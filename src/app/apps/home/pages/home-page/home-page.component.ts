@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private appContext: AppContextService
+  ) { 
+    appContext.Layout.setTitle("");
+  }
 
   ngOnInit() {
   }

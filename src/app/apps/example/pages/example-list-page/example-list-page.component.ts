@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Component({
   selector: 'app-example-list-page',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExampleListPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private appContext: AppContextService
+  ) { 
+    appContext.Layout.setTitle("Example App");
+  }
 
   ngOnInit() {
   }
