@@ -1,0 +1,6 @@
+<h1>Example List</h1>
+<ul>
+  <li *ngFor="let item of model.items">
+    <a routerLink="/app/example/view/{{item.id}}">{{ item.title }} ({{ item.id }})</a>
+  </li>
+</ul>
