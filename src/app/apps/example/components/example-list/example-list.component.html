@@ -1,6 +1,24 @@
 <h1>Example List</h1>
-<ul>
-  <li *ngFor="let item of model.items">
-    <a routerLink="/app/example/view/{{item.id}}">{{ item.title }} ({{ item.id }})</a>
-  </li>
-</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of model.items">
+      <td>
+          <a routerLink="/app/example/view/{{item.id}}">{{ item.id }}</a>
+          
+          <a routerLink="/app/example/edit/{{item.id}}" class="btn btn-primary">Edit</a>
+      </td>
+      <td>
+          {{ item.title }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+

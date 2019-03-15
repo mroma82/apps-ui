@@ -1,5 +1,5 @@
 <footer>
-  <nav class="navbar fixed-bottom navbar-dark bg-primary">
-    <a>Michael Roma</a>
+  <nav class="navbar fixed-bottom navbar-dark bg-primary" *ngIf="user$ | async as user">
+    <a>{{ user.name }}</a>
   </nav>
 </footer>

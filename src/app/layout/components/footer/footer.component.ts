@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContextService } from 'src/app/app-context.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  // user 
+  user$: Observable<any>;
+
+  constructor(
+    private appContext: AppContextService
+  ) 
+  { 
+    this.user$ = appContext.User.profile$;
+  }
 
   ngOnInit() {
+
   }
 
 }

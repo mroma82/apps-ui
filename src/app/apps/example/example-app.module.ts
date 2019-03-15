@@ -9,6 +9,7 @@ import { ExampleListComponent } from './components/example-list/example-list.com
 import { ExampleNavComponent } from './components/example-nav/example-nav.component';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { ExampleRoutingModule } from './example-routing.module';
+import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 
 @NgModule({
   declarations: [    
@@ -23,6 +24,7 @@ import { ExampleRoutingModule } from './example-routing.module';
   imports: [
     CommonModule,
     AppCommonModule,
+    AppFoundationModule,
     ExampleRoutingModule
   ]
 })

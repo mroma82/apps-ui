@@ -12,6 +12,9 @@ import { HeaderNavComponent } from './layout/components/header-nav/header-nav.co
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { LayoutContextService } from './layout/services/layout-context.service';
 import { AppContextService } from './app-context.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { AppContextService } from './app-context.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppCommonModule
+    AppCommonModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [
     AppContextService,
