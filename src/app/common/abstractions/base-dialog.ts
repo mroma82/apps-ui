@@ -1,41 +1,67 @@
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ViewChild } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ViewChild, OnDestroy } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 
-export class BaseDialog {
+export class BaseDialog implements OnDestroy {
     @ViewChild('content') content : any;
     
     closeResult: string;
+
+    // modal
+    modal : NgbModalRef;
+
+    // open/close subscription
+    onOpenClose$ : Subscription;
     
     // new
     constructor(
         private modalService: NgbModal
-    ) {
-        
-    }
+    ) { }
 
+    // init
     init(modalService: NgbModal) {
         this.modalService = modalService;
     }
+    
+    // init open/close subscription
+    initOpenCloseSubscription(o : Observable<boolean>) {
+        this.onOpenClose$ = o.subscribe(x => {
+            console.log(x);
+            if(x) {
+                this.openDialog();
+            } else {
+                this.closeDialog();
+            }
+        })
+    }
 
+    // open dialog
     openDialog() {
         this.open(this.content);    
     }
 
-    open(content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    // close dialog
+    closeDialog() {
+        console.log("X");
+        if(this.modal)
+            this.modal.dismiss();
+    }
+
+    private open(content) {
+        this.modal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+        this.modal.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            this.closeResult = `Dismissed`;
         });
     }
 
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return `with: ${reason}`;
+    // clean up
+    ngOnDestroy(): void {
+
+        // close open.close subscription
+        if(this.onOpenClose$) {
+            this.onOpenClose$.unsubscribe();
         }
     }
 }

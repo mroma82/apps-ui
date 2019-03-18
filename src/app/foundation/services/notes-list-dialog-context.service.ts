@@ -10,7 +10,6 @@ export class NotesListDialogContextService {
 
   // list observable
   list$ = new BehaviorSubject<any[]>([]);
-  //record$ : Observable<any>
 
   // new
   constructor(

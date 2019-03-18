@@ -4,9 +4,11 @@ import { FoundationViewEditButtonBarComponent } from './components/foundation-vi
 import { NoteListDialogComponent } from './dialogs/note-list-dialog/note-list-dialog.component';
 import { NotesService } from './services/notes-service';
 import { FormsModule } from '@angular/forms';
+import { AuditTrailService } from './services/audit-trail/audit-trail.service';
+import { AuditTrailListDialogComponent } from './dialogs/audit-trail-list-dialog/audit-trail-list-dialog.component';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent],
   imports: [
     CommonModule,
     FormsModule
@@ -15,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     FoundationViewEditButtonBarComponent
   ],
   providers: [
-    NotesService
+    NotesService,
+    AuditTrailService
   ]
 })
 export class AppFoundationModule { }

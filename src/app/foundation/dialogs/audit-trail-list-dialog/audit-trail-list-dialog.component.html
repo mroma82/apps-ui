@@ -1,0 +1,42 @@
+<ng-template #content>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Audit Trail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeDialog()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-sm-4">
+
+        <div class="list-group">
+          <a *ngFor="let item of list$ | async" (click)="setItem(item)" class="list-group-item list-group-item-action">
+            {{ item.createDateTime | date:'medium' }}<br>
+            <small>{{ item.createUserFullname }} ({{ item.recordTypeText }}</small>
+          </a>
+        </div>
+
+      </div>
+      <div class="col-sm-8">
+        <ul class="list-group" *ngIf="detailList$ | async as detailList">
+          <li class="list-group-item list-group-item-dark">
+            <div class="row label-row text-bold">
+              <div class="col-sm-4">Column</div>
+              <div class="col-sm-4">Old</div>
+              <div class="col-sm-4">New</div>
+            </div>
+          </li>
+          <li *ngFor="let detail of detailList" class="list-group-item">
+            <div class="row">
+              <div class="col-sm-4">{{ detail.columnName }}</div>
+              <div class="col-sm-4 old-value">{{ detail.oldValue }}</div>
+              <div class="col-sm-4">{{ detail.newValue }}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+</ng-template>
