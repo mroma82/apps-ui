@@ -77,4 +77,9 @@ export class AttachmentDialogContextService {
       tempFileId: this.tempFile$.value.id
     });
   }
+
+  // update
+  update(model: any) {
+    return this.service.update(model);    
+  }
 }

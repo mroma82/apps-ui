@@ -1,8 +1,21 @@
 <div *ngFor="let item of (list$ | async) ">
   <h4>{{ item.createUserFullname }} on {{ item.createDateTime | date }}</h4>      
-  <p>
-    {{ item.description }}
-  </p>
+  <div>
+    <a [href]="getDownloadUrl(item)">{{ item.fileName }}</a><br>
+    <img *ngIf="isImage(item)" [src]="getViewUrl(item)" class="preview-image" /><br>
+    
+    <div *ngIf="!item.editPending">
+        {{ item.description }}
+        <br>
+        <button type="button" class="btn btn-link" (click)="edit(item)">Edit</button>
+    </div>
+    <div *ngIf="item.editPending">      
+      <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" />
+      <button type="button" class="btn btn-primary" (click)="editCommit(item)">Save</button>
+      <button type="button" class="btn btn-link" (click)="editCancel(item)">Cancel</button>
+    </div>
+    
+  </div>
   <hr>
 </div>
 

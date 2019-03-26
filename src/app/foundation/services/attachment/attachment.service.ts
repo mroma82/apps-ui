@@ -29,6 +29,12 @@ export class AttachmentService {
     return this.apiClient.post("/foundation/attachment/add", model);
   }
 
+  // update
+  update(model: any) {
+    return this.apiClient.post("/foundation/attachment/update", model);
+  }
+
+
   // upload temp file
   uploadTempFile(file: any) : Observable<any> {
     
