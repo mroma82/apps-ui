@@ -1,0 +1,12 @@
+<div *ngFor="let item of (list$ | async) ">
+  <h4>{{ item.createUserFullname }} on {{ item.createDateTime | date }}</h4>      
+  <p>
+    {{ item.description }}
+  </p>
+  <hr>
+</div>
+
+<div>
+  <button type="button" class="btn btn-primary" (click)="add()">Add</button>
+  <button type="button" class="btn btn-primary" (click)="refresh()">Refresh</button>
+</div>

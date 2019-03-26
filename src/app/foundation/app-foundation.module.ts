@@ -6,19 +6,27 @@ import { NotesService } from './services/notes-service';
 import { FormsModule } from '@angular/forms';
 import { AuditTrailService } from './services/audit-trail/audit-trail.service';
 import { AuditTrailListDialogComponent } from './dialogs/audit-trail-list-dialog/audit-trail-list-dialog.component';
+import { AttachmentListDialogComponent } from './dialogs/attachment-list-dialog/attachment-list-dialog.component';
+import { AttachmentListComponent } from './components/attachment-list/attachment-list.component';
+import { AttachmentAddComponent } from './components/attachment-add/attachment-add.component';
+import { AttachmentEditComponent } from './components/attachment-edit/attachment-edit.component';
+import { AttachmentService } from './services/attachment/attachment.service';
+import { AppCommonModule } from '../common/app-common.module';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AppCommonModule
   ],
   exports: [
     FoundationViewEditButtonBarComponent
   ],
   providers: [
     NotesService,
-    AuditTrailService
+    AuditTrailService,
+    AttachmentService
   ]
 })
 export class AppFoundationModule { }

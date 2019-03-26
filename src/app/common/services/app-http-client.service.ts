@@ -16,7 +16,7 @@ export class AppHttpClientService {
   }
 
   // full url
-  private getUrl(path: string) : string {
+  public getUrl(path: string) : string {
     return environment.apiUrl + path;
   }
   

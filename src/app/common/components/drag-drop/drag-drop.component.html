@@ -1,0 +1,12 @@
+<div class="drop-area" [class.active]="state.isDraggedOn" (drop)="drop($event)" (dragover)="allowDrop($event)" (dragleave)="dragLeave()" draggable="true">  
+  <div>
+    <i class="fa fa-cloud-upload drop-icon"></i>
+  </div>
+  <div class="drop-text">
+      Drop Files Here
+  </div>  
+</div>
+
+<div class="form-group" style="margin:auto;margin-top:10px;">
+  <input #file type="file" multiple (change)="upload(file.files)" style="width:110px;"/>
+</div>
