@@ -82,4 +82,9 @@ export class AttachmentDialogContextService {
   update(model: any) {
     return this.service.update(model);    
   }
+
+  // delete
+  delete(id: string) {
+    return this.service.delete(id);    
+  }
 }

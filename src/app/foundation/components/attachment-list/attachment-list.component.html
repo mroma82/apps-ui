@@ -8,13 +8,20 @@
         {{ item.description }}
         <br>
         <button type="button" class="btn btn-link" (click)="edit(item)">Edit</button>
+        <button type="button" class="btn btn-link" (click)="delete(item)" *ngIf="!item.deletePending">Delete</button>
     </div>
+    
     <div *ngIf="item.editPending">      
       <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" />
       <button type="button" class="btn btn-primary" (click)="editCommit(item)">Save</button>
       <button type="button" class="btn btn-link" (click)="editCancel(item)">Cancel</button>
     </div>
-    
+
+    <div *ngIf="item.deletePending">              
+      Are you sure you want to delete?
+      <button type="button" class="btn btn-primary" (click)="deleteCommit(item)">Yes</button>
+      <button type="button" class="btn btn-link" (click)="deleteCancel(item)">No - Cancel</button>
+    </div>
   </div>
   <hr>
 </div>

@@ -34,6 +34,11 @@ export class AttachmentService {
     return this.apiClient.post("/foundation/attachment/update", model);
   }
 
+  // delete
+  delete(id: string) {
+    return this.apiClient.post(`/foundation/attachment/delete/${id}`, {});
+  }
+
 
   // upload temp file
   uploadTempFile(file: any) : Observable<any> {

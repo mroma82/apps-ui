@@ -64,6 +64,29 @@ export class AttachmentListComponent implements OnInit {
     attachment.editPending = false;    
   }
 
+
+  // delete
+  delete(attachment: any) {
+    attachment.deletePending = true;    
+  }
+  deleteCommit(attachment: any) {
+    
+    // save
+    this.context.delete(attachment.id).subscribe(x => {
+      
+      // check if ok
+      if(x.success) {
+        attachment.deletePending = false;
+        this.context.refreshList();
+      }
+    });    
+  }
+  deleteCancel(attachment: any) {
+    attachment.deletePending = false;    
+  }
+
+  
+  // init
   ngOnInit() {
   }
 
