@@ -6,7 +6,8 @@ import { RecordContextService } from 'src/app/common/services/record-context.ser
 @Component({
   selector: 'app-example-view-page',
   templateUrl: './example-view-page.component.html',
-  styleUrls: ['./example-view-page.component.scss']
+  styleUrls: ['./example-view-page.component.scss'],
+  providers: [RecordContextService]
 })
 export class ExampleViewPageComponent implements OnInit {
 

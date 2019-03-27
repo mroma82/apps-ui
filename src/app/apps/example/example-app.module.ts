@@ -22,7 +22,7 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
     ExampleNavComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule,    
     AppCommonModule,
     AppFoundationModule,
     ExampleRoutingModule

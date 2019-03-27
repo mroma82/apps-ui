@@ -12,6 +12,7 @@ import { AttachmentAddComponent } from './components/attachment-add/attachment-a
 import { AttachmentEditComponent } from './components/attachment-edit/attachment-edit.component';
 import { AttachmentService } from './services/attachment/attachment.service';
 import { AppCommonModule } from '../common/app-common.module';
+import { RecordLockService } from './services/record-lock/record-lock.service';
 
 @NgModule({
   declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent],
@@ -21,12 +22,13 @@ import { AppCommonModule } from '../common/app-common.module';
     AppCommonModule
   ],
   exports: [
-    FoundationViewEditButtonBarComponent
+    FoundationViewEditButtonBarComponent    
   ],
   providers: [
     NotesService,
     AuditTrailService,
-    AttachmentService
+    AttachmentService,
+    RecordLockService    
   ]
 })
 export class AppFoundationModule { }

@@ -5,6 +5,7 @@ import { ExampleContainerComponent } from './containers/example-container/exampl
 import { ExampleListPageComponent } from './pages/example-list-page/example-list-page.component';
 import { ExampleViewPageComponent } from './pages/example-view-page/example-view-page.component';
 import { ExampleEditPageComponent } from './pages/example-edit-page/example-edit-page.component';
+import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 
 // example routing
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
       children: [
           { path: '', component: ExampleListPageComponent },
           { path: 'view/:id', component: ExampleViewPageComponent },
-          { path: 'edit/:id', component: ExampleEditPageComponent }
+          { path: 'edit/:id', component: ExampleEditPageComponent, canActivate: [RecordLockGuard] }
       ]
   }
 ];
@@ -22,6 +23,14 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [RecordLockGuard]
 })
-export class ExampleRoutingModule { }
+export class ExampleRoutingModule { 
+
+  constructor(
+    recordLock: RecordLockGuard
+  ) {
+    recordLock.setContextType(1);
+  }
+}
