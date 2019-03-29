@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",              
-              "src/assets/theme/bootstrap.min.css"              
+              "src/styles.scss" 
             ],
             "scripts": [],
             "es5BrowserSupport": true
