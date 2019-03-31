@@ -15,6 +15,8 @@ import { AppContextService } from './app-context.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NotificationBarComponent } from './foundation/components/notification-bar/notification-bar.component';
+import { AppFoundationModule } from './foundation/app-foundation.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     AppCommonModule,
+    AppFoundationModule,
     NgbModule,
     FormsModule,
     HttpClientModule 

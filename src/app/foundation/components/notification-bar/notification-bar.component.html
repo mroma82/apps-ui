@@ -1,0 +1,19 @@
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a [routerLink]="" class="nav-link" (mouseenter)="hoverOn =true;" (mouseleave)="hoverOn =false;">{{count$ | async }} notification(s)</a>
+    </li>
+  </ul>
+
+<div id="notification-summary" [ngClass]="hoverOn ? 'active' : ''" (mouseenter)="hoverOn =true;" (mouseleave)="hoverOn =false;">
+  <ul class="list-unstyled">
+    <li *ngFor="let item of list$ | async">
+      <a [routerLink]="getRoute(item)" (click)="hoverOn=false;">{{ item.subject }}</a>
+    </li>
+    <li *ngIf="(count$ | async) > 0">
+      <a  (click)="showListDialog()">View All</a>
+    </li>
+  </ul>
+</div>
+
+<app-notification-list-dialog></app-notification-list-dialog>
+

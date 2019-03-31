@@ -28,11 +28,11 @@ export class RecordLockGuard implements CanActivate {
     // check if locked
     return this.recordLockService
       .check(this.contextType, id)
-      //.check(1, "11111111-bf40-415b-92ee-99644a12c001")
       .pipe(map(x => {
        
         if(!x.isLocked) {
-          console.log(id + " is locked by x.lockedUserFullName");
+          // todo: toast message
+          console.log(`${id} is locked by ${x.lockedUserFullName}`);
         }
         
         return !x.isLocked;

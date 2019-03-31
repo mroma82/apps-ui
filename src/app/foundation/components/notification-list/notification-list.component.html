@@ -1,0 +1,25 @@
+<div>
+
+  <div class="row" *ngFor="let item of list">
+    <div class="col-sm-1">
+      <input type="checkbox" [(ngModel)]="item.selected" />
+    </div>
+    <div class="col-sm-4">
+      {{ item.createDateTime | date:'medium' }}
+    </div>
+    <div class="col-sm-7">
+      <a [routerLink]="getRoute(item)" (click)="closeDialog()" [class.unread]="!item.isRead">{{ item.subject }}</a>
+    </div>
+  </div>   
+  <div>
+    <button type="button" class="btn btn-link" (click)="selectAllNone(true)">Select All</button>
+    <button type="button" class="btn btn-link" (click)="selectAllNone(false)">Select None</button>
+  </div> 
+  <div>
+      <button type="button" class="btn btn-link" (click)="deleteSelected()">Delete</button>
+      <button type="button" class="btn btn-link" (click)="setReadStateSelected(true)">Mark as Read</button>
+      <button type="button" class="btn btn-link" (click)="setReadStateSelected(false)">Mark as Un-Read</button>
+  </div>
+
+</div>
+

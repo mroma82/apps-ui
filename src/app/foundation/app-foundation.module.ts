@@ -13,22 +13,32 @@ import { AttachmentEditComponent } from './components/attachment-edit/attachment
 import { AttachmentService } from './services/attachment/attachment.service';
 import { AppCommonModule } from '../common/app-common.module';
 import { RecordLockService } from './services/record-lock/record-lock.service';
+import { NotificationService } from './services/notification/notification.service';
+import { NotificationContextService } from './services/notification/notification-context.service';
+import { NotificationBarComponent } from './components/notification-bar/notification-bar.component';
+import { RouterModule } from '@angular/router';
+import { NotificationListDialogComponent } from './dialogs/notification-list-dialog/notification-list-dialog.component';
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent],
   imports: [
     CommonModule,
     FormsModule,
-    AppCommonModule
+    AppCommonModule,
+    RouterModule
   ],
   exports: [
-    FoundationViewEditButtonBarComponent    
+    FoundationViewEditButtonBarComponent,
+    NotificationBarComponent   
   ],
   providers: [
     NotesService,
     AuditTrailService,
     AttachmentService,
-    RecordLockService    
+    RecordLockService,
+    NotificationService,
+    NotificationContextService
   ]
 })
 export class AppFoundationModule { }
