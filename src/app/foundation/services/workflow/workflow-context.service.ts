@@ -17,7 +17,8 @@ export class WorkflowContextService implements OnDestroy {
 
   // dialog obseravables
   assignedListDialogOpenClose$ = new BehaviorSubject<boolean>(false);
-
+  rejectDialogOpenClose$ = new BehaviorSubject<boolean>(false);
+  resetDialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
   // options
   options = {
@@ -88,9 +89,16 @@ export class WorkflowContextService implements OnDestroy {
   }
 
   // reject
-  reject(instanceId: string, taskId: string) {
+  reject(instanceId: string, taskId: string, reason: string) {
+
+    // define model
+    let model = {
+      currentTaskId: taskId,
+      decisionText: reason
+    }
+
     this.busy$.next(true);
-    this.service.reject(this.options.url, instanceId, taskId).subscribe(x => {
+    this.service.reject(this.options.url, instanceId, model).subscribe(x => {
       this.refreshInstance();
       this.busy$.next(false);
     })
@@ -112,7 +120,22 @@ export class WorkflowContextService implements OnDestroy {
   closeAssignedDialog() {
     this.assignedListDialogOpenClose$.next(false);
   }
+  
+  // reject dialog open/close
+  openRejectDialog() {
+    this.rejectDialogOpenClose$.next(true);
+  }
+  closeRejectDialog() {
+    this.rejectDialogOpenClose$.next(false);
+  }
 
+  // reset dialog open/close
+  openResetDialog() {
+    this.resetDialogOpenClose$.next(true);
+  }
+  closeResetDialog() {
+    this.resetDialogOpenClose$.next(false);
+  }
 
   // clean up
   ngOnDestroy(): void {

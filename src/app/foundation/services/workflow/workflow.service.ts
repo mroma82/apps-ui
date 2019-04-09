@@ -24,8 +24,8 @@ export class WorkflowService {
   }
 
   // reject
-  reject(url: string, instanceId: string, taskId: string) : Observable<any>  {
-    return this.apiClient.post(`${url}/reject/${instanceId}/${taskId}`, {});
+  reject(url: string, instanceId: string, pushModel: any) : Observable<any>  {
+    return this.apiClient.post(`${url}/reject/${instanceId}`, pushModel);
   }
 
   // reset

@@ -16,13 +16,15 @@
     
     <button [disabled]="busy$ | async" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'" type="button" class="btn btn-default" (click)="reject(instance)">Reject</button>
 
-    <button [disabled]="busy$ | async" type="button" class="btn btn-default" (click)="reset(instance)">Reset</button>
+    <button [disabled]="busy$ | async" type="button" class="btn btn-default" (click)="reset()">Reset</button>
 
     <div *ngIf="instance.isRejected" id="rejectBar">
       <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
     </div>
   </div>
-  
+
 </div>
 
 <app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>
+<app-workflow-reject-dialog></app-workflow-reject-dialog>
+<app-workflow-reset-dialog></app-workflow-reset-dialog>

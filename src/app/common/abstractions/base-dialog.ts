@@ -25,9 +25,8 @@ export class BaseDialog implements OnDestroy {
     
     // init open/close subscription
     initOpenCloseSubscription(o : Observable<boolean>) {
-        this.onOpenClose$ = o.subscribe(x => {
-            console.log(x);
-            if(x) {
+        this.onOpenClose$ = o.subscribe(isOpen => {            
+            if(isOpen) {
                 this.openDialog();
             } else {
                 this.closeDialog();
@@ -41,8 +40,7 @@ export class BaseDialog implements OnDestroy {
     }
 
     // close dialog
-    closeDialog() {
-        console.log("X");
+    closeDialog() {        
         if(this.modal)
             this.modal.dismiss();
     }

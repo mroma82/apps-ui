@@ -68,12 +68,12 @@ export class WorkflowBarComponent implements OnInit {
   }
 
   // reject
-  reject(instance: any) {
-    this.context.reject(instance.id, instance.currentTaskId);
+  reject() {    
+    this.context.openRejectDialog();
   }
 
   // reset
-  reset(instance: any) {
-    this.context.reset(instance.id, instance.currentTaskId);
+  reset() {
+    this.context.openResetDialog();
   }
 }
