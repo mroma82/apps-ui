@@ -1,0 +1,12 @@
+#bar {
+    padding: 20px;
+    background-color: darkgray;
+
+    &.active {
+        background-color: yellow
+    }
+}
+
+#rejectBar {
+    color: red;
+}

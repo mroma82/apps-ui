@@ -1,0 +1,25 @@
+<div *ngIf="instance$ | async as instance">
+  <div id="bar" [class.active]="instance.isActive">    
+    
+    <span *ngIf="prefixText">{{ prefixText }}</span>
+    {{ instance.instruction }}
+
+    <span *ngIf="instance.isActive">[{{ getAssignedTo(instance) }}]</span>
+
+    <div *ngIf="instance.isActive">
+      <div *ngIf="actions$ | async as actions">
+        <button *ngFor="let action of actions" [disabled]="busy$ | async"  type="button" class="btn btn-primary" (click)="advance(instance, action)">{{ action.actionDescription }}</button>      
+      </div>    
+    </div>
+    
+    <button [disabled]="busy$ | async" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'" type="button" class="btn btn-default" (click)="reject(instance)">Reject</button>
+
+    <button [disabled]="busy$ | async" type="button" class="btn btn-default" (click)="reset(instance)">Reset</button>
+
+    <div *ngIf="instance.isRejected" id="rejectBar">
+      <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
+    </div>
+  </div>
+  
+</div>
+

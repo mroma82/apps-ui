@@ -19,9 +19,11 @@ import { NotificationBarComponent } from './components/notification-bar/notifica
 import { RouterModule } from '@angular/router';
 import { NotificationListDialogComponent } from './dialogs/notification-list-dialog/notification-list-dialog.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { WorkflowBarComponent } from './components/workflow-bar/workflow-bar.component';
+import { WorkflowService } from './services/workflow/workflow.service';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -30,7 +32,8 @@ import { NotificationListComponent } from './components/notification-list/notifi
   ],
   exports: [
     FoundationViewEditButtonBarComponent,
-    NotificationBarComponent   
+    NotificationBarComponent,
+    WorkflowBarComponent
   ],
   providers: [
     NotesService,
@@ -38,7 +41,8 @@ import { NotificationListComponent } from './components/notification-list/notifi
     AttachmentService,
     RecordLockService,
     NotificationService,
-    NotificationContextService
+    NotificationContextService,
+    WorkflowService
   ]
 })
 export class AppFoundationModule { }
