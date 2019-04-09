@@ -4,7 +4,9 @@
     <span *ngIf="prefixText">{{ prefixText }}</span>
     {{ instance.instruction }}
 
-    <span *ngIf="instance.isActive">[{{ getAssignedTo(instance) }}]</span>
+    <button type="button" class="btn btn-link" *ngIf="instance.isActive" (click)="showAssignedListDialog()">
+      {{ getAssignedTo(instance) }}
+    </button>
 
     <div *ngIf="instance.isActive">
       <div *ngIf="actions$ | async as actions">
@@ -23,3 +25,4 @@
   
 </div>
 
+<app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>

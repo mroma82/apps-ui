@@ -13,6 +13,11 @@ export class WorkflowContextService implements OnDestroy {
   context$ = new BehaviorSubject<IContext>(null);    
   instance$ = new BehaviorSubject<any>(null);
   actions$ = new BehaviorSubject<any>([]);
+  assigned$ = new BehaviorSubject<any>([]);
+
+  // dialog obseravables
+  assignedListDialogOpenClose$ = new BehaviorSubject<boolean>(false);
+
 
   // options
   options = {
@@ -34,6 +39,7 @@ export class WorkflowContextService implements OnDestroy {
     });
     this.onInstanceChange = this.instance$.subscribe(x => {
       this.refreshActions();
+      this.refreshAssigned();
     });
   }
 
@@ -63,6 +69,15 @@ export class WorkflowContextService implements OnDestroy {
     }
   }
 
+  // refresh assigned
+  refreshAssigned() {
+    let instance = this.instance$.value;
+    if(instance !== null) {
+      this.service.getAssigned(instance.id).subscribe(x => this.assigned$.next(x));
+    }
+  }
+
+
   // advance
   advance(instanceId: string, pushModel: any) {
     this.busy$.next(true);
@@ -89,6 +104,15 @@ export class WorkflowContextService implements OnDestroy {
       this.busy$.next(false);
     })
   }
+
+  // assigned list dialog open/close
+  openAssignedDialog() {
+    this.assignedListDialogOpenClose$.next(true);
+  }
+  closeAssignedDialog() {
+    this.assignedListDialogOpenClose$.next(false);
+  }
+
 
   // clean up
   ngOnDestroy(): void {

@@ -21,9 +21,11 @@ import { NotificationListDialogComponent } from './dialogs/notification-list-dia
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { WorkflowBarComponent } from './components/workflow-bar/workflow-bar.component';
 import { WorkflowService } from './services/workflow/workflow.service';
+import { WorkflowAssignedListComponent } from './components/workflow-assigned-list/workflow-assigned-list.component';
+import { WorkflowAssignedListDialogComponent } from './dialogs/workflow-assigned-list-dialog/workflow-assigned-list-dialog.component';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent],
   imports: [
     CommonModule,
     FormsModule,

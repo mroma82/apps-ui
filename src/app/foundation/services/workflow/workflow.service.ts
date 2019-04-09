@@ -43,4 +43,9 @@ export class WorkflowService {
   getActions(id: string) : Observable<any> {
     return this.apiClient.get(`/foundation/workflow/getActions/${id}`);
   }
+
+  // get assigned
+  getAssigned(id: string) : Observable<any> {
+    return this.apiClient.get(`/foundation/workflow/getAssigned/${id}`);
+  }
 }

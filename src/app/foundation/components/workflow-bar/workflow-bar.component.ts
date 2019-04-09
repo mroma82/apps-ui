@@ -18,12 +18,15 @@ export class WorkflowBarComponent implements OnInit {
   busy$: Observable<boolean>;
   instance$ : Observable<any>;
   actions$: Observable<any>;
+  assigned$: Observable<any>;
+
 
   constructor(    
     private context: WorkflowContextService
   ) { 
     this.instance$ = context.instance$;
     this.actions$ = context.actions$;
+    this.assigned$ = context.assigned$;
     this.busy$ = context.busy$;
   }
 
@@ -49,6 +52,11 @@ export class WorkflowBarComponent implements OnInit {
     } else {
       return assignedTo;
     }
+  }
+
+  // show the assigned list dialog
+  showAssignedListDialog() {
+    this.context.openAssignedDialog();
   }
 
   // advance
