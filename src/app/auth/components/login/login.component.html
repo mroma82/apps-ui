@@ -1,0 +1,17 @@
+<div>
+  <label>Username</label>
+  <input type="text" class="form-control" [(ngModel)]="model.username" />
+</div>
+
+<div>
+  <label>Password</label>
+  <input type="password" class="form-control" [(ngModel)]="model.password" />
+</div>
+
+<div class="text-right">
+  <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+
+  <div *ngIf="state.hasError" class="text-danger">
+    {{state.errorText}}
+  </div>
+</div>
