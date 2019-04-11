@@ -1,28 +1,37 @@
 <div *ngIf="instance$ | async as instance">
-  <div id="bar" [class.active]="instance.isActive">    
+  <div class="bar" [class.active]="instance.isActive">    
     
-    <span *ngIf="prefixText">{{ prefixText }}</span>
+    <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
     {{ instance.instruction }}
-
-    <button type="button" class="btn btn-link" *ngIf="instance.isActive" (click)="showAssigned()">
-      {{ getAssignedTo(instance) }}
-    </button>
-
-    <div *ngIf="instance.isActive">
-      <div *ngIf="actions$ | async as actions">
-        <button *ngFor="let action of actions" [disabled]="busy$ | async"  type="button" class="btn btn-primary" (click)="advance(instance, action)">{{ action.actionDescription }}</button>      
-      </div>    
-    </div>
     
-    <button [disabled]="busy$ | async" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'" type="button" class="btn btn-default" (click)="reject(instance)">Reject</button>
+    <span class="badge badge-primary" *ngIf="instance.isActive">{{ getAssignedTo(instance) }}</span>    
 
-    <button [disabled]="busy$ | async" type="button" class="btn btn-default" (click)="reset()">Reset</button>
+    <ul class="nav nav-pills float-right" *ngIf="instance.isActive">
 
-    <div *ngIf="instance.isRejected" id="rejectBar">
+      <li class="nav-item" *ngFor="let action of (actions$ | async)">
+        <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
+      </li>
+      
+      <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
+        <a class="nav-link active" href="javascript:;;" (click)="reject(instance)">Reject</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:;;" role="button" aria-haspopup="true"
+          aria-expanded="false">Functions</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="javscript:;;" (click)="showHistory()">History</a>
+          <a class="dropdown-item" href="javscript:;;" (click)="reset()">Reset</a>
+          <a class="dropdown-item" href="#">Show who is assigned</a>          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </li>
+    </ul>
+            
+    <div *ngIf="instance.isRejected" class="reject-bar">
       <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
     </div>
-
-    <button type="button" class="btn btn-light" (click)="showHistory()">History</button>
   </div>
 
 </div>

@@ -1,5 +1,5 @@
-#bar {
-    padding: 20px;
+.bar {
+    padding: 10px;
     background-color: darkgray;
 
     &.active {
@@ -7,6 +7,10 @@
     }
 }
 
-#rejectBar {
+.prefix {
+    font-weight: bold;
+}
+
+.reject-bar {
     color: red;
 }
