@@ -4,7 +4,7 @@
     <span *ngIf="prefixText">{{ prefixText }}</span>
     {{ instance.instruction }}
 
-    <button type="button" class="btn btn-link" *ngIf="instance.isActive" (click)="showAssignedListDialog()">
+    <button type="button" class="btn btn-link" *ngIf="instance.isActive" (click)="showAssigned()">
       {{ getAssignedTo(instance) }}
     </button>
 
@@ -21,6 +21,8 @@
     <div *ngIf="instance.isRejected" id="rejectBar">
       <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
     </div>
+
+    <button type="button" class="btn btn-light" (click)="showHistory()">History</button>
   </div>
 
 </div>
@@ -28,3 +30,4 @@
 <app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>
 <app-workflow-reject-dialog></app-workflow-reject-dialog>
 <app-workflow-reset-dialog></app-workflow-reset-dialog>
+<app-workflow-history-list-dialog></app-workflow-history-list-dialog>

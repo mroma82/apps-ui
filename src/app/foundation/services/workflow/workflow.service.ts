@@ -48,4 +48,9 @@ export class WorkflowService {
   getAssigned(id: string) : Observable<any> {
     return this.apiClient.get(`/foundation/workflow/getAssigned/${id}`);
   }
+
+  // get history
+  getHistory(id: string) : Observable<any> {
+    return this.apiClient.get(`/foundation/workflow/getHistory/${id}`);
+  }
 }

@@ -55,8 +55,13 @@ export class WorkflowBarComponent implements OnInit {
   }
 
   // show the assigned list dialog
-  showAssignedListDialog() {
+  showAssigned() {
     this.context.openAssignedDialog();
+  }
+
+  // show history dialog
+  showHistory() {
+    this.context.openHistoryDialog();
   }
 
   // advance

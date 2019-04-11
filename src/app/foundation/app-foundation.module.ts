@@ -27,9 +27,11 @@ import { WorkflowRejectComponent } from './components/workflow-reject/workflow-r
 import { WorkflowResetComponent } from './components/workflow-reset/workflow-reset.component';
 import { WorkflowRejectDialogComponent } from './dialogs/workflow-reject-dialog/workflow-reject-dialog.component';
 import { WorkflowResetDialogComponent } from './dialogs/workflow-reset-dialog/workflow-reset-dialog.component';
+import { WorkflowHistoryListComponent } from './components/workflow-history-list/workflow-history-list.component';
+import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-list-dialog/workflow-history-list-dialog.component';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent, WorkflowRejectComponent, WorkflowResetComponent, WorkflowRejectDialogComponent, WorkflowResetDialogComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent, WorkflowRejectComponent, WorkflowResetComponent, WorkflowRejectDialogComponent, WorkflowResetDialogComponent, WorkflowHistoryListComponent, WorkflowHistoryListDialogComponent],
   imports: [
     CommonModule,
     FormsModule,

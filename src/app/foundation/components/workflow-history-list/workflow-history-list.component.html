@@ -1,0 +1,24 @@
+<div *ngIf="list$ | async as history">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Date/Time</th>
+        <th>State</th>
+        <th>Assigned</th>
+        <th>Who</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of history">
+        <td><span *ngIf="item.isRejected">[--</span></td>
+        <td>{{ item.historyDateTime | date:'medium' }}</td>
+        <td>{{ item.currentStateText }}</td>
+        <td>{{ item.currentAssigned }}</td>
+        <td>{{ item.createUser }}</td>
+        <td>{{ item.decisionText }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -14,11 +14,13 @@ export class WorkflowContextService implements OnDestroy {
   instance$ = new BehaviorSubject<any>(null);
   actions$ = new BehaviorSubject<any>([]);
   assigned$ = new BehaviorSubject<any>([]);
+  history$ = new BehaviorSubject<any>([]);
 
   // dialog obseravables
   assignedListDialogOpenClose$ = new BehaviorSubject<boolean>(false);
   rejectDialogOpenClose$ = new BehaviorSubject<boolean>(false);
   resetDialogOpenClose$ = new BehaviorSubject<boolean>(false);
+  historyDialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
   // options
   options = {
@@ -38,9 +40,12 @@ export class WorkflowContextService implements OnDestroy {
     this.onContextChange = this.context$.subscribe(x => {
       this.refreshInstance()
     });
+
+    // instance change
     this.onInstanceChange = this.instance$.subscribe(x => {
       this.refreshActions();
       this.refreshAssigned();
+      this.refreshHistory();
     });
   }
 
@@ -75,6 +80,14 @@ export class WorkflowContextService implements OnDestroy {
     let instance = this.instance$.value;
     if(instance !== null) {
       this.service.getAssigned(instance.id).subscribe(x => this.assigned$.next(x));
+    }
+  }
+
+  // refresh history
+  refreshHistory() {
+    let instance = this.instance$.value;
+    if(instance !== null) {
+      this.service.getHistory(instance.id).subscribe(x => this.history$.next(x));
     }
   }
 
@@ -137,6 +150,15 @@ export class WorkflowContextService implements OnDestroy {
     this.resetDialogOpenClose$.next(false);
   }
 
+  // history dialog open/close
+  openHistoryDialog() {
+    this.historyDialogOpenClose$.next(true);
+  }
+  closeHistoryDialog() {
+    this.historyDialogOpenClose$.next(false);
+  }
+
+  
   // clean up
   ngOnDestroy(): void {
     
