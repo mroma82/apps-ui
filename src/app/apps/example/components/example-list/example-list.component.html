@@ -1,24 +1,33 @@
-<h1>Example List</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let item of model.items">
-      <td>
-          <a routerLink="/app/example/view/{{item.id}}">{{ item.id }}</a>
-          
-          <a routerLink="/app/example/edit/{{item.id}}" class="btn btn-primary">Edit</a>
-      </td>
-      <td>
-          {{ item.title }}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<div *ngIf="list$ | async as list">
+  <ngx-datatable
+    class="bootstrap"
+    [columnMode]="'flex'"
+    [rows]="list.items"
+    [headerHeight]="40"
+    [footerHeight]="40"
+    [limit]="pageSize"
+    [externalPaging]="true"
+    [externalSorting]="true"
+    [count]="list.totalRows"
+    [rowHeight]="'auto'"
+    (sort)="onSort($event)"
+    (page)="onPage($event)">  
+    
+    <ngx-datatable-column name="ID" prop="id" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a routerLink="../view/{{value}}"> {{value}} </a>
+        <a routerLink="../edit/{{value}}"> [ Edit ] </a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Title" prop="title" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>    
+    <ngx-datatable-column name="Status" prop="status" [flexGrow]="1">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{getStatusText(value)}}
+      </ng-template>
+    </ngx-datatable-column>   
+  </ngx-datatable>
+</div>

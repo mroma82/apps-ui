@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +16,6 @@ import { HeaderNavComponent } from './layout/components/header-nav/header-nav.co
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { LayoutContextService } from './layout/services/layout-context.service';
 import { AppContextService } from './app-context.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { NotificationBarComponent } from './foundation/components/notification-bar/notification-bar.component';
 import { AppFoundationModule } from './foundation/app-foundation.module';
 
 @NgModule({
@@ -35,7 +35,8 @@ import { AppFoundationModule } from './foundation/app-foundation.module';
     AppFoundationModule,
     NgbModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    NgxDatatableModule
   ],
   providers: [
     AppContextService,
