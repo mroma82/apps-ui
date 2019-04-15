@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 
     this.userContext.login(this.model).subscribe(x => {
       if(x.success) {
-        console.log("good-" + x.nextUrl);
         this.router.navigateByUrl(x.nextUrl);
       } else {
         this.state = {...this.state, ...{

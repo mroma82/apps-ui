@@ -1,5 +1,8 @@
 <ul>
-  <li>
-    <h2><a routerLink="/app/example">Example App</a></h2>
+
+  <li *ngFor="let item of menuItems$ | async">
+    <h2>
+      <a [routerLink]="item.routerLink">{{ item.title }}</a>
+    </h2>
   </li>
 </ul> 

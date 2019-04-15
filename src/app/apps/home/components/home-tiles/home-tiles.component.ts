@@ -1,15 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AppContextService } from 'src/app/app-context.service';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-home-tiles',
   templateUrl: './home-tiles.component.html',
   styleUrls: ['./home-tiles.component.scss']
 })
-export class HomeTilesComponent implements OnInit {
+export class HomeTilesComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  // define menu base
+  allMenuItems = [
+    { title: "Example App", routerLink: "/app/example", key: "ExampleUser" },
+    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin" }
+  ];
 
+  // observables
+  menuItems$ = new BehaviorSubject<any>([]);
+
+  // subscriptions
+  onProfileChange: Subscription;
+
+  // new
+  constructor(
+    private appContext: AppContextService
+  ) { 
+
+    // profile change
+    this.onProfileChange = this.appContext.User.profile$.subscribe(x => {
+      this.buildMenu(x);
+    });
+  }
+
+  // build menu
+  buildMenu(profile: any) {
+
+    // init
+    let menuItems = [];
+    let roles = profile.role;
+    if(roles) {
+      console.log(roles);
+      this.allMenuItems.forEach(x => {
+        if( roles.indexOf(x.key) > -1) {
+          menuItems.push(x);
+        }
+      });
+      console.log(this.allMenuItems);
+      console.log(menuItems);
+    }
+
+    // set
+    this.menuItems$.next(menuItems);
+  };
+
+  // init
   ngOnInit() {
+  }
+
+  // destroy
+  ngOnDestroy() {
+    // clean up
+    this.onProfileChange.unsubscribe();
   }
 
 }

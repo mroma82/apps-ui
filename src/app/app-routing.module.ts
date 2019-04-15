@@ -8,7 +8,8 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
 const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent
+    pathMatch: 'full',
+    redirectTo: '/app'
   },
   {
     path: 'login',
@@ -26,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: '',        
-        component: AppContainerComponent
+        component: HomePageComponent
       }
     ] 
   }
