@@ -1,5 +1,6 @@
 
 <app-workflow-bar prefixText="Approval WF" contextType="1" [contextId]="model.id" workflowUrl="/example/workflow"></app-workflow-bar>
-<app-foundation-view-edit-button-bar [contextId]="model.id" contextType="1"></app-foundation-view-edit-button-bar>
 
-<app-example-view-edit [id]="model.id"></app-example-view-edit>
+<app-foundation-view-edit-button-bar [contextId]="model.id" contextType="1" [viewMode]="true" (onEdit)="edit()"></app-foundation-view-edit-button-bar>
+
+<app-example-view-edit [id]="model.id" [viewMode]="true"></app-example-view-edit>

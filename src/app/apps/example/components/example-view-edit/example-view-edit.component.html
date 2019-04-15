@@ -1,1 +1,20 @@
-Record: {{ id }}
+<hr>
+<div class="row">
+
+    <div class="col-md-3">
+        <label>ID</label>
+        <input type="text" class="form-control" readonly [(ngModel)]="viewModel.record.id" />
+    </div>
+
+    <div class="col-md-3">
+        <label>Title</label>
+        <input type="text" class="form-control" [readonly]="viewMode" [(ngModel)]="viewModel.record.title" />
+    </div>
+
+    <div class="col-md-3">
+        <label>Status</label>        
+        <select class="form-control" [(ngModel)]="viewModel.record.status" [disabled]="viewMode">
+            <option *ngFor="let item of statusList$ | async" [value]="item.code">{{ item.text }}</option>
+        </select>
+    </div>
+</div>

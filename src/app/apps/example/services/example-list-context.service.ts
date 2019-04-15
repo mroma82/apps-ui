@@ -36,12 +36,7 @@ export class ExampleListContextService implements OnDestroy {
     })
 
     // statuses
-    this.statusList$ = of([
-      { code: 0, text: "Not started" },
-      { code: 1, text: "In Processed" },
-      { code: 2, text: "Approved" },
-      { code: 3, text: "Completed" }
-    ]);
+    this.statusList$ = service.getStatusList();
   }
 
   // refresh data

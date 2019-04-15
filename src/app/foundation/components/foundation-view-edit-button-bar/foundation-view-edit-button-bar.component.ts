@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RecordContextService } from 'src/app/common/services/record-context.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuditTrailDialogContextService } from '../../services/audit-trail/audit-trail-dialog-context.service';
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
 
@@ -16,6 +14,12 @@ import { AttachmentDialogContextService } from '../../services/attachment/attach
 export class FoundationViewEditButtonBarComponent implements OnInit {
   @Input() contextId: string;
   @Input() contextType: number;
+  @Input() viewMode: boolean;
+
+  // events
+  @Output() onEdit = new EventEmitter<void>();
+  @Output() onSave = new EventEmitter<void>();
+  @Output() onSaveClose = new EventEmitter<void>();
 
   // new
   constructor(
@@ -24,7 +28,23 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   )
   {}
   
+  // init
   ngOnInit() {
+  }
+
+  // edit
+  edit() {
+    this.onEdit.emit();
+  }
+
+  // edit
+  save() {
+    this.onSave.emit();
+  }
+
+  // edit
+  saveClose() {
+    this.onSaveClose.emit();
   }
 
   // open audit trail
