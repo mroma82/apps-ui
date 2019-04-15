@@ -64,4 +64,15 @@ export class ExampleEditPageComponent implements OnInit {
       }
     });
   }
+
+  // delete
+  delete() {
+
+    // delete, if ok, go back to listing
+    this.viewEditContext.delete().subscribe(x => {
+      if(x) {
+        this.router.navigateByUrl('/app/example');
+      }
+    });
+  }
 }

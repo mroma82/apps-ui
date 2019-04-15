@@ -58,6 +58,7 @@ export class ExampleViewEditContextService implements OnDestroy {
         return true;
       } else {
         // todo: show error
+        console.log(x.text);
         return false;
       }
     }));
@@ -67,11 +68,12 @@ export class ExampleViewEditContextService implements OnDestroy {
   delete() : Observable<boolean> {
 
     // delete, check if ok
-    return this.service.update(this.id$.value).pipe(map(x => {
+    return this.service.delete(this.id$.value).pipe(map(x => {
       if(x.success) {
         return true;
       } else {
         // todo: show error
+        console.log(x.text);
         return false;
       }
     }));

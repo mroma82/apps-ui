@@ -1,12 +1,13 @@
 <div>
   <button type="button" class="btn btn-primary" (click)="edit()" *ngIf="viewMode">Edit</button>
   <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!viewMode">Save</button>
-  <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode">Save and Close</button>
-  
+  <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode">Save and Close</button>  
   <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()">Attachments</button>
   <button type="button" class="btn btn-primary" (click)="noteListDialog.openDialog()">Notes</button>
   <button type="button" class="btn btn-primary" (click)="openAuditTrail()">Audit Trail</button>
-  <button type="button" class="btn btn-primary">Print</button>
+  <button type="button" class="btn btn-primary" (click)="print()">Print</button>
+  <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode">Delete</button>
+
 </div>
 
 <app-note-list-dialog #noteListDialog></app-note-list-dialog>

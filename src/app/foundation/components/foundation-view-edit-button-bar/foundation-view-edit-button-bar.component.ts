@@ -20,6 +20,7 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   @Output() onEdit = new EventEmitter<void>();
   @Output() onSave = new EventEmitter<void>();
   @Output() onSaveClose = new EventEmitter<void>();
+  @Output() onDelete = new EventEmitter<void>();
 
   // new
   constructor(
@@ -37,14 +38,24 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
     this.onEdit.emit();
   }
 
-  // edit
+  // save
   save() {
     this.onSave.emit();
   }
 
-  // edit
+  // save and close
   saveClose() {
     this.onSaveClose.emit();
+  }
+
+  // delete
+  delete() {
+    this.onDelete.emit();
+  }
+
+  // print
+  print() {
+    window.print();
   }
 
   // open audit trail
