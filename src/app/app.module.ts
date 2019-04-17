@@ -17,6 +17,7 @@ import { FooterComponent } from './layout/components/footer/footer.component';
 import { LayoutContextService } from './layout/services/layout-context.service';
 import { AppContextService } from './app-context.service';
 import { AppFoundationModule } from './foundation/app-foundation.module';
+import { DialogService } from './common/services/dialog.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AppFoundationModule } from './foundation/app-foundation.module';
   ],
   providers: [
     AppContextService,
-    LayoutContextService
+    LayoutContextService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

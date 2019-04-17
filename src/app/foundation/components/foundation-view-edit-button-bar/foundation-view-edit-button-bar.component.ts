@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuditTrailDialogContextService } from '../../services/audit-trail/audit-trail-dialog-context.service';
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Component({
   selector: 'app-foundation-view-edit-button-bar',
@@ -25,7 +27,8 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   // new
   constructor(
     private auditTrailContext: AuditTrailDialogContextService,
-    private attachmentsDialogContext : AttachmentDialogContextService
+    private attachmentsDialogContext : AttachmentDialogContextService,
+    private dialogService : DialogService
   )
   {}
   
@@ -50,7 +53,13 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
 
   // delete
   delete() {
-    this.onDelete.emit();
+
+    // ask
+    this.dialogService.yesNo("Delete", "Are you sure you want to delete?").subscribe(x => {
+      if(x == DialogResultEnum.Yes) {
+        this.onDelete.emit();
+      }
+    });          
   }
 
   // print

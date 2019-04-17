@@ -7,7 +7,7 @@ import { debounce } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ExampleListContextService implements OnDestroy {  
-  readonly PAGE_SIZE : number = 10;
+  readonly PAGE_SIZE : number = 20;
 
   // observables
   list$ = new BehaviorSubject<any>({});  

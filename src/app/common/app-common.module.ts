@@ -3,20 +3,23 @@ import { CommonModule } from '@angular/common';
 import { AppHttpClientService } from './services/app-http-client.service';
 import { DragDropComponent } from './components/drag-drop/drag-drop.component';
 import { ContextTypeRouteResolverService } from './services/context-type-route-resolver.service';
+import { YesNoDialogComponent } from './components/dialogs/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
-    DragDropComponent
+    DragDropComponent,
+    YesNoDialogComponent    
   ],
   providers: [
     AppHttpClientService,
-    ContextTypeRouteResolverService
+    ContextTypeRouteResolverService    
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    DragDropComponent
+    DragDropComponent,
+    YesNoDialogComponent,    
   ]
 })
 export class AppCommonModule { }
