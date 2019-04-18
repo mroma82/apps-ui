@@ -10,7 +10,7 @@ export class ExampleViewEditContextService implements OnDestroy {
 
   // observables
   id$ = new BehaviorSubject<string>(null);
-  exampleRecord$ = new BehaviorSubject<any>(null);
+  exampleRecord$ = new BehaviorSubject<any>({});
 
   // lists
   statusList$: Observable<any>;

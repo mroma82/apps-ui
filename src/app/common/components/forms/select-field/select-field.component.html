@@ -1,0 +1,14 @@
+<div>
+    <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+    <select
+        [disabled]="disabled"
+        [attr.name]="name"
+        class="form-control"
+        [disabled]="disabled"
+        [(ngModel)]="value"
+        [ngClass]="{invalid: (invalid | async)}"
+        [id]="identifier">
+        <option value="" selected disabled *ngIf="placeholder">{{placeholder}}</option>
+        <ng-content></ng-content>
+    </select>
+</div>

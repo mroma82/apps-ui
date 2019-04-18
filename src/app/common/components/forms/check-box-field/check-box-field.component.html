@@ -1,0 +1,12 @@
+<div class="form-check form-check-inline">
+    <input   
+        type="checkbox"
+        [(ngModel)]="value"
+        [ngClass]="{invalid: (invalid | async)}"
+        class="form-check form-check-input" 
+        [attr.name]="name"    
+        [id]="identifier"
+        [disabled]="disabled"
+    />    
+    <label *ngIf="label" class="form-check-label" [attr.for]="identifier">{{label}}</label>    
+</div>

@@ -1,8 +1,7 @@
 <div class="row">
   
   <div class="col-md-3">
-    <label>Search</label>    
-    <input type="text" class="form-control" [(ngModel)]="model.searchText" (change)="updateFilter()" />
+    <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" label="Search" name="search" placeholder=""></app-text-field>    
   </div>
 
   <div class="col-md-3">

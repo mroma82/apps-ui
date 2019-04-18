@@ -1,0 +1,14 @@
+<div>
+    <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+    <input      
+      [disabled]="disabled"   
+      type="date"
+      [readonly]="readonly"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+      [ngClass]="{invalid: (invalid | async )}"
+      class="form-control"           
+      [id]="identifier"
+      [attr.name]="name"            
+    />
+</div>
