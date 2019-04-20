@@ -24,8 +24,7 @@ export class ExampleEditPageComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private appContext: AppContextService,
+    private router: Router,    
     private recordContext: RecordContextService,
     private recordLockContext: RecordLockContextService,
     private viewEditContext: ExampleViewEditContextService
@@ -36,8 +35,7 @@ export class ExampleEditPageComponent implements OnInit {
   ngOnInit() {
     
     // get the id
-    this.model.id = this.activatedRoute.snapshot.paramMap.get('id');  
-    this.appContext.Layout.setTitle("Example: " + this.model.id);
+    this.model.id = this.activatedRoute.snapshot.paramMap.get('id');      
 
     // set record
     this.recordContext.setRecordContext(1, this.model.id);

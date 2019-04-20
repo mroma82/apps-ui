@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { ExampleService } from './example.service';
 import { map } from 'rxjs/operators';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class ExampleViewEditContextService implements OnDestroy {
 
   // new
   constructor(
-    private service: ExampleService
+    private service: ExampleService,
+    private appContext: AppContextService
   ) { 
 
     // status list
@@ -44,6 +46,9 @@ export class ExampleViewEditContextService implements OnDestroy {
     // get the data
     this.service.getSingle(this.id$.value).subscribe(x => {
       this.exampleRecord$.next(x);
+
+      // set title
+      this.appContext.Layout.setTitle("Example: " + x.exampleId);
     });
   }
 
