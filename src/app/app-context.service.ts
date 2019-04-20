@@ -3,7 +3,7 @@ import { LayoutContextService } from './layout/services/layout-context.service';
 import { UserContextService } from './common/services/user-context.service';
 
 @Injectable({
-  providedIn: 'root'  
+  providedIn: 'root'
 })
 export class AppContextService {
 

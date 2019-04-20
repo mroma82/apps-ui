@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NotificationBarComponent } from './foundation/components/notification-bar/notification-bar.component';
 import { AppFoundationModule } from './foundation/app-foundation.module';
+import { UserContextService } from './common/services/user-context.service';
+import { LoginComponent } from './auth/components/login/login.component';
+import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { AppFoundationModule } from './foundation/app-foundation.module';
     HomePageComponent,
     HeaderComponent,
     HeaderNavComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import { AppFoundationModule } from './foundation/app-foundation.module';
   ],
   providers: [
     AppContextService,
-    LayoutContextService
+    LayoutContextService,
+    UserContextService
   ],
   bootstrap: [AppComponent]
 })

@@ -22,7 +22,7 @@ export class AppHttpClientService {
   
   // jwt token
   private getJwtToken() {
-    let token = localStorage.getItem('app:token');
+    let token = localStorage.getItem('apps:token');
     return 'Bearer ' + token;
   }  
 
