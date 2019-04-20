@@ -1,14 +1,34 @@
-<div>
+
+
+<div>    
     <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+    <div class="input-group mb-3">
+        <input      
+          [disabled]="disabled"   
+          type="text"
+          [readonly]="readonly"
+          [(ngModel)]="dateValue"
+          [ngClass]="{invalid: (invalid | async )}"
+          class="form-control"           
+          [id]="identifier"
+          [attr.name]="name"   
+          [bsConfig]="{dateInputFormat: 'M/D/YYYY'}"
+          bsDatepicker                     
+          (ngModelChange)="onDateChange()" 
+          #d="bsDatepicker"     
+        />    
+        <div class="input-group-append">
+          <button class="btn">
+              <i class="far fa-calendar-alt fa-lg"(click)="d.toggle()" role="button"></i>          
+          </button>          
+        </div>          
+    </div>
+    
     <input      
-      [disabled]="disabled"   
-      type="date"
-      [readonly]="readonly"
-      [placeholder]="placeholder"
+      type="hidden"
       [(ngModel)]="value"
-      [ngClass]="{invalid: (invalid | async )}"
-      class="form-control"           
-      [id]="identifier"
-      [attr.name]="name"            
+      (ngModelChange)="onValueChange()"      
     />
+
+    
 </div>

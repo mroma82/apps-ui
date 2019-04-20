@@ -15,6 +15,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ExampleListFilterComponent } from './components/example-list-filter/example-list-filter.component';
 import { FormsModule } from '@angular/forms';
 import { ExampleListContextService } from './services/example-list-context.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [    
@@ -33,7 +34,8 @@ import { ExampleListContextService } from './services/example-list-context.servi
     AppFoundationModule,
     ExampleRoutingModule,
     NgxDatatableModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     ExampleService,

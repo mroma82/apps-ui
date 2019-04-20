@@ -11,6 +11,7 @@ import { TextAreaFieldComponent } from './components/forms/text-area-field/text-
 import { DateFieldComponent } from './components/forms/date-field/date-field.component';
 import { CheckBoxFieldComponent } from './components/forms/check-box-field/check-box-field.component';
 import { NumberFieldComponent } from './components/forms/number-field/number-field.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NumberFieldComponent } from './components/forms/number-field/number-fie
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     DragDropComponent,

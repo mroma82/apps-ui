@@ -18,6 +18,7 @@ import { LayoutContextService } from './layout/services/layout-context.service';
 import { AppContextService } from './app-context.service';
 import { AppFoundationModule } from './foundation/app-foundation.module';
 import { DialogService } from './common/services/dialog.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DialogService } from './common/services/dialog.service';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     AppContextService,
