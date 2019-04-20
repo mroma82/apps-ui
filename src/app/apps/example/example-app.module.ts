@@ -16,6 +16,9 @@ import { ExampleListFilterComponent } from './components/example-list-filter/exa
 import { FormsModule } from '@angular/forms';
 import { ExampleListContextService } from './services/example-list-context.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/example-create-dialog.component';
+import { ExampleCreateComponent } from './components/example-create/example-create.component';
+import { ExampleCreateContextService } from './services/example-create-context.service';
 
 @NgModule({
   declarations: [    
@@ -26,7 +29,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ExampleViewEditComponent,
     ExampleListComponent,
     ExampleNavComponent,
-    ExampleListFilterComponent
+    ExampleListFilterComponent,
+    ExampleCreateDialogComponent,
+    ExampleCreateComponent
   ],
   imports: [
     CommonModule,    
@@ -39,7 +44,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   ],
   providers: [
     ExampleService,
-    ExampleListContextService
+    ExampleListContextService,
+    ExampleCreateContextService
   ]
 })
 export class ExampleAppModule { }

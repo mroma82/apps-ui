@@ -16,7 +16,8 @@ export class ExampleListContextService implements OnDestroy {
   });
   page$ = new BehaviorSubject<number>(1);
   sort$ = new BehaviorSubject<any>({
-    field: "id"
+    field: "CreateDateTime",
+    isDescending: true
   });
 
   // lists

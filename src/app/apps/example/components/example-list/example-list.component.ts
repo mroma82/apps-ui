@@ -30,8 +30,7 @@ export class ExampleListComponent implements OnInit {
     this.context.setPage(e.offset + 1);    
   }
 
-  onSort(e) {  
-    console.log(e);  
+  onSort(e) {      
     if(e.sorts.length) {
       this.context.setSort({
         field: e.sorts[0].prop,

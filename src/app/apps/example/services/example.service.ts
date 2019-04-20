@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClientService } from 'src/app/common/services/app-http-client.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,10 @@ export class ExampleService {
   // delete
   delete(id: string) : Observable<any> {
     return this.apiClient.post(`/example/delete/${id}`, null);
+  }
+
+  // create
+  create(model: any) : Observable<any> {
+    return this.apiClient.post("/example/create", model);
   }
 }

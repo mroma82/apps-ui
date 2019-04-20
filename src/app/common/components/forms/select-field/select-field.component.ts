@@ -14,7 +14,7 @@ import { ElementBase } from '../base/element-base';
 })
 export class SelectFieldComponent extends ElementBase<string> {
   @Input() public label: string;
-  @Input() public placeholder: string;
+  @Input() public placeholder: string = "";
   @Input() public readonly: boolean;
   @Input() public disabled: boolean;
   @Input() public name: string;
