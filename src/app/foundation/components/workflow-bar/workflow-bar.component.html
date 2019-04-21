@@ -1,33 +1,32 @@
 <div *ngIf="instance$ | async as instance">
-  <div class="bar" [class.active]="instance.isActive">    
+  <div class="bar" [class.active]="instance.canAct">    
     
     <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
-    {{ instance.instruction }}
+    
+    <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
+    <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
     
     <span class="badge badge-primary" *ngIf="instance.isActive">{{ getAssignedTo(instance) }}</span>    
 
-    <ul class="nav nav-pills float-right" *ngIf="instance.isActive">
+
+    <ul class="nav nav-pills float-right">
+      <li class="nav-item"><a class="nav-link active" href="javascript:;;" (click)="showHistory()">History</a></li> 
+      <li class="nav-item"><a class="nav-link active" href="javascript:;;" (click)="reset()">Reset</a></li> 
+      <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link active" href="javascript:;;">Show who is assigned</a></li> 
+    </ul>
+    
+    <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
 
       <li class="nav-item" *ngFor="let action of (actions$ | async)">
         <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
       </li>
-      
       <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
         <a class="nav-link active" href="javascript:;;" (click)="reject(instance)">Reject</a>
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:;;" role="button" aria-haspopup="true"
-          aria-expanded="false">Functions</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="javscript:;;" (click)="showHistory()">History</a>
-          <a class="dropdown-item" href="javscript:;;" (click)="reset()">Reset</a>
-          <a class="dropdown-item" href="#">Show who is assigned</a>          
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </li>
     </ul>
+
+
             
     <div *ngIf="instance.isRejected" class="reject-bar">
       <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>

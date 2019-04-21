@@ -63,7 +63,7 @@ export class WorkflowContextService implements OnDestroy {
   refreshInstance() {    
     let context = this.context$.value;    
     if(context !== null) {
-        this.service.getInstanceByContext(context).subscribe(i => this.instance$.next(i));
+        this.service.getInstanceByContext(this.options.url, context).subscribe(i => this.instance$.next(i));
     }
   }
 

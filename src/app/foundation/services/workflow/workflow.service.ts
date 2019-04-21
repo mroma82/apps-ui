@@ -35,8 +35,8 @@ export class WorkflowService {
   
 
   // get instance  
-  getInstanceByContext(context: IContext) : Observable<any> {
-    return this.apiClient.get(`/foundation/workflow/getInstanceByContext/${context.contextType}/${context.contextId}`);
+  getInstanceByContext(url: string, context: IContext) : Observable<any> {
+    return this.apiClient.get(`${url}/getInstance/${context.contextId}`);
   }
 
   // get actions
