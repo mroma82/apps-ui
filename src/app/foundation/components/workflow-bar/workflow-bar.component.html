@@ -1,38 +1,40 @@
 <div *ngIf="instance$ | async as instance">
   <div class="bar" [class.active]="instance.canAct">    
     
-    <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
-    
-    <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
-    <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
-    
-    <span class="badge badge-primary" *ngIf="instance.isActive">{{ getAssignedTo(instance) }}</span>    
+    <div class="row">
+      
+      <div class="col-sm-6" style="padding-top: 10px;">
+        <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
+        <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
+        <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
+        <span class="badge badge-primary" style="margin-left: 10px;" *ngIf="instance.isActive">{{ getAssignedTo(instance) }}</span>  
+        
+        <div>
+          <div *ngIf="instance.isRejected" class="reject-bar">
+            <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
+          </div>
+        </div>
+      </div>
 
-
-    <ul class="nav nav-pills float-right">
-      <li class="nav-item"><a class="nav-link active" href="javascript:;;" (click)="showHistory()">History</a></li> 
-      <li class="nav-item"><a class="nav-link active" href="javascript:;;" (click)="reset()">Reset</a></li> 
-      <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link active" href="javascript:;;">Show who is assigned</a></li> 
-    </ul>
-    
-    <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
-
-      <li class="nav-item" *ngFor="let action of (actions$ | async)">
-        <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
-      </li>
-      <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
-        <a class="nav-link active" href="javascript:;;" (click)="reject(instance)">Reject</a>
-      </li>
-
-    </ul>
-
-
-            
-    <div *ngIf="instance.isRejected" class="reject-bar">
-      <strong>Rejected by {{ instance.rejectBy }}: {{ instance.rejectText }}</strong>
+      <div class="col-sm-6">
+        <ul class="nav nav-pills float-right">
+          <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="showHistory()">History</a></li> 
+          <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="reset()">Reset</a></li> 
+          <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link" href="javascript:;;">Show who is assigned</a></li> 
+        </ul>
+  
+        <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
+          <li class="nav-item" *ngFor="let action of (actions$ | async)">
+            <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
+          </li>
+          <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
+            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)">Reject</a>
+          </li>
+        </ul>
+      </div>
     </div>
+      
   </div>
-
 </div>
 
 <app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>
