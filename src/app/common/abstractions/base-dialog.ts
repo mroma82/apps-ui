@@ -46,7 +46,7 @@ export class BaseDialog implements OnDestroy {
     }
 
     private open(content) {
-        this.modal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+        this.modal = this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' });
         this.modal.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {

@@ -1,32 +1,41 @@
-<div *ngFor="let item of (list$ | async) ">
-  <h4>{{ item.createUserFullname }} on {{ item.createDateTime | date }}</h4>      
+<div *ngFor="let item of (list$ | async) ">  
   <div>
-    <a [href]="getDownloadUrl(item)">{{ item.fileName }}</a><br>
-    <img *ngIf="isImage(item)" [src]="getViewUrl(item)" class="preview-image" /><br>
-    
-    <div *ngIf="!item.editPending">
-        {{ item.description }}
-        <br>
-        <button type="button" class="btn btn-link" (click)="edit(item)">Edit</button>
-        <button type="button" class="btn btn-link" (click)="delete(item)" *ngIf="!item.deletePending">Delete</button>
-    </div>
-    
-    <div *ngIf="item.editPending">      
-      <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" />
-      <button type="button" class="btn btn-primary" (click)="editCommit(item)">Save</button>
-      <button type="button" class="btn btn-link" (click)="editCancel(item)">Cancel</button>
-    </div>
 
-    <div *ngIf="item.deletePending">              
-      Are you sure you want to delete?
-      <button type="button" class="btn btn-primary" (click)="deleteCommit(item)">Yes</button>
-      <button type="button" class="btn btn-link" (click)="deleteCancel(item)">No - Cancel</button>
+    <div>
+      <a [href]="getDownloadUrl(item)">{{ item.fileName }}</a>
     </div>
+    <div>
+        {{ item.createUserFullname }} on {{ item.createDateTime | date }}
+    </div>
+    <img *ngIf="isImage(item)" [src]="getViewUrl(item)" class="preview-image" />    
+    <div *ngIf="!item.editPending">
+        <div>
+          {{ item.description }}        
+        </div>
+        <div class="mt-2">
+          <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)">Edit</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="delete(item)" *ngIf="!item.deletePending">Delete</button>
+
+          <div *ngIf="item.deletePending" style="display: inline-block; margin-left: 10px;">              
+            Are you sure you want to delete?
+            <button type="button" class="btn btn-link btn-sm" (click)="deleteCommit(item)">Yes</button> 
+            <button type="button" class="btn btn-link btn-sm" (click)="deleteCancel(item)">No - Cancel</button>
+          </div>
+        </div>
+    </div>
+    
+    <div *ngIf="item.editPending" class="mt-md-2">      
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" placeholder="Description" />
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)="editCommit(item)">Save</button> 
+      <button type="button" class="btn btn-link btn-sm" (click)="editCancel(item)">Cancel</button>
+    </div>    
   </div>
   <hr>
 </div>
 
 <div>
-  <button type="button" class="btn btn-primary" (click)="add()">Add</button>
-  <button type="button" class="btn btn-primary" (click)="refresh()">Refresh</button>
+  <button type="button" class="btn btn-primary" (click)="add()">Add</button> 
+  <button type="button" class="btn btn-link" (click)="refresh()">Refresh</button>
 </div>

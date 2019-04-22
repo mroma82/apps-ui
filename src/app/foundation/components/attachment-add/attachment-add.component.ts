@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
 import { Observable } from 'rxjs';
+import { DragDropComponent } from 'src/app/common/components/drag-drop/drag-drop.component';
 
 @Component({
   selector: 'app-attachment-add',
@@ -8,7 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./attachment-add.component.scss']
 })
 export class AttachmentAddComponent implements OnInit {
-
+  @ViewChild('dropArea') dropArea : DragDropComponent;
+  
   // observables
   tempFile$ : Observable<any>;
 
@@ -24,6 +26,7 @@ export class AttachmentAddComponent implements OnInit {
 
   // cancel
   cancel() {
+    this.clear();
     this.context.setDialogMode("list");
   }
 
@@ -43,13 +46,29 @@ export class AttachmentAddComponent implements OnInit {
     this.context.uploadFile(files[0]);    
   }
 
+  // clear form
+  clear() {
+
+    // model
+    this.model = {
+      description: ""
+    };    
+
+    // clear temp
+    this.context.clearTempFile();
+    
+    // reset drag area
+    this.dropArea.reset();
+  }
+
   // save
   save() {
     this.context.add({
       description: this.model.description      
-    }).subscribe(x => {
-      this.context.refreshList();
-      this.context.closeDialog();
+    }).subscribe(x => {            
+      this.context.refreshList();      
+      this.context.setDialogMode("list");      
+      this.clear();
     });
   }
 }

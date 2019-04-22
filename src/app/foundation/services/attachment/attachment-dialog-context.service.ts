@@ -63,6 +63,11 @@ export class AttachmentDialogContextService {
     });
   }
 
+  // clear temp file
+  clearTempFile() {
+    this.tempFile$.next({});
+  }
+
   // add
   add(model: any) {
 

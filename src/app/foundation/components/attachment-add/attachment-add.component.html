@@ -1,5 +1,5 @@
 <div>  
-  <app-drag-drop (afterUpload)="onUpload($event)"></app-drag-drop>  
+  <app-drag-drop #dropArea (afterUpload)="onUpload($event)"></app-drag-drop>  
 
   <div *ngIf="tempFile$ | async as tempFile">
     <div class="form-group" *ngIf="tempFile.id">

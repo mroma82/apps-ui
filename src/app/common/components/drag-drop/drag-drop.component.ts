@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-drag-drop',
@@ -6,8 +6,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./drag-drop.component.scss']
 })
 export class DragDropComponent implements OnInit {
-  @Output('afterUpload') afterUpload = new EventEmitter<any>();
-
+  @Output('afterUpload') afterUpload = new EventEmitter<any>();  
+  @ViewChild('file') fileUpload : ElementRef;
   // state
   state = {
     isDraggedOn: false
@@ -32,12 +32,16 @@ export class DragDropComponent implements OnInit {
     this.state.isDraggedOn = false;
 
     // after upload
-    this.afterUpload.emit(ev.dataTransfer.files);
-    //this.upload(ev.dataTransfer.files)
+    this.afterUpload.emit(ev.dataTransfer.files);    
   }
 
   // upload button
   upload(files) {      
     this.afterUpload.emit(files);
+  }
+
+  // reset
+  reset() {
+    this.fileUpload.nativeElement.value = "";
   }
 }
