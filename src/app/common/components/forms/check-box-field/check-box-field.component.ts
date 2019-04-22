@@ -1,0 +1,34 @@
+import { Component, OnInit, Input, ViewChild, Optional, Inject } from '@angular/core';
+import { ElementBase } from '../base/element-base';
+import { NG_VALUE_ACCESSOR, NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
+
+@Component({
+  selector: 'app-check-box-field',
+  templateUrl: './check-box-field.component.html',
+  styleUrls: ['./check-box-field.component.scss'],
+  providers: [{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: CheckBoxFieldComponent,
+      multi: true,
+  }]
+
+})
+export class CheckBoxFieldComponent extends ElementBase<boolean> {
+  @Input() public label: string;    
+  @Input() public name: string;
+  @Input() public disabled: boolean;
+
+  @ViewChild(NgModel) model: NgModel;
+
+  public identifier = `checkbox-field-${checkBoxIdx++}`;
+
+  constructor(
+      @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
+      @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+  ) {
+      super(validators, asyncValidators);
+  }
+}
+
+let checkBoxIdx = 0;
+

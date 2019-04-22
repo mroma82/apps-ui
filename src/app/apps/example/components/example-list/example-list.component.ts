@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ExampleListContextService } from '../../services/example-list-context.service';
 
 @Component({
   selector: 'app-example-list',
@@ -6,18 +8,47 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./example-list.component.scss']
 })
 export class ExampleListComponent implements OnInit {
-  
-  // model
-  model = {
-    items: [
-      { id: "11111111-bf40-415b-92ee-99644a12c001", title: "Example 1" },
-      { id: "4bb65d2a-3e2f-4b84-ba30-4e76bfe22b0d", title: "Example 2" },
-      { id: "e3f4c1ec-a4ef-4dfe-b328-837d49b9c060", title: "Example 3" }
-    ]
-  }
-  constructor() { }
+  pageSize: number;
 
+  // obserables
+  list$ : Observable<any>;
+  
+  // new
+  constructor(
+    private context: ExampleListContextService
+  ) { 
+    this.list$ = context.list$;
+    this.pageSize = context.PAGE_SIZE;
+  }
+
+  //
   ngOnInit() {
+  }
+
+  // on page
+  onPage(e) {
+    this.context.setPage(e.offset + 1);    
+  }
+
+  onSort(e) {      
+    if(e.sorts.length) {
+      this.context.setSort({
+        field: e.sorts[0].prop,
+        isDescending: e.sorts[0].dir === "desc"
+      })
+    }
+  }
+
+  // get statu stext todo: move to pipe
+  getStatusText(status: number) {
+    switch(status) {
+      case 0: return "None";
+      case 1: return "In Process";
+      case 2: return "Approved";
+    }
+
+    return "";
+
   }
 
 }

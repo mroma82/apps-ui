@@ -1,0 +1,15 @@
+<div class="row">
+  
+  <div class="col-md-3">
+    <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" label="Search" name="search" placeholder=""></app-text-field>    
+  </div>
+
+  <div class="col-md-3">
+    <label>Status</label>    
+    <select class="form-control" [(ngModel)]="model.status" (change)="updateFilter()">
+      <option [value]="-1">-- All Statuses --</option>
+      <option *ngFor="let item of statusList$ | async" [value]="item.code">{{ item.text }}</option>
+    </select>
+  </div>
+  
+</div>

@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,13 +16,11 @@ import { HeaderNavComponent } from './layout/components/header-nav/header-nav.co
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { LayoutContextService } from './layout/services/layout-context.service';
 import { AppContextService } from './app-context.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { NotificationBarComponent } from './foundation/components/notification-bar/notification-bar.component';
 import { AppFoundationModule } from './foundation/app-foundation.module';
 import { UserContextService } from './common/services/user-context.service';
 import { LoginComponent } from './auth/components/login/login.component';
+import { DialogService } from './common/services/dialog.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 
 @NgModule({
@@ -40,12 +42,15 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
     AppFoundationModule,
     NgbModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    NgxDatatableModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     AppContextService,
     LayoutContextService,
-    UserContextService
+    UserContextService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

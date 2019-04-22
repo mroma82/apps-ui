@@ -10,6 +10,15 @@ import { ExampleNavComponent } from './components/example-nav/example-nav.compon
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { ExampleRoutingModule } from './example-routing.module';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
+import { ExampleService } from './services/example.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ExampleListFilterComponent } from './components/example-list-filter/example-list-filter.component';
+import { FormsModule } from '@angular/forms';
+import { ExampleListContextService } from './services/example-list-context.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/example-create-dialog.component';
+import { ExampleCreateComponent } from './components/example-create/example-create.component';
+import { ExampleCreateContextService } from './services/example-create-context.service';
 
 @NgModule({
   declarations: [    
@@ -19,13 +28,24 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
     ExampleEditPageComponent,
     ExampleViewEditComponent,
     ExampleListComponent,
-    ExampleNavComponent
+    ExampleNavComponent,
+    ExampleListFilterComponent,
+    ExampleCreateDialogComponent,
+    ExampleCreateComponent
   ],
   imports: [
     CommonModule,    
     AppCommonModule,
     AppFoundationModule,
-    ExampleRoutingModule
+    ExampleRoutingModule,
+    NgxDatatableModule,
+    FormsModule,
+    BsDatepickerModule.forRoot()
+  ],
+  providers: [
+    ExampleService,
+    ExampleListContextService,
+    ExampleCreateContextService
   ]
 })
 export class ExampleAppModule { }

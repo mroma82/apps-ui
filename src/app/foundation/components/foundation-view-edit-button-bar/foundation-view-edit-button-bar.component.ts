@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RecordContextService } from 'src/app/common/services/record-context.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuditTrailDialogContextService } from '../../services/audit-trail/audit-trail-dialog-context.service';
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Component({
   selector: 'app-foundation-view-edit-button-bar',
@@ -16,15 +16,55 @@ import { AttachmentDialogContextService } from '../../services/attachment/attach
 export class FoundationViewEditButtonBarComponent implements OnInit {
   @Input() contextId: string;
   @Input() contextType: number;
+  @Input() viewMode: boolean;
+
+  // events
+  @Output() onEdit = new EventEmitter<void>();
+  @Output() onSave = new EventEmitter<void>();
+  @Output() onSaveClose = new EventEmitter<void>();
+  @Output() onDelete = new EventEmitter<void>();
 
   // new
   constructor(
     private auditTrailContext: AuditTrailDialogContextService,
-    private attachmentsDialogContext : AttachmentDialogContextService
+    private attachmentsDialogContext : AttachmentDialogContextService,
+    private dialogService : DialogService
   )
   {}
   
+  // init
   ngOnInit() {
+  }
+
+  // edit
+  edit() {
+    this.onEdit.emit();
+  }
+
+  // save
+  save() {
+    this.onSave.emit();
+  }
+
+  // save and close
+  saveClose() {
+    this.onSaveClose.emit();
+  }
+
+  // delete
+  delete() {
+
+    // ask
+    this.dialogService.yesNo("Delete", "Are you sure you want to delete?").subscribe(x => {
+      if(x == DialogResultEnum.Yes) {
+        this.onDelete.emit();
+      }
+    });          
+  }
+
+  // print
+  print() {
+    window.print();
   }
 
   // open audit trail

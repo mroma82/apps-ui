@@ -1,3 +1,5 @@
-<a routerLink="/app/example">Back to Listing</a>
+<app-workflow-bar prefixText="Approval WF" contextType="1" [contextId]="model.id" workflowUrl="/example/workflow"></app-workflow-bar>
 
-<app-example-view-edit></app-example-view-edit>
+<app-foundation-view-edit-button-bar [contextId]="model.id" contextType="1" [viewMode]="false" (onSave)="save()" (onSaveClose)="saveClose()" (onDelete)="delete()"></app-foundation-view-edit-button-bar>
+
+<app-example-view-edit [id]="model.id" [viewMode]="false"></app-example-view-edit>
