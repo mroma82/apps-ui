@@ -23,7 +23,7 @@ export class NotesService {
   }
 
   // delete
-  delete(id: number) : Observable<any> {
+  delete(id: string) : Observable<any> {
     return this.apiClient.post(`/foundation/notes/delete/${id}`, {});
   }
 }

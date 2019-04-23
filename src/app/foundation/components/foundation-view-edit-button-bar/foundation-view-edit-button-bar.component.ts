@@ -3,6 +3,7 @@ import { AuditTrailDialogContextService } from '../../services/audit-trail/audit
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
 
 @Component({
   selector: 'app-foundation-view-edit-button-bar',
@@ -10,7 +11,8 @@ import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enu
   styleUrls: ['./foundation-view-edit-button-bar.component.scss'],
   providers: [
     AuditTrailDialogContextService,
-    AttachmentDialogContextService
+    AttachmentDialogContextService,
+    NotesListDialogContextService
   ]
 })
 export class FoundationViewEditButtonBarComponent implements OnInit {
@@ -26,6 +28,7 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
 
   // new
   constructor(
+    private notesDialogContext: NotesListDialogContextService,
     private auditTrailContext: AuditTrailDialogContextService,
     private attachmentsDialogContext : AttachmentDialogContextService,
     private dialogService : DialogService
@@ -75,5 +78,10 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   // open attachment dialog
   openAttachmentsDialog() {
     this.attachmentsDialogContext.openDialog();
+  }
+
+  // open notes dialog
+  openNotesDialog() {
+    this.notesDialogContext.openDialog();
   }
 }

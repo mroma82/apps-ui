@@ -3,13 +3,13 @@
   <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!viewMode">Save</button>
   <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode">Save and Close</button>  
   <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()">Attachments</button>
-  <button type="button" class="btn btn-primary" (click)="noteListDialog.openDialog()">Notes</button>
+  <button type="button" class="btn btn-primary" (click)="openNotesDialog()">Notes</button>
   <button type="button" class="btn btn-primary" (click)="openAuditTrail()">Audit Trail</button>
   <button type="button" class="btn btn-primary" (click)="print()">Print</button>
   <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode">Delete</button>
 
 </div>
 
-<app-note-list-dialog #noteListDialog></app-note-list-dialog>
+<app-note-list-dialog></app-note-list-dialog>
 <app-audit-trail-list-dialog></app-audit-trail-list-dialog>
 <app-attachment-list-dialog></app-attachment-list-dialog>

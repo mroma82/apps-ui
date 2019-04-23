@@ -1,28 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
-import { RecordContextService } from 'src/app/common/services/record-context.service';
-import { NotesService } from '../../services/notes-service';
-import { NotesListDialogContextService } from '../../services/notes-list-dialog-context.service';
+import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-note-list-dialog',
   templateUrl: './note-list-dialog.component.html',
-  styleUrls: ['./note-list-dialog.component.scss'],
-  providers: [NotesListDialogContextService]
+  styleUrls: ['./note-list-dialog.component.scss']  
 })
 export class NoteListDialogComponent extends BaseDialog implements OnInit  {
-  version = 4;
 
   // new
   constructor(
-    modalService: NgbModal,    
-    private notesService : NotesService,
-    private notesListDialogContext : NotesListDialogContextService
+    modalService: NgbModal,        
+    private context : NotesListDialogContextService
 
   ) {
     super(modalService);
+
+    // setup open/close subscription
+    this.initOpenCloseSubscription(context.dialogOpenClose$);
   } 
 
   // list
@@ -40,12 +38,12 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
   ngOnInit(): void {
 
     // setup obserables
-    this.list$ = this.notesListDialogContext.list$;
+    this.list$ = this.context.list$;
   }
 
   // refresh the list
   refresh() {
-    this.notesListDialogContext.refreshList();
+    this.context.refreshList();
   }
   
 
@@ -59,12 +57,10 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
   }
   editConfirm(item) {
 
-    this.notesService.addUpdate({
+    this.context.update({
       id: item.id,
       contentText: item.contentTextEdit
-    }).subscribe(x => {
-      this.refresh();
-    });    
+    }).subscribe();
   }
 
   // delete
@@ -75,11 +71,7 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
     item.deletePending = false;
   }
   deleteConfirm(item) {
-    
-    // delete
-    this.notesService.delete(item.id).subscribe(x => {
-      this.refresh();
-    })
+    this.context.delete(item.id).subscribe();    
   }
 
   
@@ -94,7 +86,7 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
     this.model.addPending = false;
   }
   addCommit() {
-    this.notesListDialogContext.add({
+    this.context.add({
       contentText: this.model.addModel.contentText
     }).subscribe(x => {
       this.refresh();
