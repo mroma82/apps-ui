@@ -10,31 +10,49 @@
     <div class="row">
       <div class="col-sm-4">
 
-        <div class="list-group">
-          <a *ngFor="let item of list$ | async" (click)="setItem(item)" class="list-group-item list-group-item-action">
-            {{ item.createDateTime | date:'medium' }}<br>
-            <small>{{ item.createUserFullname }} ({{ item.recordTypeText }}</small>
-          </a>
-        </div>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>Date/time</th>
+            </tr>            
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of list$ | async" >
+              <td (click)="setItem(item)" class="cursor-pointer" [class.table-active]="item.id == currentItemId">
+                <div>
+                    <strong>{{ item.createDateTime | date:'medium' }}</strong>
+                </div>                
+                <div>
+                    <small>{{ item.createUserFullname }}</small>
+                </div>
+                <div>
+                    <span class="badge badge-primary">{{ item.recordTypeText }}</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
       <div class="col-sm-8">
-        <ul class="list-group" *ngIf="detailList$ | async as detailList">
-          <li class="list-group-item list-group-item-dark">
-            <div class="row label-row text-bold">
-              <div class="col-sm-4">Column</div>
-              <div class="col-sm-4">Old</div>
-              <div class="col-sm-4">New</div>
-            </div>
-          </li>
-          <li *ngFor="let detail of detailList" class="list-group-item">
-            <div class="row">
-              <div class="col-sm-4">{{ detail.columnName }}</div>
-              <div class="col-sm-4 old-value">{{ detail.oldValue }}</div>
-              <div class="col-sm-4">{{ detail.newValue }}</div>
-            </div>
-          </li>
-        </ul>
+        
+        <table class="table" *ngIf="detailList$ | async as detailList">
+          <thead class="thead-light">
+            <tr>
+              <th>Column</th>
+              <th>Old</th>
+              <th>New</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detail of detailList">
+              <td>{{ detail.columnName }}</td>
+              <td class="old-value">{{ detail.oldValue }}</td>
+              <td>{{ detail.newValue }}</td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
     
