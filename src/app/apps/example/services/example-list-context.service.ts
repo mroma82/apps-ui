@@ -19,6 +19,7 @@ export class ExampleListContextService implements OnDestroy {
     field: "CreateDateTime",
     isDescending: true
   });
+  isMyTasks$ = new BehaviorSubject<boolean>(false);
 
   // lists
   statusList$ : Observable<any>;
@@ -32,7 +33,7 @@ export class ExampleListContextService implements OnDestroy {
   ) { 
  
     // setup filter change
-    this.onFilterChange$ = combineLatest(this.filter$, this.page$, this.sort$).pipe(debounce(() => timer(100))).subscribe(x => {
+    this.onFilterChange$ = combineLatest(this.filter$, this.page$, this.sort$, this.isMyTasks$).pipe(debounce(() => timer(100))).subscribe(x => {
       this.refreshData();
     })
 
@@ -46,6 +47,9 @@ export class ExampleListContextService implements OnDestroy {
     // combine model
     let model = {
       ...this.filter$.value,
+      ...{
+        isMyTasks: this.isMyTasks$.value
+      },
       ...{
         pageNumber: this.page$.value,
         pageSize: this.PAGE_SIZE,        
@@ -76,6 +80,11 @@ export class ExampleListContextService implements OnDestroy {
   // set sort
   setSort(model: any) {
     this.sort$.next(model);
+  }
+
+  // set my tasks
+  setMyTasks(set: boolean) {
+    this.isMyTasks$.next(set);
   }
 
   // clean up
