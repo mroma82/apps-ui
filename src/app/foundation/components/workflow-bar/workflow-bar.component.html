@@ -20,7 +20,7 @@
         <ul class="nav nav-pills float-right">
           <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="showHistory()">History</a></li> 
           <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="reset()">Reset</a></li> 
-          <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link" href="javascript:;;">Show who is assigned</a></li> 
+          <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link" href="javascript:;;" (click)="showAssigned()">Show who is assigned</a></li> 
         </ul>
   
         <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
