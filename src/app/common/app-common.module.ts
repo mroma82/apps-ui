@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AppHttpClientService } from './services/app-http-client.service';
 import { DragDropComponent } from './components/drag-drop/drag-drop.component';
 import { ContextTypeRouteResolverService } from './services/context-type-route-resolver.service';
@@ -12,6 +12,7 @@ import { DateFieldComponent } from './components/forms/date-field/date-field.com
 import { CheckBoxFieldComponent } from './components/forms/check-box-field/check-box-field.component';
 import { NumberFieldComponent } from './components/forms/number-field/number-field.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UtcDateTimePipe } from './pipes/utc-date-time.pipe';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TextAreaFieldComponent,
     DateFieldComponent,
     CheckBoxFieldComponent,
-    NumberFieldComponent    
+    NumberFieldComponent,
+    UtcDateTimePipe    
   ],
   providers: [
     AppHttpClientService,
-    ContextTypeRouteResolverService    
+    ContextTypeRouteResolverService,
+    DatePipe     
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     DateFieldComponent,
     CheckBoxFieldComponent,
     NumberFieldComponent,
-    TextAreaFieldComponent
+    TextAreaFieldComponent,
+    UtcDateTimePipe
   ]
 })
 export class AppCommonModule { }

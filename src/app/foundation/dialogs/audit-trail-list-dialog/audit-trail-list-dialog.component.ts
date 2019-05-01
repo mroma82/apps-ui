@@ -44,4 +44,18 @@ export class AuditTrailListDialogComponent extends BaseDialog implements OnInit 
     this.context.refreshDetailList(item.id);
   }
 
+  // clean
+  clean(value: string) {
+
+    // check value
+    if(value) {
+
+      // 12:00 am
+      value = value.replace("Jan  1 1900 12:00AM", "");
+      value = value.replace(" 12:00AM", "");
+    }
+
+    // return
+    return value;
+  }
 }

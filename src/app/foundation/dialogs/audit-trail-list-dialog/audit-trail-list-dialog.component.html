@@ -20,7 +20,7 @@
             <tr *ngFor="let item of list$ | async" >
               <td (click)="setItem(item)" class="cursor-pointer" [class.table-active]="item.id == currentItemId">
                 <div>
-                    <strong>{{ item.createDateTime | date:'medium' }}</strong>
+                    <strong>{{ item.createDateTime | utcDateTime:'medium' }}</strong>
                 </div>                
                 <div>
                     <small>{{ item.createUserFullname }}</small>
@@ -47,8 +47,8 @@
           <tbody>
             <tr *ngFor="let detail of detailList">
               <td>{{ detail.columnName }}</td>
-              <td class="old-value">{{ detail.oldValue }}</td>
-              <td>{{ detail.newValue }}</td>
+              <td class="old-value">{{ clean(detail.oldValue) }}</td>
+              <td>{{ clean(detail.newValue) }}</td>
             </tr>
           </tbody>
         </table>

@@ -5,7 +5,7 @@
       <input type="checkbox" [(ngModel)]="item.selected" />
     </div>
     <div class="col-sm-4">
-      {{ item.createDateTime | date:'medium' }}
+      {{ item.createDateTime | utcDateTime:'medium' }}
     </div>
     <div class="col-sm-7">
       <a [routerLink]="getRoute(item)" (click)="closeDialog()" [class.unread]="!item.isRead">{{ item.subject }}</a>

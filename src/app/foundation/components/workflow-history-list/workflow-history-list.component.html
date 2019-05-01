@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let item of history">
         <td><span *ngIf="item.isRejected">[--</span></td>
-        <td>{{ item.historyDateTime | date:'medium' }}</td>
+        <td>{{ item.historyDateTime | utcDateTime:'medium' }}</td>
         <td>{{ item.currentStateText }}</td>
         <td>{{ item.currentAssigned }}</td>
         <td>{{ item.createUser }}</td>
