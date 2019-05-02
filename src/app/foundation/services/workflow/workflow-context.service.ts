@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { WorkflowService } from './workflow.service';
 import { IContext } from 'src/app/common/models/context';
+import { NotificationContextService } from '../notification/notification-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class WorkflowContextService implements OnDestroy {
 
   // new
   constructor(
-    private service: WorkflowService
+    private service: WorkflowService,
+    private notificationContext: NotificationContextService
   ) { 
     
     // on context change
@@ -97,6 +99,7 @@ export class WorkflowContextService implements OnDestroy {
     this.busy$.next(true);
     this.service.advance(this.options.url, instanceId, pushModel).subscribe(x => {
       this.refreshInstance();
+      this.notificationContext.refreshList();
       this.busy$.next(false);
     })
   }
@@ -113,6 +116,7 @@ export class WorkflowContextService implements OnDestroy {
     this.busy$.next(true);
     this.service.reject(this.options.url, instanceId, model).subscribe(x => {
       this.refreshInstance();
+      this.notificationContext.refreshList();
       this.busy$.next(false);
     })
   }
@@ -122,6 +126,7 @@ export class WorkflowContextService implements OnDestroy {
     this.busy$.next(true);
     this.service.reset(this.options.url, instanceId, taskId).subscribe(x => {
       this.refreshInstance();
+      this.notificationContext.refreshList();
       this.busy$.next(false);
     })
   }

@@ -14,7 +14,6 @@ import { AttachmentService } from './services/attachment/attachment.service';
 import { AppCommonModule } from '../common/app-common.module';
 import { RecordLockService } from './services/record-lock/record-lock.service';
 import { NotificationService } from './services/notification/notification.service';
-import { NotificationContextService } from './services/notification/notification-context.service';
 import { NotificationBarComponent } from './components/notification-bar/notification-bar.component';
 import { RouterModule } from '@angular/router';
 import { NotificationListDialogComponent } from './dialogs/notification-list-dialog/notification-list-dialog.component';
@@ -49,7 +48,6 @@ import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-l
     AttachmentService,
     RecordLockService,
     NotificationService,
-    NotificationContextService,
     WorkflowService
   ]
 })

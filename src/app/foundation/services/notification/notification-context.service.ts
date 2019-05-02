@@ -1,24 +1,34 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, merge, forkJoin } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, merge, forkJoin, Subscription } from 'rxjs';
 import { NotificationService } from './notification.service';
+import { UserContextService } from 'src/app/common/services/user-context.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationContextService {
+export class NotificationContextService implements OnDestroy {
 
   // observables
   list$ = new BehaviorSubject<any>([]);
   listCount$ = new BehaviorSubject<number>(0);
   listDialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
+  // subscriptions
+  onAuthChange$ : Subscription;
+
   // new
   constructor(
-    private service : NotificationService
+    private service : NotificationService,
+    private userContext: UserContextService
   ) { 
-
+console.log("NotificationContextService.new()");
     // initial refresh
     this.refreshList();
+
+    // setup subscription for auth change
+    this.onAuthChange$ = this.userContext.profile$.subscribe(x => {
+      this.refreshList();
+    });
   }
 
   // refresh
@@ -57,5 +67,10 @@ export class NotificationContextService {
   // close dialog
   closeListDialog() : void {
     this.listDialogOpenClose$.next(false);
+  }
+
+  // on destroy
+  ngOnDestroy() {
+    this.onAuthChange$.unsubscribe();
   }
 }
