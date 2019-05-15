@@ -15,8 +15,10 @@ export class ExampleViewEditComponent implements OnInit {
 
   // model
   viewModel = {
-    record: {      
-    }    
+    record: { 
+      customerId: "",
+      customerName: ""     
+    }
   };
 
   // subscriptions
@@ -49,5 +51,9 @@ export class ExampleViewEditComponent implements OnInit {
     this.subs.forEach(x => x.unsubscribe());
   }
 
-
+  // select
+  setCustomer(customer) {
+    this.viewModel.record.customerId = customer.customerId;
+    this.viewModel.record.customerName = customer.customerName;
+  }
 }

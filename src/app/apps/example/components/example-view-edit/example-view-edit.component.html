@@ -27,7 +27,8 @@
         </div>
 
         <div class="col-md-3">
-            <app-text-field [(ngModel)]="viewModel.record.customerId" [disabled]="viewMode" label="Customer #" name="customerId"></app-text-field>     
+            <app-lookup-field [(ngModel)]="viewModel.record.customerId" [disabled]="viewMode" label="Customer #" name="customerId" (onLookup)="customerLookup.openDialog()"></app-lookup-field>                 
+            <app-customer-lookup-dialog #customerLookup (onSelect)="setCustomer($event)"></app-customer-lookup-dialog>
         </div>
 
         <div class="col-md-3">
