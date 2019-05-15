@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+  <div class="input-group mb-3">
+    <input      
+      [disabled]="disabled"   
+      type="text"
+      [readonly]="readonly"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+      [ngClass]="{invalid: (invalid | async )}"
+      class="form-control"           
+      [id]="identifier"
+      [attr.name]="name"            
+    />
+    <div class="input-group-append">      
+      <button type="button" class="btn btn-secondary" (click)="lookup()">Lookup</button>
+    </div>
+  </div>  
+</div>

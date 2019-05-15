@@ -13,6 +13,10 @@ import { CheckBoxFieldComponent } from './components/forms/check-box-field/check
 import { NumberFieldComponent } from './components/forms/number-field/number-field.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UtcDateTimePipe } from './pipes/utc-date-time.pipe';
+import { LookupDialogContainerComponent } from './lookups/containers/lookup-dialog-container/lookup-dialog-container.component';
+import { CustomerLookupDialogComponent } from './lookups/customer-lookup-dialog/customer-lookup-dialog.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { UtcDateTimePipe } from './pipes/utc-date-time.pipe';
     DateFieldComponent,
     CheckBoxFieldComponent,
     NumberFieldComponent,
-    UtcDateTimePipe    
+    LookupFieldComponent,
+    UtcDateTimePipe,
+    LookupDialogContainerComponent,
+    CustomerLookupDialogComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -34,6 +41,7 @@ import { UtcDateTimePipe } from './pipes/utc-date-time.pipe';
   imports: [
     CommonModule,
     FormsModule,
+    NgxDatatableModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [
@@ -46,7 +54,9 @@ import { UtcDateTimePipe } from './pipes/utc-date-time.pipe';
     CheckBoxFieldComponent,
     NumberFieldComponent,
     TextAreaFieldComponent,
-    UtcDateTimePipe
+    LookupFieldComponent,
+    UtcDateTimePipe,
+    CustomerLookupDialogComponent
   ]
 })
 export class AppCommonModule { }
