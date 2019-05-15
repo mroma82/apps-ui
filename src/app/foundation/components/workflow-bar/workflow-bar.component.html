@@ -17,12 +17,16 @@
       </div>
 
       <div class="col-sm-6">
-        <ul class="nav nav-pills float-right">
-          <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="showHistory()">History</a></li> 
-          <li class="nav-item"><a class="nav-link" href="javascript:;;" (click)="reset()">Reset</a></li> 
-          <li class="nav-item" *ngIf="instance.isActive"> <a class="nav-link" href="javascript:;;" (click)="showAssigned()">Show who is assigned</a></li> 
-        </ul>
-  
+        
+        <div ngbDropdown class="d-inline-block float-right">
+          <button class="btn btn-link" id="workflowMenu" ngbDropdownToggle>Functions</button>
+          <div ngbDropdownMenu aria-labelledby="workflowMenu">
+            <button ngbDropdownItem (click)="showHistory()">History</button> 
+            <button ngbDropdownItem (click)="reset()">Reset</button> 
+            <button ngbDropdownItem (click)="showAssigned()">Show who is assigned</button> 
+          </div>
+        </div>
+
         <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
           <li class="nav-item" *ngFor="let action of (actions$ | async)">
             <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>

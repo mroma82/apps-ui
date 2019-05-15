@@ -28,6 +28,7 @@ import { WorkflowRejectDialogComponent } from './dialogs/workflow-reject-dialog/
 import { WorkflowResetDialogComponent } from './dialogs/workflow-reset-dialog/workflow-reset-dialog.component';
 import { WorkflowHistoryListComponent } from './components/workflow-history-list/workflow-history-list.component';
 import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-list-dialog/workflow-history-list-dialog.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent, WorkflowRejectComponent, WorkflowResetComponent, WorkflowRejectDialogComponent, WorkflowResetDialogComponent, WorkflowHistoryListComponent, WorkflowHistoryListDialogComponent],
@@ -35,7 +36,8 @@ import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-l
     CommonModule,
     FormsModule,
     AppCommonModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   exports: [
     FoundationViewEditButtonBarComponent,
