@@ -16,6 +16,12 @@ export class NotificationListComponent implements OnInit, OnDestroy {
   // subscriptions
   onListChange : Subscription;
 
+  // model
+  model = {
+    selectAll: false
+  };
+  
+  // new
   constructor(
     private context : NotificationContextService,
     private routeResolver : ContextTypeRouteResolverService

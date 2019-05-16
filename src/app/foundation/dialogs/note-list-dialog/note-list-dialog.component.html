@@ -9,7 +9,7 @@
 
     <div *ngFor="let item of (list$ | async) ">
       <div>
-        <strong>{{ item.createUserFullname }} on {{ item.createDateTime | date }}</strong>
+        <strong>{{ item.createUserFullname }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
         <div class="d-inline ml-2">
           <a class="btn btn-link" (click)="edit(item)" role="button">
             <i class="fas fa-pencil-alt"></i>
@@ -19,9 +19,9 @@
           </a>
         </div>
         <div class="d-inline ml-2" *ngIf="item.deletePending">
-          Are you sure you want to delete this note?
-          <button type="button" class="btn btn-link" (click)="deleteConfirm(item)">Yes - Delete</button>
-          <button type="button" class="btn btn-link" (click)="deleteCancel(item)">No - Cancel</button>
+          Are you sure you want to delete?
+          <button type="button" class="btn btn-link btn-sm" (click)="deleteConfirm(item)">Yes</button>
+          <button type="button" class="btn btn-link btn-sm" (click)="deleteCancel(item)">No - Cancel</button>
         </div>
       </div>
       <p *ngIf="!item.editPending">
@@ -37,6 +37,7 @@
         </div>
         <hr>
       </div>
+      <hr>
     </div>
     
     <div class="mt-2" *ngIf="!model.addPending">

@@ -1,19 +1,23 @@
-<ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a [routerLink]="" class="nav-link" (mouseenter)="hoverOn =true;" (mouseleave)="hoverOn =false;">{{count$ | async }} notification(s)</a>
-    </li>
-  </ul>
 
-<div id="notification-summary" [ngClass]="hoverOn ? 'active' : ''" (mouseenter)="hoverOn =true;" (mouseleave)="hoverOn =false;">
-  <ul class="list-unstyled">
-    <li *ngFor="let item of list$ | async">
-      <a [routerLink]="getRoute(item)" (click)="hoverOn=false;">{{ item.subject }}</a>
-    </li>
-    <li *ngIf="(count$ | async) > 0">
-      <a  (click)="showListDialog()">View All</a>
-    </li>
-  </ul>
-</div>
+<ul class="nav navbar-nav navbar-right" *ngIf="(count$ | async) > 0">
+  <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
+    <a class="nav-link dropdown-toggle active" href="javascript:;;" ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{count$ | async }} notification(s)
+    </a>
+    <div class="dropdown-menu px-4 py-3" ngbDropdownMenu aria-labelledby="navbarDropdown" style="width: 300px;">
+      
+      <div *ngFor="let item of list$ | async">
+        <strong><a [routerLink]="getRoute(item)" (click)="hoverOn=false;">{{ item.subject }}</a></strong>
+        <hr />
+      </div>
+      
+      <small>
+        <a href="javascript:;;" (click)="showListDialog()">View All Notifications</a>
+      </small>      
+
+    </div>
+  </li>
+</ul>
 
 <app-notification-list-dialog></app-notification-list-dialog>
 
