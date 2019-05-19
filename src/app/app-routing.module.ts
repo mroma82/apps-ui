@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: './apps/example/example-app.module#ExampleAppModule'
       },
       {
+        path: 'purchase-req',        
+        loadChildren: './apps/purchase-req/purchase-req-app.module#PurchaseReqAppModule'
+      },
+      {
         path: '',        
         component: HomePageComponent
       }

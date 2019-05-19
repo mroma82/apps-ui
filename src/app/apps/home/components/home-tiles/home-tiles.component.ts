@@ -12,6 +12,7 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
   // define menu base
   allMenuItems = [
     { title: "Example App", routerLink: "/app/example", key: "ExampleUser" },
+    { title: "Purchase Requisition", routerLink: "/app/purchase-req", key: "ExampleUser" },
     { title: "Admin", routerLink: "/app/admin", key: "SysAdmin" }
   ];
 
