@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: './apps/example/example-app.module#ExampleAppModule'
       },
       {
+        path: 'admin',        
+        loadChildren: './apps/admin/admin-app.module#AdminAppModule'
+      },
+      {
         path: '',        
         component: HomePageComponent
       }
