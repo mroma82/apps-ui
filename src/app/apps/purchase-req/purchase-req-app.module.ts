@@ -8,6 +8,13 @@ import { PurchaseReqListComponent } from './components/list/purchase-req-list/pu
 import { PurchaseReqListFilterComponent } from './components/list/purchase-req-list-filter/purchase-req-list-filter.component';
 import { PurchaseReqRoutingModule } from './purchase-req-routing.module';
 import { PurchaseReqNavComponent } from './components/shared/purchase-req-nav/purchase-req-nav.component';
+import { PurchaseReqListContextService } from './services/purchase-req-list-context.service';
+import { PurchaseReqApiService } from './services/purchase-req-api.service';
+import { AppCommonModule } from 'src/app/common/app-common.module';
+import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -19,8 +26,17 @@ import { PurchaseReqNavComponent } from './components/shared/purchase-req-nav/pu
     PurchaseReqListFilterComponent, PurchaseReqNavComponent
   ],
   imports: [
-    CommonModule,
-    PurchaseReqRoutingModule
+    CommonModule,    
+    AppCommonModule,
+    AppFoundationModule,
+    PurchaseReqRoutingModule,
+    NgxDatatableModule,
+    FormsModule,
+    BsDatepickerModule.forRoot()
+  ],
+  providers: [
+    PurchaseReqListContextService,
+    PurchaseReqApiService
   ]
 })
 export class PurchaseReqAppModule { }

@@ -40,14 +40,12 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
     let menuItems = [];
     let roles = profile.role;
     if(roles) {
-      console.log(roles);
+
       this.allMenuItems.forEach(x => {
         if( roles.indexOf(x.key) > -1) {
           menuItems.push(x);
         }
-      });
-      console.log(this.allMenuItems);
-      console.log(menuItems);
+      });      
     }
 
     // set

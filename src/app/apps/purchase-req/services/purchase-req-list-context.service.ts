@@ -1,0 +1,98 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, combineLatest, timer, Subscription } from 'rxjs';
+import { PurchaseReqApiService } from './purchase-req-api.service';
+import { debounce } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PurchaseReqListContextService {
+  readonly PAGE_SIZE : number = 20;
+
+  // observables
+  list$ = new BehaviorSubject<any>({});  
+  filter$ = new BehaviorSubject<any>({
+    status: -1
+  });
+  page$ = new BehaviorSubject<number>(1);
+  sort$ = new BehaviorSubject<any>({
+    field: "CreateDateTime",
+    isDescending: true
+  });
+  isMyTasks$ = new BehaviorSubject<boolean>(false);
+
+  // lists
+  statusList$ : Observable<any>;
+
+  // subscriptions
+  onFilterChange$ : Subscription;
+
+  // new
+  constructor(
+    private api : PurchaseReqApiService
+  ) { 
+ 
+    // setup filter change
+    this.onFilterChange$ = combineLatest(
+      this.filter$, 
+      this.page$, 
+      this.sort$, 
+      this.isMyTasks$
+    ).pipe(debounce(() => timer(100))).subscribe(x => {
+      this.refreshData();
+    });    
+  }
+
+  // refresh data
+  refreshData() {
+
+    // combine model
+    let model = {
+      ...this.filter$.value,
+      ...{
+        isMyTasks: this.isMyTasks$.value
+      },
+      ...{
+        pageNumber: this.page$.value,
+        pageSize: this.PAGE_SIZE,        
+      },
+      ...{
+        sortField: this.sort$.value.field,
+        sortIsDescending: this.sort$.value.isDescending
+      }
+    };    
+
+    // get the data
+    this.api.getListFiltered(model).subscribe(x => {
+      this.list$.next(x);      
+    });
+  }
+
+  // set filter
+  setFilter(model: any) {
+    this.filter$.next(model);
+    this.page$.next(1);
+  }
+
+  // set page
+  setPage(page: number) {
+    this.page$.next(page);
+  }
+
+  // set sort
+  setSort(model: any) {
+    this.sort$.next(model);
+  }
+
+  // set my tasks
+  setMyTasks(set: boolean) {
+    this.isMyTasks$.next(set);
+  }
+
+  // clean up
+  ngOnDestroy(): void {
+    
+    // subscriptions
+    this.onFilterChange$.unsubscribe();
+  }
+}
