@@ -13,9 +13,9 @@ const routes: Routes = [
       path: '',
       component: PurchaseReqContainerComponent,
       children: [
-          { path: '', component: PurchaseReqListPageComponent, data: { reqListType: 0 } },
-          { path: 'all', component: PurchaseReqListPageComponent, data: { reqListType: 1 } },
-          { path: 'mytasks', component: PurchaseReqListPageComponent, data: { reqListType: 2 } },
+          { path: '', component: PurchaseReqListPageComponent, data: { listType: 0, listFilterType: 0 } },
+          { path: 'all', component: PurchaseReqListPageComponent, data: { listType: 0, listFilterType: 1 } },
+          { path: 'mytasks', component: PurchaseReqListPageComponent, data: { listType: 0, listFilterType: 2 } },
           { path: 'view/:id', component: PurchaseReqViewPageComponent },
           { path: 'edit/:id', component: PurchaseReqEditPageComponent, canActivate: [RecordLockGuard] }
       ]

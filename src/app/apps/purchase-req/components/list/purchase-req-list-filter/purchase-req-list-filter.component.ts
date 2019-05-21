@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PurchaseReqListContextService } from '../../../services/purchase-req-list-context.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-purchase-req-list-filter',
@@ -13,6 +13,11 @@ export class PurchaseReqListFilterComponent implements OnInit, OnDestroy {
   model : {
     searchText: ""
   };
+
+  // lists
+  statusList$ : Observable<any>;
+  userList$ : Observable<any>;
+  buyerGroupList$ : Observable<any>;
 
   // subscriptions
   onFilterChange$ : Subscription;
@@ -27,6 +32,11 @@ export class PurchaseReqListFilterComponent implements OnInit, OnDestroy {
 
     // set filter on change
     this.onFilterChange$ = this.context.filter$.subscribe(x => this.model = x);
+
+    // lists
+    this.statusList$ = this.context.statusList$;
+    this.buyerGroupList$ = this.context.buyerGroupList$;
+    this.userList$ = this.context.userList$;
   }
 
   // clean up

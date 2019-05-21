@@ -1,7 +1,28 @@
 <div class="row">
   
-  <div class="col-md-3">
-    <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" label="Search" name="search" placeholder=""></app-text-field>    
+  <div class="col-md-2">
+    <app-select-field [(ngModel)]="model.requestUserId" (change)="updateFilter()" name="requestUserId">
+      <option [value]="''">-- All Users --</option>
+      <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="item.username == model.requestUserId">{{ item.fullName }}</option>      
+    </app-select-field>
+  </div>
+
+  <div class="col-md-2">
+    <app-select-field [(ngModel)]="model.status" (change)="updateFilter()" name="status">
+      <option [value]="0">-- All Open/Closed --</option>
+      <option *ngFor="let item of statusList$ | async" [value]="item.code" [selected]="item.code == model.status">{{ item.text }}</option>      
+    </app-select-field>
+  </div>
+
+  <div class="col-md-2">
+    <app-select-field [(ngModel)]="model.buyerGroup" (change)="updateFilter()" name="buyerGroup">
+      <option [value]="''">-- All Buyer Groups --</option>
+      <option *ngFor="let item of buyerGroupList$ | async" [value]="item.code" [selected]="item.code == model.buyerGroup">{{ item.text }}</option>      
+    </app-select-field>
+  </div>
+
+  <div class="col-md-2">
+    <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" name="search" placeholder="Search"></app-text-field>    
   </div>
   
 </div>

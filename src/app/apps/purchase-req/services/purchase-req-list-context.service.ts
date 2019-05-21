@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, timer, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, timer, Subscription, of } from 'rxjs';
 import { PurchaseReqApiService } from './purchase-req-api.service';
 import { debounce } from 'rxjs/operators';
 
@@ -12,17 +12,23 @@ export class PurchaseReqListContextService {
   // observables
   list$ = new BehaviorSubject<any>({});  
   filter$ = new BehaviorSubject<any>({
-    status: -1
+    status: 0,
+    buyerGroup: "",
+    searchText: "",
+    requestUserId: ""
   });
+  listType$ = new BehaviorSubject<number>(0);
+  listFilterType$ = new BehaviorSubject<number>(0);
   page$ = new BehaviorSubject<number>(1);
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
   });
-  isMyTasks$ = new BehaviorSubject<boolean>(false);
 
   // lists
   statusList$ : Observable<any>;
+  userList$ : Observable<any>;
+  buyerGroupList$ : Observable<any>;
 
   // subscriptions
   onFilterChange$ : Subscription;
@@ -35,12 +41,32 @@ export class PurchaseReqListContextService {
     // setup filter change
     this.onFilterChange$ = combineLatest(
       this.filter$, 
+      this.listType$, 
+      this.listFilterType$,
       this.page$, 
-      this.sort$, 
-      this.isMyTasks$
+      this.sort$
     ).pipe(debounce(() => timer(100))).subscribe(x => {
       this.refreshData();
     });    
+
+    // status list
+    this.statusList$ = of([
+      { code: 1, text: "Open" },
+      { code: 2, text: "Closed" }
+    ]);
+
+    // buyer groups
+    this.buyerGroupList$ = of([
+      { code: "IT", text: "IT" },
+      { code: "Purchasing", text: "Purchasing" },
+      { code: "Self", text: "Self" }
+    ]);
+
+    // users
+    this.userList$ = of([
+      { username: "mroma", fullName: "Michael Roma" },
+      { username: "mjones", fullName: "Mary Jones" }
+    ]);
   }
 
   // refresh data
@@ -50,7 +76,10 @@ export class PurchaseReqListContextService {
     let model = {
       ...this.filter$.value,
       ...{
-        isMyTasks: this.isMyTasks$.value
+        listType: this.listType$.value
+      },
+      ...{
+        listFilterType: this.listFilterType$.value
       },
       ...{
         pageNumber: this.page$.value,
@@ -84,9 +113,14 @@ export class PurchaseReqListContextService {
     this.sort$.next(model);
   }
 
-  // set my tasks
-  setMyTasks(set: boolean) {
-    this.isMyTasks$.next(set);
+  // set list type
+  setListType(set: number) {
+    this.listType$.next(set);
+  }
+
+  // set list filter type
+  setListFilterType(set: number) {
+    this.listFilterType$.next(set);
   }
 
   // clean up
