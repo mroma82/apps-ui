@@ -15,6 +15,8 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PurchaseReqCreateComponent } from './components/create/purchase-req-create/purchase-req-create.component';
+import { PurchaseReqCreateDialogComponent } from './dialogs/purchase-req-create-dialog/purchase-req-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     PurchaseReqViewPageComponent, 
     PurchaseReqEditPageComponent, 
     PurchaseReqListComponent, 
-    PurchaseReqListFilterComponent, PurchaseReqNavComponent
+    PurchaseReqListFilterComponent, 
+    PurchaseReqNavComponent, 
+    PurchaseReqCreateComponent, 
+    PurchaseReqCreateDialogComponent
   ],
   imports: [
     CommonModule,    

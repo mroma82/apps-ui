@@ -1,0 +1,11 @@
+<div>
+  <app-text-field [(ngModel)]="model.description" name="description" id="description" label="Description"></app-text-field>
+</div>
+
+<div class="mt-sm-3">
+  <button type="button" class="btn btn-primary" (click)="create()">Create</button>
+  
+  <span class="ml-1 error-text">
+    {{ state.errorText }}
+  </span>
+</div>

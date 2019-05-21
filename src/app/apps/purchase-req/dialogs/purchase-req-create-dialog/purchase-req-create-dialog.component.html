@@ -1,0 +1,13 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Purchase Requsition</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+    <app-purchase-req-create></app-purchase-req-create>
+  
+  </div>
+</ng-template>

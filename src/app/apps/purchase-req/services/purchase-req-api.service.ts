@@ -16,4 +16,9 @@ export class PurchaseReqApiService {
   getListFiltered(model: any) : Observable<any> {
     return this.http.post("/purchasereq/getListFiltered", model);
   }  
+
+  // create
+  create(model: any) : Observable<any> {
+    return this.http.post("/purchasereq/create", model);
+  }
 }
