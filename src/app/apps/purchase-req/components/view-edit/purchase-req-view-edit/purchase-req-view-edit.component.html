@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-4">
+    <app-text-field [(ngModel)]="viewModel.record.reqNumber" name="reqNumber" label="Req #" [readonly]="viewMode"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.description" name="description" label="Description" [readonly]="viewMode"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.poNumber" name="poNumber" label="PO #" [readonly]="viewModel"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.specialInstructions" name="specialInstructions" label="Special instructions" [readonly]="viewModel"></app-text-field>
+    <app-lookup-field [(ngModel)]="viewModel.record.vendorId" name="vendorId" label="Vendor" [readonly]="viewModel"></app-lookup-field>
+  </div>
+</div>

@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PurchaseReqCreateComponent } from './components/create/purchase-req-create/purchase-req-create.component';
 import { PurchaseReqCreateDialogComponent } from './dialogs/purchase-req-create-dialog/purchase-req-create-dialog.component';
+import { PurchaseReqViewEditComponent } from './components/view-edit/purchase-req-view-edit/purchase-req-view-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PurchaseReqCreateDialogComponent } from './dialogs/purchase-req-create-
     PurchaseReqListFilterComponent, 
     PurchaseReqNavComponent, 
     PurchaseReqCreateComponent, 
-    PurchaseReqCreateDialogComponent
+    PurchaseReqCreateDialogComponent, 
+    PurchaseReqViewEditComponent
   ],
   imports: [
     CommonModule,    
