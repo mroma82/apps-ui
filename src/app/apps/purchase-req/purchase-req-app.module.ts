@@ -18,6 +18,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PurchaseReqCreateComponent } from './components/create/purchase-req-create/purchase-req-create.component';
 import { PurchaseReqCreateDialogComponent } from './dialogs/purchase-req-create-dialog/purchase-req-create-dialog.component';
 import { PurchaseReqViewEditComponent } from './components/view-edit/purchase-req-view-edit/purchase-req-view-edit.component';
+import { PurchaseReqListsService } from './services/purchase-req-lists.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PurchaseReqViewEditComponent } from './components/view-edit/purchase-re
   ],
   providers: [
     PurchaseReqListContextService,
-    PurchaseReqApiService
+    PurchaseReqApiService,
+    PurchaseReqListsService
   ]
 })
 export class PurchaseReqAppModule { }

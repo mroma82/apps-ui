@@ -43,6 +43,6 @@ export class PurchaseReqCreateContextService {
     }
 
     // return create
-    return this.api.create(model).pipe(map(x => { return { success: true, text: x.errorText, id: x }}));      
+    return this.api.create(model);      
   };
 }

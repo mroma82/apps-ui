@@ -1,9 +1,45 @@
-<div class="row">
+<div class="row" *ngIf="viewModel.record.id">
   <div class="col-md-4">
-    <app-text-field [(ngModel)]="viewModel.record.reqNumber" name="reqNumber" label="Req #" [readonly]="viewMode"></app-text-field>
-    <app-text-field [(ngModel)]="viewModel.record.description" name="description" label="Description" [readonly]="viewMode"></app-text-field>
-    <app-text-field [(ngModel)]="viewModel.record.poNumber" name="poNumber" label="PO #" [readonly]="viewModel"></app-text-field>
-    <app-text-field [(ngModel)]="viewModel.record.specialInstructions" name="specialInstructions" label="Special instructions" [readonly]="viewModel"></app-text-field>
-    <app-lookup-field [(ngModel)]="viewModel.record.vendorId" name="vendorId" label="Vendor" [readonly]="viewModel"></app-lookup-field>
+    <app-text-field [(ngModel)]="viewModel.record.reqNumber" name="reqNumber" label="Req #" [disabled]="viewMode"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.description" name="description" label="Description" [disabled]="viewMode"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.poNumber" name="poNumber" label="PO #" [disabled]="viewMode"></app-text-field>
+    <app-text-field [(ngModel)]="viewModel.record.specialInstructions" name="specialInstructions" label="Special instructions" [disabled]="viewMode"></app-text-field>
+    <app-lookup-field [(ngModel)]="viewModel.record.vendorId" name="vendorId" label="Vendor" [disabled]="viewMode"></app-lookup-field>
+
+    <app-date-field [(ngModel)]="viewModel.record.requestDate" name="requestDate" label="Request Date" [disabled]="viewMode"></app-date-field>
+    <app-date-field [(ngModel)]="viewModel.record.requiredDate" name="requiredDate" label="Required Date" [disabled]="viewMode"></app-date-field>
+
+
+    <app-select-field [(ngModel)]="viewModel.record.requestUserId" name="requestUserId" label="Requested by" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="viewModel.record.requestUserId == item.username">{{ item.fullName }}</option>
+    </app-select-field>
+
+    <app-select-field [(ngModel)]="viewModel.record.buyerGroup" name="buyerGroup" label="Buyer Group" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of buyerGroupList$ | async" [value]="item.code" [selected]="viewModel.record.buyerGroup == item.code">{{ item.text }}</option>
+    </app-select-field>
+
+    <app-select-field [(ngModel)]="viewModel.record.projectId" name="projectId" label="Project" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of projectList$ | async" [value]="item.projectId" [selected]="viewModel.record.projectId == item.projectId">{{ item.projectName }}</option>
+    </app-select-field>
+
+    <app-select-field [(ngModel)]="viewModel.record.department" name="department" label="Department" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of departmentList$ | async" [value]="item.departmentId" [selected]="viewModel.record.department == item.departmentId">{{ item.departmentName }}</option>
+    </app-select-field>
+
+    <app-select-field [(ngModel)]="viewModel.record.location" name="locationId" label="Location" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of locationList$ | async" [value]="item.locationId" [selected]="viewModel.record.location == item.locationId">{{ item.locationName }}</option>
+    </app-select-field>
+
+    <app-check-box-field [(ngModel)]="viewModel.record.isBudgeted" label="Budgeted?" [disabled]="viewMode" name="isBudgeted"></app-check-box-field>
+    <app-check-box-field [(ngModel)]="viewModel.record.isCapital" label="Capital?" [disabled]="viewMode" name="isCapital"></app-check-box-field>
+
+    <span>
+      Line Total: {{ viewModel.record.lineTotal | currency }}
+    </span>
   </div>
 </div>

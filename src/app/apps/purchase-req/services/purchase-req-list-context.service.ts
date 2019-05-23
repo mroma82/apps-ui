@@ -23,12 +23,7 @@ export class PurchaseReqListContextService {
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
-  });
-
-  // lists
-  statusList$ : Observable<any>;
-  userList$ : Observable<any>;
-  buyerGroupList$ : Observable<any>;
+  });  
 
   // subscriptions
   onFilterChange$ : Subscription;
@@ -47,26 +42,7 @@ export class PurchaseReqListContextService {
       this.sort$
     ).pipe(debounce(() => timer(100))).subscribe(x => {
       this.refreshData();
-    });    
-
-    // status list
-    this.statusList$ = of([
-      { code: 1, text: "Open" },
-      { code: 2, text: "Closed" }
-    ]);
-
-    // buyer groups
-    this.buyerGroupList$ = of([
-      { code: "IT", text: "IT" },
-      { code: "Purchasing", text: "Purchasing" },
-      { code: "Self", text: "Self" }
-    ]);
-
-    // users
-    this.userList$ = of([
-      { username: "mroma", fullName: "Michael Roma" },
-      { username: "mjones", fullName: "Mary Jones" }
-    ]);
+    });      
   }
 
   // refresh data

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { PurchaseReqViewEditContextService } from '../../../services/purchase-req-view-edit-context.service';
+import { PurchaseReqListsService } from '../../../services/purchase-req-lists.service';
 
 @Component({
   selector: 'app-purchase-req-view-edit',
@@ -11,7 +12,11 @@ export class PurchaseReqViewEditComponent implements OnInit {
   @Input() viewMode : boolean;
 
   // lists
-  statusList$ : Observable<any>;  
+  userList$ : Observable<any>;
+  buyerGroupList$ : Observable<any>;
+  projectList$ : Observable<any>;
+  departmentList$ : Observable<any>;
+  locationList$ : Observable<any>;  
 
   // model
   viewModel = {
@@ -25,10 +30,10 @@ export class PurchaseReqViewEditComponent implements OnInit {
 
   // new
   constructor(
-    private context: PurchaseReqViewEditContextService    
+    private context: PurchaseReqViewEditContextService,
+    private lists: PurchaseReqListsService
   ) {     
-    // lists
-    this.statusList$ = context.statusList$;    
+    
   }
   
   // init
@@ -41,6 +46,13 @@ export class PurchaseReqViewEditComponent implements OnInit {
           this.viewModel.record = x;                  
         }
       });           
+
+    // lists
+    this.userList$ = this.lists.userList$;    
+    this.buyerGroupList$ = this.lists.buyerGroupList$;    
+    this.projectList$ = this.lists.projectList$;    
+    this.departmentList$ = this.lists.departmentList$;    
+    this.locationList$ = this.lists.locationList$;    
   }
 
   // destroy
