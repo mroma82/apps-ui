@@ -17,6 +17,7 @@ import { LookupDialogContainerComponent } from './lookups/containers/lookup-dial
 import { CustomerLookupDialogComponent } from './lookups/customer-lookup-dialog/customer-lookup-dialog.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
+import { CardGroupComponent } from './components/layout/card-group/card-group.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LookupFieldComponent } from './components/forms/lookup-field/lookup-fie
     LookupFieldComponent,
     UtcDateTimePipe,
     LookupDialogContainerComponent,
-    CustomerLookupDialogComponent    
+    CustomerLookupDialogComponent,
+    CardGroupComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -56,7 +58,8 @@ import { LookupFieldComponent } from './components/forms/lookup-field/lookup-fie
     TextAreaFieldComponent,
     LookupFieldComponent,
     UtcDateTimePipe,
-    CustomerLookupDialogComponent
+    CustomerLookupDialogComponent,
+    CardGroupComponent
   ]
 })
 export class AppCommonModule { }
