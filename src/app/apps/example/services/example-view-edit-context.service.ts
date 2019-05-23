@@ -16,7 +16,7 @@ export class ExampleViewEditContextService implements OnDestroy {
 
   // lists
   statusList$: Observable<any>;
-  statusValueList$ : Observable<any>;
+  statusValueList$ = new BehaviorSubject<any>([]);
 
   // subscriptions
   onIdChange$: Subscription;
@@ -30,7 +30,13 @@ export class ExampleViewEditContextService implements OnDestroy {
 
     // status list
     this.statusList$ = service.getStatusList();
-    this.statusValueList$ = this.listItems.getItemsByType("47cac5f6-6d33-4e40-a89e-ebc37d0ec9c5").pipe(shareReplay());
+
+    // get params
+    this.service.getParameters().subscribe(x => {      
+      if(x) {
+        this.listItems.getItemsByType(x.statusListTypeId).subscribe(lst => this.statusValueList$.next(lst));
+      }
+    });    
 
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
