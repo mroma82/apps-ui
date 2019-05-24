@@ -18,6 +18,7 @@ import { CustomerLookupDialogComponent } from './lookups/customer-lookup-dialog/
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
 import { CardGroupComponent } from './components/layout/card-group/card-group.component';
+import { IntegrationService } from './services/integration.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CardGroupComponent } from './components/layout/card-group/card-group.co
   providers: [
     AppHttpClientService,
     ContextTypeRouteResolverService,
-    DatePipe     
+    IntegrationService,
+    DatePipe
   ],
   imports: [
     CommonModule,

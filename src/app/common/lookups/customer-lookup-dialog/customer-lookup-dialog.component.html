@@ -1,5 +1,5 @@
 <ng-template #content let-modal>
-  <app-lookup-dialog-container #dialog title="Customer Lookup" (onSearch)="search($event)" (onClose)="closeDialog()">    
+  <app-lookup-dialog-container #dialog title="Customer Lookup" (onSearch)="onSearch($event)" (onClose)="closeDialog()">    
     
     <div *ngIf="items$ | async as items">
       <ngx-datatable
