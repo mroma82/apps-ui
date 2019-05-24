@@ -17,6 +17,7 @@ import { LookupDialogContainerComponent } from './lookups/containers/lookup-dial
 import { CustomerLookupDialogComponent } from './lookups/customer-lookup-dialog/customer-lookup-dialog.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
+import { IntegrationService } from './services/integration.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LookupFieldComponent } from './components/forms/lookup-field/lookup-fie
   providers: [
     AppHttpClientService,
     ContextTypeRouteResolverService,
-    DatePipe     
+    IntegrationService,
+    DatePipe
   ],
   imports: [
     CommonModule,
