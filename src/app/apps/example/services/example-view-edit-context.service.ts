@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { ExampleService } from './example.service';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { ListItemService } from 'src/app/common/services/list-item.service';
+import { ExampleListsService } from './example-lists.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ExampleViewEditContextService implements OnDestroy {
   exampleRecord$ = new BehaviorSubject<any>({});
 
   // lists
+  userList$: Observable<any>;
   statusList$: Observable<any>;
   statusValueList$ = new BehaviorSubject<any>([]);
 
@@ -25,18 +27,20 @@ export class ExampleViewEditContextService implements OnDestroy {
   constructor(
     private service: ExampleService,
     private listItems: ListItemService,
-    private appContext: AppContextService
+    private appContext: AppContextService,
+    lists: ExampleListsService
   ) { 
 
     // status list
     this.statusList$ = service.getStatusList();
+    this.userList$ = lists.userList$;
 
     // get params
-    this.service.getParameters().subscribe(x => {      
+    this.service.getParameters().pipe(tap(x => {
       if(x) {
         this.listItems.getItemsByType(x.statusListTypeId).subscribe(lst => this.statusValueList$.next(lst));
       }
-    });    
+    })).subscribe();            
 
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {

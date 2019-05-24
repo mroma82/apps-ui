@@ -14,7 +14,7 @@ export class AuthService {
   TOKEN_KEY: string = "apps:token";
 
   constructor(
-    private apiClient: AppHttpClientService
+    private http: AppHttpClientService
   ) { }
 
   // token
@@ -36,7 +36,7 @@ export class AuthService {
   verify() : Observable<any> {
 
     // convert the response
-    return this.apiClient.get("/auth/verify").pipe(map(x => {
+    return this.http.get("/auth/verify").pipe(map(x => {
       
       // check error response
       if(x instanceof HttpErrorResponse) {
@@ -57,7 +57,7 @@ export class AuthService {
 
   // login
   login(model: any): Observable<any> {
-    return this.apiClient.post("/auth/login", model);
+    return this.http.post("/auth/login", model);
   }
 
   // parse token
@@ -65,5 +65,15 @@ export class AuthService {
     let model = jwt_decode(this.getToken());
     console.log(model);
     return model;
+  }
+
+  // get users
+  getUsers() : Observable<any> {
+    return this.http.get("/auth/getUsers");
+  }
+
+  // get groups
+  getGroups() : Observable<any> {
+    return this.http.get("/auth/getGroups");
   }
 }

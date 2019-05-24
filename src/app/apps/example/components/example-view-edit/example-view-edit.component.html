@@ -48,6 +48,13 @@
             <div class="col-md-3">
                 <app-date-field [(ngModel)]="viewModel.record.dateField" [disabled]="viewMode" label="Date Field" name="dateField"></app-date-field>                 
             </div>
+
+            <div class="col-md-3">
+                <app-select-field [(ngModel)]="viewModel.record.requestUserId" [disabled]="viewMode" name="requestUserId" label="Request User">
+                    <option value="">-- Please select --</option>
+                    <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="item.username == viewModel.record.requestUserId">{{ item.name }}</option>
+                </app-select-field>        
+            </div>
         </div>
     </app-card-group>
 </div>
