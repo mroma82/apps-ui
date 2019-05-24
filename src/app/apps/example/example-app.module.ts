@@ -19,6 +19,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/example-create-dialog.component';
 import { ExampleCreateComponent } from './components/example-create/example-create.component';
 import { ExampleCreateContextService } from './services/example-create-context.service';
+import { ExampleListsService } from './services/example-lists.service';
 
 @NgModule({
   declarations: [    
@@ -45,7 +46,8 @@ import { ExampleCreateContextService } from './services/example-create-context.s
   providers: [
     ExampleService,
     ExampleListContextService,
-    ExampleCreateContextService
+    ExampleCreateContextService,
+    ExampleListsService
   ]
 })
 export class ExampleAppModule { }
