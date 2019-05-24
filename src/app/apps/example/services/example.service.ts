@@ -46,4 +46,9 @@ export class ExampleService {
   create(model: any) : Observable<any> {
     return this.apiClient.post("/example/create", model);
   }
+
+  // get parameters
+  getParameters() : Observable<any> {
+    return this.apiClient.get("/example/getParameters");
+  }
 }

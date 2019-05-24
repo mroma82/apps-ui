@@ -12,7 +12,7 @@
       [id]="identifier"
       [attr.name]="name"            
     />
-    <div class="input-group-append">      
+    <div class="input-group-append" *ngIf="!readonly && !disabled">      
       <button type="button" class="btn btn-secondary" (click)="lookup()">Lookup</button>
     </div>
   </div>  

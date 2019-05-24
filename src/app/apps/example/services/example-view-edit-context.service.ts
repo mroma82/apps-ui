@@ -1,8 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { ExampleService } from './example.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
+import { ListItemService } from 'src/app/common/services/list-item.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,27 @@ export class ExampleViewEditContextService implements OnDestroy {
 
   // lists
   statusList$: Observable<any>;
-  
+  statusValueList$ = new BehaviorSubject<any>([]);
+
   // subscriptions
   onIdChange$: Subscription;
 
   // new
   constructor(
     private service: ExampleService,
+    private listItems: ListItemService,
     private appContext: AppContextService
   ) { 
 
     // status list
     this.statusList$ = service.getStatusList();
+
+    // get params
+    this.service.getParameters().subscribe(x => {      
+      if(x) {
+        this.listItems.getItemsByType(x.statusListTypeId).subscribe(lst => this.statusValueList$.next(lst));
+      }
+    });    
 
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
