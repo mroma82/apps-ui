@@ -11,9 +11,9 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
 
   // define menu base
   allMenuItems = [
-    { title: "Example App", routerLink: "/app/example", key: "ExampleUser" },
+    { title: "Example App", routerLink: "/app/example", key: "ExampleUser", icon: "fas fa-shapes" },
     { title: "Purchase Requisition", routerLink: "/app/purchase-req", key: "ExampleUser" },
-    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin" }
+    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin", icon: "fas fa-cogs" }
   ];
 
   // observables

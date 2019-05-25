@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ExampleCreateContextService } from '../../services/example-create-context.service';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./example-create.component.scss']
 })
 export class ExampleCreateComponent implements OnInit {
-
+  
   // model
   model : any;
 
