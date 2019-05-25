@@ -2,7 +2,5 @@
 <footer>
   <nav class="navbar fixed-bottom navbar-dark bg-primary" *ngIf="isAuthenticated$ | async">
     <a>{{ (user$ | async).fullName }}</a>
-
-    <a href="javascript:;;" (click)="logOut()">[ Logout ]</a>
   </nav>
 </footer>

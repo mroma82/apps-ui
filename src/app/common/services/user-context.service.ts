@@ -85,7 +85,7 @@ export class UserContextService {
 
         // next url
         let nextUrl = window.localStorage.getItem("apps:requestedUrl");
-        if(!nextUrl || nextUrl == "/login") {
+        if(!nextUrl || nextUrl == "/login" || nextUrl == "/logout") {
           nextUrl = "/";
         }
 

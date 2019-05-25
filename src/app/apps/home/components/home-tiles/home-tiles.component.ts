@@ -11,8 +11,8 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
 
   // define menu base
   allMenuItems = [
-    { title: "Example App", routerLink: "/app/example", key: "ExampleUser" },
-    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin" }
+    { title: "Example App", routerLink: "/app/example", key: "ExampleUser", icon: "fas fa-shapes" },
+    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin", icon: "fas fa-cogs" }
   ];
 
   // observables
@@ -39,14 +39,11 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
     let menuItems = [];
     let roles = profile.role;
     if(roles) {
-      console.log(roles);
       this.allMenuItems.forEach(x => {
         if( roles.indexOf(x.key) > -1) {
           menuItems.push(x);
         }
       });
-      console.log(this.allMenuItems);
-      console.log(menuItems);
     }
 
     // set
