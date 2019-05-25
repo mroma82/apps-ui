@@ -1,6 +1,6 @@
 <div class="footer-spacer"></div>
 <footer>
-  <nav class="navbar fixed-bottom navbar-dark bg-primary" *ngIf="isAuthenticated$ | async">
+  <nav class="navbar fixed-bottom navbar-light bg-light" *ngIf="isAuthenticated$ | async">
     <a>{{ (user$ | async).fullName }}</a>
   </nav>
 </footer>

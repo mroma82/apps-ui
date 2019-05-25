@@ -19,6 +19,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
 import { CardGroupComponent } from './components/layout/card-group/card-group.component';
 import { IntegrationService } from './services/integration.service';
+import { ListingControlsComponent } from './components/listing/listing-controls/listing-controls.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { IntegrationService } from './services/integration.service';
     UtcDateTimePipe,
     LookupDialogContainerComponent,
     CustomerLookupDialogComponent,
-    CardGroupComponent    
+    CardGroupComponent,
+    ListingControlsComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -46,6 +49,7 @@ import { IntegrationService } from './services/integration.service';
     CommonModule,
     FormsModule,
     NgxDatatableModule,
+    NgbModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [
@@ -61,7 +65,8 @@ import { IntegrationService } from './services/integration.service';
     LookupFieldComponent,
     UtcDateTimePipe,
     CustomerLookupDialogComponent,
-    CardGroupComponent
+    CardGroupComponent,
+    ListingControlsComponent
   ]
 })
 export class AppCommonModule { }

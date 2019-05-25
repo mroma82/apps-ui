@@ -7,14 +7,14 @@ import { debounce } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ExampleListContextService implements OnDestroy {  
-  readonly PAGE_SIZE : number = 20;
-
+  
   // observables
   list$ = new BehaviorSubject<any>({});  
   filter$ = new BehaviorSubject<any>({
     status: -1
   });
   page$ = new BehaviorSubject<number>(1);
+  pageSize$ = new BehaviorSubject<number>(25);
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
@@ -33,9 +33,13 @@ export class ExampleListContextService implements OnDestroy {
   ) { 
  
     // setup filter change
-    this.onFilterChange$ = combineLatest(this.filter$, this.page$, this.sort$, this.isMyTasks$).pipe(debounce(() => timer(100))).subscribe(x => {
-      this.refreshData();
-    })
+    this.onFilterChange$ = combineLatest(
+        this.filter$, 
+        this.page$, 
+        this.sort$, 
+        this.pageSize$,
+        this.isMyTasks$
+      ).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
 
     // statuses
     this.statusList$ = service.getStatusList();
@@ -52,7 +56,7 @@ export class ExampleListContextService implements OnDestroy {
       },
       ...{
         pageNumber: this.page$.value,
-        pageSize: this.PAGE_SIZE,        
+        pageSize: this.pageSize$.value,        
       },
       ...{
         sortField: this.sort$.value.field,
@@ -80,6 +84,11 @@ export class ExampleListContextService implements OnDestroy {
   // set sort
   setSort(model: any) {
     this.sort$.next(model);
+  }
+
+  // set page size
+  setPageSize(pageSize: number) {
+    this.pageSize$.next(pageSize);
   }
 
   // set my tasks

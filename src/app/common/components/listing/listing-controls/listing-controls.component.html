@@ -1,0 +1,21 @@
+<div class="btn-group" role="group" aria-label="Listing Controls">
+
+  <button type="button" class="btn btn-secondary" (click)="exportExcel()">
+    <i class="fas fa-file-excel"></i>
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="refresh()">
+    <i class="fas fa-sync-alt"></i>
+  </button>
+
+  <div ngbDropdown class="btn-group" placement="bottom-left">
+    <button class="btn btn-secondary" id="listingPageMenu" ngbDropdownToggle>
+      {{model.pageSize != PAGE_SIZE_MAX ? model.pageSize : 'All'}}</button>
+    <div ngbDropdownMenu aria-labelledby="listingPageMenu">
+      <button ngbDropdownItem (click)="setPageSize(25)">25</button>
+      <button ngbDropdownItem (click)="setPageSize(50)">50</button>
+      <button ngbDropdownItem (click)="setPageSize(100)">100</button>
+      <button ngbDropdownItem (click)="setPageSize(PAGE_SIZE_MAX)">All</button>
+    </div>
+  </div>
+
+</div>

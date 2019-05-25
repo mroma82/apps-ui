@@ -19,7 +19,6 @@ export class IntegrationService {
 
   // get customers
   getCustomerList(filter: string) : Observable<any> {
-    console.log("getCustomerList:" + filter);
     return this.http.get(`/integration/customerList?filter=${encodeURIComponent(filter)}`);
   }
 }

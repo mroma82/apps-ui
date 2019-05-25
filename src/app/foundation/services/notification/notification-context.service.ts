@@ -21,7 +21,6 @@ export class NotificationContextService implements OnDestroy {
     private service : NotificationService,
     private userContext: UserContextService
   ) { 
-console.log("NotificationContextService.new()");
     // initial refresh
     this.refreshList();
 
