@@ -1,6 +1,10 @@
 <header>
-  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
-    <a class="navbar-brand" routerLink="/">Apps</a>
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary" >
+
+    <a class="navbar-brand" href="javascript:;;" (click)="toggleMenu()">
+      <i class="fas fa-bars mr-3"></i>Apps
+    </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,3 +18,12 @@
     </div>
   </nav>
 </header>
+
+<div class="left-menu bg-primary" [class.active]="model.showMenu">
+  <ul class="list-group">
+    <li class="list-group-item"><a routerLink="/app" (click)="hideMenu()"><i class="fas fa-home mr-2"></i>Home</a></li>
+    <li class="list-group-item"><a routerLink="/app/example" (click)="hideMenu()"><i class="fas fa-shapes mr-2"></i>Example App</a></li>
+    <li class="list-group-item"><a routerLink="/app/admin" (click)="hideMenu()"><i class="fas fa-cogs mr-2"></i>Admin</a></li>
+    <li class="list-group-item border-top"><a routerLink="/logout" (click)="hideMenu()"><i class="fas fa-sign-out-alt mr-2"></i>Log Out</a></li>
+  </ul>
+</div>

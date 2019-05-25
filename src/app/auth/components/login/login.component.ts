@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserContextService } from 'src/app/common/services/user-context.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild("usernameField") usernameField : ElementRef;
 
   model = {
     username: "",
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   // init
   ngOnInit() {
+    this.usernameField.nativeElement.focus();
   }
 
   // login

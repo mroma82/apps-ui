@@ -1,7 +1,10 @@
 <div class="wrapper">
-  <div class="mb-3" *ngFor="let item of menuItems$ | async">
-    <button type="button" class="btn btn-primary btn-lg btn-block tile-btn" [routerLink]="item.routerLink">
-      {{ item.title }}
-    </button>
-  </div>  
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let item of menuItems$ | async">
+      <a [routerLink]="item.routerLink">
+          <i [class]="item.icon + ' mr-2'"></i>
+        {{ item.title }}
+      </a>
+    </li>
+  </ul>
 </div>

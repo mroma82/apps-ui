@@ -8,17 +8,17 @@ import { ExampleListContextService } from '../../services/example-list-context.s
   styleUrls: ['./example-list.component.scss']
 })
 export class ExampleListComponent implements OnInit {
-  pageSize: number;
-
+  
   // obserables
   list$ : Observable<any>;
-  
+  pageSize$ : Observable<number>;
+
   // new
   constructor(
     private context: ExampleListContextService
   ) { 
     this.list$ = context.list$;
-    this.pageSize = context.PAGE_SIZE;
+    this.pageSize$ = context.pageSize$;
   }
 
   //
