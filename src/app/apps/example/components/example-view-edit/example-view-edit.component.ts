@@ -13,6 +13,7 @@ export class ExampleViewEditComponent implements OnInit {
   // lists
   statusList$ : Observable<any>;  
   statusValueList$ : Observable<any>;  
+  userList$ : Observable<any>;
 
   // model
   viewModel = {
@@ -32,6 +33,7 @@ export class ExampleViewEditComponent implements OnInit {
     // lists
     this.statusList$ = context.statusList$;    
     this.statusValueList$ = context.statusValueList$;
+    this.userList$ = context.userList$;
   }
   
   // init
