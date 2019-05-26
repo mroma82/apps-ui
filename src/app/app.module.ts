@@ -23,6 +23,7 @@ import { DialogService } from './common/services/dialog.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 
+import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
     HeaderNavComponent,
     FooterComponent,
     LoginComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LogoutPageComponent
   ],
   imports: [
     BrowserModule,

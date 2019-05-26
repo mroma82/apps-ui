@@ -17,6 +17,10 @@ import { LookupDialogContainerComponent } from './lookups/containers/lookup-dial
 import { CustomerLookupDialogComponent } from './lookups/customer-lookup-dialog/customer-lookup-dialog.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LookupFieldComponent } from './components/forms/lookup-field/lookup-field.component';
+import { CardGroupComponent } from './components/layout/card-group/card-group.component';
+import { IntegrationService } from './services/integration.service';
+import { ListingControlsComponent } from './components/listing/listing-controls/listing-controls.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,17 +35,21 @@ import { LookupFieldComponent } from './components/forms/lookup-field/lookup-fie
     LookupFieldComponent,
     UtcDateTimePipe,
     LookupDialogContainerComponent,
-    CustomerLookupDialogComponent    
+    CustomerLookupDialogComponent,
+    CardGroupComponent,
+    ListingControlsComponent    
   ],
   providers: [
     AppHttpClientService,
     ContextTypeRouteResolverService,
-    DatePipe     
+    IntegrationService,
+    DatePipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     NgxDatatableModule,
+    NgbModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [
@@ -56,7 +64,9 @@ import { LookupFieldComponent } from './components/forms/lookup-field/lookup-fie
     TextAreaFieldComponent,
     LookupFieldComponent,
     UtcDateTimePipe,
-    CustomerLookupDialogComponent
+    CustomerLookupDialogComponent,
+    CardGroupComponent,
+    ListingControlsComponent
   ]
 })
 export class AppCommonModule { }
