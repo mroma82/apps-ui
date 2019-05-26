@@ -16,7 +16,7 @@
             [disabled]="viewMode">
             <option value="">-- Please select --</option>
             <option *ngFor="let item of userList$ | async" [value]="item.username"
-              [selected]="viewModel.record.requestUserId == item.username">{{ item.fullName }}</option>
+              [selected]="viewModel.record.requestUserId == item.username">{{ item.name }}</option>
           </app-select-field>
         </div>
         <div class="col-md-3">
@@ -41,8 +41,8 @@
           <app-select-field [(ngModel)]="viewModel.record.buyerGroup" name="buyerGroup" label="Buyer Group"
             [disabled]="viewMode">
             <option value="">-- Please select --</option>
-            <option *ngFor="let item of buyerGroupList$ | async" [value]="item.code"
-              [selected]="viewModel.record.buyerGroup == item.code">{{ item.text }}</option>
+            <option *ngFor="let item of buyerGroupList$ | async" [value]="item.valueId"
+              [selected]="viewModel.record.buyerGroup == item.valueId">{{ item.text }}</option>
           </app-select-field>
         </div>
         <div class="col-md-3">

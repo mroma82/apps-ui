@@ -3,7 +3,7 @@
   <div class="col-md-2">
     <app-select-field [(ngModel)]="model.requestUserId" (change)="updateFilter()" name="requestUserId">
       <option [value]="''">-- All Users --</option>
-      <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="item.username == model.requestUserId">{{ item.fullName }}</option>      
+      <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="item.username == model.requestUserId">{{ item.name }}</option>      
     </app-select-field>
   </div>
 
@@ -17,7 +17,7 @@
   <div class="col-md-2">
     <app-select-field [(ngModel)]="model.buyerGroup" (change)="updateFilter()" name="buyerGroup">
       <option [value]="''">-- All Buyer Groups --</option>
-      <option *ngFor="let item of buyerGroupList$ | async" [value]="item.code" [selected]="item.code == model.buyerGroup">{{ item.text }}</option>      
+      <option *ngFor="let item of buyerGroupList$ | async" [value]="item.valueId" [selected]="item.valueId == model.buyerGroup">{{ item.text }}</option>      
     </app-select-field>
   </div>
 

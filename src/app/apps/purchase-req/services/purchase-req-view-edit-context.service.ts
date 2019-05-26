@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { PurchaseReqApiService } from './purchase-req-api.service';
 import { AppContextService } from 'src/app/app-context.service';
 import { map } from 'rxjs/operators';
+import { PurchaseReqListsService } from './purchase-req-lists.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,13 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   id$ = new BehaviorSubject<string>(null);
   reqRecord$ = new BehaviorSubject<any>({});
 
-  // lists
-  statusList$: Observable<any>;    
-  userList$ : Observable<any>;
-  buyerGroupList$ : Observable<any>;
-  
   // subscriptions
   onIdChange$: Subscription;
 
   // new
   constructor(
     private api: PurchaseReqApiService,
-    private appContext: AppContextService
+    private appContext: AppContextService    
   ) {   
 
     // id change
@@ -32,26 +28,6 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       if(x)
         this.refreshData();
     });
-
-    // lists
-    // status list
-    this.statusList$ = of([
-      { code: 1, text: "Open" },
-      { code: 2, text: "Closed" }
-    ]);
-
-    // buyer groups
-    this.buyerGroupList$ = of([
-      { code: "IT", text: "IT" },
-      { code: "Purchasing", text: "Purchasing" },
-      { code: "Self", text: "Self" }
-    ]);
-
-    // users
-    this.userList$ = of([
-      { username: "mroma", fullName: "Michael Roma" },
-      { username: "mjones", fullName: "Mary Jones" }
-    ]);
   }
 
   // set id

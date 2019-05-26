@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { PurchaseReqApiService } from './purchase-req-api.service';
+import { tap, shareReplay } from 'rxjs/operators';
+import { ListItemService } from 'src/app/common/services/list-item.service';
+import { AuthService } from 'src/app/common/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,32 +13,26 @@ export class PurchaseReqListsService {
   // lists
   statusList$ : Observable<any>;
   userList$ : Observable<any>;
-  buyerGroupList$ : Observable<any>;
+  buyerGroupList$ = new BehaviorSubject<any>([]);
   projectList$ : Observable<any>;
   departmentList$ : Observable<any>;
   locationList$ : Observable<any>;
 
   // new
-  constructor() { 
-
+  constructor(
+    api : PurchaseReqApiService,
+    auth : AuthService,
+    listItems : ListItemService
+  ) { 
+    
     // status list
     this.statusList$ = of([
       { code: 1, text: "Open" },
       { code: 2, text: "Closed" }
-    ]);
-
-    // buyer groups
-    this.buyerGroupList$ = of([
-      { code: "IT", text: "IT" },
-      { code: "Purchasing", text: "Purchasing" },
-      { code: "Self", text: "Self" }
-    ]);
+    ]);    
 
     // users
-    this.userList$ = of([
-      { username: "mroma", fullName: "Michael Roma" },
-      { username: "mjones", fullName: "Mary Jones" }
-    ]);
+    this.userList$ = auth.getUsers().pipe(shareReplay());
 
     // users
     this.projectList$ = of([
@@ -53,5 +51,14 @@ export class PurchaseReqListsService {
       { locationId: "LOC1", locationName: "Location 1" },
       { locationId: "LOC2", locationName: "Location 2" }
     ]);
+
+    // from params    
+    api.getParameters().pipe(tap((x : any) => {
+      if(x) {
+
+        // set lists
+        listItems.getItemsByType(x.buyerGroupListTypeId).subscribe(x => this.buyerGroupList$.next(x));   
+      }
+    })).subscribe();   
   }
 }
