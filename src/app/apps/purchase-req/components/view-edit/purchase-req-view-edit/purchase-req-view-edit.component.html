@@ -71,11 +71,11 @@
           </app-select-field>
         </div>
         <div class="col-md-3">
-          <app-select-field [(ngModel)]="viewModel.record.location" name="locationId" label="Location"
+          <app-select-field [(ngModel)]="viewModel.record.locationId" name="locationId" label="Location"
             [disabled]="viewMode">
             <option value="">-- Please select --</option>
             <option *ngFor="let item of locationList$ | async" [value]="item.locationId"
-              [selected]="viewModel.record.location == item.locationId">{{ item.locationName }}</option>
+              [selected]="viewModel.record.locationId == item.locationId">{{ item.locationName }}</option>
           </app-select-field>
         </div>
         <div class="col-md-3">
