@@ -107,27 +107,54 @@
     </app-card-group>
 
     <app-card-group title="Lines">
-      <table>
+      <table class="table">
         <thead>
-
+          <tr>
+            <th>Item #</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Ext Price</th>
+            <th style="width:100px"></th>
+          </tr>
         </thead>
+        <thead>
+            <tr>
+              <td>ABC</td>
+              <td>ABC Description</td>
+              <td>4</td>
+              <td>{{ 1.99 | currency }}</td>
+              <td>{{ 4 * 1.99 | currency }}</td>
+              <td>
+                <button type="button" class="btn btn-link" (click)="deleteLine(line)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+                <td>DEF</td>
+                <td>DEF Description</td>
+                <td>2</td>
+                <td>{{ 2.99 | currency }}</td>
+                <td>{{ 2 * 2.99 | currency }}</td>
+                <td>
+                  <button type="button" class="btn btn-link" (click)="deleteLine(line)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th colspan="4">
+                <button type="button" (click)="addLine()" class="btn btn-primary">Add Line</button>
+              </th>
+              <th>{{ viewModel.record.lineTotal | currency }}</th>
+              <th></th>
+            </tr>
+          </tfoot>
       </table>
     </app-card-group>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <span>
-      Line Total: {{ viewModel.record.lineTotal | currency }}
-    </span>
   </div>
 </div>
