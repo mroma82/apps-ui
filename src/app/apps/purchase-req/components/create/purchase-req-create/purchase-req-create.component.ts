@@ -36,7 +36,7 @@ export class PurchaseReqCreateComponent implements OnInit {
 
     // create
     this.context.create(this.model).subscribe(x => {
-      console.log(x);
+      
       if(x.success) {
         this.context.closeDialog();
         this.router.navigateByUrl(`/app/purchase-req/edit/${x.id}`);

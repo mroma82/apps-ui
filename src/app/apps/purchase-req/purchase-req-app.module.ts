@@ -19,6 +19,8 @@ import { PurchaseReqCreateComponent } from './components/create/purchase-req-cre
 import { PurchaseReqCreateDialogComponent } from './dialogs/purchase-req-create-dialog/purchase-req-create-dialog.component';
 import { PurchaseReqViewEditComponent } from './components/view-edit/purchase-req-view-edit/purchase-req-view-edit.component';
 import { PurchaseReqListsService } from './services/purchase-req-lists.service';
+import { PurchaseReqLineDialogComponent } from './dialogs/purchase-req-line-dialog/purchase-req-line-dialog.component';
+import { PurchaseReqLineComponent } from './components/view-edit/purchase-req-line/purchase-req-line.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PurchaseReqListsService } from './services/purchase-req-lists.service';
     PurchaseReqNavComponent, 
     PurchaseReqCreateComponent, 
     PurchaseReqCreateDialogComponent, 
-    PurchaseReqViewEditComponent
+    PurchaseReqViewEditComponent, 
+    PurchaseReqLineDialogComponent, 
+    PurchaseReqLineComponent
   ],
   imports: [
     CommonModule,    

@@ -18,6 +18,11 @@ export class PurchaseReqApiService {
     return this.http.get(`${this.apiRoot}/getSingle/${id}`);
   }
 
+  // get lines
+  getLines(id: string) : Observable<any> {
+    return this.http.get(`${this.apiRoot}/getLines/${id}`);
+  }
+
   // get list filtered
   getListFiltered(model: any) : Observable<any> {
     return this.http.post(`${this.apiRoot}/getListFiltered`, model);

@@ -13,6 +13,9 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // observables
   id$ = new BehaviorSubject<string>(null);
   reqRecord$ = new BehaviorSubject<any>({});
+  reqLines$ = new BehaviorSubject<any>([]);  
+  lineDialogOpen$ = new BehaviorSubject<boolean>(false);
+  lineDialogModel$ = new BehaviorSubject<any>({});
 
   // subscriptions
   onIdChange$: Subscription;
@@ -22,7 +25,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     private api: PurchaseReqApiService,
     private appContext: AppContextService    
   ) {   
-
+console.log("new PurchaseReqViewEditContextService");
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
       if(x)
@@ -46,7 +49,14 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       this.appContext.Layout.setTitle("Purchase Requisition: " + x.reqNumber);
     });
 
-    // todo: get lines
+    // get lines
+    this.api.getLines(this.id$.value).subscribe(x => {
+      this.reqLines$.next(x);      
+    });
+
+    // clear line dialog
+    this.lineDialogModel$.next({});
+    this.lineDialogOpen$.next(false);
   }
 
   // update 
@@ -54,7 +64,8 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     
     // update, check if ok
     return this.api.update({
-      purchaseReq: this.reqRecord$.value
+      purchaseReq: this.reqRecord$.value,
+      purchaseReqLines: this.reqLines$.value
     }).pipe(map(x => {
       if(x.success) {
         return true;
@@ -79,6 +90,48 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
         return false;
       }
     }));
+  }
+
+  // open line dialog for create
+  openLineDialogForCreate() {
+
+    // set the default values and open
+    this.lineDialogModel$.next({
+      lineIndex: -1,
+      quantity: 1
+    });    
+    this.lineDialogOpen$.next(true);
+  }
+
+  // open line dialog for edit
+  openLineDialogForEdit(index: number, line: any) {
+    
+    // prep edit model
+    this.lineDialogModel$.next({      
+      ...line,
+      ...{ 
+        lineIndex: index 
+      },
+    });
+    this.lineDialogOpen$.next(true);
+  }
+
+  // add line
+  addUpdateLine(model: any) {
+
+    var lines = this.reqLines$.value;
+    
+    if(model.lineIndex == -1) {
+      lines.push(model);
+    } else {
+      var existingLine = lines[model.lineIndex];
+      lines[model.lineIndex] = {...existingLine, ...model};      
+    }    
+    
+    this.reqLines$.next(lines);
+
+    // close dialog
+    this.lineDialogOpen$.next(false);
   }
 
   // destroy

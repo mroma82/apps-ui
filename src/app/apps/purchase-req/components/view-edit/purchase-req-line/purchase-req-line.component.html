@@ -1,0 +1,18 @@
+<app-card-group title="Details">
+  <div class="row">
+      <div class="col-md-6">
+          <app-lookup-field [(ngModel)]="viewModel.itemId" name="itemId" label="Item #" [disabled]="viewMode">
+          </app-lookup-field>
+        </div>
+    <div class="col-md-6">
+      <app-text-field [(ngModel)]="viewModel.itemDescription" name="itemDescription" label="Description"
+        [disabled]="viewMode"></app-text-field>
+    </div>    
+  </div>
+</app-card-group>
+
+<div>
+  <button type="button" class="btn btn-primary" (click)="saveLine()">Save</button>
+</div>
+
+<pre>model = {{ viewModel | json }}</pre>
