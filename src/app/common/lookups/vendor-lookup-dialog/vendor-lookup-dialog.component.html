@@ -1,0 +1,34 @@
+<ng-template #content let-modal>
+    <app-lookup-dialog-container #dialog title="Vendor Lookup" (onSearch)="onSearch($event)" (onClose)="closeDialog()">    
+      
+      <div *ngIf="items$ | async as items">
+        <ngx-datatable
+          class="bootstrap"
+          [columnMode]="'flex'"
+          [rows]="items"
+          [headerHeight]="40"
+          [footerHeight]="40"
+          [limit]="10"      
+          [count]="items.length"
+          [rowHeight]="'auto'">  
+          
+          <ngx-datatable-column name="ID" prop="vendorId" [flexGrow]="1">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Name" prop="vendorName" [flexGrow]="1">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{value}}
+            </ng-template>
+          </ngx-datatable-column>    
+          <ngx-datatable-column name="" prop="vendorId" [flexGrow]="1">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <button type="button" class="btn btn-primary" (click)="select(row)">Select</button>
+            </ng-template>
+          </ngx-datatable-column>   
+        </ngx-datatable>
+      </div>
+  
+    </app-lookup-dialog-container>
+  </ng-template>

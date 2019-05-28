@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseReqCreateContextService } from '../../services/purchase-req-create-context.service';
 import { PurchaseReqListContextService } from '../../services/purchase-req-list-context.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Component({
   selector: 'app-purchase-req-list-page',
@@ -14,7 +15,8 @@ export class PurchaseReqListPageComponent implements OnInit {
   constructor(
     private createContext : PurchaseReqCreateContextService,
     private context: PurchaseReqListContextService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private appContext: AppContextService
   ) { }
 
   // init
@@ -23,6 +25,9 @@ export class PurchaseReqListPageComponent implements OnInit {
     // set the list type
     this.context.setListType(+this.activatedRoute.snapshot.data.listType);    
     this.context.setListFilterType(+this.activatedRoute.snapshot.data.listFilterType);    
+    
+    // set title
+    this.appContext.Layout.setTitle("Purchase Requisitions");
   }
 
   // open create dialog

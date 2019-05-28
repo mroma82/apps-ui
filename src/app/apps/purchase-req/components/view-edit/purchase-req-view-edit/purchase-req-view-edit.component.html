@@ -35,7 +35,8 @@
         </div>
         <div class="col-md-3">
           <app-lookup-field [(ngModel)]="viewModel.record.vendorId" name="vendorId" label="Vendor"
-            [disabled]="viewMode"></app-lookup-field>
+            [disabled]="viewMode" (onLookup)="vendorLookup.openDialog()"></app-lookup-field>
+          <app-vendor-lookup-dialog #vendorLookup (onSelect)="setVendor($event)"></app-vendor-lookup-dialog>
         </div>
         <div class="col-md-3">
           <app-select-field [(ngModel)]="viewModel.record.buyerGroup" name="buyerGroup" label="Buyer Group"

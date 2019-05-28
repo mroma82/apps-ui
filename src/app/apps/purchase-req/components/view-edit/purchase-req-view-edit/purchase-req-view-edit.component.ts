@@ -71,7 +71,7 @@ export class PurchaseReqViewEditComponent implements OnInit, OnDestroy {
   }
 
   // select
-  setCustomer(item) {
+  setVendor(item) {
     this.viewModel.record.vendorId = item.vendorId;    
   }
 

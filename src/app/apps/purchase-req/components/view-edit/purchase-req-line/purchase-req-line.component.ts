@@ -18,7 +18,9 @@ export class PurchaseReqLineComponent implements OnInit {
   viewModel = {
     quantity: 0,
     unitPrice: 0,
-    extPrice: 0
+    extPrice: 0,
+    itemId: "",
+    itemDescription: ""
   };
 
   // subscriptions
@@ -55,6 +57,12 @@ export class PurchaseReqLineComponent implements OnInit {
   // save line
   saveLine() {
     this.context.addUpdateLine(this.viewModel);
+  }
+
+  // set item
+  setItem(item: any) {
+    this.viewModel.itemId = item.itemId;
+    this.viewModel.itemDescription = item.itemName
   }
 
   // update ext price
