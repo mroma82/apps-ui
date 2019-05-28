@@ -16,8 +16,7 @@ export class PurchaseReqViewEditComponent implements OnInit, OnDestroy {
   buyerGroupList$ : Observable<any>;
   projectList$ : Observable<any>;
   departmentList$ : Observable<any>;
-  locationList$ : Observable<any>;  
-  lineDialogOpen$ : Observable<any>;
+  locationList$ : Observable<any>;    
 
   // model
   viewModel = {
@@ -41,7 +40,7 @@ export class PurchaseReqViewEditComponent implements OnInit, OnDestroy {
   
   // init
   ngOnInit() {    
-this.lineDialogOpen$ = this.context.lineDialogOpen$;
+
     // subscribe to record changes
     this.onRecordChange$ =
       this.context.reqRecord$.subscribe(x => {        
@@ -84,5 +83,10 @@ this.lineDialogOpen$ = this.context.lineDialogOpen$;
   // edit line
   editLine(index: number, line: any) {
     this.context.openLineDialogForEdit(index, line);
+  }
+  
+  // line total
+  getLineTotal(): number {
+    return this.context.calcLineTotal();  
   }
 }

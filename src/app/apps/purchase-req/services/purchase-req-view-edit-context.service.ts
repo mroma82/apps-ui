@@ -61,9 +61,13 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // update 
   update() : Observable<boolean> {
     
+    // set line total
+    var reqRecord = this.reqRecord$.value;
+    reqRecord.lineTotal = this.calcLineTotal();
+
     // update, check if ok
     return this.api.update({
-      purchaseReq: this.reqRecord$.value,
+      purchaseReq: reqRecord,
       purchaseReqLines: this.reqLines$.value
     }).pipe(map(x => {
       if(x.success) {
@@ -93,11 +97,16 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
 
   // open line dialog for create
   openLineDialogForCreate() {
-
+    let req = this.reqRecord$.value;
+    
     // set the default values and open
     this.lineDialogModel$.next({
       lineIndex: -1,
-      quantity: 1
+      itemType: 0,
+      quantity: 1,
+      uom: 'Each',
+      locationId: req.locationId,
+      requiredDate: req.requiredDate
     });    
     this.lineDialogOpen$.next(true);
   }
@@ -133,6 +142,12 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     this.lineDialogOpen$.next(false);
   }
 
+  // calc the line total
+  calcLineTotal() : number {
+    return this.reqLines$.value
+      .filter((line : any) => !line.isDeleted)
+      .reduce((sum : number, current : any) => sum + current.extPrice, 0);
+  }
   // destroy
   ngOnDestroy() {
     this.onIdChange$.unsubscribe();

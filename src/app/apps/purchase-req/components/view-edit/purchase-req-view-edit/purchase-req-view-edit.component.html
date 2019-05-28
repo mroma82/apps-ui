@@ -122,14 +122,25 @@
           <tr *ngFor="let item of viewModel.lines; let i = index">
             <td>
               {{ item.itemId }}
-              <a class="ml-2" (click)="editLine(i, item)"><i class="fas fa-pencil-alt"></i></a>
+              <a href="javascript:;;" class="ml-2" (click)="editLine(i, item)" *ngIf="!viewMode"><i class="fas fa-pencil-alt"></i></a>
+              <a href="javascript:;;" class="ml-2" (click)="editLine(i, item)" *ngIf="viewMode"><i class="fas fa-external-link-square-alt"></i></a>
             </td>
-            <td>{{ item.itemDescription }}</td>
-            <td>4</td>
-            <td>{{ 1.99 | currency }}</td>
-            <td>{{ 4 * 1.99 | currency }}</td>
             <td>
-              <button type="button" class="btn btn-link" (click)="deleteLine(line)">
+              {{ item.itemDescription }}
+              <div *ngIf="item.note">
+                <small>{{ item.notes }}</small>
+              </div>              
+              <div *ngIf="item.url">
+                <small>
+                    <a [href]="item.url" target="_blank">{{ item.url }}</a>
+                </small>
+              </div>
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitPrice | currency }}</td>
+            <td>{{ item.extPrice | currency }}</td>
+            <td>
+              <button type="button" class="btn btn-link" (click)="deleteLine(line)" *ngIf="!viewMode">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
@@ -138,9 +149,9 @@
         <tfoot>
           <tr>
             <th colspan="4">
-              <button type="button" (click)="addLine()" class="btn btn-primary">Add Line</button> {{ lineDialogOpen$ | async }}
+              <button type="button" (click)="addLine()" class="btn btn-primary" *ngIf="!viewMode">Add Line</button>
             </th>
-            <th>{{ viewModel.record.lineTotal | currency }}</th>
+            <th>{{ getLineTotal() | currency }}</th>
             <th></th>
           </tr>
         </tfoot>
@@ -150,4 +161,4 @@
   </div>
 </div>
 
-<app-purchase-req-line-dialog></app-purchase-req-line-dialog>
+<app-purchase-req-line-dialog [viewMode]="viewMode"></app-purchase-req-line-dialog>

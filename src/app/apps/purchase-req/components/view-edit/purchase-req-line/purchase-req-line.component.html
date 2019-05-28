@@ -1,18 +1,72 @@
-<app-card-group title="Details">
-  <div class="row">
-      <div class="col-md-6">
-          <app-lookup-field [(ngModel)]="viewModel.itemId" name="itemId" label="Item #" [disabled]="viewMode">
-          </app-lookup-field>
-        </div>
-    <div class="col-md-6">
-      <app-text-field [(ngModel)]="viewModel.itemDescription" name="itemDescription" label="Description"
-        [disabled]="viewMode"></app-text-field>
-    </div>    
-  </div>
-</app-card-group>
-
 <div>
-  <button type="button" class="btn btn-primary" (click)="saveLine()">Save</button>
+  <app-select-field [(ngModel)]="viewModel.itemType" name="itemType" label="Item type" [disabled]="viewMode">
+    <option [value]="0" [selected]="viewModel.itemType == 0">Inventory</option>
+    <option [value]="1" [selected]="viewModel.itemType == 1">Non-Inventory</option>
+  </app-select-field>
 </div>
 
-<pre>model = {{ viewModel | json }}</pre>
+<div class="row">
+  <div class="col-md-6">
+    <app-lookup-field [(ngModel)]="viewModel.itemId" name="itemId" label="Item #" [disabled]="viewMode"
+      *ngIf="viewModel.itemType == 0">
+    </app-lookup-field>
+  </div>
+  <div class="col-md-6">
+    <app-text-field [(ngModel)]="viewModel.itemDescription" name="itemDescription" label="Description"
+      [disabled]="viewMode"></app-text-field>
+  </div>
+  <div class="col-md-6">
+    <app-text-field [(ngModel)]="viewModel.itemRevision" name="itemRevision" label="Item revision"
+      [disabled]="viewMode"></app-text-field>
+  </div>
+  <div class="col-md-6">
+    <app-text-field [(ngModel)]="viewModel.vendorItemId" name="vendorItemId" label="Vendor item #"
+      [disabled]="viewMode"></app-text-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <app-number-field [(ngModel)]="viewModel.quantity" name="quantity" label="Quantity" [disabled]="viewMode"
+      (change)="updateExtPrice()">
+    </app-number-field>
+  </div>
+  <div class="col-md-4">
+    <app-number-field [(ngModel)]="viewModel.unitPrice" name="unitPrice" label="Unit price" [disabled]="viewMode"
+      (change)="updateExtPrice()">
+    </app-number-field>
+  </div>
+  <div class="col-md-4">
+    <app-number-field [(ngModel)]="viewModel.extPrice" name="extPrice" label="Ext Price" [disabled]="true">
+    </app-number-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <app-date-field [(ngModel)]="viewModel.requiredDate" name="requiredDate" label="Required date"
+      [disabled]="viewMode"></app-date-field>
+  </div>
+  <div class="col-md-4">
+    <app-select-field [(ngModel)]="viewModel.locationId" name="locationId" label="Location" [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of locationList$ | async" [value]="item.locationId"
+        [selected]="viewModel.locationId == item.locationId">{{ item.locationName }}</option>
+    </app-select-field>
+  </div>
+  <div class="col-md-4">
+    <app-text-field [(ngModel)]="viewModel.uom" name="uom" label="UOM" [disabled]="viewMode"></app-text-field>
+  </div>
+</div>
+
+<div>
+  <app-text-field [(ngModel)]="viewModel.notes" name="notes" label="Notes" [disabled]="viewMode"></app-text-field>
+</div>
+
+<div>
+  <app-text-field [(ngModel)]="viewModel.url" name="url" label="URL" [disabled]="viewMode"></app-text-field>
+</div>
+
+<div *ngIf="!viewMode">
+  <button type="button" class="btn btn-primary" (click)="saveLine()">Save</button>
+</div>
