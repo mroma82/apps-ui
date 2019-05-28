@@ -25,7 +25,6 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     private api: PurchaseReqApiService,
     private appContext: AppContextService    
   ) {   
-console.log("new PurchaseReqViewEditContextService");
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
       if(x)
