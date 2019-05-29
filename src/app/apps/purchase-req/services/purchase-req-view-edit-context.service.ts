@@ -4,6 +4,8 @@ import { PurchaseReqApiService } from './purchase-req-api.service';
 import { AppContextService } from 'src/app/app-context.service';
 import { map } from 'rxjs/operators';
 import { PurchaseReqListsService } from './purchase-req-lists.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // new
   constructor(
     private api: PurchaseReqApiService,
-    private appContext: AppContextService    
+    private appContext: AppContextService,
+    private dialogService: DialogService 
   ) {   
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
@@ -104,9 +107,12 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       lineIndex: -1,
       itemType: 0,
       quantity: 1,
+      unitPrice: 0,
+      extPrice: 0,
       uom: 'Each',
       locationId: req.locationId,
-      requiredDate: req.requiredDate
+      requiredDate: req.requiredDate,
+      isDeleted: false
     });    
     this.lineDialogOpen$.next(true);
   }
@@ -127,19 +133,44 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // add line
   addUpdateLine(model: any) {
 
-    var lines = this.reqLines$.value;
+    // get the lines
+    var lines : any[] = this.reqLines$.value;
     
+    // check if we need to add or update
     if(model.lineIndex == -1) {
       lines.push(model);
-    } else {
-      var existingLine = lines[model.lineIndex];
-      lines[model.lineIndex] = {...existingLine, ...model};      
+    } else {      
+
+      // update, get the existing line and update
+      var existingLine = lines.filter((line : any) => !line.isDeleted)[model.lineIndex];      
+      lines[lines.indexOf(existingLine)] = {...existingLine, ...model};      
     }    
     
+    // next the lines
     this.reqLines$.next(lines);
 
     // close dialog
     this.lineDialogOpen$.next(false);
+  }
+
+  // delete line
+  deleteLine(index: number) {
+
+    // ask
+    this.dialogService.yesNo("Delete Line", "Are you sure you want to delete this line?").subscribe(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // get the lines
+        var lines = this.reqLines$.value;
+
+        // get the existing line
+        var existingLine = lines.filter((line : any) => !line.isDeleted)[index];
+        existingLine.isDeleted = true;
+
+        // push a new lines    
+        this.reqLines$.next(lines);
+      }
+    });  
   }
 
   // calc the line total
@@ -148,6 +179,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       .filter((line : any) => !line.isDeleted)
       .reduce((sum : number, current : any) => sum + current.extPrice, 0);
   }
+
   // destroy
   ngOnDestroy() {
     this.onIdChange$.unsubscribe();

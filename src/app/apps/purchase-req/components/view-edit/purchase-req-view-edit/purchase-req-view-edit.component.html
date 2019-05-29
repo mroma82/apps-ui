@@ -120,7 +120,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of viewModel.lines; let i = index">
+          <tr *ngFor="let item of viewModel.lines | excludeDeleted; let i = index">
             <td>
               {{ item.itemId }}
               <a href="javascript:;;" class="ml-2" (click)="editLine(i, item)" *ngIf="!viewMode"><i class="fas fa-pencil-alt"></i></a>
@@ -141,9 +141,9 @@
             <td>{{ item.unitPrice | currency }}</td>
             <td>{{ item.extPrice | currency }}</td>
             <td>
-              <button type="button" class="btn btn-link" (click)="deleteLine(line)" *ngIf="!viewMode">
+              <button type="button" class="btn btn-link" (click)="deleteLine(i)" *ngIf="!viewMode">
                 <i class="fas fa-trash-alt"></i>
-              </button>
+              </button>              
             </td>
           </tr>
         </tbody>
@@ -157,6 +157,7 @@
           </tr>
         </tfoot>
       </table>
+      <pre>lines = {{ viewModel.lines | json }}</pre>
     </app-card-group>
 
   </div>

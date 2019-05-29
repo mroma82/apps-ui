@@ -23,6 +23,7 @@ import { ListingControlsComponent } from './components/listing/listing-controls/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VendorLookupDialogComponent } from './lookups/vendor-lookup-dialog/vendor-lookup-dialog.component';
 import { ItemLookupDialogComponent } from './lookups/item-lookup-dialog/item-lookup-dialog.component';
+import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ItemLookupDialogComponent } from './lookups/item-lookup-dialog/item-loo
     CardGroupComponent,
     ListingControlsComponent,
     VendorLookupDialogComponent,
-    ItemLookupDialogComponent    
+    ItemLookupDialogComponent,
+    ExcludeDeletedPipe    
   ],
   providers: [
     AppHttpClientService,
@@ -72,7 +74,8 @@ import { ItemLookupDialogComponent } from './lookups/item-lookup-dialog/item-loo
     CardGroupComponent,
     ListingControlsComponent,
     VendorLookupDialogComponent,
-    ItemLookupDialogComponent  
+    ItemLookupDialogComponent,
+    ExcludeDeletedPipe
   ]
 })
 export class AppCommonModule { }

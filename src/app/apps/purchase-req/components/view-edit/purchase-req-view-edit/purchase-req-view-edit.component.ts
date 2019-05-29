@@ -84,6 +84,11 @@ export class PurchaseReqViewEditComponent implements OnInit, OnDestroy {
   editLine(index: number, line: any) {
     this.context.openLineDialogForEdit(index, line);
   }
+
+  // delete line
+  deleteLine(index: number) {
+    this.context.deleteLine(index);
+  }
   
   // line total
   getLineTotal(): number {
