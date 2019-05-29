@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { PurchaseReqListsService } from './purchase-req-lists.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { message } from 'src/app/common/components/forms/base/validation';
 
 @Injectable({
   providedIn: 'root'
@@ -130,8 +131,34 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     this.lineDialogOpen$.next(true);
   }
 
+  // validate line
+  validateLine(model: any) : boolean {
+
+    // check messages
+    let messages : string[] = [];
+
+    // check each
+    if(!model.itemId) messages.push("Item # is required");
+    if(!model.quantity) messages.push("Quantity is required");
+    if(!model.unitPrice) messages.push("Unit Price is required");
+
+    // check error
+    if( messages.length) {
+      this.dialogService.message("Validation", "The following errors occurred:\n\n" + messages.join('\n'));
+      return false;
+    }
+
+    // is ok
+    return true;
+  }
+
   // add line
-  addUpdateLine(model: any) {
+  addUpdateLine(model: any) : boolean {
+
+    // validate
+    if(!this.validateLine(model)) {
+      return false;
+    }
 
     // get the lines
     var lines : any[] = this.reqLines$.value;
@@ -151,6 +178,9 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
 
     // close dialog
     this.lineDialogOpen$.next(false);
+
+    // return ok
+    return true;
   }
 
   // delete line
