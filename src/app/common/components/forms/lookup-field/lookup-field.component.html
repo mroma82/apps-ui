@@ -4,7 +4,7 @@
     <input      
       [disabled]="disabled"   
       type="text"
-      [readonly]="readonly"
+      [readonly]="readonly || !allowManualEntry"
       [placeholder]="placeholder"
       [(ngModel)]="value"
       [ngClass]="{invalid: (invalid | async )}"
