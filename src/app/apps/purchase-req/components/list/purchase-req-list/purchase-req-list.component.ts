@@ -8,11 +8,11 @@ import { PurchaseReqListContextService } from '../../../services/purchase-req-li
   styleUrls: ['./purchase-req-list.component.scss']
 })
 export class PurchaseReqListComponent implements OnInit {
-  pageSize: number;
-
+  
   // obserables
   list$ : Observable<any>;
-  
+  pageSize$ : Observable<number>;
+
   // new
   constructor(
     private context: PurchaseReqListContextService
@@ -21,7 +21,7 @@ export class PurchaseReqListComponent implements OnInit {
   // init
   ngOnInit() {
     this.list$ = this.context.list$;
-    this.pageSize = this.context.PAGE_SIZE;
+    this.pageSize$ = this.context.pageSize$;
   }
 
   // on page

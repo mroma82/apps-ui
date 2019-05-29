@@ -24,5 +24,9 @@
   <div class="col-md-2">
     <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" name="search" placeholder="Search"></app-text-field>    
   </div>
+
+  <div class="col-md-4 text-right" style="padding-top:32px;">
+    <app-listing-controls #listingControls (onRefresh)="refresh($event)" (onSetPageSize)="setPageSize($event)"></app-listing-controls>
+  </div>
   
 </div>

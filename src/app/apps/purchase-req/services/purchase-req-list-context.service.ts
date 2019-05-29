@@ -7,7 +7,6 @@ import { debounce } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PurchaseReqListContextService {
-  readonly PAGE_SIZE : number = 20;
 
   // observables
   list$ = new BehaviorSubject<any>({});  
@@ -20,6 +19,7 @@ export class PurchaseReqListContextService {
   listType$ = new BehaviorSubject<number>(0);
   listFilterType$ = new BehaviorSubject<number>(0);
   page$ = new BehaviorSubject<number>(1);
+  pageSize$ = new BehaviorSubject<number>(25);
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
@@ -59,7 +59,7 @@ export class PurchaseReqListContextService {
       },
       ...{
         pageNumber: this.page$.value,
-        pageSize: this.PAGE_SIZE,        
+        pageSize: this.pageSize$.value,        
       },
       ...{
         sortField: this.sort$.value.field,
@@ -82,6 +82,11 @@ export class PurchaseReqListContextService {
   // set page
   setPage(page: number) {
     this.page$.next(page);
+  }
+
+  // set page size
+  setPageSize(pageSize: number) {
+    this.pageSize$.next(pageSize);
   }
 
   // set sort

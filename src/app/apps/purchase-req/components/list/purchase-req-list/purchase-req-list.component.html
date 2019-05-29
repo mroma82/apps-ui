@@ -5,7 +5,7 @@
     [rows]="list.items"
     [headerHeight]="40"
     [footerHeight]="40"
-    [limit]="pageSize"
+    [limit]="pageSize$ | async"
     [externalPaging]="true"
     [externalSorting]="true"
     [count]="list.totalRows"
