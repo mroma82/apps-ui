@@ -51,7 +51,11 @@ export class PurchaseReqEditPageComponent implements OnInit {
   save() {
 
     // update
-    this.viewEditContext.update().subscribe();
+    this.viewEditContext.update().subscribe(x => {
+      if(x) {
+        this.viewEditContext.refreshData();
+      }
+    });
   }
 
   // save close
