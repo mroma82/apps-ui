@@ -21,6 +21,7 @@ import { CardGroupComponent } from './components/layout/card-group/card-group.co
 import { IntegrationService } from './services/integration.service';
 import { ListingControlsComponent } from './components/listing/listing-controls/listing-controls.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LookupDialogContainerComponent,
     CustomerLookupDialogComponent,
     CardGroupComponent,
-    ListingControlsComponent    
+    ListingControlsComponent,
+    ExcludeDeletedPipe    
   ],
   providers: [
     AppHttpClientService,
@@ -66,7 +68,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UtcDateTimePipe,
     CustomerLookupDialogComponent,
     CardGroupComponent,
-    ListingControlsComponent
+    ListingControlsComponent,
+    ExcludeDeletedPipe
   ]
 })
 export class AppCommonModule { }
