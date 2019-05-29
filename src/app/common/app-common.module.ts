@@ -23,6 +23,7 @@ import { ListingControlsComponent } from './components/listing/listing-controls/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VendorLookupDialogComponent } from './lookups/vendor-lookup-dialog/vendor-lookup-dialog.component';
 import { ItemLookupDialogComponent } from './lookups/item-lookup-dialog/item-lookup-dialog.component';
+import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
 import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     ListingControlsComponent,
     VendorLookupDialogComponent,
     ItemLookupDialogComponent,
+    MessageDialogComponent,    
     ExcludeDeletedPipe    
   ],
   providers: [
@@ -75,6 +77,7 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     ListingControlsComponent,
     VendorLookupDialogComponent,
     ItemLookupDialogComponent,
+    MessageDialogComponent,
     ExcludeDeletedPipe
   ]
 })
