@@ -22,6 +22,7 @@ import { IntegrationService } from './services/integration.service';
 import { ListingControlsComponent } from './components/listing/listing-controls/listing-controls.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
+import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     CustomerLookupDialogComponent,
     CardGroupComponent,
     ListingControlsComponent,
-    ExcludeDeletedPipe    
+    ExcludeDeletedPipe,
+    MessageDialogComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -69,7 +71,8 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     CustomerLookupDialogComponent,
     CardGroupComponent,
     ListingControlsComponent,
-    ExcludeDeletedPipe
+    ExcludeDeletedPipe,
+    MessageDialogComponent
   ]
 })
 export class AppCommonModule { }
