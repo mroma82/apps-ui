@@ -12,6 +12,11 @@ import { AppContextService } from 'src/app/app-context.service';
 })
 export class PurchaseReqListPageComponent implements OnInit {
 
+  // types
+  listType: number;
+  listFilterType: number;
+
+  // new
   constructor(
     private createContext : PurchaseReqCreateContextService,
     private context: PurchaseReqListContextService,
@@ -21,17 +26,45 @@ export class PurchaseReqListPageComponent implements OnInit {
 
   // init
   ngOnInit() {
-    
+        
     // set the list type
-    this.context.setListType(+this.activatedRoute.snapshot.data.listType);    
-    this.context.setListFilterType(+this.activatedRoute.snapshot.data.listFilterType);    
+    this.listType = +this.activatedRoute.snapshot.data.listType;
+    this.context.setListType(this.listType);
     
+    // set filter type
+    this.listFilterType = +this.activatedRoute.snapshot.data.listFilterType;
+    this.context.setListFilterType(this.listFilterType);    
+    
+    // build title
+    let title = "Purchase Requisitions";
+    if(this.listType == 0)
+    {
+      switch(this.listFilterType)
+      { 
+        case 1: title = "Purchase Requisitions - All"; break;
+        case 2: title = "Purchase Requisitions - My Tasks"; break;
+      }
+    }
+
+    // templates
+    else if(this.listType == 1)
+    {
+      switch(this.listFilterType)
+      { 
+        case 0: title = "Purchase Requisitions - My Templates"; break;
+        case 1: title = "Purchase Requisitions - All Templates"; break;        
+      }
+    }
+
     // set title
-    this.appContext.Layout.setTitle("Purchase Requisitions");
+    this.appContext.Layout.setTitle(title);
   }
 
   // open create dialog
   openCreateDialog() {
+
+    // set type and open dialog
+    this.createContext.isTemplate$.next(this.listType == 1);
     this.createContext.openDialog();
   }
 }

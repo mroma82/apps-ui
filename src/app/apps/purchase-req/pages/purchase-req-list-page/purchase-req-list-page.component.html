@@ -1,5 +1,5 @@
 <div class="mb-sm-2">
-  <button type="button" class="btn btn-primary" (click)="openCreateDialog()">Create Purchase Requisition</button>
+  <button type="button" class="btn btn-primary" (click)="openCreateDialog()">Create {{ this.listType == 1 ? 'Template' : 'Purchase Requisition' }}</button>
 </div>
 <div>
   <app-purchase-req-list-filter></app-purchase-req-list-filter>

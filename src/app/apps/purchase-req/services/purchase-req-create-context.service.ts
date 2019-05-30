@@ -10,6 +10,7 @@ import { AppContextService } from 'src/app/app-context.service';
 export class PurchaseReqCreateContextService {
 
   // observables
+  isTemplate$ = new BehaviorSubject<boolean>(false);
   dialogOpen$ = new BehaviorSubject<boolean>(false);
 
   // new
@@ -17,6 +18,11 @@ export class PurchaseReqCreateContextService {
     private api: PurchaseReqApiService,
     private appContext: AppContextService
   ) { }
+
+  // set template
+  setIsTemplate(set: boolean) {
+    this.isTemplate$.next(set);
+  }
 
   // open dialog
   openDialog() {
@@ -33,7 +39,8 @@ export class PurchaseReqCreateContextService {
 
     // set user
     model.requestUserId = this.appContext.User.profile$.value.username;
-
+    model.isTemplate = this.isTemplate$.value;
+    
     // check if no description
     if(!model.description) {
       return of({

@@ -3,11 +3,11 @@
 
     <app-card-group title="Details">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf="!viewModel.record.isTemplate">
           <app-text-field [(ngModel)]="viewModel.record.reqNumber" name="reqNumber" label="Req #" [disabled]="true">
           </app-text-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf="!viewModel.record.isTemplate">
           <app-date-field [(ngModel)]="viewModel.record.requestDate" name="requestDate" label="Request Date"
             [disabled]="viewMode"></app-date-field>
         </div>
@@ -19,7 +19,7 @@
               [selected]="viewModel.record.requestUserId == item.username">{{ item.name }}</option>
           </app-select-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf="!viewModel.record.isTemplate">
           <app-date-field [(ngModel)]="viewModel.record.requiredDate" name="requiredDate" label="Required Date"
             [disabled]="viewMode"></app-date-field>
 
@@ -89,7 +89,7 @@
 
 
 
-    <app-card-group title="Purchasing">
+    <app-card-group title="Purchasing" *ngIf="!viewModel.record.isTemplate">
       <div class="row">
         <div class="col-md-3">
           <app-text-field [(ngModel)]="viewModel.record.poNumber" name="poNumber" label="PO #" [disabled]="viewMode">

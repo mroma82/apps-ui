@@ -60,11 +60,11 @@ export class PurchaseReqEditPageComponent implements OnInit {
 
   // save close
   saveClose() {
-
+    
     // update, if ok, go back to listing
     this.viewEditContext.update().subscribe(x => {
-      if(x) {
-        this.router.navigateByUrl('/app/purchase-req');
+      if(x) {                
+        this.redirectToListing();
       }
     });
   }
@@ -75,8 +75,17 @@ export class PurchaseReqEditPageComponent implements OnInit {
     // delete, if ok, go back to listing
     this.viewEditContext.delete().subscribe(x => {
       if(x) {
-        this.router.navigateByUrl('/app/purchase-req');
+        this.redirectToListing();
       }
     });
+  }
+
+  // redirect to listing
+  redirectToListing() {
+    if(this.viewEditContext.isTemplate()) {
+      this.router.navigateByUrl('/app/purchase-req/my-templates');
+    } else {
+      this.router.navigateByUrl('/app/purchase-req');      
+    }
   }
 }

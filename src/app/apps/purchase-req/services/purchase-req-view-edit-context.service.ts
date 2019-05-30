@@ -40,6 +40,11 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   setId(id: string) {
     this.id$.next(id);
   }
+
+  // is template
+  isTemplate() {
+    return this.reqRecord$.value.isTemplate;
+  }
   
   // refresh
   refreshData() {
