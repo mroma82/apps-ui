@@ -21,6 +21,7 @@ import { PurchaseReqViewEditComponent } from './components/view-edit/purchase-re
 import { PurchaseReqListsService } from './services/purchase-req-lists.service';
 import { PurchaseReqLineDialogComponent } from './dialogs/purchase-req-line-dialog/purchase-req-line-dialog.component';
 import { PurchaseReqLineComponent } from './components/view-edit/purchase-req-line/purchase-req-line.component';
+import { PurchaseReqViewEditButtonBarComponent } from './components/view-edit/purchase-req-view-edit-button-bar/purchase-req-view-edit-button-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { PurchaseReqLineComponent } from './components/view-edit/purchase-req-li
     PurchaseReqCreateDialogComponent, 
     PurchaseReqViewEditComponent, 
     PurchaseReqLineDialogComponent, 
-    PurchaseReqLineComponent
+    PurchaseReqLineComponent, PurchaseReqViewEditButtonBarComponent
   ],
   imports: [
     CommonModule,    

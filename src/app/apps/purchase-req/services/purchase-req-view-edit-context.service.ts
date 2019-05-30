@@ -19,6 +19,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   reqLines$ = new BehaviorSubject<any>([]);  
   lineDialogOpen$ = new BehaviorSubject<boolean>(false);
   lineDialogModel$ = new BehaviorSubject<any>({});
+  isTemplate$ = new BehaviorSubject<boolean>(false);
 
   // subscriptions
   onIdChange$: Subscription;
@@ -39,12 +40,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // set id
   setId(id: string) {
     this.id$.next(id);
-  }
-
-  // is template
-  isTemplate() {
-    return this.reqRecord$.value.isTemplate;
-  }
+  }  
   
   // refresh
   refreshData() {
@@ -53,8 +49,15 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     this.api.getSingle(this.id$.value).subscribe(x => {
       this.reqRecord$.next(x);
 
+      // set template
+      this.isTemplate$.next(x.isTemplate);
+
       // set title
-      this.appContext.Layout.setTitle("Purchase Requisition: " + x.reqNumber);
+      if(x.isTemplate) {
+        this.appContext.Layout.setTitle("Purchase Requisition Template: " + x.reqNumber);
+      } else {
+        this.appContext.Layout.setTitle("Purchase Requisition: " + x.reqNumber);
+      }      
     });
 
     // get lines
@@ -213,6 +216,11 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     return this.reqLines$.value
       .filter((line : any) => !line.isDeleted)
       .reduce((sum : number, current : any) => sum + current.extPrice, 0);
+  }
+
+  // create from template
+  createFromTemplate() {
+    return this.api.createFromTemplate(this.reqRecord$.value.id);
   }
 
   // destroy

@@ -43,6 +43,11 @@ export class PurchaseReqApiService {
     return this.http.post(`${this.apiRoot}/create`, model);
   }
 
+  // create from template
+  createFromTemplate(templateId: string) : Observable<string> {
+    return this.http.post(`${this.apiRoot}/createFromTemplate/${templateId}`, null);
+  }
+
   // get parameters
   getParameters() : Observable<any> {
     return this.http.get(`${this.apiRoot}/getParameters`);

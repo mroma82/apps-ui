@@ -82,7 +82,7 @@ export class PurchaseReqEditPageComponent implements OnInit {
 
   // redirect to listing
   redirectToListing() {
-    if(this.viewEditContext.isTemplate()) {
+    if(this.viewEditContext.isTemplate$.value) {
       this.router.navigateByUrl('/app/purchase-req/my-templates');
     } else {
       this.router.navigateByUrl('/app/purchase-req');      
