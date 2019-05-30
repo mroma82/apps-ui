@@ -51,4 +51,16 @@ export class AppHttpClientService {
       );
   }
 
+  // post blob
+  postBlob(url: string, data: any) : Observable<any> {    
+    
+    // build headers
+    const headers = {
+      ...this.getHeaders(), 
+      ...{ responseType: 'blob' }      
+    };
+
+    // post
+    return this.httpClient.post(this.getUrl(url), data, headers);      
+  }
 }
