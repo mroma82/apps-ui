@@ -1,7 +1,7 @@
 <ng-template #content let-modal>
   <div class="modal-header" >
     <h4 class="modal-title" id="modal-basic-title">{{ modalDetails.title }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="close('close')">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -9,9 +9,5 @@
       <p class="ws-pl">
         {{  modalDetails.message }}             
       </p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="yes()">Yes</button>    
-    <button type="button" class="btn btn-secondard" (click)="no()">No</button>    
   </div>
 </ng-template>

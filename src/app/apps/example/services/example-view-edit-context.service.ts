@@ -1,10 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription, of } from 'rxjs';
 import { ExampleService } from './example.service';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { ListItemService } from 'src/app/common/services/list-item.service';
 import { ExampleListsService } from './example-lists.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class ExampleViewEditContextService implements OnDestroy {
     private service: ExampleService,
     private listItems: ListItemService,
     private appContext: AppContextService,
+    private dialogService: DialogService,
     lists: ExampleListsService
   ) { 
 
@@ -69,6 +71,12 @@ export class ExampleViewEditContextService implements OnDestroy {
   // update 
   update() : Observable<boolean> {
     
+    // validate
+    if(!this.exampleRecord$.value.customerId) {
+      this.dialogService.message("Validation", "Customer is required");
+      return of(false);
+    }
+
     // update, check if ok
     return this.service.update({
       example: this.exampleRecord$.value

@@ -11,6 +11,10 @@ export class DialogService {
   yesNoDialog$ = new Subject<any>()
   yesNoDialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
+  // message dialog
+  messageDialog$ = new Subject<any>();
+  messageDialogOpenClose$ =  new BehaviorSubject<boolean>(false);
+
   // new
   constructor(
   ) {     
@@ -30,6 +34,25 @@ export class DialogService {
         
     // open dialog
     this.yesNoDialogOpenClose$.next(true);
+    
+    // return subject
+    return subject;    
+  }
+
+  // message dialog
+  message(title: string, message: string) : Observable<boolean> {    
+    
+    let subject = new Subject<boolean>();
+
+    // setup dialog
+    this.messageDialog$.next({
+      title: title,
+      message: message,
+      result: subject
+    });
+        
+    // open dialog
+    this.messageDialogOpenClose$.next(true);
     
     // return subject
     return subject;    
