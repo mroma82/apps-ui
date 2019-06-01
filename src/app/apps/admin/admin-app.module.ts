@@ -12,12 +12,16 @@ import { AdminPermissionsEditComponent } from './components/permissions/admin-pe
 import { AdminContainerComponent } from './containers/admin-container/admin-container.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminNavComponent } from './components/shared/admin-nav/admin-nav.component';
+import { PermissionsContextService } from './services/permissions/permissions-context.service';
 
 @NgModule({
   declarations: [AdminHomePageComponent, AdminDropDownListPageComponent, AdminDropDownEditPageComponent, AdminPermissionsEditPageComponent, AdminPermissionsListPageComponent, AdminDropDownListComponent, AdminDropDownEditComponent, AdminPermissionsListComponent, AdminPermissionsEditComponent, AdminContainerComponent, AdminNavComponent],
   imports: [
     CommonModule,
     AdminRoutingModule
+  ],
+  providers: [
+    PermissionsContextService
   ]
 })
 export class AdminAppModule { }
