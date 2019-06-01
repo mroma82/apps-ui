@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PermissionsContextService } from '../../../services/permissions/permissions-context.service';
 
 @Component({
   selector: 'app-admin-permissions-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPermissionsListComponent implements OnInit {
 
-  constructor() { }
+  // observables
+  permissionsList$ : Observable<any>;
 
+  // new
+  constructor(
+    private context: PermissionsContextService
+  ) { }
+
+  // init
   ngOnInit() {
+    this.permissionsList$ = this.context.permissions$;
   }
 
 }

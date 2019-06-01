@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PermissionsContextService } from '../../../services/permissions/permissions-context.service';
 
 @Component({
   selector: 'app-admin-permissions-list-page',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPermissionsListPageComponent implements OnInit {
 
-  constructor() { }
+  // new
+  constructor(
+    private context: PermissionsContextService
+  ) { }
 
+  // init
   ngOnInit() {
+    this.context.refreshData();
   }
 
 }

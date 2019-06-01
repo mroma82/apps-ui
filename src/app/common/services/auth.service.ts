@@ -57,6 +57,11 @@ export class AuthService {
     return this.http.postAsActualUser(`/auth/impersonate/${username}`, null);
   }
 
+  // save
+  save(model: any): Observable<any> {
+    return this.http.post(`/auth/update`, null);
+  }
+
   // parse token
   parseToken(token: string) : any {
     let model = jwt_decode(token);
@@ -72,5 +77,15 @@ export class AuthService {
   // get groups
   getGroups() : Observable<any> {
     return this.http.get("/auth/getGroups");
+  }
+
+  // get user permissions
+  getUserPermissions() : Observable<any> {
+    return this.http.get("/auth/getUserPermissions");
+  }
+
+  // upate user permission
+  updateUserPermission(model: any ) : Observable<any> {
+    return this.http.post("/auth/updateUserPermission", model);
   }
 }
