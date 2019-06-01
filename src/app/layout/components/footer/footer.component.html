@@ -2,5 +2,6 @@
 <footer>
   <nav class="navbar fixed-bottom navbar-light bg-light" *ngIf="isAuthenticated$ | async">
     <a>{{ (user$ | async).fullName }}</a>
+    <app-simulate-user></app-simulate-user>
   </nav>
 </footer>

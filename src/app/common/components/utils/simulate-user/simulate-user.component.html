@@ -1,0 +1,7 @@
+<div *ngIf="isAdmin$ | async">
+  <button class="btn btn-link" (click)="simulateUser('mjones')">Simulate Mary Jones</button>
+  <button class="btn btn-link" (click)="simulateUser('msmith')">Simulate Mike Smith</button>
+  <button class="btn btn-link" (click)="simulateUser('jsmith')">Simulate John Smith</button>
+
+  <button class="btn btn-link" (click)="clearImpersonate()" *ngIf="isImpersonating$ | async">Clear</button>
+</div>
