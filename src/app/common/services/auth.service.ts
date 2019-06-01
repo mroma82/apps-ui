@@ -10,33 +10,25 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class AuthService {
 
-  // const
-  TOKEN_KEY: string = "apps:token";
+  // tokens
+  private token = () => window.localStorage.getItem("apps:token"); 
+  private tokenImpersonated = () => window.localStorage.getItem("apps:token:impersonate"); 
 
+  // new
   constructor(
     private http: AppHttpClientService
   ) { }
 
-  // token
-  getToken() { 
-    return window.localStorage.getItem(this.TOKEN_KEY); 
+  // return actual token
+  getActualToken() : string {
+    return this.token();
   }
-
-  // set token
-  setToken(token: string) {
-    window.localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
-  // clear token
-  clearToken() {
-    window.localStorage.removeItem(this.TOKEN_KEY);
-  }
-
+  
   // verify token
   verify() : Observable<any> {
 
     // convert the response
-    return this.http.get("/auth/verify").pipe(map(x => {
+    return this.http.getAsActualUser("/auth/verify").pipe(map(x => {
       
       // check error response
       if(x instanceof HttpErrorResponse) {
@@ -57,12 +49,17 @@ export class AuthService {
 
   // login
   login(model: any): Observable<any> {
-    return this.http.post("/auth/login", model);
+    return this.http.postAsActualUser("/auth/login", model);
+  }
+
+  // impersonate
+  impersonate(username: string) : Observable<any> {
+    return this.http.postAsActualUser(`/auth/impersonate/${username}`, null);
   }
 
   // parse token
-  parseToken() : any {
-    let model = jwt_decode(this.getToken());
+  parseToken(token: string) : any {
+    let model = jwt_decode(token);
     console.log(model);
     return model;
   }

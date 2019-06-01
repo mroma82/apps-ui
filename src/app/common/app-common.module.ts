@@ -23,6 +23,7 @@ import { ListingControlsComponent } from './components/listing/listing-controls/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
+import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MessageDialogComponent } from './components/dialogs/message-dialog/mess
     CardGroupComponent,
     ListingControlsComponent,
     ExcludeDeletedPipe,
-    MessageDialogComponent    
+    MessageDialogComponent,
+    SimulateUserComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -72,7 +74,8 @@ import { MessageDialogComponent } from './components/dialogs/message-dialog/mess
     CardGroupComponent,
     ListingControlsComponent,
     ExcludeDeletedPipe,
-    MessageDialogComponent
+    MessageDialogComponent,
+    SimulateUserComponent
   ]
 })
 export class AppCommonModule { }
