@@ -4,8 +4,8 @@ import { UserContextService } from './user-context.service';
 
 // foundation menu items
 const foundationMenu : IMenuItem[] = [
-  { title: "Example App", url: "/apps/example", allowedRoles: [ "ExampleUser"], icon: "fas fa-shapes" },
-  { title: "Admin", url: "/apps/admin", allowedRoles: [ "SysAdmin"], icon: "fas fa-cogs" }
+  { title: "Example App", url: "/app/example", allowedRoles: [ "ExampleUser"], icon: "fas fa-shapes" },
+  { title: "Admin", url: "/app/admin", allowedRoles: [ "SysAdmin"], icon: "fas fa-cogs" }
 ];
 
 // app menu items

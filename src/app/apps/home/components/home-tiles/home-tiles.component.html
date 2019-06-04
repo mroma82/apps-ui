@@ -1,7 +1,7 @@
 <div class="wrapper">
   <ul class="list-group list-group-flush">
     <li class="list-group-item" *ngFor="let item of menuItems$ | async">
-      <a [routerLink]="item.routerLink">
+      <a [routerLink]="item.url">
           <i [class]="item.icon + ' mr-2'"></i>
         {{ item.title }}
       </a>

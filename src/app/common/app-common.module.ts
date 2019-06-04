@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
 import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
+import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SimulateUserComponent } from './components/utils/simulate-user/simulate
     ListingControlsComponent,
     ExcludeDeletedPipe,
     MessageDialogComponent,
-    SimulateUserComponent    
+    SimulateUserComponent,
+    UserFullnamePipe    
   ],
   providers: [
     AppHttpClientService,
@@ -75,7 +77,8 @@ import { SimulateUserComponent } from './components/utils/simulate-user/simulate
     ListingControlsComponent,
     ExcludeDeletedPipe,
     MessageDialogComponent,
-    SimulateUserComponent
+    SimulateUserComponent,
+    UserFullnamePipe
   ]
 })
 export class AppCommonModule { }

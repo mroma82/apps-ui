@@ -16,7 +16,7 @@
         <td>{{ item.historyDateTime | utcDateTime:'medium' }}</td>
         <td>{{ item.currentStateText }}</td>
         <td>{{ item.currentAssigned }}</td>
-        <td>{{ item.createUser }}</td>
+        <td>{{ item.createUser | userFullname | async }}</td>
         <td>{{ item.decisionText }}</td>
       </tr>
     </tbody>

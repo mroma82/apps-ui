@@ -73,4 +73,9 @@ export class AuthService {
   getGroups() : Observable<any> {
     return this.http.get("/auth/getGroups");
   }
+
+  // get username
+  getUserFullName(username: string) : Observable<any> {
+    return this.http.get(`/auth/getUserFullName/${username}`);
+  }
 }

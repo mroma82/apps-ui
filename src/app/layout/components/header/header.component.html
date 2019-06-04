@@ -24,7 +24,7 @@
     <li class="list-group-item"><a routerLink="/app" (click)="hideMenu()"><i class="fas fa-home mr-2"></i>Home</a></li>
     
     <li class="list-group-item" *ngFor="let item of menuItems$ | async">
-      <a [routerLink]="item.routerLink" (click)="hideMenu()">
+      <a [routerLink]="item.url" (click)="hideMenu()">
         <i [class]="item.icon + ' mr-2'"></i>
         {{ item.title }}
       </a>
