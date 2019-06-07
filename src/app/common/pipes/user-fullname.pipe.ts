@@ -19,6 +19,7 @@ export class UserFullnamePipe implements PipeTransform {
   // transform
   transform(value: string): Observable<string> {
 
+    // check cache
     if(!this.cache[value]) {
       this.cache[value] = this.auth.getUserFullName(value).pipe(map(x => x.fullName), shareReplay());
     }
