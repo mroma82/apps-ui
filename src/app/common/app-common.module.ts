@@ -25,6 +25,8 @@ import { VendorLookupDialogComponent } from './lookups/vendor-lookup-dialog/vend
 import { ItemLookupDialogComponent } from './lookups/item-lookup-dialog/item-lookup-dialog.component';
 import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
 import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
+import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
+import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,10 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     VendorLookupDialogComponent,
     ItemLookupDialogComponent,
     MessageDialogComponent,    
-    ExcludeDeletedPipe    
+    ExcludeDeletedPipe,    
+    MessageDialogComponent,
+    SimulateUserComponent,
+    UserFullnamePipe    
   ],
   providers: [
     AppHttpClientService,
@@ -78,7 +83,10 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
     VendorLookupDialogComponent,
     ItemLookupDialogComponent,
     MessageDialogComponent,
-    ExcludeDeletedPipe
+    ExcludeDeletedPipe,
+    MessageDialogComponent,
+    SimulateUserComponent,
+    UserFullnamePipe
   ]
 })
 export class AppCommonModule { }

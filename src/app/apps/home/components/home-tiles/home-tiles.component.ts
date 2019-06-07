@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppContextService } from 'src/app/app-context.service';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { MenuItemService } from 'src/app/common/services/menu-item.service';
+import { IMenuItem } from 'src/app/common/models/menu-item';
 
 @Component({
   selector: 'app-home-tiles',
@@ -8,49 +10,25 @@ import { Observable, Subscription, BehaviorSubject } from 'rxjs';
   styleUrls: ['./home-tiles.component.scss']
 })
 export class HomeTilesComponent implements OnInit, OnDestroy {
-
-  // define menu base
-  allMenuItems = [
-    { title: "Example App", routerLink: "/app/example", key: "ExampleUser", icon: "fas fa-shapes" },
-    { title: "Purchase Requisition", routerLink: "/app/purchase-req", key: "ExampleUser", icon: "fas fa-shapes" },
-    { title: "Admin", routerLink: "/app/admin", key: "SysAdmin", icon: "fas fa-cogs" }
-  ];
-
+      
   // observables
-  menuItems$ = new BehaviorSubject<any>([]);
+  menuItems$ = new BehaviorSubject<IMenuItem[]>([]);
 
   // subscriptions
   onProfileChange: Subscription;
 
   // new
   constructor(
-    private appContext: AppContextService
+    private appContext: AppContextService,
+    private menuItemService: MenuItemService
   ) { 
 
     // profile change
     this.onProfileChange = this.appContext.User.profile$.subscribe(x => {
-      this.buildMenu(x);
+      this.menuItems$.next(this.menuItemService.getMenuItems());
     });
-  }
+  }  
 
-  // build menu
-  buildMenu(profile: any) {
-
-    // init
-    let menuItems = [];
-    let roles = profile.role;
-    if(roles) {
-
-      this.allMenuItems.forEach(x => {
-        if( roles.indexOf(x.key) > -1) {
-          menuItems.push(x);
-        }
-      });      
-    }
-
-    // set
-    this.menuItems$.next(menuItems);
-  };
 
   // init
   ngOnInit() {
@@ -58,6 +36,7 @@ export class HomeTilesComponent implements OnInit, OnDestroy {
 
   // destroy
   ngOnDestroy() {
+
     // clean up
     this.onProfileChange.unsubscribe();
   }

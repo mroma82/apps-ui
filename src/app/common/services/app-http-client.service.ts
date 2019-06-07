@@ -9,6 +9,11 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AppHttpClientService {
 
+  // tokens
+  private token = () => window.localStorage.getItem("apps:token"); 
+  private tokenImpersonated = () => window.localStorage.getItem("apps:token:impersonate"); 
+
+  // new    
   constructor(
     private httpClient: HttpClient
   ) { 
@@ -20,23 +25,37 @@ export class AppHttpClientService {
     return environment.apiUrl + path;
   }
   
-  // jwt token
+  // jwt token with impersonation consideration
   private getJwtToken() {
-    let token = localStorage.getItem('apps:token');
-    return 'Bearer ' + token;
+    
+    // get the correct token
+    let token = this.tokenImpersonated();
+    if(!token)
+      token = this.token();
+
+    return token;
   }  
 
   // get headers
-  private getHeaders() : any {
+  private getHeaders(token: string) : any {
     return { 
-      headers: new HttpHeaders().set('Authorization', this.getJwtToken()) 
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token) 
     };
   }
 
   // get
   get(path: string) : Observable<any> {
 
-    return this.httpClient.get(this.getUrl(path), this.getHeaders())
+    return this.httpClient.get(this.getUrl(path), this.getHeaders(this.getJwtToken()))
+      .pipe(        
+        catchError(err => of(err)) 
+      );
+  }
+
+  // get with actual token
+  getAsActualUser(path: string) : Observable<any> {
+
+    return this.httpClient.get(this.getUrl(path), this.getHeaders(this.token()))
       .pipe(        
         catchError(err => of(err)) 
       );
@@ -45,10 +64,30 @@ export class AppHttpClientService {
 
   // post
   post(url: string, data: any) : Observable<any> {    
-    return this.httpClient.post(this.getUrl(url), data, this.getHeaders())
+    return this.httpClient.post(this.getUrl(url), data, this.getHeaders(this.getJwtToken()))
       .pipe(        
         catchError(err => of({ success: false,  response: err})) 
       );
   }
 
+  // post with actual token
+  postAsActualUser(url: string, data: any) : Observable<any> {    
+    return this.httpClient.post(this.getUrl(url), data, this.getHeaders(this.token()))
+      .pipe(        
+        catchError(err => of({ success: false,  response: err})) 
+      );
+  }
+
+  // post blob
+  postBlob(url: string, data: any) : Observable<any> {    
+    
+    // build headers
+    const headers = {
+      ...this.getHeaders(this.getJwtToken()), 
+      ...{ responseType: 'blob' }      
+    };
+
+    // post
+    return this.httpClient.post(this.getUrl(url), data, headers);      
+  }
 }

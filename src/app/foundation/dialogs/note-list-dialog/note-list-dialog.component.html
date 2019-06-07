@@ -9,7 +9,7 @@
 
     <div *ngFor="let item of (list$ | async) ">
       <div>
-        <strong>{{ item.createUserFullname }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
+        <strong>{{ item.createUser | userFullname | async }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
         <div class="d-inline ml-2">
           <a class="btn btn-link" (click)="edit(item)" role="button">
             <i class="fas fa-pencil-alt"></i>

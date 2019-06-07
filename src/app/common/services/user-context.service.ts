@@ -12,8 +12,10 @@ import { AuthService } from './auth.service';
 export class UserContextService {
 
   // observables
-  isAuthenticated$ = new BehaviorSubject<boolean>(true);
+  isAuthenticated$ = new BehaviorSubject<boolean>(true);  
+  isAdmin$ = new BehaviorSubject<boolean>(false);
   profile$ = new BehaviorSubject<any>({});
+  isImpersonating$ = new BehaviorSubject<boolean>(false);
   
   // new
   constructor(
@@ -21,7 +23,7 @@ export class UserContextService {
   ) { 
 
     // check if a token
-    if(this.authService.getToken()) {
+    if(this.authService.getActualToken()) {
 
       // check the token
       this.checkToken().subscribe(x => {
@@ -52,7 +54,17 @@ export class UserContextService {
         // set state
         this.isAuthenticated$.next(true);
         window.localStorage.setItem('apps:token', x.token);
-        this.profile$.next(this.authService.parseToken());
+        
+        
+        // set profile
+        this.setProfile(this.authService.parseToken(x.token));        
+
+        // check if impersonating
+        let impersonateToken = window.localStorage.getItem('apps:token:impersonate');
+        if(impersonateToken) {
+          this.profile$.next(this.authService.parseToken(impersonateToken));
+          this.isImpersonating$.next(true);
+        }
 
         // continute
         return {
@@ -81,7 +93,11 @@ export class UserContextService {
         // set state
         this.isAuthenticated$.next(true);
         window.localStorage.setItem('apps:token', x.token);
-        this.profile$.next(this.authService.parseToken());
+        window.localStorage.removeItem("apps:token:impersonate");
+        this.isImpersonating$.next(false);
+
+        // set profile
+        this.setProfile(this.authService.parseToken(x.token));
 
         // next url
         let nextUrl = window.localStorage.getItem("apps:requestedUrl");
@@ -106,10 +122,39 @@ export class UserContextService {
 
     // clear storage
     window.localStorage.removeItem("apps:token");
+    window.localStorage.removeItem("apps:token:impersonate");
     window.localStorage.removeItem("apps:requestedUrl");
 
     // set state
     this.profile$.next(null);
     this.isAuthenticated$.next(false);
+    this.isAdmin$.next(false);
+    this.isImpersonating$.next(false);
+  }
+
+  // simulate user
+  simulateUser(username: string) {
+
+    // impersonate
+    this.authService.impersonate(username).subscribe(x => {
+
+      // set token and overwrite profile
+      window.localStorage.setItem('apps:token:impersonate', x.impersonateToken);
+      this.profile$.next(this.authService.parseToken(x.impersonateToken));
+      this.isImpersonating$.next(true);
+    });
+  }
+
+  // clear impersonate
+  clearImpersonate() {
+    window.localStorage.removeItem("apps:token:impersonate");
+    this.profile$.next(this.authService.parseToken(window.localStorage.getItem('apps:token')));    
+    this.isImpersonating$.next(false);
+  }
+
+  // set profile
+  setProfile(profile: any) {
+    this.profile$.next(profile);
+    this.isAdmin$.next(profile.role.indexOf("SysAdmin") > -1);
   }
 }

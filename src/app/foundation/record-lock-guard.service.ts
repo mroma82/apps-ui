@@ -32,7 +32,7 @@ export class RecordLockGuard implements CanActivate {
        
         if(!x.isLocked) {
           // todo: toast message
-          console.log(`${id} is locked by ${x.lockedUserFullName}`);
+          console.log(`${id} is locked by ${x.lockedUser}`);
         }
         
         return !x.isLocked;
