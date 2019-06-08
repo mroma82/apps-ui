@@ -1,0 +1,45 @@
+<h4>Editing items for {{ model.typeId }}</h4>
+<div class="mb-3">
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+</div>
+
+<ul class="list-group list-group-flush">
+
+  <li class="list-group-item bg-light">
+    <div class="row">
+      <div class="col-4 font-weight-bold">
+        Value
+      </div>
+      <div class="col-4 font-weight-bold">
+        Description
+      </div>
+      <div class="col-2 font-weight-bold">
+        Sort order
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </li>
+
+  <li class="list-group-item" *ngFor="let item of model.items | excludeDeleted">
+    <div class="row">
+      <div class="col-4">
+        <input type="text" class="form-control" [(ngModel)]="item.valueId">
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" [(ngModel)]="item.text">
+      </div>
+      <div class="col-2">
+        <input type="number" class="form-control" [(ngModel)]="item.sortOrder">
+      </div>
+      <div class="col-2">
+        <button type="button" (click)="deleteItem(item)" class="btn btn-link">
+          <i class="fas fa-trash-alt"></i>
+        </button>  
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <button type="button" class="btn btn-primary" (click)="addItem()">Add Item</button>
+  </li>
+</ul>

@@ -21,5 +21,4 @@ export class AdminPermissionsListComponent implements OnInit {
   ngOnInit() {
     this.permissionsList$ = this.context.permissions$;
   }
-
 }
