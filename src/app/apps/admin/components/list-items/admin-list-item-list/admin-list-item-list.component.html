@@ -1,0 +1,38 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item bg-light font-weight-bold">
+    <div class="row">
+      <div class="col-4">
+        Lists
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item" *ngFor="let item of listItemTypeList$ | async">
+    <div class="row">
+      <div class="col-4" *ngIf="!item.updatePending">
+        <a routerLink="edit/{{item.id}}">{{ item.description }}</a>
+        <a href="javascript:;;" class="ml-2" (click)="updateType(item)"><i class="fas fa-pencil-alt"></i></a>
+      </div>
+      <div class="col-4" *ngIf="item.updatePending">
+        <app-text-field [(ngModel)]="item.updateTypeDescription" name="updateTypeDescription" label=""></app-text-field>
+      </div>
+      <div class="col-4" *ngIf="item.updatePending">
+        <button (click)="updateTypeCommit(item)" class="btn btn-primary">Save</button>
+        <button (click)="updateTypeCancel(item)" class="btn btn-link">Cancel</button>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div class="m-3">
+  <div *ngIf="!state.addPending">
+    <button type="button" class="btn btn-primary" (click)="addType()">Add Type</button>
+  </div>
+  <div *ngIf="state.addPending">
+    <app-text-field [(ngModel)]="model.newTypeDescription" name="newTypeDescription" placeholder="Description"></app-text-field>
+    <div>
+      <button type="button" class="btn btn-primary" (click)="addTypeCommit()">Add Type</button>
+      <button type="button" class="btn btn-link" (click)="addTypeCancel()">Cancel</button>
+    </div>
+  </div>
+</div>
