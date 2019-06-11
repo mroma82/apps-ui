@@ -3,7 +3,7 @@
   <input type="text" class="form-control" [(ngModel)]="model.rejectReason" />  
 </div>
 
-<div class="text-right">
+<div class="text-right mt-3">
   <span *ngIf="state.hasErrors" class="text-danger">{{ state.errorText }}</span>
   <button type="button" class="btn btn-primary" (click)="reject()">Reject</button>  
 </div>
