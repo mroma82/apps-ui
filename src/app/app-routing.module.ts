@@ -36,6 +36,10 @@ const routes: Routes = [
         loadChildren: './apps/purchase-req/purchase-req-app.module#PurchaseReqAppModule'
       },
       {
+        path: 'admin',        
+        loadChildren: './apps/admin/admin-app.module#AdminAppModule'
+      },
+      {
         path: '',        
         component: HomePageComponent
       }

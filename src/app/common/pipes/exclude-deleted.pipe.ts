@@ -14,6 +14,6 @@ export class ExcludeDeletedPipe implements PipeTransform {
     }
 
     // filter out deleted items
-    return items.filter(item => item.isDeleted == false);
+    return items.filter(item => !item.isDeleted);
   }
 }
