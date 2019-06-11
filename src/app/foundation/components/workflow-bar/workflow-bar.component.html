@@ -28,7 +28,7 @@
         </div>
 
         <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
-          <li class="nav-item" *ngFor="let action of (actions$ | async)">
+          <li class="nav-item mr-2" *ngFor="let action of (actions$ | async)">
             <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
           </li>
           <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
