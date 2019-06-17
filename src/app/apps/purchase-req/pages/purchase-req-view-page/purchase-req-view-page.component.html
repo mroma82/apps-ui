@@ -1,5 +1,5 @@
 
-<app-workflow-bar prefixText="Purchase Req" contextType="1000" [contextId]="model.id" workflowUrl="/purchasereq/workflow"></app-workflow-bar>
+<app-workflow-bar contextType="1000" [contextId]="model.id" workflowUrl="/purchasereq/workflow"></app-workflow-bar>
 
 <app-foundation-view-edit-button-bar [contextId]="model.id" [contextType]="contextType" [viewMode]="true" (onEdit)="edit()"></app-foundation-view-edit-button-bar>
 <app-purchase-req-view-edit-button-bar [viewMode]="true"></app-purchase-req-view-edit-button-bar>
