@@ -1,5 +1,5 @@
 <div>
-  <app-select-field [(ngModel)]="viewModel.itemType" name="itemType" label="Item type" [disabled]="viewMode">
+  <app-select-field [(ngModel)]="viewModel.itemType" name="itemType" label="Item type" [disabled]="viewMode" (change)="onItemTypeChange()">
     <option [value]="0" [selected]="viewModel.itemType == 0">Inventory</option>
     <option [value]="1" [selected]="viewModel.itemType == 1">Non-Inventory</option>
   </app-select-field>
@@ -10,17 +10,29 @@
     <app-lookup-field [(ngModel)]="viewModel.itemId" name="itemId" label="Item #" [disabled]="viewMode"
       *ngIf="viewModel.itemType == 0" (onLookup)="itemLookup.openDialog()">
     </app-lookup-field>
+    <app-text-field [(ngModel)]="viewModel.itemId" name="itemIdManual" label="Item #" [disabled]="viewMode"
+      *ngIf="viewModel.itemType == 1" (onLookup)="itemLookup.openDialog()"></app-text-field>
     <app-item-lookup-dialog #itemLookup (onSelect)="setItem($event)"></app-item-lookup-dialog>
   </div>
   <div class="col-md-6">
     <app-text-field [(ngModel)]="viewModel.itemDescription" name="itemDescription" label="Description"
       [disabled]="viewMode"></app-text-field>
   </div>
-  <div class="col-md-6">
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <app-select-field [(ngModel)]="viewModel.ledgerAccount" name="ledgerAccount" label="G/L account" [disabled]="viewMode" *ngIf="viewModel.itemType == 1">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of ledgerList$ | async" [value]="item.ledgerId"
+        [selected]="viewModel.ledgerAccount == item.ledgerId">{{ item.ledgerName }}</option>
+    </app-select-field>
+  </div>
+  <div class="col-md-4">
     <app-text-field [(ngModel)]="viewModel.itemRevision" name="itemRevision" label="Item revision"
       [disabled]="viewMode"></app-text-field>
-  </div>
-  <div class="col-md-6">
+  </div>  
+  <div class="col-md-4">
     <app-text-field [(ngModel)]="viewModel.vendorItemId" name="vendorItemId" label="Vendor item #"
       [disabled]="viewMode"></app-text-field>
   </div>

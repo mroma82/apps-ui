@@ -13,9 +13,11 @@ export class PurchaseReqLineComponent implements OnInit {
 
   // lists  
   locationList$ : Observable<any>;    
+  ledgerList$ : Observable<any>;
   
   // model
-  viewModel = {
+  viewModel : any = {
+    itemType : 0,
     quantity: 0,
     unitPrice: 0,
     extPrice: 0,
@@ -47,6 +49,7 @@ export class PurchaseReqLineComponent implements OnInit {
 
     // lists
     this.locationList$ = this.lists.locationList$;    
+    this.ledgerList$ = this.lists.ledgerList$;
   }
 
   // destroy
@@ -63,10 +66,32 @@ export class PurchaseReqLineComponent implements OnInit {
   setItem(item: any) {
     this.viewModel.itemId = item.itemId;
     this.viewModel.itemDescription = item.itemName
+    
+    // set price
+    this.viewModel.unitPrice = item.unitPrice;
+    this.updateExtPrice();
   }
 
   // update ext price
   updateExtPrice() {
     this.viewModel.extPrice = this.viewModel.quantity * this.viewModel.unitPrice;
+  }
+
+  // handle item type change
+  onItemTypeChange() {
+
+    // inventory
+    if(this.viewModel.itemType == 0) {
+
+        // clear item id on change to inventory item
+        this.viewModel.itemId = "";     
+    }
+
+    // non-inventory
+    else if(this.viewModel.itemType == 1) {
+
+      // clear ledger account
+      this.viewModel.ledgerAccount = "";
+    } 
   }
 }

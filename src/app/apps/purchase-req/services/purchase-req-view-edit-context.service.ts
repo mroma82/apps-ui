@@ -150,6 +150,11 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     if(!model.quantity) messages.push("Quantity is required");
     if(!model.unitPrice) messages.push("Unit Price is required");
 
+    // check ledger account
+    if(model.itemType == 1 && !model.ledgerAccount) {
+      messages.push("G/L Account is required for non-inventory lines");
+    }
+
     // check error
     if( messages.length) {
       this.dialogService.message("Validation", "The following errors occurred:\n\n" + messages.join('\n'));
