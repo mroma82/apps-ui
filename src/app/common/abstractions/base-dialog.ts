@@ -6,7 +6,7 @@ export class BaseDialog implements OnDestroy {
     @ViewChild('content') content : any;
     
     // define options
-    protected dialogSize: '' | 'full' | 'xl' = ''
+    protected dialogSize: 'lg' | 'sm' | 'full' | 'xl' = 'lg'
 
     closeResult: string;
 
@@ -51,11 +51,19 @@ export class BaseDialog implements OnDestroy {
     // open the dialog
     private open(content) {
 
+        // handle issue with modal component only accepting lg and sm sizes
+        let modalSize = this.dialogSize;
+        let windowClass = "";
+        if(modalSize != 'lg' && modalSize != 'sm') {
+            windowClass = `modal-size-${modalSize}`;
+            modalSize = 'lg';
+        }
+
         // open the modal
         this.modal = this.modalService.open(content, { 
-            size: 'lg', 
+            size: modalSize, 
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: this.dialogSize ? `modal-size-${this.dialogSize}` : '' 
+            windowClass: windowClass
         });
 
         // handle promise
