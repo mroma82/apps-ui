@@ -21,9 +21,11 @@
         <div ngbDropdown class="d-inline-block float-right" placement="bottom-right">
           <button class="btn btn-link" id="workflowMenu" ngbDropdownToggle>Functions</button>
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
+            <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button> 
             <button ngbDropdownItem (click)="showHistory()">History</button> 
-            <button ngbDropdownItem (click)="reset()">Reset</button> 
-            <button ngbDropdownItem (click)="showAssigned()">Show who is assigned</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()">Refresh</button> 
+            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button> 
           </div>
         </div>
 
@@ -43,5 +45,4 @@
 
 <app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>
 <app-workflow-reject-dialog></app-workflow-reject-dialog>
-<app-workflow-reset-dialog></app-workflow-reset-dialog>
 <app-workflow-history-list-dialog></app-workflow-history-list-dialog>

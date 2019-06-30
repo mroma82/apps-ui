@@ -32,7 +32,16 @@ export class WorkflowService {
   reset(url: string, instanceId: string, taskId: string) : Observable<any>  {
     return this.apiClient.post(`${url}/reset/${instanceId}/${taskId}`, {});
   }
+
+  // cancel
+  cancel(url: string, instanceId: string, taskId: string) : Observable<any>  {
+    return this.apiClient.post(`${url}/cancel/${instanceId}/${taskId}`, {});
+  }
   
+  // regenerate
+  regenerate(url: string, instanceId: string) : Observable<any>  {
+    return this.apiClient.post(`${url}/regenerate/${instanceId}`, {});
+  }
 
   // get instance  
   getInstanceByContext(url: string, context: IContext) : Observable<any> {
