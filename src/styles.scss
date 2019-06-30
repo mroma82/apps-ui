@@ -43,3 +43,18 @@ html,body {
         }
     }
 }
+
+/* modal size */
+.modal-size {
+    &-xl {
+        .modal-dialog {
+            max-width: 95%;
+        }
+    }
+
+    &-full {
+        .modal-dialog {
+            max-width: 100%;
+        }
+    }
+}

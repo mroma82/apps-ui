@@ -5,6 +5,9 @@ import { Subscription, Observable } from 'rxjs';
 export class BaseDialog implements OnDestroy {
     @ViewChild('content') content : any;
     
+    // define options
+    protected dialogSize: '' | 'full' | 'xl' = ''
+
     closeResult: string;
 
     // modal
@@ -45,8 +48,17 @@ export class BaseDialog implements OnDestroy {
             this.modal.dismiss();
     }
 
+    // open the dialog
     private open(content) {
-        this.modal = this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' });
+
+        // open the modal
+        this.modal = this.modalService.open(content, { 
+            size: 'lg', 
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: this.dialogSize ? `modal-size-${this.dialogSize}` : '' 
+        });
+
+        // handle promise
         this.modal.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
