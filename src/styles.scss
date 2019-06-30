@@ -16,10 +16,6 @@
     margin-left: 5px;
 }
 
-.cursor-pointer {
-    cursor: pointer;
-}
-
 html,body {
     height: 100%;
 }
@@ -31,4 +27,19 @@ html,body {
 
 .ws-pl {
     white-space: pre-line
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+/* drop down toggle */
+.dropdown-toggle {
+
+    /* icon */
+    &.dropdown-toggle-icon {
+        &::after {
+            display: none;
+        }
+    }
 }
