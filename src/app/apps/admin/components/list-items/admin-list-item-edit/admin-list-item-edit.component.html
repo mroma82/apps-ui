@@ -1,4 +1,4 @@
-<h4>Editing items for {{ model.typeId }}</h4>
+<h4>Editing items for {{ (type$ | async).description }}</h4>
 <div class="mb-3">
   <button type="button" class="btn btn-primary" (click)="save()">Save</button>
 </div>

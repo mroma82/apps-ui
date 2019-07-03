@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminListItemContextService } from '../../../services/list-items/admin-list-item-context.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,9 @@ export class AdminListItemEditComponent implements OnInit, OnDestroy {
   model = {
     items: []
   };
+
+  // observables
+  type$ : Observable<any>;
 
   // subscriptions
   onModelChange$ : Subscription;
@@ -32,6 +35,7 @@ export class AdminListItemEditComponent implements OnInit, OnDestroy {
 
   // init
   ngOnInit() {
+    this.type$ = this.context.listItemTypeSelected$;
   }
 
   // cleanup
