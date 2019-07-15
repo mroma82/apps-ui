@@ -18,7 +18,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of list$ | async" >
-              <td (click)="setItem(item)" class="cursor-pointer" [class.table-active]="item.id == currentItemId">
+              <td (click)="setItem(item)" class="clickable" [class.table-active]="item.id == currentItemId">
                 <div>
                     <strong>{{ item.createDateTime | utcDateTime:'medium' }}</strong>
                 </div>                

@@ -19,6 +19,9 @@ export class WorkflowAssignedListDialogComponent extends BaseDialog implements O
 
     // open/close subscription
     this.initOpenCloseSubscription(context.assignedListDialogOpenClose$);
+
+    // size
+    this.dialogSize = "sm";
   }
 
   ngOnInit() {

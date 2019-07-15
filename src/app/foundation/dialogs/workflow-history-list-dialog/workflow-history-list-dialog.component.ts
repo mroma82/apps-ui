@@ -19,6 +19,9 @@ export class WorkflowHistoryListDialogComponent extends BaseDialog implements On
 
     // open/close subscription
     this.initOpenCloseSubscription(context.historyDialogOpenClose$);
+
+    // set size
+    this.dialogSize = 'xl';
   }
 
   ngOnInit() {

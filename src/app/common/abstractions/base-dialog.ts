@@ -5,6 +5,9 @@ import { Subscription, Observable } from 'rxjs';
 export class BaseDialog implements OnDestroy {
     @ViewChild('content') content : any;
     
+    // define options
+    protected dialogSize: 'lg' | 'sm' | 'full' | 'xl' = 'lg'
+
     closeResult: string;
 
     // modal
@@ -45,8 +48,25 @@ export class BaseDialog implements OnDestroy {
             this.modal.dismiss();
     }
 
+    // open the dialog
     private open(content) {
-        this.modal = this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' });
+
+        // handle issue with modal component only accepting lg and sm sizes
+        let modalSize = this.dialogSize;
+        let windowClass = "";
+        if(modalSize != 'lg' && modalSize != 'sm') {
+            windowClass = `modal-size-${modalSize}`;
+            modalSize = 'lg';
+        }
+
+        // open the modal
+        this.modal = this.modalService.open(content, { 
+            size: modalSize, 
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: windowClass
+        });
+
+        // handle promise
         this.modal.result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
