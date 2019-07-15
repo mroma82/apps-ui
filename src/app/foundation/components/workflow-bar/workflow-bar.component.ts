@@ -79,6 +79,16 @@ export class WorkflowBarComponent implements OnInit {
 
   // reset
   reset() {
-    this.context.openResetDialog();
+    this.context.reset();
+  }
+
+  // cancel
+  cancel() {
+    this.context.cancel();
+  }
+
+  // regenerate
+  regenerate() {
+    this.context.regenerate();
   }
 }

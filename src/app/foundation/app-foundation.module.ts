@@ -23,15 +23,13 @@ import { WorkflowService } from './services/workflow/workflow.service';
 import { WorkflowAssignedListComponent } from './components/workflow-assigned-list/workflow-assigned-list.component';
 import { WorkflowAssignedListDialogComponent } from './dialogs/workflow-assigned-list-dialog/workflow-assigned-list-dialog.component';
 import { WorkflowRejectComponent } from './components/workflow-reject/workflow-reject.component';
-import { WorkflowResetComponent } from './components/workflow-reset/workflow-reset.component';
 import { WorkflowRejectDialogComponent } from './dialogs/workflow-reject-dialog/workflow-reject-dialog.component';
-import { WorkflowResetDialogComponent } from './dialogs/workflow-reset-dialog/workflow-reset-dialog.component';
 import { WorkflowHistoryListComponent } from './components/workflow-history-list/workflow-history-list.component';
 import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-list-dialog/workflow-history-list-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent, WorkflowRejectComponent, WorkflowResetComponent, WorkflowRejectDialogComponent, WorkflowResetDialogComponent, WorkflowHistoryListComponent, WorkflowHistoryListDialogComponent],
+  declarations: [FoundationViewEditButtonBarComponent, NoteListDialogComponent, AuditTrailListDialogComponent, AttachmentListDialogComponent, AttachmentListComponent, AttachmentAddComponent, AttachmentEditComponent, NotificationBarComponent, NotificationListDialogComponent, NotificationListComponent, WorkflowBarComponent, WorkflowAssignedListComponent, WorkflowAssignedListDialogComponent, WorkflowRejectComponent, WorkflowRejectDialogComponent, WorkflowHistoryListComponent, WorkflowHistoryListDialogComponent],
   imports: [
     CommonModule,
     FormsModule,

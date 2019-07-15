@@ -17,6 +17,11 @@ export class AdminListItemApiService {
     return this.http.get("/foundation/listItem/types");
   }
 
+  // get type
+  getType(id: string) : Observable<any> {
+    return this.http.get(`/foundation/listItem/type/${id}`);
+  }
+
   // get items by type
   getItemsByType(typeId: string) : Observable<any> {
     return this.http.get(`/foundation/listItem/itemsForType/${typeId}`);

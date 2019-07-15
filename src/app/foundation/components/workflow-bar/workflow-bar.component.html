@@ -7,7 +7,9 @@
         <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
         <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
         <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
-        <span class="badge badge-primary" style="margin-left: 10px;" *ngIf="instance.isActive">{{ getAssignedTo(instance) }}</span>  
+        <span class="badge badge-primary ml-2 clickable" *ngIf="instance.isActive" (click)="showAssigned()">
+          {{ getAssignedTo(instance) }}
+        </span>  
         
         <div>
           <div *ngIf="instance.isRejected" class="reject-bar">
@@ -19,11 +21,16 @@
       <div class="col-sm-6">
         
         <div ngbDropdown class="d-inline-block float-right" placement="bottom-right">
-          <button class="btn btn-link" id="workflowMenu" ngbDropdownToggle>Functions</button>
+          <button class="btn btn-link dropdown-toggle-icon" id="workflowMenu" ngbDropdownToggle>
+            <i class="fas fa-cog"></i>
+          </button>
+          
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
+            <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button> 
             <button ngbDropdownItem (click)="showHistory()">History</button> 
-            <button ngbDropdownItem (click)="reset()">Reset</button> 
-            <button ngbDropdownItem (click)="showAssigned()">Show who is assigned</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()">Refresh</button> 
+            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button> 
           </div>
         </div>
 
@@ -43,5 +50,4 @@
 
 <app-workflow-assigned-list-dialog></app-workflow-assigned-list-dialog>
 <app-workflow-reject-dialog></app-workflow-reject-dialog>
-<app-workflow-reset-dialog></app-workflow-reset-dialog>
 <app-workflow-history-list-dialog></app-workflow-history-list-dialog>

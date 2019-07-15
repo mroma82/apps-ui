@@ -3,6 +3,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { WorkflowService } from './workflow.service';
 import { IContext } from 'src/app/common/models/context';
 import { NotificationContextService } from '../notification/notification-context.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +22,8 @@ export class WorkflowContextService implements OnDestroy {
   // dialog obseravables
   assignedListDialogOpenClose$ = new BehaviorSubject<boolean>(false);
   rejectDialogOpenClose$ = new BehaviorSubject<boolean>(false);
-  resetDialogOpenClose$ = new BehaviorSubject<boolean>(false);
-  historyDialogOpenClose$ = new BehaviorSubject<boolean>(false);
-
+  historyDialogOpenClose$ = new BehaviorSubject<boolean>(false); 
+  
   // options
   options = {
     url: ""
@@ -35,7 +36,8 @@ export class WorkflowContextService implements OnDestroy {
   // new
   constructor(
     private service: WorkflowService,
-    private notificationContext: NotificationContextService
+    private notificationContext: NotificationContextService,
+    private dialogService: DialogService
   ) { 
     
     // on context change
@@ -122,13 +124,60 @@ export class WorkflowContextService implements OnDestroy {
   }
 
   // reset
-  reset(instanceId: string, taskId: string) {
+  reset() {
+
+    // ask
+    this.dialogService.yesNo("Cancel Workflow", "Are you sure you want to cancel the workflow?").subscribe(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // get the instance
+        const instance = this.instance$.value;
+    
+        // reset
+        this.busy$.next(true);
+        this.service.reset(this.options.url, instance.id, instance.currentTaskId).subscribe(x => {
+          this.refreshInstance();
+          this.notificationContext.refreshList();
+          this.busy$.next(false);
+        });
+      }
+    });
+  }
+
+  // cancel
+  cancel() {
+
+    // ask
+    this.dialogService.yesNo("Cancel Workflow", "Are you sure you want to cancel the workflow?").subscribe(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // get the instance
+        const instance = this.instance$.value;
+
+        // cancel
+        this.busy$.next(true);
+        this.service.cancel(this.options.url, instance.id, instance.currentTaskId).subscribe(x => {
+          this.refreshInstance();
+          this.notificationContext.refreshList();
+          this.busy$.next(false);
+        });
+      }
+    });
+  }
+
+  // regenerate
+  regenerate() {
+
+    // get the instance
+    const instance = this.instance$.value;
+
+    // cancel
     this.busy$.next(true);
-    this.service.reset(this.options.url, instanceId, taskId).subscribe(x => {
+    this.service.regenerate(this.options.url, instance.id).subscribe(x => {
       this.refreshInstance();
       this.notificationContext.refreshList();
       this.busy$.next(false);
-    })
+    });
   }
 
   // assigned list dialog open/close
@@ -145,14 +194,6 @@ export class WorkflowContextService implements OnDestroy {
   }
   closeRejectDialog() {
     this.rejectDialogOpenClose$.next(false);
-  }
-
-  // reset dialog open/close
-  openResetDialog() {
-    this.resetDialogOpenClose$.next(true);
-  }
-  closeResetDialog() {
-    this.resetDialogOpenClose$.next(false);
   }
 
   // history dialog open/close

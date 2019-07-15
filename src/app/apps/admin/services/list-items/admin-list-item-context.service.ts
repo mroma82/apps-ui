@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { ListItemService } from 'src/app/common/services/list-item.service';
 import { AdminListItemApiService } from './admin-list-item-api.service';
 import { tap } from 'rxjs/operators';
 
@@ -13,7 +12,7 @@ export class AdminListItemContextService {
   listItemTypeList$ = new BehaviorSubject<any>([]);
 
   // edit observables
-  listItemTypeSelected$ = new BehaviorSubject<string>("");
+  listItemTypeSelected$ = new BehaviorSubject<any>({});
   listItemsList$ = new BehaviorSubject<any>([]);
 
   // new
@@ -30,8 +29,12 @@ export class AdminListItemContextService {
 
   // set type
   setItemTypeSelected(typeId: string) {
-    this.listItemTypeSelected$.next(typeId);
-    this.refreshItems(typeId);
+
+    // get the type details
+    this.api.getType(typeId).subscribe(x => {
+      this.listItemTypeSelected$.next(x);
+      this.refreshItems(typeId);
+    });
   }
 
   // refresh items
@@ -42,7 +45,7 @@ export class AdminListItemContextService {
 
   // save
   save() : Observable<any> {
-    return this.api.updateItems(this.listItemTypeSelected$.value, this.listItemsList$.value);
+    return this.api.updateItems(this.listItemTypeSelected$.value.id, this.listItemsList$.value);
   }
 
   // add type
