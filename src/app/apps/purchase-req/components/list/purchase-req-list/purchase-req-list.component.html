@@ -22,7 +22,7 @@
 
     <ngx-datatable-column name="Requested by" prop="requestUserId" [flexGrow]="1">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        {{ value }}
+        {{ value | userFullname | async }}
       </ng-template>
     </ngx-datatable-column>   
 
