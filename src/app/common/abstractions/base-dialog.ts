@@ -63,7 +63,9 @@ export class BaseDialog implements OnDestroy {
         this.modal = this.modalService.open(content, { 
             size: modalSize, 
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: windowClass
+            windowClass: windowClass,
+            backdrop : 'static',
+            keyboard : false
         });
 
         // handle promise
