@@ -120,6 +120,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       extPrice: 0,
       uom: 'Each',
       locationId: req.locationId,
+      department: req.department,
       requiredDate: req.requiredDate,
       isDeleted: false
     });    

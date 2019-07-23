@@ -14,6 +14,7 @@ export class PurchaseReqLineComponent implements OnInit {
   // lists  
   locationList$ : Observable<any>;    
   ledgerList$ : Observable<any>;
+  departmentList$ : Observable<any>;
   
   // model
   viewModel : any = {
@@ -50,6 +51,7 @@ export class PurchaseReqLineComponent implements OnInit {
     // lists
     this.locationList$ = this.lists.locationList$;    
     this.ledgerList$ = this.lists.ledgerList$;
+    this.departmentList$ = this.lists.departmentList$;
   }
 
   // destroy

@@ -72,6 +72,17 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-4">
+    <app-select-field [(ngModel)]="viewModel.department" name="department" label="Department"
+      [disabled]="viewMode">
+      <option value="">-- Please select --</option>
+      <option *ngFor="let item of departmentList$ | async" [value]="item.departmentId"
+        [selected]="viewModel.department == item.departmentId">{{ item.departmentName }}</option>
+    </app-select-field>
+  </div>  
+</div>
+
 <div>
   <app-text-field [(ngModel)]="viewModel.notes" name="notes" label="Notes" [disabled]="viewMode"></app-text-field>
 </div>
