@@ -16,6 +16,10 @@ export class ContextTypeRouteResolverService {
       // example
       case 1: 
         return `/app/example/view/${contextId}`;
+
+      // purchase req
+      case 1000:
+        return `/app/purchase-req/view/${contextId}`;
     }
 
     // else, nothing
