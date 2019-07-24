@@ -44,9 +44,15 @@ export class MenuItemService {
 
   // has access to menu item
   hasAccessToMenuItem(menuItem: IMenuItem) : boolean {        
-    
+    const profile = this.userContext.profile$.value;
+    const isAdmin = this.userContext.isAdmin$.value;
+
+    // check admin
+    if(isAdmin)
+      return true;  
+
     // get the roles, check if any roles to check
-    let roles = this.userContext.profile$.value.role;
+    let roles = profile.role;
     if(roles && menuItem.allowedRoles) {
 
       // go through each allowed role
