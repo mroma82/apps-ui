@@ -1,11 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription, of } from 'rxjs';
 import { ExampleService } from './example.service';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap, switchMap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { ListItemService } from 'src/app/common/services/list-item.service';
 import { ExampleListsService } from './example-lists.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,35 @@ export class ExampleViewEditContextService implements OnDestroy {
         // todo: show error
         console.log(x.text);
         return false;
+      }
+    }));
+  }
+
+  // copy
+  copy(isEdit: boolean) : Observable<any> {
+    
+    // ask first
+    return this.dialogService.yesNo("Copy", "Are you sure you want to copy this record?").pipe(switchMap(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // define check/update observable
+        let checkUpd$ : Observable<boolean>;
+        if(isEdit) {
+          checkUpd$ = this.update();
+        } else {
+          checkUpd$ = of(true);
+        }
+
+        // check/update, then copy
+        return checkUpd$.pipe(switchMap(updateResult => {
+          console.log(["updateResult", updateResult])
+          if(updateResult) {
+            return this.service.copy(this.id$.value);
+          }
+          return of({ success: false });
+        }));
+      } else {
+        return of({ success: false });
       }
     }));
   }

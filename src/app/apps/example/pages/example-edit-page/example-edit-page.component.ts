@@ -73,4 +73,15 @@ export class ExampleEditPageComponent implements OnInit {
       }
     });
   }
+
+  // copy
+  copy() {
+
+    // copy, then check if ok
+    this.viewEditContext.copy(true).subscribe(result => {
+      if(result.success) {
+        this.router.navigateByUrl(`/app/example/edit/${result.id}`)
+      }          
+    });   
+  }
 }

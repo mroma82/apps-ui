@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppContextService } from 'src/app/app-context.service';
 import { RecordContextService } from 'src/app/common/services/record-context.service';
 import { ExampleViewEditContextService } from '../../services/example-view-edit-context.service';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 
 @Component({
   selector: 'app-example-view-page',
@@ -24,7 +26,8 @@ export class ExampleViewPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,    
     private recordContext: RecordContextService,
-    private viewEditContext: ExampleViewEditContextService
+    private viewEditContext: ExampleViewEditContextService,
+    private dialogService: DialogService
   ) {   
     
   }
@@ -43,5 +46,16 @@ export class ExampleViewPageComponent implements OnInit {
   // edit
   edit() {
     this.router.navigateByUrl(`/app/example/edit/${this.model.id}`)
+  }
+
+  // copy
+  copy() {
+    
+    // copy, then check if ok
+    this.viewEditContext.copy(false).subscribe(result => {
+      if(result.success) {
+        this.router.navigateByUrl(`/app/example/edit/${result.id}`)
+      }          
+    });      
   }
 }
