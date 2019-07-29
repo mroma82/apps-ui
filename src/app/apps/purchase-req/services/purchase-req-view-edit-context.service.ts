@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { PurchaseReqApiService } from './purchase-req-api.service';
 import { AppContextService } from 'src/app/app-context.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { PurchaseReqListsService } from './purchase-req-lists.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
@@ -227,6 +227,34 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
   // create from template
   createFromTemplate() {
     return this.api.createFromTemplate(this.reqRecord$.value.id);
+  }
+
+   // copy
+   copy(isEdit: boolean) : Observable<any> {
+    
+    // ask first
+    return this.dialogService.yesNo("Copy", "Are you sure you want to copy this record?").pipe(switchMap(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // define check/update observable
+        let checkUpd$ : Observable<boolean>;
+        if(isEdit) {
+          checkUpd$ = this.update();
+        } else {
+          checkUpd$ = of(true);
+        }
+
+        // check/update, then copy
+        return checkUpd$.pipe(switchMap(updateResult => {          
+          if(updateResult) {
+            return this.api.copy(this.id$.value);
+          }
+          return of({ success: false });
+        }));
+      } else {
+        return of({ success: false });
+      }
+    }));
   }
 
   // destroy

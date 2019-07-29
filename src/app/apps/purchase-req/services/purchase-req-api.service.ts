@@ -48,6 +48,11 @@ export class PurchaseReqApiService {
     return this.http.post(`${this.apiRoot}/createFromTemplate/${templateId}`, null);
   }
 
+  // copy
+  copy(id: string) : Observable<any> {
+    return this.http.post(`${this.apiRoot}/copy/${id}`, null);
+  }
+
   // get parameters
   getParameters() : Observable<any> {
     return this.http.get(`${this.apiRoot}/getParameters`);

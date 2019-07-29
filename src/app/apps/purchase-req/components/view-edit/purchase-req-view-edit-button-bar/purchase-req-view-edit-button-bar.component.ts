@@ -41,7 +41,15 @@ export class PurchaseReqViewEditButtonBarComponent implements OnInit {
           }
         });
       }
-    })
-    
+    });    
+  }
+
+  // copy
+  copy() {
+    this.context.copy(!this.viewMode).subscribe(result => {
+      if(result.success) {
+        this.router.navigateByUrl(`/app/purchase-req`)
+      }          
+    });      
   }
 }
