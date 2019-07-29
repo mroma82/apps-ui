@@ -47,6 +47,11 @@ export class ExampleService {
     return this.apiClient.post("/example/create", model);
   }
 
+  // copy
+  copy(id: string) : Observable<any> {
+    return this.apiClient.post(`/example/copy/${id}`, null);
+  }
+
   // get parameters
   getParameters() : Observable<any> {
     return this.apiClient.get("/example/getParameters");

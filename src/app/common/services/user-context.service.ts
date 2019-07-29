@@ -153,8 +153,9 @@ export class UserContextService {
   }
 
   // set profile
-  setProfile(profile: any) {
-    this.profile$.next(profile);
-    this.isAdmin$.next(profile.role.indexOf("SysAdmin") > -1);
+  setProfile(profile: any) {    
+    console.log(profile);
+    this.profile$.next(profile);  
+    this.isAdmin$.next(profile.role ? profile.role.indexOf("SysAdmin") > -1 : false);
   }
 }
