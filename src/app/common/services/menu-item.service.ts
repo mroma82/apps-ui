@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { IMenuItem } from '../models/menu-item';
 import { UserContextService } from './user-context.service';
+import { BehaviorSubject, Subscription, combineLatest, timer } from 'rxjs';
+import { debounce } from 'rxjs/operators';
 
 // foundation menu items
 const foundationMenu : IMenuItem[] = [
@@ -22,21 +24,36 @@ const fullMenu = [
 @Injectable({
   providedIn: 'root'
 })
-export class MenuItemService {
+export class MenuItemService implements OnDestroy {
+
+  // observables
+  menuItems$ = new BehaviorSubject<IMenuItem[]>([]);
+
+  // subscriptions
+  onProfileChange$ : Subscription;
 
   // new
   constructor(
     private userContext: UserContextService
-  ) { }
+  ) { 
+
+    // setup subscription
+    this.onProfileChange$ = combineLatest(
+      userContext.profile$, 
+      userContext.isAdmin$
+    ).pipe(debounce(() => timer(100))).subscribe(([profile, isAdmin]) => {
+      this.menuItems$.next(this.buildMenuItems(profile, isAdmin));
+    });
+  }
 
   // get menu items
-  getMenuItems() : IMenuItem[] {
+  private buildMenuItems(profile: any, isAdmin: boolean) : IMenuItem[] {
     
     // build the menu
     let menuItems : IMenuItem[] = [];
-    fullMenu.forEach(x => {
-      if(this.hasAccessToMenuItem(x))
-        menuItems.push(x);
+    fullMenu.forEach(menuItem => {
+      if(this.hasAccessToMenuItem(profile, isAdmin, menuItem))
+        menuItems.push(menuItem);
     });
 
     // return 
@@ -44,9 +61,7 @@ export class MenuItemService {
   }
 
   // has access to menu item
-  hasAccessToMenuItem(menuItem: IMenuItem) : boolean {        
-    const profile = this.userContext.profile$.value;
-    const isAdmin = this.userContext.isAdmin$.value;
+  private hasAccessToMenuItem(profile: any, isAdmin: boolean, menuItem: IMenuItem) : boolean {                
 
     // check admin
     if(isAdmin)
@@ -69,5 +84,12 @@ export class MenuItemService {
     
     // no access
     return false;
+  }
+  
+  // destroy
+  ngOnDestroy() {
+
+    // clean up
+    this.onProfileChange$.unsubscribe();
   }
 }
