@@ -7,12 +7,12 @@ import { debounce } from 'rxjs/operators';
 // foundation menu items
 const foundationMenu : IMenuItem[] = [
   { title: "Example App", url: "/app/example", allowedRoles: [ "ExampleUser"], icon: "fas fa-shapes" },
-  { title: "Admin", url: "/app/admin", allowedRoles: [ "SysAdmin"], icon: "fas fa-cogs" }
+  { title: "Admin", url: "/app/admin", allowedRoles: [ "SysAdmin" ], icon: "fas fa-cogs" }
 ];
 
 // app menu items
 const appMenuItems: IMenuItem[] = [
-  { title: "Purchase Requisition", url: "/app/purchase-req", allowedRoles: [ "ExampleUser" ], icon: "fas fa-shopping-cart" }
+  { title: "Purchase Requisition", url: "/app/purchase-req", allowedRoles: [ "PurchaseReqUser" ], icon: "fas fa-shopping-cart" }
 ];
 
 // full menu
