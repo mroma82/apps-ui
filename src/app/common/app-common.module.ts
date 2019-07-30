@@ -25,6 +25,7 @@ import { ExcludeDeletedPipe } from './pipes/exclude-deleted.pipe';
 import { MessageDialogComponent } from './components/dialogs/message-dialog/message-dialog.component';
 import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
 import { UserFullnamePipe } from './pipes/user-fullname.pipe';
+import { MenuItemService } from './services/menu-item.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { UserFullnamePipe } from './pipes/user-fullname.pipe';
     AppHttpClientService,
     ContextTypeRouteResolverService,
     IntegrationService,
-    DatePipe
+    DatePipe,
+    MenuItemService
   ],
   imports: [
     CommonModule,

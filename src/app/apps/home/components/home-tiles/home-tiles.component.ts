@@ -9,35 +9,21 @@ import { IMenuItem } from 'src/app/common/models/menu-item';
   templateUrl: './home-tiles.component.html',
   styleUrls: ['./home-tiles.component.scss']
 })
-export class HomeTilesComponent implements OnInit, OnDestroy {
+export class HomeTilesComponent implements OnInit {
   
   // observables
-  menuItems$ = new BehaviorSubject<IMenuItem[]>([]);
-
-  // subscriptions
-  onProfileChange: Subscription;
+  menuItems$ : Observable<IMenuItem[]>;
 
   // new
   constructor(
-    private appContext: AppContextService,
     private menuItemService: MenuItemService
   ) { 
 
     // profile change
-    this.onProfileChange = this.appContext.User.profile$.subscribe(x => {
-      this.menuItems$.next(this.menuItemService.getMenuItems());
-    });
+    this.menuItems$ = this.menuItemService.menuItems$;    
   }  
 
   // init
   ngOnInit() {
   }
-
-  // destroy
-  ngOnDestroy() {
-
-    // clean up
-    this.onProfileChange.unsubscribe();
-  }
-
 }
