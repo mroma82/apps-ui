@@ -229,8 +229,8 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
     return this.api.createFromTemplate(this.reqRecord$.value.id);
   }
 
-   // copy
-   copy(isEdit: boolean) : Observable<any> {
+  // copy
+  copy(isEdit: boolean) : Observable<any> {
     
     // ask first
     return this.dialogService.yesNo("Copy", "Are you sure you want to copy this record?").pipe(switchMap(x => {
@@ -248,6 +248,34 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
         return checkUpd$.pipe(switchMap(updateResult => {          
           if(updateResult) {
             return this.api.copy(this.id$.value);
+          }
+          return of({ success: false });
+        }));
+      } else {
+        return of({ success: false });
+      }
+    }));
+  }
+
+  // integrate po
+  integratePurchaseOrder(isEdit: boolean) : Observable<any> {
+    
+    // ask first
+    return this.dialogService.yesNo("Create/Update Purchase Order", "Are you sure you want to create/update a purchase order for this record").pipe(switchMap(x => {
+      if(x == DialogResultEnum.Yes) {
+
+        // define check/update observable
+        let checkUpd$ : Observable<boolean>;
+        if(isEdit) {
+          checkUpd$ = this.update();
+        } else {
+          checkUpd$ = of(true);
+        }
+
+        // check/update, then copy
+        return checkUpd$.pipe(switchMap(updateResult => {          
+          if(updateResult) {
+            return this.api.integratePurchaseOrder(this.id$.value);
           }
           return of({ success: false });
         }));

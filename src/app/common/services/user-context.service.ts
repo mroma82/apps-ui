@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, combineLatest } from 'rxjs';
 import { AppHttpClientService } from './app-http-client.service';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -157,5 +157,29 @@ export class UserContextService {
     console.log(profile);
     this.profile$.next(profile);  
     this.isAdmin$.next(profile.role ? profile.role.indexOf("SysAdmin") > -1 : false);
+  }
+
+  // check if has a permission
+  hasPermission(role: string) : Observable<boolean> {
+    
+    // combine profile and admin
+    return combineLatest(
+      this.profile$, 
+      this.isAdmin$,
+      this.isImpersonating$
+    ).pipe(map(([profile, isAdmin, isImpersonating]) => {
+      
+      // admin, always yes
+      if(isAdmin && !isImpersonating)
+        return true;
+
+      // else check roles
+      if(profile.role) {
+        return profile.role.indexOf(role) > -1;
+      }
+
+      // else, no
+      return false;
+    }));    
   }
 }

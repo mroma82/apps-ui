@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { UserContextService } from 'src/app/common/services/user-context.service';
 
 @Component({
   selector: 'app-purchase-req-view-edit-button-bar',
@@ -15,10 +16,12 @@ export class PurchaseReqViewEditButtonBarComponent implements OnInit {
 
   // observables
   isTemplate$: Observable<boolean>;
+  canCreatePurchaseOrder$ : Observable<boolean>;
 
   // new
   constructor(
     private context: PurchaseReqViewEditContextService,
+    private userContext: UserContextService,
     private dialogService: DialogService,
     private router: Router
   ) { }
@@ -26,6 +29,7 @@ export class PurchaseReqViewEditButtonBarComponent implements OnInit {
   // init
   ngOnInit() {
     this.isTemplate$ = this.context.isTemplate$;
+    this.canCreatePurchaseOrder$ = this.userContext.hasPermission("PurchReqCreatePurchaseOrder");
   }
 
   // create from template
@@ -49,7 +53,19 @@ export class PurchaseReqViewEditButtonBarComponent implements OnInit {
     this.context.copy(!this.viewMode).subscribe(result => {
       if(result.success) {
         this.router.navigateByUrl(`/app/purchase-req`)
-      }          
+      }   
+    });      
+  }
+
+  // create/update po
+  createUpdatePurchaseOrder() {
+    this.context.integratePurchaseOrder(!this.viewMode).subscribe(result => {
+      if(result.success) {
+        this.context.refreshData();
+        this.dialogService.message("Success", "Purchase order created/updated successfully");        
+      } else {        
+        this.dialogService.message("Error", result.text);        
+      }  
     });      
   }
 }

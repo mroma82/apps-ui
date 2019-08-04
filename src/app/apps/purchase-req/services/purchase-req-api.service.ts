@@ -53,6 +53,11 @@ export class PurchaseReqApiService {
     return this.http.post(`${this.apiRoot}/copy/${id}`, null);
   }
 
+  // integrate
+  integratePurchaseOrder(id: string) : Observable<any> {
+    return this.http.post(`${this.apiRoot}/integratePurchaseOrder/${id}`, null);
+  }
+
   // get parameters
   getParameters() : Observable<any> {
     return this.http.get(`${this.apiRoot}/getParameters`);
