@@ -1,0 +1,66 @@
+<h4>Editing group {{ model.groupId }}</h4>
+<div class="mb-3">
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+</div>
+
+<ul class="list-group list-group-flush">
+
+  <li class="list-group-item">
+    <div class="row" *ngIf="model.securityUsersList">
+      <div class="col-2 font-weight-bold">
+        Approval Users
+      </div>
+      <div class="col-4 mb-3">
+        <div *ngFor="let item of userList$ | async">
+          <input type="checkbox" [checked]="model.securityUsersList.indexOf(item.username) > -1"
+            (change)="setUser(model.securityUsersList, item, $event)" /> {{ item.name}}
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row" *ngIf="model.securityGroupsList">
+      <div class="col-2 font-weight-bold">
+        Approval Groups
+      </div>
+      <div class="col-4 mb-3">
+        <div *ngFor="let item of groupList$ | async">
+          <input type="checkbox" [checked]="model.securityGroupsList.indexOf(item.name) > -1"
+            (change)="setGroup(model.securityGroupsList, item, $event)" /> {{ item.name}}
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row" *ngIf="model.notificationUsersList">
+      <div class="col-2 font-weight-bold">
+        Notification Users
+      </div>
+      <div class="col-4 mb-3">
+        <div *ngFor="let item of userList$ | async">
+          <input type="checkbox" [checked]="model.notificationUsersList.indexOf(item.username) > -1"
+            (change)="setUser(model.notificationUsersList, item, $event)" /> {{ item.name}}
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row" *ngIf="model.notificationGroupsList">
+      <div class="col-2 font-weight-bold">
+        Notification Groups
+      </div>
+      <div class="col-4 mb-3">
+        <div *ngFor="let item of groupList$ | async">
+          <input type="checkbox" [checked]="model.notificationGroupsList.indexOf(item.name) > -1"
+            (change)="setGroup(model.notificationGroupsList, item, $event)" /> {{ item.name}}
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+<pre>model = {{model | json}}</pre>

@@ -17,6 +17,12 @@ import { AdminListItemEditComponent } from './components/list-items/admin-list-i
 import { AdminListItemEditPageComponent } from './pages/list-items/admin-list-item-edit-page/admin-list-item-edit-page.component';
 import { AdminListItemListPageComponent } from './pages/list-items/admin-list-item-list-page/admin-list-item-list-page.component';
 import { AppCommonModule } from 'src/app/common/app-common.module';
+import { AdminWorkflowGroupContainerComponent } from './containers/admin-workflow-group-container/admin-workflow-group-container.component';
+import { AdminWorkflowGroupListPageComponent } from './pages/workflow-groups/admin-workflow-group-list-page/admin-workflow-group-list-page.component';
+import { AdminWorkflowGroupEditPageComponent } from './pages/workflow-groups/admin-workflow-group-edit-page/admin-workflow-group-edit-page.component';
+import { AdminWorkflowGroupEditComponent } from './components/workflow-groups/admin-workflow-group-edit/admin-workflow-group-edit.component';
+import { AdminWorkflowGroupListComponent } from './components/workflow-groups/admin-workflow-group-list/admin-workflow-group-list.component';
+import { AdminWorkflowGroupApiService } from './services/workflow-groups/admin-workflow-group-api.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,12 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
     AdminListItemListComponent, 
     AdminListItemEditComponent, 
     AdminListItemEditPageComponent, 
-    AdminListItemListPageComponent
+    AdminListItemListPageComponent, 
+    AdminWorkflowGroupContainerComponent, 
+    AdminWorkflowGroupListPageComponent, 
+    AdminWorkflowGroupEditPageComponent,     
+    AdminWorkflowGroupEditComponent, 
+    AdminWorkflowGroupListComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +52,8 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
     FormsModule
   ],
   providers: [
-    PermissionsContextService
+    PermissionsContextService,
+    AdminWorkflowGroupApiService
   ]
 })
 export class AdminAppModule { }

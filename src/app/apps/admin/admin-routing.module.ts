@@ -9,6 +9,9 @@ import { AdminPermissionsContainerComponent } from './containers/admin-permissio
 import { AdminListItemContainerComponent } from './containers/admin-list-item-container/admin-list-item-container.component';
 import { AdminListItemListPageComponent } from './pages/list-items/admin-list-item-list-page/admin-list-item-list-page.component';
 import { AdminListItemEditPageComponent } from './pages/list-items/admin-list-item-edit-page/admin-list-item-edit-page.component';
+import { AdminWorkflowGroupContainerComponent } from './containers/admin-workflow-group-container/admin-workflow-group-container.component';
+import { AdminWorkflowGroupListPageComponent } from './pages/workflow-groups/admin-workflow-group-list-page/admin-workflow-group-list-page.component';
+import { AdminWorkflowGroupEditPageComponent } from './pages/workflow-groups/admin-workflow-group-edit-page/admin-workflow-group-edit-page.component';
 
 // routing
 const routes: Routes = [
@@ -34,6 +37,16 @@ const routes: Routes = [
             children: [
               { path: '', component: AdminPermissionsListPageComponent },
               { path: 'edit/:key', component: AdminPermissionsEditPageComponent },
+              { path: 'edit', redirectTo: '' }
+            ]
+          },
+
+          { 
+            path: 'workflow-groups', 
+            component: AdminWorkflowGroupContainerComponent,
+            children: [
+              { path: '', component: AdminWorkflowGroupListPageComponent },
+              { path: 'edit/:id', component: AdminWorkflowGroupEditPageComponent },
               { path: 'edit', redirectTo: '' }
             ]
           }
