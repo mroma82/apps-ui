@@ -119,7 +119,7 @@ export class PurchaseReqViewEditContextService implements OnDestroy {
       unitPrice: 0,
       extPrice: 0,
       uom: 'Each',
-      locationId: req.locationId,
+      location: req.location,
       department: req.department,
       requiredDate: req.requiredDate,
       isDeleted: false

@@ -61,10 +61,10 @@
       [disabled]="viewMode"></app-date-field>
   </div>
   <div class="col-md-4">
-    <app-select-field [(ngModel)]="viewModel.locationId" name="locationId" label="Location" [disabled]="viewMode">
+    <app-select-field [(ngModel)]="viewModel.location" name="location" label="Location" [disabled]="viewMode">
       <option value="">-- Please select --</option>
       <option *ngFor="let item of locationList$ | async" [value]="item.locationId"
-        [selected]="viewModel.locationId == item.locationId">{{ item.locationName }}</option>
+        [selected]="viewModel.location == item.locationId">{{ item.locationName }}</option>
     </app-select-field>
   </div>
   <div class="col-md-4">
