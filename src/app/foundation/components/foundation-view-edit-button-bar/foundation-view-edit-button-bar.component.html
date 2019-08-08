@@ -8,6 +8,7 @@
   <button type="button" class="btn btn-primary" (click)="print()">Print</button>
   <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode">Delete</button>
 
+  <ng-content select="button"></ng-content>
 </div>
 
 <app-note-list-dialog></app-note-list-dialog>
