@@ -85,6 +85,13 @@ release:stage:
   only:
     - stage
 
+release:demo:
+  <<: *release_script
+  variables:
+    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE:demo
+  only:
+    - master   
+
 release:master:
   <<: *release_script
   variables:
