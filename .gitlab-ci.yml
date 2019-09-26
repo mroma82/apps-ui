@@ -30,7 +30,8 @@ info:
     - echo Reference name=$CI_BUILD_REF_NAME
     - echo Release image=$RELEASE_IMAGE
     - echo Tag=$CI_COMMIT_TAG
-
+  only:
+    - debug
 
 # BUILD ===============================
 .build_script: &build_script
@@ -89,7 +90,7 @@ release:master:
   variables:
     DEPLOY_IMAGE: $CI_REGISTRY_IMAGE:master
   only:
-    - stage    
+    - master    
 
 release:production:
   <<: *release_script
