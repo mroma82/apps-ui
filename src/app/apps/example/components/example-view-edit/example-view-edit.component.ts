@@ -16,7 +16,7 @@ export class ExampleViewEditComponent implements OnInit {
   userList$ : Observable<any>;
 
   // model
-  viewModel = {
+  viewModel : any = {
     record: { 
       customerId: "",
       customerName: ""     
