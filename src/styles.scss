@@ -13,6 +13,7 @@ $dark:#3c4055;
 $enable-gradients:false;
 $spacer:0.7rem;
 $border-width:1px;
+$enable-rounded:false;
 //$btn-border-radius:0.25rem;
 
 //@import "~bootswatch/dist/default/variables";
@@ -33,8 +34,13 @@ $border-width:1px;
     margin-left: 5px;
 }
 
+.btn-primary {
+    border-color: #216ca0;
+}
+
 html,body {
     height: 100%;
+    font-family: $headings-font-family;
 }
 
 .error-text {
