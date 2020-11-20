@@ -16,13 +16,15 @@ export class ListingContextService {
   filter$ = new BehaviorSubject<any>({});
   searchText$ = new BehaviorSubject<string>(null);
 
-  /*
+  
   page$ = new BehaviorSubject<number>(1);
   pageSize$ = new BehaviorSubject<number>(25);
+  
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
   });
+  /*
   isMyTasks$ = new BehaviorSubject<boolean>(false);
   */
 
@@ -37,18 +39,15 @@ export class ListingContextService {
     private api : EntityApiService
   ) { 
 
-    
- 
-
     // setup filter change
     this.onFilterChange$ = combineLatest(
       this.view$,
       this.filter$, 
-      this.searchText$
-      /*this.page$, 
-      this.sort$, 
+      this.searchText$,
+      this.page$,       
       this.pageSize$,
-      this.isMyTasks$*/
+      this.sort$, 
+      /*this.isMyTasks$*/
     ).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
 
     this.listingConfig.getViews().pipe(take(1)).subscribe(x => {
@@ -66,20 +65,19 @@ export class ListingContextService {
         ...this.filter$.value,
         ...this.view$.value.filter                      
       },
-      searchText: this.searchText$.value
+      searchText: this.searchText$.value,
       /*
-      ...this.filter$.value,
       ...{
         isMyTasks: this.isMyTasks$.value
-      },
+      },*/
       ...{
         pageNumber: this.page$.value,
         pageSize: this.pageSize$.value,        
-      },
+      },      
       ...{
         sortField: this.sort$.value.field,
         sortIsDescending: this.sort$.value.isDescending
-      }*/
+      }
     };    
 
     // get the data
@@ -95,14 +93,30 @@ export class ListingContextService {
 
   // set filter
   setFilter(model: any) {    
+
+    // merge filter
     this.filter$.next({
       ...this.filter$.value,
       ...model
     });
-    //his.page$.next(1);
+
+    // refresh filter
+    this.page$.next(1);
   }
 
   setSearchText(text: string) {
     this.searchText$.next(text);
+  }
+
+  setPage(page: number) {
+    this.page$.next(page);
+  }
+
+  setPageSize(size: number) {
+    this.pageSize$.next(size);
+  }
+
+  setSort(sort: any) {
+    this.sort$.next(sort);
   }
 }

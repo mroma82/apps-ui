@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
   selector: 'app-listing-page-generic',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListingPageGenericComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private listingContext : ListingContextService
+  ) { }
 
   ngOnInit() {
+
+    // refresh on load
+    this.refresh();
+  }
+
+  // refresh
+  refresh() {
+    this.listingContext.refreshData();
+  }
+
+  setPageSize(pageSize: number) {
+    this.listingContext.pageSize$.next(pageSize);
   }
 
 }

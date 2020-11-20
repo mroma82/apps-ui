@@ -12,6 +12,7 @@ export class ListingResultsComponent implements OnInit {
 
   listItems$ : Observable<any[]> = this.context.listItems$;
   columns$ : Observable<any[]> = this.config.getColumns();
+  pageSize$ : Observable<number> = this.context.pageSize$;
   
   constructor(
     private context : ListingContextService,
@@ -19,6 +20,20 @@ export class ListingResultsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  // on page
+  onPage(e) {
+    this.context.setPage(e.offset + 1);    
+  }
+
+  onSort(e) {      
+    if(e.sorts.length) {
+      this.context.setSort({
+        field: e.sorts[0].prop,
+        isDescending: e.sorts[0].dir === "desc"
+      })
+    }
   }
 
 }
