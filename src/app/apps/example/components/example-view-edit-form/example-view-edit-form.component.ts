@@ -1,23 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleListsService } from '../../services/example-lists.service';
-import { ExampleViewEditContextService } from '../../services/example-view-edit-context.service';
+
 
 @Component({
-  selector: 'app-example-view-edit',
-  templateUrl: './example-view-edit.component.html',
-  styleUrls: ['./example-view-edit.component.scss']
+  selector: 'app-example-view-edit-form',
+  templateUrl: './example-view-edit-form.component.html',
+  styleUrls: ['./example-view-edit-form.component.scss']
 })
-export class ExampleViewEditComponent implements OnInit {
+export class ExampleViewEditFormComponent implements OnInit {
   
-  // state
-  viewMode : boolean;
-  
+    
   // lists
   statusList$ : Observable<any>;  
   statusValueList$ : Observable<any>;  
   userList$ : Observable<any>;
+
+  // state
+  viewMode$ : Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
 
   // model
   viewModel : any = {
@@ -38,8 +40,7 @@ export class ExampleViewEditComponent implements OnInit {
     // lists
     this.statusList$ = lists.userList$
     this.statusValueList$ = lists.statusValueList$;
-    this.userList$ = lists.userList$;
-    this.viewMode = context.mode$.value == "view";
+    this.userList$ = lists.userList$;    
   }
   
   // init

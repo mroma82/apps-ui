@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ExampleContainerComponent } from './containers/example-container/example-container.component';
 import { ExampleListPageComponent } from './pages/example-list-page/example-list-page.component';
 import { ExampleViewPageComponent } from './pages/example-view-page/example-view-page.component';
-import { ExampleEditPageComponent } from './pages/example-edit-page/example-edit-page.component';
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 
 // example routing

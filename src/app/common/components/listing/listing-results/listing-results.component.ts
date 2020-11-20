@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
+import { IListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ListingResultsComponent implements OnInit {
   
   constructor(
     private context : ListingContextService,
-    private config : ListingConfigurationService
+    @Inject("IListingConfigurationService") private config : IListingConfigurationService
   ) { }
 
   ngOnInit() {

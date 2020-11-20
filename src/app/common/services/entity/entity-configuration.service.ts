@@ -10,9 +10,11 @@ export class EntityConfigurationService {
   contextType: number = 0;
   entityTypeId : string = "";
   
+  // workflow
   workflow = {
     enabled: false,
-    url: ""
+    url: "",
+    prefixText: ""
   }
 
   constructor() { }

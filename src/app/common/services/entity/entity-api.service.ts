@@ -16,7 +16,7 @@ export class EntityApiService {
   }
 
   getSingle(entityTypeId : string, id: string) : Observable<any> {
-    return this.api.get(`/entity/getSingle?entityTypeId=${entityTypeId}&id=${id}`);
+    return this.api.get(`/entity/get?entityTypeId=${entityTypeId}&id=${id}`);
   }
 
   update(entityTypeId : string, model: any) : Observable<any> {

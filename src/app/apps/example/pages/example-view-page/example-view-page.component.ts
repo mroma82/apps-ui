@@ -6,6 +6,7 @@ import { ExampleViewEditContextService } from '../../services/example-view-edit-
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-example-view-page',
@@ -21,9 +22,9 @@ export class ExampleViewPageComponent implements OnInit {
 
   // define model
   model = {
-    id: "",
-    mode: null
+    id: ""    
   };
+  
 
   constructor(    
     private router: Router,        
