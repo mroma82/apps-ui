@@ -20,7 +20,7 @@
                 <app-select-field [(ngModel)]="viewModel.record.statusValue" [disabled]="viewMode$ | async" name="statusValue" label="Status Value">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of statusValueList$ | async" [value]="item.valueId" [selected]="item.valueId == viewModel.record.statusValue">{{ item.text }}</option>
-                </app-select-field>        
+                </app-select-field>                        
             </div>
 
             <div class="col-md-2">

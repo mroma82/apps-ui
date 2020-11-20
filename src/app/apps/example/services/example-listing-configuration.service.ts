@@ -18,6 +18,7 @@ export class ExampleListingConfigurationService implements IListingConfiguration
     ]);
   }
 
+  // columns
   getColumns() : Observable<any[]> {
     return of([
       {
@@ -41,6 +42,10 @@ export class ExampleListingConfigurationService implements IListingConfiguration
       {
         model: "numberField",
         title: "Number"
+      },
+      {
+        model: "statusValue",
+        title: "Status (Value)"
       }
     ]);
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { mergeMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { ListItemService } from 'src/app/common/services/list-item.service';
 import { ExampleService } from './example.service';
@@ -28,12 +28,10 @@ export class ExampleListsService {
     // status list
     this.statusList$ = this.getStatusList();    
 
-    // get params
-    service.getParameters().pipe(tap(x => {
-      if(x) {
-        this.statusValueList$ = listItems.getItemsByType(x.statusListTypeId).pipe(take(1));
-      }
-    })).subscribe();          
+    // get params    
+    this.statusValueList$ = service.getParameters().pipe(mergeMap(x => 
+      listItems.getItemsByType(x.statusListTypeId).pipe(take(1))
+    ));
   }
 
   // get status list

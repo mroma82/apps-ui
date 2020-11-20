@@ -9,16 +9,16 @@ import { EntityViewEditContextService } from 'src/app/common/services/entity/vie
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-example-view-page',
-  templateUrl: './example-view-page.component.html',
-  styleUrls: ['./example-view-page.component.scss'],
+  selector: 'app-example-view-edit-page',
+  templateUrl: './example-view-edit-page.component.html',
+  styleUrls: ['./example-view-edit-page.component.scss'],
   providers: [
     RecordContextService,
     EntityViewEditContextService,
     ExampleViewEditContextService
   ]
 })
-export class ExampleViewPageComponent implements OnInit {
+export class ExampleViewEditPageComponent implements OnInit {
 
   // define model
   model = {

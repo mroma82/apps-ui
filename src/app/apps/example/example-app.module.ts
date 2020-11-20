@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExampleContainerComponent } from './containers/example-container/example-container.component';
 import { ExampleListPageComponent } from './pages/example-list-page/example-list-page.component';
-import { ExampleViewPageComponent } from './pages/example-view-page/example-view-page.component';
-import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
 import { ExampleNavComponent } from './components/example-nav/example-nav.component';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { ExampleRoutingModule } from './example-routing.module';
@@ -23,13 +21,15 @@ import { EntityConfigurationService } from 'src/app/common/services/entity/entit
 import { EntityViewEditConfigurationService } from 'src/app/common/services/entity/view-edit/entity-view-edit-configuration.service';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
+import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
+import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
 
 @NgModule({
   declarations: [    
     ExampleContainerComponent,
-    ExampleListPageComponent,
-    ExampleViewPageComponent,    
-    ExampleViewEditFormComponent,  
+    ExampleListPageComponent,        
+    ExampleViewEditPageComponent,  
+    ExampleViewEditFormComponent,
     ExampleNavComponent,
     ExampleListFilterComponent,
     ExampleCreateDialogComponent,

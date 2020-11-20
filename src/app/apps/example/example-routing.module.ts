@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ExampleContainerComponent } from './containers/example-container/example-container.component';
 import { ExampleListPageComponent } from './pages/example-list-page/example-list-page.component';
-import { ExampleViewPageComponent } from './pages/example-view-page/example-view-page.component';
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
+import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 
 // example routing
 const routes: Routes = [
@@ -14,8 +14,8 @@ const routes: Routes = [
       children: [
           { path: '', component: ExampleListPageComponent },
           { path: 'mytasks', component: ExampleListPageComponent, data: { isMyTasks: true } },
-          { path: 'view/:id', component: ExampleViewPageComponent, data: { mode: "view" } },
-          { path: 'edit/:id', component: ExampleViewPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] }
+          { path: 'view/:id', component: ExampleViewEditPageComponent, data: { mode: "view" } },
+          { path: 'edit/:id', component: ExampleViewEditPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] }
       ]
   }
 ];
