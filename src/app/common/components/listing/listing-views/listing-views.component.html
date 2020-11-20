@@ -1,0 +1,9 @@
+<div>
+  <h4 *ngIf="selectedView$ | async as selectedView">{{ selectedView.title }} <small><a href="javascript:;;" (click)="showChange()">Change</a></small></h4>
+  
+  <div *ngIf="state.showChange">
+  <div *ngFor="let view of views$ | async">
+    <a href="javascript:;;" (click)="setView(view)">{{ view.title }}</a>
+  </div>
+</div>
+</div>

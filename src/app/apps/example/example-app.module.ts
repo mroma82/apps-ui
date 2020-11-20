@@ -5,7 +5,6 @@ import { ExampleListPageComponent } from './pages/example-list-page/example-list
 import { ExampleViewPageComponent } from './pages/example-view-page/example-view-page.component';
 import { ExampleEditPageComponent } from './pages/example-edit-page/example-edit-page.component';
 import { ExampleViewEditComponent } from './components/example-view-edit/example-view-edit.component';
-import { ExampleListComponent } from './components/example-list/example-list.component';
 import { ExampleNavComponent } from './components/example-nav/example-nav.component';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { ExampleRoutingModule } from './example-routing.module';
@@ -20,6 +19,9 @@ import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/ex
 import { ExampleCreateComponent } from './components/example-create/example-create.component';
 import { ExampleCreateContextService } from './services/example-create-context.service';
 import { ExampleListsService } from './services/example-lists.service';
+import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
+import { ListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
+import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
 
 @NgModule({
   declarations: [    
@@ -27,8 +29,7 @@ import { ExampleListsService } from './services/example-lists.service';
     ExampleListPageComponent,
     ExampleViewPageComponent,
     ExampleEditPageComponent,
-    ExampleViewEditComponent,
-    ExampleListComponent,
+    ExampleViewEditComponent,  
     ExampleNavComponent,
     ExampleListFilterComponent,
     ExampleCreateDialogComponent,
@@ -47,7 +48,10 @@ import { ExampleListsService } from './services/example-lists.service';
     ExampleService,
     ExampleListContextService,
     ExampleCreateContextService,
-    ExampleListsService
+    ExampleListsService,
+    EntityConfigurationService,
+    ListingConfigurationService,
+    ListingContextService
   ]
 })
 export class ExampleAppModule { }

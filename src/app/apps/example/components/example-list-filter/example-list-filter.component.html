@@ -1,18 +1,13 @@
 <div class="row">
   
-  <div class="col-md-3">
-    <app-text-field [(ngModel)]="model.searchText" (change)="updateFilter()" label="Search" name="search" placeholder=""></app-text-field>    
-  </div>
-
-  <div class="col-md-3">
+  <div class="col-md-2 col-sm-4">
     <label>Status</label>    
     <select class="form-control" [(ngModel)]="model.status" (change)="updateFilter()">
-      <option [value]="-1">-- All Statuses --</option>
-      <option *ngFor="let item of statusList$ | async" [value]="item.code">{{ item.text }}</option>
+      <option value="">-- All Statuses --</option>
+      <option [value]="0">Open</option>
+      <option [value]="1">Active</option>
+      <option [value]="2">Unknown</option>
     </select>
   </div>
-  
-  <div class="col-md-6 text-right" style="padding-top:32px;">
-    <app-listing-controls #listingControls (onRefresh)="refresh()" (onSetPageSize)="setPageSize($event)"></app-listing-controls>
-  </div>
+    
 </div>

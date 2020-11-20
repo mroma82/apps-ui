@@ -1,0 +1,15 @@
+<div class="d-flex">
+  <div class="mr-auto p-2">
+    <app-listing-views></app-listing-views>
+  </div>    
+  <div class="p-2">
+    <app-listing-filters></app-listing-filters>
+  </div>
+</div>
+
+<div class="mb-sm-2">      
+  <ng-content select="[filter]"></ng-content>
+</div>
+<div>
+  <app-listing-results></app-listing-results>
+</div>
