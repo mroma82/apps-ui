@@ -6,8 +6,8 @@ import { debounce } from 'rxjs/operators';
 
 // foundation menu items
 const foundationMenu : IMenuItem[] = [
-  { title: "Example App", url: "/app/example", allowedRoles: [ "ExampleUser"], icon: "fas fa-shapes" },
-  { title: "Admin", url: "/app/admin", allowedRoles: [ "SysAdmin"], icon: "fas fa-cogs" }
+  { title: "Example App", url: "/app/example", allowedRoles: [ "ExampleUser"], icon: "fas fa-shapes", description: "Demo application to display core functionality" },
+  { title: "Admin", url: "/app/admin", allowedRoles: [ "SysAdmin"], icon: "fas fa-cogs", description: "Manage users and global settings" }
 ];
 
 // app menu items
