@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class EntityConfigurationService {
   
+  rootUrl: string = "";
+  
   contextType: number = 0;
   entityTypeId : string = "";
   

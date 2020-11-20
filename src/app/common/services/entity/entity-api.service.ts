@@ -18,4 +18,18 @@ export class EntityApiService {
   getSingle(entityTypeId : string, id: string) : Observable<any> {
     return this.api.get(`/entity/getSingle?entityTypeId=${entityTypeId}&id=${id}`);
   }
+
+  update(entityTypeId : string, model: any) : Observable<any> {
+    return this.api.post("/entity/update", {
+      entityTypeId: entityTypeId,
+      model: model
+    });
+  }
+
+  delete(entityTypeId : string, id: string) : Observable<any> {
+    return this.api.post("/entity/delete", {
+      entityTypeId: entityTypeId,
+      id: id
+    });
+  }
 }

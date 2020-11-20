@@ -32,18 +32,7 @@ export class EntityViewEditContextService {
     private appContext: AppContextService,
     private dialogService: DialogService    
   ) { 
-
-    // status list
-    //this.statusList$ = service.getStatusList();
-    //this.userList$ = lists.userList$;
-
-    // get params
-    /*this.service.getParameters().pipe(tap(x => {
-      if(x) {
-        this.listItems.getItemsByType(x.statusListTypeId).subscribe(lst => this.statusValueList$.next(lst));
-      }
-    })).subscribe();            */
-
+    
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
       if(x)
@@ -73,25 +62,23 @@ export class EntityViewEditContextService {
     });
   }
 
-  /*
+  
   // update 
   update() : Observable<boolean> {
     
-    // validate
-    if(!this.exampleRecord$.value.customerId) {
+    // validate?
+    /*if(!this.record$.value.customerId) {
       this.dialogService.message("Validation", "Customer is required");
       return of(false);
-    }
+    }*/
 
     // update, check if ok
-    return this.service.update({
-      example: this.exampleRecord$.value
-    }).pipe(map(x => {
+    return this.api.update(this.entityConfig.entityTypeId, this.entityRecord$.value).pipe(map(x => {
+
       if(x.success) {
         return true;
       } else {
-        // todo: show error
-        console.log(x.text);
+        this.dialogService.message("Error during update", x.text);
         return false;
       }
     }));
@@ -101,17 +88,16 @@ export class EntityViewEditContextService {
   delete() : Observable<boolean> {
 
     // delete, check if ok
-    return this.service.delete(this.id$.value).pipe(map(x => {
+    return this.api.delete(this.entityConfig.entityTypeId, this.id$.value).pipe(map(x => {
       if(x.success) {
         return true;
-      } else {
-        // todo: show error
-        console.log(x.text);
+      } else {        
+        this.dialogService.message("Error during delete", x.text);
         return false;
       }
     }));
   }
-
+/*
   // copy
   copy(isEdit: boolean) : Observable<any> {
     

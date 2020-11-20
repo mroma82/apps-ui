@@ -22,7 +22,6 @@ import { ListingContextService } from 'src/app/common/services/entity/listing-co
 import { ListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
 import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
 import { EntityViewEditConfigurationService } from 'src/app/common/services/entity/view-edit/entity-view-edit-configuration.service';
-import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
 import { AppsCoreModule } from 'src/app/core/core.module';
 
 @NgModule({
@@ -66,6 +65,7 @@ export class ExampleAppModule {
     // setup
     entityConfig.entityTypeId = "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47";
     entityConfig.contextType = 1;
+    entityConfig.rootUrl = "/app/example";
 
     // workflow
     entityConfig.workflow.enabled = true;

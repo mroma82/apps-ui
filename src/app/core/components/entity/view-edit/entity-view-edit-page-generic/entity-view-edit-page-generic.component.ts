@@ -61,7 +61,36 @@ export class EntityViewEditPageGenericComponent implements OnInit {
 
   // edit
   edit() {
-    this.router.navigateByUrl(`/app/example/edit/${this.model.id}`)
+    this.router.navigateByUrl(`${this.entityConfig.rootUrl}/edit/${this.model.id}`)
+  }
+
+  // save
+  save() {
+
+    // update
+    this.viewEditContext.update().subscribe();
+  }
+
+  // save close
+  saveClose() {
+
+    // update, if ok, go back to listing
+    this.viewEditContext.update().subscribe(x => {
+      if(x) {
+        this.router.navigateByUrl(this.entityConfig.rootUrl);
+      }
+    });
+  }
+
+  // delete
+  delete() {
+
+    // delete, if ok, go back to listing
+    this.viewEditContext.delete().subscribe(x => {
+      if(x) {
+        this.router.navigateByUrl(this.entityConfig.rootUrl);
+      }
+    });
   }
 
   // copy
