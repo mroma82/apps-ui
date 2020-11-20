@@ -1,21 +1,20 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, Subscription, of } from 'rxjs';
-import { ExampleService } from './example.service';
-import { map, shareReplay, tap, switchMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
-import { ListItemService } from 'src/app/common/services/list-item.service';
-import { ExampleListsService } from './example-lists.service';
-import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { DialogService } from '../../dialog.service';
+import { ListItemService } from '../../list-item.service';
+import { EntityApiService } from '../entity-api.service';
+import { EntityConfigurationService } from '../entity-configuration.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ExampleViewEditContextService implements OnDestroy {
+@Injectable()
+export class EntityViewEditContextService {
 
   // observables
   id$ = new BehaviorSubject<string>(null);
-  exampleRecord$ = new BehaviorSubject<any>({});
+  mode$ = new BehaviorSubject<"view" | "edit" | null>(null);
+  entityRecord$ = new BehaviorSubject<any>({});
 
   // lists
   userList$: Observable<any>;
@@ -27,13 +26,23 @@ export class ExampleViewEditContextService implements OnDestroy {
 
   // new
   constructor(
-    private service: ExampleService,
+    private api: EntityApiService,
+    private entityConfig: EntityConfigurationService,    
     private listItems: ListItemService,
     private appContext: AppContextService,
     private dialogService: DialogService    
   ) { 
 
-      
+    // status list
+    //this.statusList$ = service.getStatusList();
+    //this.userList$ = lists.userList$;
+
+    // get params
+    /*this.service.getParameters().pipe(tap(x => {
+      if(x) {
+        this.listItems.getItemsByType(x.statusListTypeId).subscribe(lst => this.statusValueList$.next(lst));
+      }
+    })).subscribe();            */
 
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
@@ -46,19 +55,25 @@ export class ExampleViewEditContextService implements OnDestroy {
   setId(id: string) {
     this.id$.next(id);
   }
-  
+
+  // set mode
+  setMode(mode: "view" | "edit" | null) {
+    this.mode$.next(mode);
+  }
+   
   // refresh
   refreshData() {
 
     // get the data
-    this.service.getSingle(this.id$.value).subscribe(x => {
-      this.exampleRecord$.next(x);
+    this.api.getSingle(this.entityConfig.entityTypeId, this.id$.value).subscribe(x => {
+      this.entityRecord$.next(x);
 
       // set title
-      this.appContext.Layout.setTitle("Example: " + x.exampleId);
+      this.appContext.Layout.setTitle(`Record: ${this.mode$.value} ${x.exampleId}`);
     });
   }
 
+  /*
   // update 
   update() : Observable<boolean> {
     
@@ -125,6 +140,7 @@ export class ExampleViewEditContextService implements OnDestroy {
       }
     }));
   }
+  */
 
   // destroy
   ngOnDestroy() {

@@ -32,6 +32,7 @@ import { ListingFiltersComponent } from './components/listing/listing-filters/li
 import { EntityApiService } from './services/entity/entity-api.service';
 import { RouterModule } from '@angular/router';
 import { ListingPageGenericComponent } from './components/listing/listing-page-generic/listing-page-generic.component';
+import { AppFoundationModule } from '../foundation/app-foundation.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { ListingPageGenericComponent } from './components/listing/listing-page-g
     ListingResultsComponent,
     ListingViewsComponent,
     ListingFiltersComponent,
-    ListingPageGenericComponent    
+    ListingPageGenericComponent
   ],
   providers: [
     AppHttpClientService,
@@ -68,7 +69,7 @@ import { ListingPageGenericComponent } from './components/listing/listing-page-g
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,    
     NgxDatatableModule,
     NgbModule,
     RouterModule,

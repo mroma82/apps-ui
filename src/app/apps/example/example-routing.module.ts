@@ -15,8 +15,8 @@ const routes: Routes = [
       children: [
           { path: '', component: ExampleListPageComponent },
           { path: 'mytasks', component: ExampleListPageComponent, data: { isMyTasks: true } },
-          { path: 'view/:id', component: ExampleViewPageComponent },
-          { path: 'edit/:id', component: ExampleEditPageComponent, canActivate: [RecordLockGuard] }
+          { path: 'view/:id', component: ExampleViewPageComponent, data: { mode: "view" } },
+          { path: 'edit/:id', component: ExampleViewPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] }
       ]
   }
 ];
@@ -30,7 +30,7 @@ const routes: Routes = [
 export class ExampleRoutingModule { 
 
   constructor(
-    recordLock: RecordLockGuard
+    recordLock: RecordLockGuard,    
   ) {
     recordLock.setContextType(1);
   }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/common/services/auth.service';
+import { ListItemService } from 'src/app/common/services/list-item.service';
+import { ExampleService } from './example.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +12,37 @@ export class ExampleListsService {
 
   // observables
   userList$ : Observable<any>;
+  statusList$ : Observable<any>;
+  statusValueList$ : Observable<any>;
 
   // new
   constructor(
-    authService : AuthService
+    authService : AuthService,
+    service : ExampleService,
+    listItems: ListItemService
   ) { 
 
     // set lists
     this.userList$ = authService.getUsers();
+
+    // status list
+    this.statusList$ = this.getStatusList();    
+
+    // get params
+    service.getParameters().pipe(tap(x => {
+      if(x) {
+        this.statusValueList$ = listItems.getItemsByType(x.statusListTypeId).pipe(take(1));
+      }
+    })).subscribe();          
+  }
+
+  // get status list
+  getStatusList() : Observable<any> {
+    return of([
+      { code: 0, text: "Not started" },
+      { code: 1, text: "In Processed" },
+      { code: 2, text: "Approved" },
+      { code: 3, text: "Completed" }
+    ]);
   }
 }

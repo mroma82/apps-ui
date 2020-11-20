@@ -14,4 +14,8 @@ export class EntityApiService {
   list(model: any) : Observable<any> {
     return this.api.post(`/entity/list`, model);
   }
+
+  getSingle(entityTypeId : string, id: string) : Observable<any> {
+    return this.api.get(`/entity/getSingle?entityTypeId=${entityTypeId}&id=${id}`);
+  }
 }

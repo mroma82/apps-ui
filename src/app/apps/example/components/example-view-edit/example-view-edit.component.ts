@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
+import { ExampleListsService } from '../../services/example-lists.service';
 import { ExampleViewEditContextService } from '../../services/example-view-edit-context.service';
 
 @Component({
@@ -8,8 +10,10 @@ import { ExampleViewEditContextService } from '../../services/example-view-edit-
   styleUrls: ['./example-view-edit.component.scss']
 })
 export class ExampleViewEditComponent implements OnInit {
-  @Input() viewMode : boolean;
-
+  
+  // state
+  viewMode : boolean;
+  
   // lists
   statusList$ : Observable<any>;  
   statusValueList$ : Observable<any>;  
@@ -24,24 +28,26 @@ export class ExampleViewEditComponent implements OnInit {
   };
 
   // subscriptions
-  subs: Subscription[] = [];
+  subs = new Subscription();
 
   // new
   constructor(
-    private context: ExampleViewEditContextService    
+    private context: EntityViewEditContextService,
+    private lists: ExampleListsService    
   ) {     
     // lists
-    this.statusList$ = context.statusList$;    
-    this.statusValueList$ = context.statusValueList$;
-    this.userList$ = context.userList$;
+    this.statusList$ = lists.userList$
+    this.statusValueList$ = lists.statusValueList$;
+    this.userList$ = lists.userList$;
+    this.viewMode = context.mode$.value == "view";
   }
   
   // init
   ngOnInit() {    
 
     // subscribe to record changes
-    this.subs.push(
-      this.context.exampleRecord$.subscribe(x => {        
+    this.subs.add(
+      this.context.entityRecord$.subscribe(x => {        
         if(x) {          
           this.viewModel.record = x;                  
         }
@@ -50,9 +56,8 @@ export class ExampleViewEditComponent implements OnInit {
   }
 
   // destroy
-  ngOnDestroy() {
-    // cleanup
-    this.subs.forEach(x => x.unsubscribe());
+  ngOnDestroy() {    
+    this.subs.unsubscribe();
   }
 
   // select

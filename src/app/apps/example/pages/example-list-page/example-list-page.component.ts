@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppContextService } from 'src/app/app-context.service';
-import { ExampleListContextService } from '../../services/example-list-context.service';
 import { ExampleCreateContextService } from '../../services/example-create-context.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,8 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ExampleListPageComponent implements OnInit {
 
   constructor(
-    private appContext: AppContextService,
-    private context: ExampleListContextService,
+    private appContext: AppContextService,    
     private createContext: ExampleCreateContextService,
     private route: ActivatedRoute
   ) {     
@@ -23,16 +21,16 @@ export class ExampleListPageComponent implements OnInit {
   ngOnInit() {
 
     // check my tasks
-    if(this.route.snapshot.data.isMyTasks) {
+    /*if(this.route.snapshot.data.isMyTasks) {
       this.context.setMyTasks(true);
       this.appContext.Layout.setTitle("Example App - My Tasks");         
     } else {
       this.context.setMyTasks(false);
       this.appContext.Layout.setTitle("Example App");         
-    }
+    }*/
 
     // refresh data
-    this.context.refreshData();    
+    //this.context.refreshData();    
   }
 
   // open create dialog

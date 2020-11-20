@@ -5,6 +5,7 @@ import { RecordContextService } from 'src/app/common/services/record-context.ser
 import { ExampleViewEditContextService } from '../../services/example-view-edit-context.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
 
 @Component({
   selector: 'app-example-view-page',
@@ -12,6 +13,7 @@ import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enu
   styleUrls: ['./example-view-page.component.scss'],
   providers: [
     RecordContextService,
+    EntityViewEditContextService,
     ExampleViewEditContextService
   ]
 })
@@ -19,43 +21,28 @@ export class ExampleViewPageComponent implements OnInit {
 
   // define model
   model = {
-    id: ""
+    id: "",
+    mode: null
   };
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,    
-    private recordContext: RecordContextService,
-    private viewEditContext: ExampleViewEditContextService,
-    private dialogService: DialogService
+  constructor(    
+    private router: Router,        
   ) {   
     
   }
 
-  // init
   ngOnInit() {
-    
-    // get the id
-    this.model.id = this.activatedRoute.snapshot.paramMap.get('id');      
 
-    // set record
-    this.recordContext.setRecordContext(1, this.model.id);
-    this.viewEditContext.setId(this.model.id);
   }
-
-  // edit
-  edit() {
-    this.router.navigateByUrl(`/app/example/edit/${this.model.id}`)
-  }
-
+  
   // copy
   copy() {
     
-    // copy, then check if ok
+    /*// copy, then check if ok
     this.viewEditContext.copy(false).subscribe(result => {
       if(result.success) {
         this.router.navigateByUrl(`/app/example/edit/${result.id}`)
       }          
-    });      
+    });      */
   }
 }

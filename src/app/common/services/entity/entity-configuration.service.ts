@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class EntityConfigurationService {
   
-  entityTypeId : string = "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47";
+  contextType: number = 0;
+  entityTypeId : string = "";
   
+  workflow = {
+    enabled: false,
+    url: ""
+  }
+
   constructor() { }
 }

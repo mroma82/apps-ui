@@ -13,7 +13,6 @@ import { ExampleService } from './services/example.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ExampleListFilterComponent } from './components/example-list-filter/example-list-filter.component';
 import { FormsModule } from '@angular/forms';
-import { ExampleListContextService } from './services/example-list-context.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/example-create-dialog.component';
 import { ExampleCreateComponent } from './components/example-create/example-create.component';
@@ -22,6 +21,9 @@ import { ExampleListsService } from './services/example-lists.service';
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 import { ListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
 import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
+import { EntityViewEditConfigurationService } from 'src/app/common/services/entity/view-edit/entity-view-edit-configuration.service';
+import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
+import { AppsCoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [    
@@ -38,6 +40,7 @@ import { EntityConfigurationService } from 'src/app/common/services/entity/entit
   imports: [
     CommonModule,    
     AppCommonModule,
+    AppsCoreModule,
     AppFoundationModule,
     ExampleRoutingModule,
     NgxDatatableModule,
@@ -45,13 +48,27 @@ import { EntityConfigurationService } from 'src/app/common/services/entity/entit
     BsDatepickerModule.forRoot()
   ],
   providers: [
-    ExampleService,
-    ExampleListContextService,
+    ExampleService,    
     ExampleCreateContextService,
     ExampleListsService,
     EntityConfigurationService,
     ListingConfigurationService,
-    ListingContextService
+    ListingContextService,    
+    EntityViewEditConfigurationService
   ]
 })
-export class ExampleAppModule { }
+export class ExampleAppModule { 
+
+  // new
+  constructor(
+    entityConfig: EntityConfigurationService
+  ) { 
+    // setup
+    entityConfig.entityTypeId = "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47";
+    entityConfig.contextType = 1;
+
+    // workflow
+    entityConfig.workflow.enabled = true;
+    entityConfig.workflow.url = "/example/workflow";
+  }
+}

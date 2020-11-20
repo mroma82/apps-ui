@@ -1,8 +1,16 @@
 
-<app-workflow-bar prefixText="Approval WF" contextType="1" [contextId]="model.id" workflowUrl="/example/workflow"></app-workflow-bar>
+<app-entity-view-edit-page-generic>        
+    <div controls>
+        <button type="button" class="btn btn-primary" (click)="copy()">Copy</button>
+    </div>
 
-<app-foundation-view-edit-button-bar [contextId]="model.id" contextType="1" [viewMode]="true" (onEdit)="edit()"></app-foundation-view-edit-button-bar>
+    <div form>
+        <app-example-view-edit [id]="model.id"></app-example-view-edit>
+    </div>    
+</app-entity-view-edit-page-generic>
 
-<button type="button" class="btn btn-primary" (click)="copy()">Copy</button>
 
-<app-example-view-edit [id]="model.id" [viewMode]="true"></app-example-view-edit>
+
+
+
+

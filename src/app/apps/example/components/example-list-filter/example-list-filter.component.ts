@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ExampleListContextService } from '../../services/example-list-context.service';
-import { Observable } from 'rxjs';
-import { ListingControlsComponent } from 'src/app/common/components/listing/listing-controls/listing-controls.component';
+
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
