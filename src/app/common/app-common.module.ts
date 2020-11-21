@@ -26,12 +26,8 @@ import { MessageDialogComponent } from './components/dialogs/message-dialog/mess
 import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
 import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 import { MenuItemService } from './services/menu-item.service';
-import { ListingResultsComponent } from './components/listing/listing-results/listing-results.component';
-import { ListingViewsComponent } from './components/listing/listing-views/listing-views.component';
-import { ListingFiltersComponent } from './components/listing/listing-filters/listing-filters.component';
 import { EntityApiService } from './services/entity/entity-api.service';
 import { RouterModule } from '@angular/router';
-import { ListingPageGenericComponent } from './components/listing/listing-page-generic/listing-page-generic.component';
 import { AppFoundationModule } from '../foundation/app-foundation.module';
 
 @NgModule({
@@ -53,11 +49,7 @@ import { AppFoundationModule } from '../foundation/app-foundation.module';
     ExcludeDeletedPipe,
     MessageDialogComponent,
     SimulateUserComponent,
-    UserFullnamePipe,
-    ListingResultsComponent,
-    ListingViewsComponent,
-    ListingFiltersComponent,
-    ListingPageGenericComponent
+    UserFullnamePipe    
   ],
   providers: [
     AppHttpClientService,
@@ -93,11 +85,7 @@ import { AppFoundationModule } from '../foundation/app-foundation.module';
     ExcludeDeletedPipe,
     MessageDialogComponent,
     SimulateUserComponent,
-    UserFullnamePipe,
-    ListingResultsComponent,
-    ListingViewsComponent,
-    ListingFiltersComponent,
-    ListingPageGenericComponent
+    UserFullnamePipe    
   ]
 })
 export class AppCommonModule { }

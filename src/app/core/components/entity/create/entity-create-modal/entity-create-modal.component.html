@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{ model.title }}}}</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ modalConfig.title }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('close')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -8,6 +8,9 @@
   <div class="modal-body">
   
     <template #formContainer></template>
+    <div>
+      <input type="text" [(ngModel)]="model.title" class="form-control" />
+    </div>
   
     <div class="mt-sm-3">
       <button type="button" class="btn btn-primary" (click)="create()">Create</button>

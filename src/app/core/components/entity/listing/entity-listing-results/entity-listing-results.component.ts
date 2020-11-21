@@ -4,11 +4,11 @@ import { IListingConfigurationService } from 'src/app/common/services/entity/lis
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
-  selector: 'app-listing-results',
-  templateUrl: './listing-results.component.html',
-  styleUrls: ['./listing-results.component.scss']
+  selector: 'app-entity-listing-results',
+  templateUrl: './entity-listing-results.component.html',
+  styleUrls: ['./entity-listing-results.component.scss']
 })
-export class ListingResultsComponent implements OnInit {
+export class EntityListingResultsComponent implements OnInit {
 
   listItems$ : Observable<any[]> = this.context.listItems$;
   columns$ : Observable<any[]> = this.config.getColumns();

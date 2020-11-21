@@ -1,12 +1,15 @@
 <div class="d-flex">
   <div class="mr-auto p-2">
-    <app-listing-views></app-listing-views>
+    <app-entity-listing-views></app-entity-listing-views>
   </div>    
   <div class="p-2">
-    <app-listing-filters></app-listing-filters>
+    <app-entity-listing-filters></app-entity-listing-filters>
   </div>
   <div class="p-2">
     <app-listing-controls (onRefresh)="refresh()" (onSetPageSize)="setPageSize($event)"></app-listing-controls>
+  </div>
+  <div class="p-2">
+    <button type="button" class="btn btn-primary" (click)="openCreateDialog()">New</button>
   </div>
 </div>
 
@@ -14,5 +17,5 @@
   <ng-content select="[filter]"></ng-content>
 </div>
 <div>
-  <app-listing-results></app-listing-results>
+  <app-entity-listing-results></app-entity-listing-results>
 </div>

@@ -7,24 +7,40 @@ import { AppFoundationModule } from '../foundation/app-foundation.module';
 import { EntityCreateModalComponent } from './components/entity/create/entity-create-modal/entity-create-modal.component';
 import { EntityContainerComponent } from './components/entity/container/entity-container/entity-container.component';
 import { RouterModule } from '@angular/router';
+import { EntityListingFiltersComponent } from './components/entity/listing/entity-listing-filters/entity-listing-filters.component';
+import { EntityListingPageGenericComponent } from './components/entity/listing/entity-listing-page-generic/entity-listing-page-generic.component';
+import { EntityListingResultsComponent } from './components/entity/listing/entity-listing-results/entity-listing-results.component';
+import { EntityListingViewsComponent } from './components/entity/listing/entity-listing-views/entity-listing-views.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [    
     EntityViewEditComponent,
     EntityViewEditPageGenericComponent,    
     EntityCreateModalComponent,
-    EntityContainerComponent    
+    EntityContainerComponent,
+    EntityListingResultsComponent,
+    EntityListingViewsComponent,
+    EntityListingFiltersComponent,
+    EntityListingPageGenericComponent
   ],
   imports: [
     CommonModule,     
     RouterModule,
+    FormsModule,    
+    NgxDatatableModule,
     AppCommonModule,
     AppFoundationModule,    
   ],
   exports: [
     EntityViewEditComponent,
     EntityViewEditPageGenericComponent,
-    EntityContainerComponent    
+    EntityContainerComponent,
+    EntityListingResultsComponent,
+    EntityListingViewsComponent,
+    EntityListingFiltersComponent,
+    EntityListingPageGenericComponent
   ]
 })
 export class AppsCoreModule { }

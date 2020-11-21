@@ -4,11 +4,11 @@ import { IListingConfigurationService } from 'src/app/common/services/entity/lis
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
-  selector: 'app-listing-views',
-  templateUrl: './listing-views.component.html',
-  styleUrls: ['./listing-views.component.scss']
+  selector: 'app-entity-listing-views',
+  templateUrl: './entity-listing-views.component.html',
+  styleUrls: ['./entity-listing-views.component.scss']
 })
-export class ListingViewsComponent implements OnInit {
+export class EntityListingViewsComponent implements OnInit {
 
   // state
   selectedView$ : Observable<any> = this.listingContext.view$;

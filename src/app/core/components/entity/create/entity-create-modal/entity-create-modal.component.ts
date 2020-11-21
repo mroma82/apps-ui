@@ -13,10 +13,18 @@ export class EntityCreateModalComponent extends BaseDialog {
   @ViewChild("formContainer", { read: ViewContainerRef }) formContainer;
   componentRef: any;
   
+
+  // setup
+  modalConfig = {
+    title: "Create"
+  };
+
+  model = {};
+
   // new
   constructor(
     modelService: NgbModal,
-    context: EntityCreateContextService,
+    private context: EntityCreateContextService,
     private entityConfig: EntityConfigurationService,
     private componentFactoryResolver: ComponentFactoryResolver
   ) { 
@@ -40,6 +48,15 @@ export class EntityCreateModalComponent extends BaseDialog {
     this.formContainer.clear();
     const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
     this.componentRef = this.formContainer.createComponent(factory);
+  }
+
+  // create
+  create() {
+    this.context.create(this.model).subscribe(x => {
+      if(x) {
+        this.closeDialog();
+      }
+    });
   }
 
   //ngOnDestroy() { how

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 
 @Component({
-  selector: 'app-listing-filters',
-  templateUrl: './listing-filters.component.html',
-  styleUrls: ['./listing-filters.component.scss']
+  selector: 'app-entity-listing-filters',
+  templateUrl: './entity-listing-filters.component.html',
+  styleUrls: ['./entity-listing-filters.component.scss']
 })
-export class ListingFiltersComponent implements OnInit {
+export class EntityListingFiltersComponent implements OnInit {
 
   // model
   model = { 

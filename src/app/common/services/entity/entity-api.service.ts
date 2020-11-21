@@ -19,10 +19,10 @@ export class EntityApiService {
     return this.api.get(`/entity/get?entityTypeId=${entityTypeId}&id=${id}`);
   }
   
-  create(entityTypeId : string, model: any) : Observable<any> {
-    return this.api.post("/entity/create", {
+  add(entityTypeId : string, model: any) : Observable<any> {
+    return this.api.post("/entity/add", {
       entityTypeId: entityTypeId,
-      id: model
+      model: model
     });
   }
 
