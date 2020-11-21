@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,9 @@ export class EntityConfigurationService {
     url: "",
     prefixText: ""
   }
+
+  // create
+  createFormComponent : any;
 
   constructor() { }
 }

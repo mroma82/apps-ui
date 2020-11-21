@@ -4,20 +4,27 @@ import { EntityViewEditComponent } from './components/entity/view-edit/entity-vi
 import { EntityViewEditPageGenericComponent } from './components/entity/view-edit/entity-view-edit-page-generic/entity-view-edit-page-generic.component';
 import { AppCommonModule } from '../common/app-common.module';
 import { AppFoundationModule } from '../foundation/app-foundation.module';
+import { EntityCreateModalComponent } from './components/entity/create/entity-create-modal/entity-create-modal.component';
+import { EntityContainerComponent } from './components/entity/container/entity-container/entity-container.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [    
     EntityViewEditComponent,
-    EntityViewEditPageGenericComponent    
+    EntityViewEditPageGenericComponent,    
+    EntityCreateModalComponent,
+    EntityContainerComponent    
   ],
   imports: [
     CommonModule,     
+    RouterModule,
     AppCommonModule,
     AppFoundationModule,    
   ],
   exports: [
     EntityViewEditComponent,
-    EntityViewEditPageGenericComponent    
+    EntityViewEditPageGenericComponent,
+    EntityContainerComponent    
   ]
 })
 export class AppsCoreModule { }

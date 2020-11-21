@@ -23,6 +23,7 @@ import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
+import { EntityCreateContextService } from 'src/app/core/entity/create/entity-create-context.service';
 
 @NgModule({
   declarations: [    
@@ -52,7 +53,11 @@ import { ExampleViewEditFormComponent } from './components/example-view-edit-for
     EntityConfigurationService,
     { provide: 'IListingConfigurationService', useClass: ExampleListingConfigurationService },    
     ListingContextService,    
-    EntityViewEditConfigurationService
+    EntityViewEditConfigurationService,
+    EntityCreateContextService
+  ],
+  entryComponents: [
+    ExampleViewEditFormComponent
   ]
 })
 export class ExampleAppModule { 
@@ -70,6 +75,9 @@ export class ExampleAppModule {
     // workflow
     entityConfig.workflow.enabled = true;
     entityConfig.workflow.url = "/example/workflow";
-    entityConfig.workflow.prefixText = "Approval Workflow";        
+    entityConfig.workflow.prefixText = "Approval Workflow";   
+    
+    // create
+    entityConfig.createFormComponent = ExampleCreateComponent;
   }
 }
