@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
+import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
   selector: 'app-example-list-filter',
@@ -15,7 +14,7 @@ export class ExampleListFilterComponent implements OnInit {
   
   // new
   constructor(
-    private context: ListingContextService
+    private context: EntityListingContextService
   ) {     
   }
 

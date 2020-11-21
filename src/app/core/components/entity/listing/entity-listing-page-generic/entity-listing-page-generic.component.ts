@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
-import { EntityCreateContextService } from 'src/app/core/entity/create/entity-create-context.service';
+import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
   selector: 'app-entity-listing-page-generic',
@@ -10,7 +10,7 @@ import { EntityCreateContextService } from 'src/app/core/entity/create/entity-cr
 export class EntityListingPageGenericComponent implements OnInit {
 
   constructor(
-    private listingContext : ListingContextService,
+    private listingContext : EntityListingContextService,
     private createContext : EntityCreateContextService
   ) { }
 

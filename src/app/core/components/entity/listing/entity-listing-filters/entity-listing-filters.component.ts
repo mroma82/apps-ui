@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
+import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
   selector: 'app-entity-listing-filters',
@@ -15,7 +15,7 @@ export class EntityListingFiltersComponent implements OnInit {
 
   // new
   constructor(
-    private listingContext: ListingContextService
+    private listingContext: EntityListingContextService
   ) { 
     this.model.searchText = listingContext.searchText$.value;
   }

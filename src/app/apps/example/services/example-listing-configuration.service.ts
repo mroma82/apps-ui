@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
+import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExampleListingConfigurationService implements IListingConfigurationService {
+export class ExampleListingConfigurationService implements IEntityListingConfigurationService {
 
   constructor() { }
 

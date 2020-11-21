@@ -13,6 +13,7 @@ import { EntityListingResultsComponent } from './components/entity/listing/entit
 import { EntityListingViewsComponent } from './components/entity/listing/entity-listing-views/entity-listing-views.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
+import { EntityApiService } from './services/entity/entity-api.service';
 
 @NgModule({
   declarations: [    
@@ -32,6 +33,9 @@ import { FormsModule } from '@angular/forms';
     NgxDatatableModule,
     AppCommonModule,
     AppFoundationModule,    
+  ],
+  providers: [
+    EntityApiService
   ],
   exports: [
     EntityViewEditComponent,

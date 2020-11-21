@@ -26,9 +26,7 @@ import { MessageDialogComponent } from './components/dialogs/message-dialog/mess
 import { SimulateUserComponent } from './components/utils/simulate-user/simulate-user.component';
 import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 import { MenuItemService } from './services/menu-item.service';
-import { EntityApiService } from './services/entity/entity-api.service';
 import { RouterModule } from '@angular/router';
-import { AppFoundationModule } from '../foundation/app-foundation.module';
 
 @NgModule({
   declarations: [
@@ -56,8 +54,7 @@ import { AppFoundationModule } from '../foundation/app-foundation.module';
     ContextTypeRouteResolverService,
     IntegrationService,
     DatePipe,
-    MenuItemService,
-    EntityApiService
+    MenuItemService    
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EntityConfigurationService {
   
   rootUrl: string = "";

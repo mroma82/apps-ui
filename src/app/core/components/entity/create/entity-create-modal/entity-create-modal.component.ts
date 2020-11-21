@@ -1,8 +1,8 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
-import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
-import { EntityCreateContextService } from 'src/app/core/entity/create/entity-create-context.service';
+import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 
 @Component({
   selector: 'app-entity-create-modal',

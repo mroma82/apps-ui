@@ -1,14 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
 import { debounce, take } from 'rxjs/operators';
-import { EntityApiService } from './entity-api.service';
-import { EntityConfigurationService } from './entity-configuration.service';
-import { IListingConfigurationService } from './listing-configuration.service';
+import { EntityApiService } from '../entity-api.service';
+import { EntityConfigurationService } from '../entity-configuration.service';
+import { IEntityListingConfigurationService } from './entity-listing-configuration.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ListingContextService {
+@Injectable()
+export class EntityListingContextService {
 
   // observables
   listItems$ = new BehaviorSubject<any>([]);  
@@ -35,7 +33,7 @@ export class ListingContextService {
   // new
   constructor(
     private entityConfig : EntityConfigurationService,
-    @Inject("IListingConfigurationService") private listingConfig : IListingConfigurationService,
+    @Inject("IEntityListingConfigurationService") private listingConfig : IEntityListingConfigurationService,
     private api : EntityApiService
   ) { 
 

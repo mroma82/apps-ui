@@ -15,15 +15,14 @@ import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/ex
 import { ExampleCreateComponent } from './components/example-create/example-create.component';
 import { ExampleCreateContextService } from './services/example-create-context.service';
 import { ExampleListsService } from './services/example-lists.service';
-import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
-import { IListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
-import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
 import { EntityViewEditConfigurationService } from 'src/app/core/services/entity/view-edit/entity-view-edit-configuration.service';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
-import { EntityCreateContextService } from 'src/app/core/entity/create/entity-create-context.service';
+import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @NgModule({
   declarations: [    
@@ -51,8 +50,8 @@ import { EntityCreateContextService } from 'src/app/core/entity/create/entity-cr
     ExampleCreateContextService,
     ExampleListsService,
     EntityConfigurationService,
-    { provide: 'IListingConfigurationService', useClass: ExampleListingConfigurationService },    
-    ListingContextService,    
+    { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
+    EntityListingContextService,    
     EntityViewEditConfigurationService,
     EntityCreateContextService
   ],

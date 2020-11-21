@@ -5,8 +5,8 @@ import { AppContextService } from 'src/app/app-context.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { DialogService } from '../../../../common/services/dialog.service';
 import { ListItemService } from '../../../../common/services/list-item.service';
-import { EntityApiService } from '../../../../common/services/entity/entity-api.service';
-import { EntityConfigurationService } from '../../../../common/services/entity/entity-configuration.service';
+import { EntityApiService } from '../entity-api.service';
+import { EntityConfigurationService } from '../entity-configuration.service';
 import { IEntityValidationService } from '../entity-validation.service';
 
 @Injectable()
