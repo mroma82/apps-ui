@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
-import { DialogService } from '../../dialog.service';
-import { ListItemService } from '../../list-item.service';
-import { EntityApiService } from '../entity-api.service';
-import { EntityConfigurationService } from '../entity-configuration.service';
+import { DialogService } from '../../../../common/services/dialog.service';
+import { ListItemService } from '../../../../common/services/list-item.service';
+import { EntityApiService } from '../../../../common/services/entity/entity-api.service';
+import { EntityConfigurationService } from '../../../../common/services/entity/entity-configuration.service';
+import { IEntityValidationService } from '../entity-validation.service';
 
 @Injectable()
 export class EntityViewEditContextService {
@@ -28,9 +29,9 @@ export class EntityViewEditContextService {
   constructor(
     private api: EntityApiService,
     private entityConfig: EntityConfigurationService,    
-    private listItems: ListItemService,
+    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService,    
     private appContext: AppContextService,
-    private dialogService: DialogService    
+    private dialogService: DialogService,
   ) { 
     
     // id change
@@ -67,6 +68,9 @@ export class EntityViewEditContextService {
   update() : Observable<boolean> {
     
     // validate?
+    if(this.entityValidation) {
+     console.log("validation"); 
+    }
     /*if(!this.record$.value.customerId) {
       this.dialogService.message("Validation", "Customer is required");
       return of(false);

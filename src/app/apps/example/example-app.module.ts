@@ -18,7 +18,7 @@ import { ExampleListsService } from './services/example-lists.service';
 import { ListingContextService } from 'src/app/common/services/entity/listing-context.service';
 import { IListingConfigurationService } from 'src/app/common/services/entity/listing-configuration.service';
 import { EntityConfigurationService } from 'src/app/common/services/entity/entity-configuration.service';
-import { EntityViewEditConfigurationService } from 'src/app/common/services/entity/view-edit/entity-view-edit-configuration.service';
+import { EntityViewEditConfigurationService } from 'src/app/core/services/entity/view-edit/entity-view-edit-configuration.service';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';

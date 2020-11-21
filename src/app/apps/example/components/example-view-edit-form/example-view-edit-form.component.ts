@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
+import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleListsService } from '../../services/example-lists.service';
 
 

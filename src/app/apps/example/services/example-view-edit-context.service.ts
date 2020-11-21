@@ -7,7 +7,7 @@ import { ListItemService } from 'src/app/common/services/list-item.service';
 import { ExampleListsService } from './example-lists.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
-import { EntityViewEditContextService } from 'src/app/common/services/entity/view-edit/entity-view-edit-context.service';
+import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class ExampleViewEditContextService implements OnDestroy {
           }
           return of({ success: false });
         }));
-        
+
       } else {
         return of({ success: false });
       }
