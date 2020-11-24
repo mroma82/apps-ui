@@ -1,7 +1,8 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
-import { tap, map, switchMap } from 'rxjs/operators';
+import { tap, map, switchMap, mergeMap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
+import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { DialogService } from '../../../../common/services/dialog.service';
 import { ListItemService } from '../../../../common/services/list-item.service';
@@ -28,10 +29,10 @@ export class EntityViewEditContextService {
   // new
   constructor(
     private api: EntityApiService,
-    private entityConfig: EntityConfigurationService,    
-    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService,    
     private appContext: AppContextService,
     private dialogService: DialogService,
+    private entityConfig: EntityConfigurationService,    
+    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService    
   ) { 
     
     // id change
@@ -67,25 +68,40 @@ export class EntityViewEditContextService {
   // update 
   update() : Observable<boolean> {
     
-    // validate?
+    // get the model
+    const model = this.entityRecord$.value;
+  
+    // check if validation
+    let validate : Observable<IValidationResult>;
     if(this.entityValidation) {
-     console.log("validation"); 
+      validate = this.entityValidation.validateUpdate(model);
+    } else {
+      validate = of({ success: true });
     }
-    /*if(!this.record$.value.customerId) {
-      this.dialogService.message("Validation", "Customer is required");
-      return of(false);
-    }*/
 
-    // update, check if ok
-    return this.api.update(this.entityConfig.entityTypeId, this.entityRecord$.value).pipe(map(x => {
-
+    // validate
+    return validate.pipe(mergeMap(x => {
       if(x.success) {
-        return true;
+        
+        // try to create
+        return this.api.update(this.entityConfig.entityTypeId, model).pipe(tap(x => {
+
+          // check if ok
+          if(x.success) {            
+            return true;
+          } else {
+            this.dialogService.message("Error during update", x.text);
+            return false;
+          }
+        }));
+
       } else {
-        this.dialogService.message("Error during update", x.text);
-        return false;
+        this.dialogService.message("Validation", x.text);        
       }
-    }));
+
+      // no
+      return of(false);
+    }));         
   }
 
   // delete

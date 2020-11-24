@@ -23,6 +23,7 @@ import { ExampleViewEditFormComponent } from './components/example-view-edit-for
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
+import { ExampleValidationService } from './services/example-validation.service';
 
 @NgModule({
   declarations: [    
@@ -51,6 +52,7 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
     ExampleListsService,
     EntityConfigurationService,
     { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
+    { provide: 'IEntityValidationService', useClass: ExampleValidationService },
     EntityListingContextService,    
     EntityViewEditConfigurationService,
     EntityCreateContextService
