@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppContextService } from 'src/app/app-context.service';
-import { ExampleCreateContextService } from '../../services/example-create-context.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,8 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ExampleListPageComponent implements OnInit {
 
   constructor(
-    private appContext: AppContextService,    
-    private createContext: ExampleCreateContextService,
+    private appContext: AppContextService,        
     private route: ActivatedRoute
   ) {     
   }
@@ -31,10 +29,5 @@ export class ExampleListPageComponent implements OnInit {
 
     // refresh data
     //this.context.refreshData();    
-  }
-
-  // open create dialog
-  openCreateDialog() {
-    this.createContext.openDialog();
-  }
+  }  
 }

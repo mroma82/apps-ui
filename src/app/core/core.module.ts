@@ -14,6 +14,7 @@ import { EntityListingViewsComponent } from './components/entity/listing/entity-
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
 import { EntityApiService } from './services/entity/entity-api.service';
+import { EntityCreateComponent } from './components/entity/components/create/entity-create/entity-create.component';
 
 @NgModule({
   declarations: [    
@@ -24,7 +25,8 @@ import { EntityApiService } from './services/entity/entity-api.service';
     EntityListingResultsComponent,
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
-    EntityListingPageGenericComponent
+    EntityListingPageGenericComponent,
+    EntityCreateComponent
   ],
   imports: [
     CommonModule,     

@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription, Observable } from 'rxjs';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
@@ -9,10 +10,8 @@ import { EntityConfigurationService } from 'src/app/core/services/entity/entity-
   templateUrl: './entity-create-modal.component.html',
   styleUrls: ['./entity-create-modal.component.scss']
 })
-export class EntityCreateModalComponent extends BaseDialog {
-  @ViewChild("formContainer", { read: ViewContainerRef }) formContainer;
-  componentRef: any;
-  
+export class EntityCreateModalComponent extends BaseDialog {  
+  @ViewChild('content', ) content : any;  
 
   // setup
   modalConfig = {
@@ -23,12 +22,10 @@ export class EntityCreateModalComponent extends BaseDialog {
 
   // new
   constructor(
-    modelService: NgbModal,
-    private context: EntityCreateContextService,
-    private entityConfig: EntityConfigurationService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    modalService: NgbModal,
+    private context: EntityCreateContextService        
   ) { 
-    super(modelService);
+    super(modalService);
 
     // set open/close subscripton
     this.initOpenCloseSubscription(context.dialogOpen$);
@@ -36,30 +33,16 @@ export class EntityCreateModalComponent extends BaseDialog {
   
   // init
   ngOnInit() {
-
-    // setup form 
-    this.setupForm(this.entityConfig.createFormComponent);
-  }
-
-  // sets up the form
-  setupForm(componentType) {
-
-    // clear the form, then add the form
-    this.formContainer.clear();
-    const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-    this.componentRef = this.formContainer.createComponent(factory);
+    
   }
 
   // create
   create() {
-    this.context.create(this.model).subscribe(x => {
+    this.context.create().subscribe(x => {
       if(x) {
         this.closeDialog();
       }
     });
   }
-
-  //ngOnDestroy() { how
-  //}
 }
 

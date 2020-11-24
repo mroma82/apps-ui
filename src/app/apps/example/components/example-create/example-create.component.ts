@@ -1,47 +1,37 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ExampleCreateContextService } from '../../services/example-create-context.service';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-example-create',
   templateUrl: './example-create.component.html',
   styleUrls: ['./example-create.component.scss']
 })
-export class ExampleCreateComponent implements OnInit {
+export class ExampleCreateComponent implements OnInit, OnDestroy {
   
   // model
-  model : any;
+  model : any = {};  
 
-  // state
-  state = {
-    errorText: ""
-  };
+  // subscriptions
+  subs = new Subscription();
 
   // new
   constructor(
-    private context: ExampleCreateContextService,
+    private context: EntityCreateContextService,
     private router: Router
-  ) { }
+  ) { 
 
-  // init
-  ngOnInit() {
-    this.model = {};
+    // sub to model
+    this.context.model$.subscribe(x => this.model = x);
   }
 
-  // create
-  create() {
-    
-    // clear error
-    this.state.errorText = "";
+  // init
+  ngOnInit() {    
+  }
 
-    // create
-    this.context.create(this.model).subscribe(x => {
-      if(x.success) {
-        this.context.closeDialog();
-        this.router.navigateByUrl(`/app/example/edit/${x.id}`);
-      } else {
-        this.state.errorText = x.text;
-      }
-    })
+  // cleanup
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }

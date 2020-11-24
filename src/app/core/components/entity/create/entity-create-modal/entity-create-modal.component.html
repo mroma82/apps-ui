@@ -7,11 +7,9 @@
   </div>
   <div class="modal-body">
   
-    <template #formContainer></template>
-    <div>
-      <input type="text" [(ngModel)]="model.title" class="form-control" />
-    </div>
-  
+    <ng-content select="[form]"></ng-content>
+    <app-entity-create></app-entity-create>
+
     <div class="mt-sm-3">
       <button type="button" class="btn btn-primary" (click)="create()">Create</button>
     </div>

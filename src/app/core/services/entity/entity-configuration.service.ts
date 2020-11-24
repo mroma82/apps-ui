@@ -16,7 +16,12 @@ export class EntityConfigurationService {
   }
 
   // create
-  createFormComponent : any;
+  createFormComponent: any;
 
+  // view/edit
+  viewEditFormComponent: any;
+
+
+  // new
   constructor() { }
 }

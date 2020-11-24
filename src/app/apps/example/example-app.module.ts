@@ -11,11 +11,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ExampleListFilterComponent } from './components/example-list-filter/example-list-filter.component';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ExampleCreateDialogComponent } from './dialogs/example-create-dialog/example-create-dialog.component';
 import { ExampleCreateComponent } from './components/example-create/example-create.component';
-import { ExampleCreateContextService } from './services/example-create-context.service';
 import { ExampleListsService } from './services/example-lists.service';
-import { EntityViewEditConfigurationService } from 'src/app/core/services/entity/view-edit/entity-view-edit-configuration.service';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
@@ -25,6 +22,7 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ExampleValidationService } from './services/example-validation.service';
 
+
 @NgModule({
   declarations: [    
     ExampleContainerComponent,
@@ -32,8 +30,7 @@ import { ExampleValidationService } from './services/example-validation.service'
     ExampleViewEditPageComponent,  
     ExampleViewEditFormComponent,
     ExampleNavComponent,
-    ExampleListFilterComponent,
-    ExampleCreateDialogComponent,
+    ExampleListFilterComponent,    
     ExampleCreateComponent
   ],
   imports: [
@@ -47,17 +44,16 @@ import { ExampleValidationService } from './services/example-validation.service'
     BsDatepickerModule.forRoot()
   ],
   providers: [
-    ExampleService,    
-    ExampleCreateContextService,
+    ExampleService,        
     ExampleListsService,
     EntityConfigurationService,
     { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
     { provide: 'IEntityValidationService', useClass: ExampleValidationService },
-    EntityListingContextService,    
-    EntityViewEditConfigurationService,
+    EntityListingContextService,        
     EntityCreateContextService
   ],
   entryComponents: [
+    ExampleCreateComponent,
     ExampleViewEditFormComponent
   ]
 })
@@ -80,5 +76,8 @@ export class ExampleAppModule {
     
     // create
     entityConfig.createFormComponent = ExampleCreateComponent;
+
+    // view/edit
+    entityConfig.viewEditFormComponent = ExampleViewEditFormComponent;
   }
 }

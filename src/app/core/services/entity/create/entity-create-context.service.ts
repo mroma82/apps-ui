@@ -8,29 +8,25 @@ import { EntityConfigurationService } from '../entity-configuration.service';
 import { IEntityValidationService } from '../entity-validation.service';
 import { EntityListingContextService } from '../listing/entity-listing-context.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EntityCreateContextService {
 
   // observables
   dialogOpen$ = new BehaviorSubject<boolean>(false);
-
-  // model
-  model = {};
-
+  model$ = new BehaviorSubject<any>({});
+  
   // new
   constructor(
     private api: EntityApiService,    
     private entityConfig: EntityConfigurationService,
-    private listingContext: EntityListingContextService,
-    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService,    
-    private dialogService : DialogService
+    private listingContext: EntityListingContextService,        
+    private dialogService : DialogService,
+    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
   ) { }
 
   // open dialog
   openDialog() {
-    this.model = {};
+    this.clear();    
     this.dialogOpen$.next(true);
   }
 
@@ -40,8 +36,11 @@ export class EntityCreateContextService {
   }
 
   // create
-  create(model: any) {
+  create() {
     
+    // get hte model
+    const model = this.model$.value;
+
     // check if validation
     let validate : Observable<IValidationResult>;
     if(this.entityValidation) {
@@ -53,7 +52,7 @@ export class EntityCreateContextService {
     // validate
     return validate.pipe(mergeMap(x => {
       if(x.success) {
-        
+
         // try to create
         return this.api.add(this.entityConfig.entityTypeId, model).pipe(tap(x => {
 
@@ -75,4 +74,9 @@ export class EntityCreateContextService {
     }));
     
   };
+
+  // clear
+  clear() {
+    this.model$.next({});
+  }
 }
