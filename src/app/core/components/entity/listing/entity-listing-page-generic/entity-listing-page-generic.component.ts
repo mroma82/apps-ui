@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
@@ -10,8 +10,8 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 export class EntityListingPageGenericComponent implements OnInit {
 
   constructor(
-    private listingContext : EntityListingContextService,
-    private createContext : EntityCreateContextService
+    @Inject("IEntityListingContextService") private listingContext : EntityListingContextService,
+    @Inject("IEntityCreateContextService") private createContext : EntityCreateContextService
   ) { }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription, of } from 'rxjs';
 import { ExampleService } from './example.service';
 import { map, shareReplay, tap, switchMap } from 'rxjs/operators';
@@ -19,9 +19,9 @@ export class ExampleViewEditContextService implements OnDestroy {
   constructor(
     private service: ExampleService,
     private listItems: ListItemService,
-    private appContext: AppContextService,
-    private entityContext : EntityViewEditContextService,
-    private dialogService: DialogService    
+    private appContext: AppContextService,    
+    private dialogService: DialogService,
+    @Inject("IEntityViewEditContextService") private entityContext : EntityViewEditContextService  
   ) { 
     
   }

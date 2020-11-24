@@ -18,9 +18,9 @@ export class EntityCreateContextService {
   // new
   constructor(
     private api: EntityApiService,    
-    private entityConfig: EntityConfigurationService,
-    private listingContext: EntityListingContextService,        
     private dialogService : DialogService,
+    private entityConfig: EntityConfigurationService,
+    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService,            
     @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
   ) { }
 

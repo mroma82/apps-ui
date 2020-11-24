@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
@@ -34,7 +34,7 @@ export class ExampleViewEditFormComponent implements OnInit {
 
   // new
   constructor(
-    private context: EntityViewEditContextService,
+    @Inject("IEntityViewEditContextService") private context: EntityViewEditContextService,
     private lists: ExampleListsService    
   ) {     
     // lists

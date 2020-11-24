@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, Observable } from 'rxjs';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
@@ -23,7 +23,7 @@ export class EntityCreateModalComponent extends BaseDialog {
   // new
   constructor(
     modalService: NgbModal,
-    private context: EntityCreateContextService        
+    @Inject("IEntityCreateContextService") private context: EntityCreateContextService        
   ) { 
     super(modalService);
 

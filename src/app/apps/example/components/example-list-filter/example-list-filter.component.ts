@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ExampleListFilterComponent implements OnInit {
   
   // new
   constructor(
-    private context: EntityListingContextService
+    @Inject("IEntityListingContextService") private context: EntityListingContextService
   ) {     
   }
 

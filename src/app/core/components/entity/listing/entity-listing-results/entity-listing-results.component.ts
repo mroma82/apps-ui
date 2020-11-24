@@ -15,7 +15,7 @@ export class EntityListingResultsComponent implements OnInit {
   pageSize$ : Observable<number> = this.context.pageSize$;
   
   constructor(
-    private context : EntityListingContextService,
+    @Inject("IEntityListingContextService") private context : EntityListingContextService,
     @Inject("IEntityListingConfigurationService") private config : IEntityListingConfigurationService
   ) { }
 

@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./example-view-edit-page.component.scss'],
   providers: [
     RecordContextService,
-    EntityViewEditContextService,
+    { provide: 'IEntityViewEditContextService', useClass: EntityViewEditContextService },
     ExampleViewEditContextService
   ]
 })

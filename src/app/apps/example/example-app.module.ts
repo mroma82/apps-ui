@@ -49,8 +49,8 @@ import { ExampleValidationService } from './services/example-validation.service'
     EntityConfigurationService,
     { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
     { provide: 'IEntityValidationService', useClass: ExampleValidationService },
-    EntityListingContextService,        
-    EntityCreateContextService
+    { provide: 'IEntityListingContextService', useClass: EntityListingContextService },        
+    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService }
   ],
   entryComponents: [
     ExampleCreateComponent,

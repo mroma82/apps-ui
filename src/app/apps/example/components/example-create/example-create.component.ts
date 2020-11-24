@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ export class ExampleCreateComponent implements OnInit, OnDestroy {
 
   // new
   constructor(
-    private context: EntityCreateContextService,
+    @Inject("IEntityCreateContextService") private context: EntityCreateContextService,
     private router: Router
   ) { 
 

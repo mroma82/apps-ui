@@ -20,7 +20,7 @@ export class EntityListingViewsComponent implements OnInit {
 
   constructor(
     @Inject("IEntityListingConfigurationService") private listingConfig : IEntityListingConfigurationService,
-    private listingContext : EntityListingContextService
+    @Inject("IEntityListingContextService") private listingContext : EntityListingContextService
   ) { }
 
   ngOnInit() {
