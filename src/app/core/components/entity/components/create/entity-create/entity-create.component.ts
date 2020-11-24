@@ -21,11 +21,15 @@ export class EntityCreateComponent implements OnInit, OnDestroy {
 
   // init
   ngOnInit() {    
-    this.setupForm(this.entityConfig.createFormComponent);
+
+    // create the component
+    if(this.entityConfig.createFormComponent)
+      this.setupForm(this.entityConfig.createFormComponent);
   }
 
   ngOnDestroy() {    
-    //this.componentRef.
+    //if(this.componentRef)
+      //this.componentRef.
   }
 
   // sets up the form
