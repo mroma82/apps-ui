@@ -21,6 +21,7 @@ import { EntityConfigurationService } from 'src/app/core/services/entity/entity-
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ExampleValidationService } from './services/example-validation.service';
+import { ExampleLineCreateComponent } from './components/example-line-create/example-line-create.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ExampleValidationService } from './services/example-validation.service'
     ExampleViewEditFormComponent,
     ExampleNavComponent,
     ExampleListFilterComponent,    
-    ExampleCreateComponent
+    ExampleCreateComponent, 
+    ExampleLineCreateComponent
   ],
   imports: [
     CommonModule,    
@@ -54,7 +56,8 @@ import { ExampleValidationService } from './services/example-validation.service'
   ],
   entryComponents: [
     ExampleCreateComponent,
-    ExampleViewEditFormComponent
+    ExampleViewEditFormComponent,
+    ExampleLineCreateComponent
   ]
 })
 export class ExampleAppModule { 

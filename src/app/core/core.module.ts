@@ -14,7 +14,8 @@ import { EntityListingViewsComponent } from './components/entity/listing/entity-
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
 import { EntityApiService } from './services/entity/entity-api.service';
-import { EntityCreateComponent } from './components/entity/components/create/entity-create/entity-create.component';
+import { EntitySubGridComponent } from './components/entity/sub-grid/entity-sub-grid/entity-sub-grid.component';
+import { EntityCreateComponent } from './components/entity/create/entity-create/entity-create.component';
 
 @NgModule({
   declarations: [    
@@ -26,7 +27,8 @@ import { EntityCreateComponent } from './components/entity/components/create/ent
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
     EntityListingPageGenericComponent,
-    EntityCreateComponent
+    EntityCreateComponent,
+    EntitySubGridComponent
   ],
   imports: [
     CommonModule,     
@@ -46,7 +48,8 @@ import { EntityCreateComponent } from './components/entity/components/create/ent
     EntityListingResultsComponent,
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
-    EntityListingPageGenericComponent
+    EntityListingPageGenericComponent,
+    EntitySubGridComponent
   ]
 })
 export class AppsCoreModule { }

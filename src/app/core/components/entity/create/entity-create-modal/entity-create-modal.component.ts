@@ -23,7 +23,7 @@ export class EntityCreateModalComponent extends BaseDialog {
   // new
   constructor(
     modalService: NgbModal,
-    @Inject("IEntityCreateContextService") private context: EntityCreateContextService        
+    @Inject("IEntityCreateContextService") private context: EntityCreateContextService
   ) { 
     super(modalService);
 

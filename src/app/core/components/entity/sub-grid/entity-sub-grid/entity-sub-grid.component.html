@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.title }}
+      </th>
+      <th>
+        
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items$ | async">
+      <td *ngFor="let col of columns">
+        {{ item[col.model] }}
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+        <button type="button" class="btn btn-primary btn-sm">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <button type="button" class="btn btn-primary" (click)="openCreateDialog()">New</button>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<app-entity-create-modal></app-entity-create-modal>

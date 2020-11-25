@@ -7,6 +7,7 @@ import { EntityApiService } from 'src/app/core/services/entity/entity-api.servic
 import { EntityConfigurationService } from '../entity-configuration.service';
 import { IEntityValidationService } from '../entity-validation.service';
 import { EntityListingContextService } from '../listing/entity-listing-context.service';
+import { EntitySubGridContextService } from '../sub-grid/entity-sub-grid-context.service';
 
 @Injectable()
 export class EntityCreateContextService {
@@ -20,7 +21,8 @@ export class EntityCreateContextService {
     private api: EntityApiService,    
     private dialogService : DialogService,
     private entityConfig: EntityConfigurationService,
-    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService,            
+    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService,      
+    @Optional() private subGridContext : EntitySubGridContextService,      
     @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
   ) { }
 
@@ -38,8 +40,17 @@ export class EntityCreateContextService {
   // create
   create() {
     
+    // check if a default value
+    var modelDefault = null;
+    if(this.subGridContext !== null) {
+      modelDefault = this.subGridContext.modelDefault$.value;
+    }
+
     // get hte model
-    const model = this.model$.value;
+    const model = {
+      ...this.model$.value,
+      ...modelDefault
+    };
 
     // check if validation
     let validate : Observable<IValidationResult>;
@@ -58,8 +69,14 @@ export class EntityCreateContextService {
 
           // check if ok
           if(x.success) {
-            this.listingContext.refreshData();
+
+            if(this.subGridContext !== null) {
+              this.subGridContext.refreshData();
+            } else {
+              this.listingContext.refreshData();
+            }            
             return true;
+            
           } else {
             this.dialogService.message("Error during create", x.text);
             return false;

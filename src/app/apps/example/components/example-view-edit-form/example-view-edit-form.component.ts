@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleListsService } from '../../services/example-lists.service';
+import { ExampleLineCreateComponent } from '../example-line-create/example-line-create.component';
 
 
 @Component({
@@ -31,6 +33,12 @@ export class ExampleViewEditFormComponent implements OnInit {
 
   // subscriptions
   subs = new Subscription();
+
+  // sub grid configs
+  lineSubGridConfig : IEntitySubGridConfigurationService = {
+    createFormComponent: ExampleLineCreateComponent,
+    editFormComponent: ExampleLineCreateComponent
+  };
 
   // new
   constructor(
