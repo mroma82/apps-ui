@@ -1,5 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DialogService } from 'src/app/common/services/dialog.service';
+import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
@@ -29,6 +31,7 @@ export class EntitySubGridComponent implements OnInit {
   constructor(
     private context : EntitySubGridContextService,
     private entityConfig : EntityConfigurationService,
+    private dialogService : DialogService,
     @Inject("IEntityCreateContextService") private createContext: EntityCreateContextService    
   ) { 
     this.items$ = context.items$;
@@ -53,5 +56,18 @@ export class EntitySubGridComponent implements OnInit {
   // open the create dialog
   openCreateDialog() {
     this.createContext.openDialog();
+  }
+
+  // delete
+  delete(id: string) {
+
+    // ask
+    this.dialogService.yesNo("Delete", "Are you sure you want to delete this item?").subscribe(dialogResult => {
+      if(dialogResult == DialogResultEnum.Yes) {
+
+        // delete
+        this.context.delete(id).subscribe();          
+      }
+    });    
   }
 }

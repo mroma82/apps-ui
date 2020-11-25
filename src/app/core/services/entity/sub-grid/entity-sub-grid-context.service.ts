@@ -1,7 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
-import { debounce } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
+import { debounce, map } from 'rxjs/operators';
+import { DialogService } from 'src/app/common/services/dialog.service';
 import { EntityApiService } from '../entity-api.service';
+import { EntityConfigurationService } from '../entity-configuration.service';
 import { IEntitySubGridConfigurationService } from './entity-sub-grid-configuration.service';
 
 
@@ -22,7 +24,9 @@ export class EntitySubGridContextService implements OnDestroy {
 
   // new
   constructor(
-    private api: EntityApiService
+    private api: EntityApiService,
+    private config: EntityConfigurationService,
+    private dialogService: DialogService
   ) { 
 
     // setup subscription to refresh
@@ -50,6 +54,21 @@ export class EntitySubGridContextService implements OnDestroy {
   // refresh
   refreshData() {
     this.refresh$.next(1);
+  }
+
+  // delete
+  delete(id: string) : Observable<boolean> {
+
+    // delete, check if ok
+    return this.api.delete(this.config.entityTypeId, id).pipe(map(x => {
+      if(x.success) {
+        this.refreshData();
+        return true;
+      } else {        
+        this.dialogService.message("Error during delete", x.text);
+        return false;
+      }
+    }));
   }
 
   // cleanup
