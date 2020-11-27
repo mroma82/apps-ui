@@ -12,9 +12,13 @@ export class EntitySubGridContextService implements OnDestroy {
 
   // state
   entityTypeId$ = new BehaviorSubject<string>(null);
-  filter$ = new BehaviorSubject<any>({});
+  filter$ = new BehaviorSubject<any>({});  
   refresh$ = new BehaviorSubject<number>(0);
   modelDefault$ = new BehaviorSubject<any>(null);
+
+  sort$ = new BehaviorSubject<any>({
+    field: "CreateDateTime"    
+  });
 
   // items
   items$ = new BehaviorSubject<any[]>([]);
@@ -33,16 +37,19 @@ export class EntitySubGridContextService implements OnDestroy {
     const rx = combineLatest(
       this.entityTypeId$,
       this.filter$,
+      this.sort$,
       this.refresh$
     ).pipe(debounce(() => timer(100)))
-     .subscribe(([entityTypeId, filter]) => {
+     .subscribe(([entityTypeId, filter, sort]) => {
 
       // get the data
       this.api.list({
         entityTypeId: entityTypeId,
         filter: filter,
         pageNumber: 1,
-        pageSize: 25 //hack        
+        pageSize: 25, //hack               
+        sortField: sort.field,
+        sortIsDescending: sort.isDescending        
       }).subscribe(data => {
         this.items$.next(data.items);
       });

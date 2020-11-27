@@ -61,6 +61,7 @@
         <app-entity-sub-grid
             entityTypeId="d790dfde-8ac0-439a-9302-ee8ca897a75e"
             [filter]="{exampleId: viewModel.record.id}"
+            [sort]="{field: 'Title'}"
             [modelDefault]="{exampleId: viewModel.record.id}"
             [columns]="[ {title: 'ID', model: 'id' }, {title: 'Title', model: 'title' }, {title: 'Name', model: 'name'}]"
             [config]="lineSubGridConfig"

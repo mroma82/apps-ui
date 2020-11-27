@@ -20,6 +20,7 @@ import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-gr
 export class EntitySubGridComponent implements OnInit {
   @Input() entityTypeId : string;
   @Input() filter : any;
+  @Input() sort: any;
   @Input() columns: any[];
   @Input() config: IEntitySubGridConfigurationService;  
   @Input() modelDefault : any;
@@ -42,9 +43,9 @@ export class EntitySubGridComponent implements OnInit {
     
     // hack
     this.context.entityTypeId$.next(this.entityTypeId);
-    this.context.filter$.next(this.filter);    
+    this.context.filter$.next(this.filter);        
     this.context.modelDefault$.next(this.modelDefault);
-
+    if(this.sort) this.context.sort$.next(this.sort);
 
     // setup config
     if(this.config !== null) {
