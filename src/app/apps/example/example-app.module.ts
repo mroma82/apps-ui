@@ -22,6 +22,9 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ExampleValidationService } from './services/example-validation.service';
 import { ExampleLineCreateComponent } from './components/example-line-create/example-line-create.component';
+import { ExampleLineViewEditComponent } from './components/example-line-view-edit/example-line-view-edit.component';
+import { ExampleLineValidationService } from './services/example-line.validation.service';
+import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/example-line-sub-grid.component';
 
 
 @NgModule({
@@ -33,7 +36,8 @@ import { ExampleLineCreateComponent } from './components/example-line-create/exa
     ExampleNavComponent,
     ExampleListFilterComponent,    
     ExampleCreateComponent, 
-    ExampleLineCreateComponent
+    ExampleLineCreateComponent, 
+    ExampleLineViewEditComponent, ExampleLineSubGridComponent
   ],
   imports: [
     CommonModule,    
@@ -43,7 +47,7 @@ import { ExampleLineCreateComponent } from './components/example-line-create/exa
     ExampleRoutingModule,
     NgxDatatableModule,
     FormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule
   ],
   providers: [
     ExampleService,        
@@ -52,12 +56,15 @@ import { ExampleLineCreateComponent } from './components/example-line-create/exa
     { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
     { provide: 'IEntityValidationService', useClass: ExampleValidationService },
     { provide: 'IEntityListingContextService', useClass: EntityListingContextService },        
-    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService }
+    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService },
+
+    ExampleLineValidationService
   ],
   entryComponents: [
     ExampleCreateComponent,
     ExampleViewEditFormComponent,
-    ExampleLineCreateComponent
+    ExampleLineCreateComponent,
+    ExampleLineViewEditComponent
   ]
 })
 export class ExampleAppModule { 

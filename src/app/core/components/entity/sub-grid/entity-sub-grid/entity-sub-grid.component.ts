@@ -1,11 +1,13 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { IEntityValidationService } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-context.service';
+import { EntitySubGridViewEditContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-view-edit-context.service';
 
 @Component({
   selector: 'app-entity-sub-grid',
@@ -14,7 +16,8 @@ import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-gr
   providers: [
     EntitySubGridContextService,
     EntityConfigurationService,
-    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService }
+    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService },    
+    EntitySubGridViewEditContextService,
   ]
 })
 export class EntitySubGridComponent implements OnInit {
@@ -24,6 +27,7 @@ export class EntitySubGridComponent implements OnInit {
   @Input() columns: any[];
   @Input() config: IEntitySubGridConfigurationService;  
   @Input() modelDefault : any;
+  @Input() validationService: IEntityValidationService
 
   // state
   items$ : Observable<any[]>;
@@ -33,14 +37,15 @@ export class EntitySubGridComponent implements OnInit {
     private context : EntitySubGridContextService,
     private entityConfig : EntityConfigurationService,
     private dialogService : DialogService,
-    @Inject("IEntityCreateContextService") private createContext: EntityCreateContextService    
+    @Inject("IEntityCreateContextService") private createContext: EntityCreateContextService,
+    private viewEditContext: EntitySubGridViewEditContextService,
   ) { 
-    this.items$ = context.items$;
+    this.items$ = context.items$;    
     
   }
 
   ngOnInit() {
-    
+        
     // hack
     this.context.entityTypeId$.next(this.entityTypeId);
     this.context.filter$.next(this.filter);        
@@ -51,12 +56,27 @@ export class EntitySubGridComponent implements OnInit {
     if(this.config !== null) {
       this.entityConfig.entityTypeId = this.entityTypeId;
       this.entityConfig.createFormComponent = this.config.createFormComponent;
+      this.entityConfig.viewEditFormComponent = this.config.editFormComponent;
     }
   }
 
   // open the create dialog
-  openCreateDialog() {
+  create() {
     this.createContext.openDialog();
+  }
+
+  // view
+  view(id: string) {
+
+    // edit
+    this.viewEditContext.openDialog("view", id);
+  }
+
+  // edit
+  edit(id: string) {
+
+    // edit
+    this.viewEditContext.openDialog("edit", id);
   }
 
   // delete

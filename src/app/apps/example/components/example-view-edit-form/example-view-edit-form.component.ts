@@ -5,6 +5,7 @@ import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleListsService } from '../../services/example-lists.service';
 import { ExampleLineCreateComponent } from '../example-line-create/example-line-create.component';
+import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-line-view-edit.component';
 
 
 @Component({
@@ -32,13 +33,7 @@ export class ExampleViewEditFormComponent implements OnInit {
   };
 
   // subscriptions
-  subs = new Subscription();
-
-  // sub grid configs
-  lineSubGridConfig : IEntitySubGridConfigurationService = {
-    createFormComponent: ExampleLineCreateComponent,
-    editFormComponent: ExampleLineCreateComponent
-  };
+  subs = new Subscription();  
 
   // new
   constructor(

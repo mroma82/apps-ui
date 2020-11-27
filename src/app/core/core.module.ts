@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { EntityApiService } from './services/entity/entity-api.service';
 import { EntitySubGridComponent } from './components/entity/sub-grid/entity-sub-grid/entity-sub-grid.component';
 import { EntityCreateComponent } from './components/entity/create/entity-create/entity-create.component';
+import { EntitySubGridViewEditComponent } from './components/entity/sub-grid/entity-sub-grid-view-edit/entity-sub-grid-view-edit.component';
+import { EntitySubGridViewEditModalComponent } from './components/entity/sub-grid/entity-sub-grid-view-edit-modal/entity-sub-grid-view-edit-modal.component';
 
 @NgModule({
   declarations: [    
@@ -28,7 +30,9 @@ import { EntityCreateComponent } from './components/entity/create/entity-create/
     EntityListingFiltersComponent,
     EntityListingPageGenericComponent,
     EntityCreateComponent,
-    EntitySubGridComponent
+    EntitySubGridComponent,
+    EntitySubGridViewEditModalComponent,
+    EntitySubGridViewEditComponent
   ],
   imports: [
     CommonModule,     

@@ -1,13 +1,12 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 
 @Component({
-  selector: 'app-entity-create',
-  templateUrl: './entity-create.component.html',
-  styleUrls: ['./entity-create.component.scss']
+  selector: 'app-entity-sub-grid-view-edit',
+  templateUrl: './entity-sub-grid-view-edit.component.html',
+  styleUrls: ['./entity-sub-grid-view-edit.component.scss']
 })
-export class EntityCreateComponent implements OnInit, OnDestroy {  
+export class EntitySubGridViewEditComponent implements OnInit, OnDestroy {  
   @ViewChild("formContainer", { read: ViewContainerRef }) formContainer;
   componentRef: any;
 
@@ -23,12 +22,12 @@ export class EntityCreateComponent implements OnInit, OnDestroy {
   ngOnInit() {    
 
     // create the component
-    if(this.entityConfig.createFormComponent)
-      this.setupForm(this.entityConfig.createFormComponent);
+    if(this.entityConfig.viewEditFormComponent)
+      this.setupForm(this.entityConfig.viewEditFormComponent);
   }
 
   ngOnDestroy() {    
-    // todo: if(this.componentRef)
+    //todo: if(this.componentRef)
       //this.componentRef.
   }
 
