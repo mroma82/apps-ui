@@ -25,6 +25,8 @@ import { ExampleLineCreateComponent } from './components/example-line-create/exa
 import { ExampleLineViewEditComponent } from './components/example-line-view-edit/example-line-view-edit.component';
 import { ExampleLineValidationService } from './services/example-line.validation.service';
 import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/example-line-sub-grid.component';
+import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
+import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/
     ExampleListFilterComponent,    
     ExampleCreateComponent, 
     ExampleLineCreateComponent, 
-    ExampleLineViewEditComponent, ExampleLineSubGridComponent
+    ExampleLineViewEditComponent, ExampleLineSubGridComponent, ExampleParametersPageComponent, ExampleParametersComponent
   ],
   imports: [
     CommonModule,    
@@ -64,7 +66,8 @@ import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/
     ExampleCreateComponent,
     ExampleViewEditFormComponent,
     ExampleLineCreateComponent,
-    ExampleLineViewEditComponent
+    ExampleLineViewEditComponent,
+    ExampleParametersComponent
   ]
 })
 export class ExampleAppModule { 

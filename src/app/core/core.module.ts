@@ -18,6 +18,8 @@ import { EntitySubGridComponent } from './components/entity/sub-grid/entity-sub-
 import { EntityCreateComponent } from './components/entity/create/entity-create/entity-create.component';
 import { EntitySubGridViewEditComponent } from './components/entity/sub-grid/entity-sub-grid-view-edit/entity-sub-grid-view-edit.component';
 import { EntitySubGridViewEditModalComponent } from './components/entity/sub-grid/entity-sub-grid-view-edit-modal/entity-sub-grid-view-edit-modal.component';
+import { EntitySingleRecordPageGenericComponent } from './components/entity/single-record/entity-single-record-page-generic/entity-single-record-page-generic.component';
+import { EntitySingleRecordViewEditComponent } from './components/entity/single-record/entity-single-record-view-edit/entity-single-record-view-edit.component';
 
 @NgModule({
   declarations: [    
@@ -32,7 +34,9 @@ import { EntitySubGridViewEditModalComponent } from './components/entity/sub-gri
     EntityCreateComponent,
     EntitySubGridComponent,
     EntitySubGridViewEditModalComponent,
-    EntitySubGridViewEditComponent
+    EntitySubGridViewEditComponent,
+    EntitySingleRecordPageGenericComponent,
+    EntitySingleRecordViewEditComponent
   ],
   imports: [
     CommonModule,     
@@ -53,7 +57,9 @@ import { EntitySubGridViewEditModalComponent } from './components/entity/sub-gri
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
     EntityListingPageGenericComponent,
-    EntitySubGridComponent
+    EntitySubGridComponent,
+    EntitySingleRecordPageGenericComponent,
+    EntitySingleRecordViewEditComponent
   ]
 })
 export class AppsCoreModule { }

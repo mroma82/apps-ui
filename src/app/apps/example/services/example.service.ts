@@ -23,6 +23,6 @@ export class ExampleService {
 
   // get parameters
   getParameters() : Observable<any> {
-    return this.apiClient.get("/example/getParameters");
+    return this.apiClient.get("/entity/getSingle?entityTypeId=d6b351f0-618e-47cc-8eea-35cf3534d1fa");
   }
 }

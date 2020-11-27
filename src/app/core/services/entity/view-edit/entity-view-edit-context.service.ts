@@ -56,7 +56,7 @@ export class EntityViewEditContextService {
   refreshData() {
 
     // get the data
-    this.api.getSingle(this.entityConfig.entityTypeId, this.id$.value).subscribe(x => {
+    this.api.getSingleById(this.entityConfig.entityTypeId, this.id$.value).subscribe(x => {
       this.entityRecord$.next(x);
 
       // set title

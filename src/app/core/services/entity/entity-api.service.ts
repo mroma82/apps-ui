@@ -15,8 +15,12 @@ export class EntityApiService {
     return this.api.post(`/entity/list`, model);
   }
 
-  getSingle(entityTypeId : string, id: string) : Observable<any> {
+  getSingleById(entityTypeId : string, id: string) : Observable<any> {
     return this.api.get(`/entity/get?entityTypeId=${entityTypeId}&id=${id}`);
+  }
+
+  getSingle(entityTypeId : string) : Observable<any> {
+    return this.api.get(`/entity/getSingle?entityTypeId=${entityTypeId}`);
   }
   
   add(entityTypeId : string, model: any) : Observable<any> {

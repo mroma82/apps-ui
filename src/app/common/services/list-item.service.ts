@@ -12,9 +12,13 @@ export class ListItemService {
     private http: AppHttpClientService
   ) { }
 
-  // get items by type
-  getItemsByType(typeId: string) : Observable<any> {
-    return this.http.get(`/foundation/listitem/itemsForType/${typeId}`);
+  // get types
+  getTypes() : Observable<any> {
+    return this.http.get("/foundation/listItem/types");
   }
 
+  // get items by type
+  getItemsByType(typeId: string) : Observable<any> {
+    return this.http.get(`/foundation/listItem/itemsForType/${typeId}`);
+  }
 }

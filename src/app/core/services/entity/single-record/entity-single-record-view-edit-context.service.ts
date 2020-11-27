@@ -6,48 +6,29 @@ import { DialogService } from 'src/app/common/services/dialog.service';
 import { EntityApiService } from '../entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
 import { IEntityValidationService } from '../entity-validation.service';
-import { EntityListingContextService } from '../listing/entity-listing-context.service';
-import { EntitySubGridContextService } from './entity-sub-grid-context.service';
 
 @Injectable()
-export class EntitySubGridViewEditContextService {
+export class EntitySingleRecordViewEditContextService {
 
   // observables  
-  mode$ = new BehaviorSubject<'view' | 'edit'>("view");
-  dialogOpen$ = new BehaviorSubject<boolean>(false);
   model$ = new BehaviorSubject<any>({});
   
   // new
   constructor(
     private api: EntityApiService,    
-    private dialogService : DialogService,
+    private dialogService: DialogService,
     private entityConfig: EntityConfigurationService,
-    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService,      
-    @Optional() private subGridContext : EntitySubGridContextService,      
     @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
   ) { }
 
-  // open dialog
-  openDialog(mode : 'view' | 'edit', id: string) {
-    
-    // clear
-    this.clear();
+  // refresh
+  refresh() {
 
-    // setup this dialog
-    this.mode$.next(mode);
-    
     // get the data
-    this.api.getSingleById(this.entityConfig.entityTypeId, id).subscribe(x => {      
-      this.model$.next(x);
-      this.dialogOpen$.next(true);
-    });
-  } 
-
-  // close dialog
-  closeDialog() {
-    this.dialogOpen$.next(false);
+    this.api.getSingle(this.entityConfig.entityTypeId).subscribe(model => 
+      this.model$.next(model)
+    );
   }
-  
 
   // update
   update() {
@@ -72,12 +53,6 @@ export class EntitySubGridViewEditContextService {
 
           // check if ok
           if(x.success) {
-
-            if(this.subGridContext !== null) {
-              this.subGridContext.refreshData();
-            } else {
-              this.listingContext.refreshData();
-            }            
             return true;
             
           } else {
@@ -94,9 +69,4 @@ export class EntitySubGridViewEditContextService {
     }));
     
   };
-
-  // clear
-  clear() {
-    this.model$.next({});
-  }
 }

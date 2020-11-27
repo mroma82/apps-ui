@@ -5,6 +5,7 @@ import { ExampleContainerComponent } from './containers/example-container/exampl
 import { ExampleListPageComponent } from './pages/example-list-page/example-list-page.component';
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
+import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
 
 // example routing
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
           { path: '', component: ExampleListPageComponent },
           { path: 'mytasks', component: ExampleListPageComponent, data: { isMyTasks: true } },
           { path: 'view/:id', component: ExampleViewEditPageComponent, data: { mode: "view" } },
-          { path: 'edit/:id', component: ExampleViewEditPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] }
+          { path: 'edit/:id', component: ExampleViewEditPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] },
+          { path: 'parameters', component: ExampleParametersPageComponent }
       ]
   }
 ];
