@@ -15,7 +15,7 @@ export class EntityListingFiltersComponent implements OnInit {
 
   // new
   constructor(
-    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService
+    private listingContext: EntityListingContextService
   ) { 
     this.model.searchText = listingContext.searchText$.value;
   }

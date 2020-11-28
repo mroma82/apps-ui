@@ -5,7 +5,7 @@ import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { EntityApiService } from '../entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
-import { IEntityValidationService } from '../entity-validation.service';
+import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
 
 @Injectable()
 export class EntitySingleRecordViewEditContextService {
@@ -18,7 +18,7 @@ export class EntitySingleRecordViewEditContextService {
     private api: EntityApiService,    
     private dialogService: DialogService,
     private entityConfig: EntityConfigurationService,
-    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
+    @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
 
   // refresh

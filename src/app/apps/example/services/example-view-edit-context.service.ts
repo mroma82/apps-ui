@@ -21,7 +21,7 @@ export class ExampleViewEditContextService implements OnDestroy {
     private listItems: ListItemService,
     private appContext: AppContextService,    
     private dialogService: DialogService,
-    @Inject("IEntityViewEditContextService") private entityContext : EntityViewEditContextService  
+    private entityContext : EntityViewEditContextService  
   ) { 
     
   }

@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleLineValidationService } from '../../services/example-line.validation.service';
@@ -12,7 +13,7 @@ import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-
   templateUrl: './example-line-sub-grid.component.html',
   styleUrls: ['./example-line-sub-grid.component.scss'],
   providers: [
-    { provide: 'IEntityValidationService', useClass: ExampleLineValidationService }
+    { provide: ENTITY_VALIDATION, useClass: ExampleLineValidationService }
   ]
 })
 export class ExampleLineSubGridComponent implements OnInit {
@@ -31,7 +32,7 @@ export class ExampleLineSubGridComponent implements OnInit {
 
   // new
   constructor(
-    @Inject("IEntityViewEditContextService") private context: EntityViewEditContextService,
+    private context: EntityViewEditContextService,
   ) { }
 
   ngOnInit() {

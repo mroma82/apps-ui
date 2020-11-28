@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
+import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
@@ -15,8 +15,8 @@ export class EntityListingResultsComponent implements OnInit {
   pageSize$ : Observable<number> = this.context.pageSize$;
   
   constructor(
-    @Inject("IEntityListingContextService") private context : EntityListingContextService,
-    @Inject("IEntityListingConfigurationService") private config : IEntityListingConfigurationService
+    private context : EntityListingContextService,
+    @Inject(ENTITY_LISTING_CONFIG) private config : IEntityListingConfigurationService
   ) { }
 
   ngOnInit() {

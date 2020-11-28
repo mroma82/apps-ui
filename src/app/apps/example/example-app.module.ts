@@ -27,6 +27,8 @@ import { ExampleLineValidationService } from './services/example-line.validation
 import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/example-line-sub-grid.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
 import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
+import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
+import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 
 
 @NgModule({
@@ -55,11 +57,10 @@ import { ExampleParametersComponent } from './components/example-parameters/exam
     ExampleService,        
     ExampleListsService,
     EntityConfigurationService,
-    { provide: 'IEntityListingConfigurationService', useClass: ExampleListingConfigurationService },    
-    { provide: 'IEntityValidationService', useClass: ExampleValidationService },
-    { provide: 'IEntityListingContextService', useClass: EntityListingContextService },        
-    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService },
-
+    { provide: ENTITY_LISTING_CONFIG, useClass: ExampleListingConfigurationService },    
+    { provide: ENTITY_VALIDATION, useClass: ExampleValidationService },
+    EntityListingContextService,        
+    EntityCreateContextService,
     ExampleLineValidationService
   ],
   entryComponents: [

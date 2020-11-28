@@ -37,7 +37,7 @@ export class ExampleViewEditFormComponent implements OnInit {
 
   // new
   constructor(
-    @Inject("IEntityViewEditContextService") private context: EntityViewEditContextService,
+    private context: EntityViewEditContextService,
     private lists: ExampleListsService    
   ) {     
     // lists

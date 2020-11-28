@@ -10,8 +10,8 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 export class EntityListingPageGenericComponent implements OnInit {
 
   constructor(
-    @Inject("IEntityListingContextService") private listingContext : EntityListingContextService,
-    @Inject("IEntityCreateContextService") private createContext : EntityCreateContextService
+    private listingContext : EntityListingContextService,
+    private createContext : EntityCreateContextService
   ) { }
 
   ngOnInit() {

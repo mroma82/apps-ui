@@ -32,7 +32,7 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     private router: Router,    
     private recordContext: RecordContextService,
     private entityConfig: EntityConfigurationService,
-    @Inject("IEntityViewEditContextService") private viewEditContext : EntityViewEditContextService     
+    private viewEditContext : EntityViewEditContextService     
   ) {   
     
   }

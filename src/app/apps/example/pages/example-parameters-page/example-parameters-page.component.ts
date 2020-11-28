@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { EntitySingleRecordViewEditContextService } from 'src/app/core/services/entity/single-record/entity-single-record-view-edit-context.service';
 import { ExampleParametersComponent } from '../../components/example-parameters/example-parameters.component';
 import { ExampleParametersValidationService } from '../../services/example-parameters-validation.service';
@@ -11,7 +12,7 @@ import { ExampleParametersValidationService } from '../../services/example-param
   providers: [
     EntityConfigurationService,
     EntitySingleRecordViewEditContextService,
-    { provide: 'IEntityValidationService', useClass: ExampleParametersValidationService }
+    { provide: ENTITY_VALIDATION, useClass: ExampleParametersValidationService }
   ]
 })
 export class ExampleParametersPageComponent implements OnInit {

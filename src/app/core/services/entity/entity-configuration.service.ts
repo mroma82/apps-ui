@@ -20,8 +20,4 @@ export class EntityConfigurationService {
 
   // view/edit
   viewEditFormComponent: any;
-
-
-  // new
-  constructor() { }
 }

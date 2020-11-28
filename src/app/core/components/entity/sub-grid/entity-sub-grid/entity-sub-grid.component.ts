@@ -16,7 +16,7 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
   providers: [
     EntitySubGridContextService,
     EntityConfigurationService,
-    { provide: 'IEntityCreateContextService', useClass: EntityCreateContextService },    
+    EntityCreateContextService,    
     EntitySubGridViewEditContextService,
   ]
 })
@@ -37,7 +37,7 @@ export class EntitySubGridComponent implements OnInit {
     private context : EntitySubGridContextService,
     private entityConfig : EntityConfigurationService,
     private dialogService : DialogService,
-    @Inject("IEntityCreateContextService") private createContext: EntityCreateContextService,
+    private createContext: EntityCreateContextService,
     private viewEditContext: EntitySubGridViewEditContextService,
   ) { 
     this.items$ = context.items$;    

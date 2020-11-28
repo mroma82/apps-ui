@@ -14,7 +14,7 @@ export class ExampleListFilterComponent implements OnInit {
   
   // new
   constructor(
-    @Inject("IEntityListingContextService") private context: EntityListingContextService
+    private context: EntityListingContextService
   ) {     
   }
 

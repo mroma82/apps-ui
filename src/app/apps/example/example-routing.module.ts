@@ -14,7 +14,7 @@ const routes: Routes = [
       component: ExampleContainerComponent,
       children: [
           { path: '', component: ExampleListPageComponent },
-          { path: 'mytasks', component: ExampleListPageComponent, data: { isMyTasks: true } },
+          { path: 'mytasks', component: ExampleListPageComponent, data: { isWorkflowAssigned: true } },
           { path: 'view/:id', component: ExampleViewEditPageComponent, data: { mode: "view" } },
           { path: 'edit/:id', component: ExampleViewEditPageComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] },
           { path: 'parameters', component: ExampleParametersPageComponent }

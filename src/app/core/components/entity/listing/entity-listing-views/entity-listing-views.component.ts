@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
+import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
 @Component({
@@ -19,8 +19,8 @@ export class EntityListingViewsComponent implements OnInit {
   };
 
   constructor(
-    @Inject("IEntityListingConfigurationService") private listingConfig : IEntityListingConfigurationService,
-    @Inject("IEntityListingContextService") private listingContext : EntityListingContextService
+    @Inject(ENTITY_LISTING_CONFIG) private listingConfig : IEntityListingConfigurationService,
+    private listingContext : EntityListingContextService
   ) { }
 
   ngOnInit() {

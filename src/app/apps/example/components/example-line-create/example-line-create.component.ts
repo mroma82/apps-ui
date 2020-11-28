@@ -17,7 +17,7 @@ export class ExampleLineCreateComponent implements OnInit, OnDestroy {
 
   // new
   constructor(
-    @Inject("IEntityCreateContextService") private context: EntityCreateContextService    
+    private context: EntityCreateContextService    
   ) { 
 
     // sub to model

@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
 import { debounce, take } from 'rxjs/operators';
 import { EntityApiService } from '../entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
-import { IEntityListingConfigurationService } from './entity-listing-configuration.service';
+import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from './entity-listing-configuration.service';
 
 @Injectable()
 export class EntityListingContextService {
@@ -13,6 +13,7 @@ export class EntityListingContextService {
   view$ = new BehaviorSubject<any>({});
   filter$ = new BehaviorSubject<any>({});
   searchText$ = new BehaviorSubject<string>(null);
+  isWorkflowAssigned$ = new BehaviorSubject<boolean>(false);
 
   
   page$ = new BehaviorSubject<number>(1);
@@ -22,10 +23,7 @@ export class EntityListingContextService {
     field: "CreateDateTime",
     isDescending: true
   });
-  /*
-  isMyTasks$ = new BehaviorSubject<boolean>(false);
-  */
-
+  
 
   // subscriptions
   onFilterChange$ : Subscription;
@@ -33,7 +31,7 @@ export class EntityListingContextService {
   // new
   constructor(
     private entityConfig : EntityConfigurationService,
-    @Inject("IEntityListingConfigurationService") private listingConfig : IEntityListingConfigurationService,
+    @Inject(ENTITY_LISTING_CONFIG) private listingConfig : IEntityListingConfigurationService,
     private api : EntityApiService
   ) { 
 
@@ -45,9 +43,10 @@ export class EntityListingContextService {
       this.page$,       
       this.pageSize$,
       this.sort$, 
-      /*this.isMyTasks$*/
+      this.isWorkflowAssigned$
     ).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
 
+    // get the first view
     this.listingConfig.getViews().pipe(take(1)).subscribe(x => {
       this.setView(x[0]);
     });
@@ -75,6 +74,9 @@ export class EntityListingContextService {
       ...{
         sortField: this.sort$.value.field,
         sortIsDescending: this.sort$.value.isDescending
+      },
+      ...{
+        isWorkflowAssigned: this.isWorkflowAssigned$.value
       }
     };    
 
@@ -116,5 +118,9 @@ export class EntityListingContextService {
 
   setSort(sort: any) {
     this.sort$.next(sort);
+  }
+
+  setIsWorkflowAssigned(set: boolean) {
+    this.isWorkflowAssigned$.next(set);
   }
 }

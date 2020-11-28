@@ -5,7 +5,7 @@ import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
-import { IEntityValidationService } from '../entity-validation.service';
+import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
 import { EntityListingContextService } from '../listing/entity-listing-context.service';
 import { EntitySubGridContextService } from '../sub-grid/entity-sub-grid-context.service';
 
@@ -21,9 +21,9 @@ export class EntityCreateContextService {
     private api: EntityApiService,    
     private dialogService : DialogService,
     private entityConfig: EntityConfigurationService,
-    @Inject("IEntityListingContextService") private listingContext: EntityListingContextService,      
+    private listingContext: EntityListingContextService,      
     @Optional() private subGridContext : EntitySubGridContextService,      
-    @Optional() @Inject("IEntityValidationService") private entityValidation: IEntityValidationService
+    @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
 
   // open dialog

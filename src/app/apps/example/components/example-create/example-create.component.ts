@@ -18,7 +18,7 @@ export class ExampleCreateComponent implements OnInit, OnDestroy {
 
   // new
   constructor(
-    @Inject("IEntityCreateContextService") private context: EntityCreateContextService,
+    private context: EntityCreateContextService,
     private router: Router
   ) { 
 
