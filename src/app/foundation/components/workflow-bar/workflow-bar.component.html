@@ -22,7 +22,7 @@
         
         <div ngbDropdown class="d-inline-block float-right" placement="bottom-right">
           <button class="btn btn-link dropdown-toggle-icon" id="workflowMenu" ngbDropdownToggle>
-            <i class="fas fa-cog"></i>
+            <i class="fas fa-ellipsis-v"></i>
           </button>
           
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
@@ -36,10 +36,12 @@
 
         <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
           <li class="nav-item mr-2" *ngFor="let action of (actions$ | async)">
-            <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">{{ action.actionDescription }}</a>
+            <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">
+              <i class="{{ getActionIcon(action) }} mr-1"></i> {{ action.actionDescription }}
+            </a>
           </li>
           <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
-            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)">Reject</a>
+            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)"><i class="fas fa-reply mr-1"></i> Reject</a>
           </li>
         </ul>
       </div>

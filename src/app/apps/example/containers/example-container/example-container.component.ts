@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutContextService } from 'src/app/layout/services/layout-context.service';
 
 @Component({
   selector: 'app-example-container',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExampleContainerComponent implements OnInit {
 
-  constructor() { }
+  // new
+  constructor(
+    layoutContext : LayoutContextService
+  ) { 
+    // set app
+    layoutContext.setApp("Example Application");
+  }
 
   ngOnInit() {
   }

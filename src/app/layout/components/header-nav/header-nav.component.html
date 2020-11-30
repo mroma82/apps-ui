@@ -1,6 +1,10 @@
 <ul class="navbar-nav mr-auto">
 
-  <li class="nav-item active">
-    <a class="nav-link">{{ title$ | async }}</a>
+  <li class="nav-item active" *ngIf="app$ | async as app">
+    <a class="nav-link">{{ app }}</a>
+  </li>
+
+  <li class="nav-item active" *ngIf="title$ | async as title">
+    <a class="nav-link">{{ title }}</a>
   </li>
 </ul>

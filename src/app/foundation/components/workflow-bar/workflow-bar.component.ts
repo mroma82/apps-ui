@@ -91,4 +91,29 @@ export class WorkflowBarComponent implements OnInit {
   regenerate() {
     this.context.regenerate();
   }
+
+  // action icon
+  getActionIcon(action: { actionDescription: string }) {
+    
+    // check special cases
+    switch(action.actionDescription.toLowerCase()) {
+      
+      // approve
+      case "approve":
+        return "fas fa-thumbs-up";
+
+      // deny
+      case "deny":
+      case "denied":
+        return "fas fa-ban";
+
+      // submit
+      case "submit":
+        return "fas fa-paper-plane";
+
+      // default
+      default:
+        return "fas fa-check";
+    }
+  }
 }

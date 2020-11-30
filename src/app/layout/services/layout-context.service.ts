@@ -7,8 +7,14 @@ import { BehaviorSubject } from 'rxjs';
 export class LayoutContextService {
 
   // title area
-  pageTitle$ = new BehaviorSubject<string>("");  
+  appTitle$ = new BehaviorSubject<string>(null)
+  pageTitle$ = new BehaviorSubject<string>(null);  
 
+  // set app
+  setApp(appTitle: string) {
+    this.appTitle$.next(appTitle);
+  }
+  
   // set page title
   setTitle(title: string) {
     this.pageTitle$.next(title);    

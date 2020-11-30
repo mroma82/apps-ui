@@ -20,6 +20,7 @@ import { EntitySubGridViewEditComponent } from './components/entity/sub-grid/ent
 import { EntitySubGridViewEditModalComponent } from './components/entity/sub-grid/entity-sub-grid-view-edit-modal/entity-sub-grid-view-edit-modal.component';
 import { EntitySingleRecordPageGenericComponent } from './components/entity/single-record/entity-single-record-page-generic/entity-single-record-page-generic.component';
 import { EntitySingleRecordViewEditComponent } from './components/entity/single-record/entity-single-record-view-edit/entity-single-record-view-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [    
@@ -43,6 +44,7 @@ import { EntitySingleRecordViewEditComponent } from './components/entity/single-
     RouterModule,
     FormsModule,    
     NgxDatatableModule,
+    NgbModule,
     AppCommonModule,
     AppFoundationModule,    
   ],

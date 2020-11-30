@@ -1,14 +1,13 @@
-<div>
-  <div class="d-flex">
-    <h4 *ngIf="selectedView$ | async as selectedView">{{ selectedView.title }}</h4>
-    <div class="p-2">
-      <ul class="list-inline" *ngIf="state.showChange">
-        <li class="list-inline-item" *ngFor="let view of views$ | async">
-          <a href="javascript:;;" (click)="setView(view)">{{ view.title }}</a>
-        </li>    
-      </ul>    
-    </div>  
-    
-  </div>   
-  <small><a href="javascript:;;" (click)="showChange()">Change</a></small>
-</div>
+
+<div class="d-flex">    
+
+  <div ngbDropdown class="btn-group view-menu" placement="bottom-left">
+    <button class="btn btn-link" id="viewMenu" ngbDropdownToggle>
+      {{(selectedView$ | async).title}}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="viewMenu">
+      <button ngbDropdownItem (click)="setView(view)" *ngFor="let view of views$ | async">{{ view.title }}</button>        
+    </div>
+  </div>
+
+</div>     

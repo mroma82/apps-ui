@@ -9,12 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class HeaderNavComponent implements OnInit {
 
-  title$ : Observable<string>;
+  // observables
+  app$ : Observable<string> = this.layoutContext.appTitle$;
+  title$ : Observable<string> = this.layoutContext.pageTitle$;
   
   constructor(
     private layoutContext: LayoutContextService
-  ) { 
-    this.title$ = this.layoutContext.pageTitle$;
+  ) {     
   }
 
   ngOnInit() {

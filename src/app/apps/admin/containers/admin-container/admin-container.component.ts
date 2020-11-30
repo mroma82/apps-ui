@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Component({
   selector: 'app-admin-container',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminContainerComponent implements OnInit {
 
-  constructor() { }
+  // new
+  constructor(
+    appContext: AppContextService
+  ) { 
+    appContext.Layout.setApp("Administration");
+    appContext.Layout.setTitle(null);
+  }
 
   ngOnInit() {
   }

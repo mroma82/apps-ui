@@ -22,6 +22,9 @@
 }
 
 .navbar-brand {
-    padding-top: 0.1rem;
-    font-weight: 600;
+    padding-top: 0.1rem;    
+
+    .fas {
+        font-size: 1rem;
+    }
 }

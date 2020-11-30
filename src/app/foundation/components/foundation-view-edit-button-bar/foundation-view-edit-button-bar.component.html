@@ -1,12 +1,12 @@
 <div>
-  <button type="button" class="btn btn-primary" (click)="edit()" *ngIf="viewMode">Edit</button>
-  <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!viewMode">Save</button>
-  <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode">Save and Close</button>  
-  <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()">Attachments</button>
-  <button type="button" class="btn btn-primary" (click)="openNotesDialog()">Notes</button>
-  <button type="button" class="btn btn-primary" (click)="openAuditTrail()">Audit Trail</button>
-  <button type="button" class="btn btn-primary" (click)="print()">Print</button>
-  <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode">Delete</button>
+  <button type="button" class="btn btn-primary" (click)="edit()" *ngIf="viewMode"><i class="fas fa-pencil-alt mr-1"></i> Edit</button>
+  <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!viewMode"><i class="far fa-save mr-1"></i> Save</button>
+  <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode"><i class="far fa-save mr-1"></i>Save and Close</button>  
+  <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()"><i class="fas fa-paperclip mr-1"></i> Attachments</button>
+  <button type="button" class="btn btn-primary" (click)="openNotesDialog()"><i class="far fa-sticky-note mr-1"></i> Notes</button>
+  <button type="button" class="btn btn-primary" (click)="openAuditTrail()"><i class="fas fa-history mr-1"></i> Audit Trail</button>
+  <button type="button" class="btn btn-primary" (click)="print()"><i class="fas fa-print mr-1"></i> Print</button>
+  <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode"><i class="far fa-trash-alt mr-1"></i> Delete</button>
 
   <ng-content select="button"></ng-content>
 </div>

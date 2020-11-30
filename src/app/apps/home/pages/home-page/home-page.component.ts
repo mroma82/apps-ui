@@ -11,7 +11,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private appContext: AppContextService
   ) { 
-    appContext.Layout.setTitle("");
+    appContext.Layout.setTitle(null);
+    appContext.Layout.setApp(null);
   }
 
   ngOnInit() {

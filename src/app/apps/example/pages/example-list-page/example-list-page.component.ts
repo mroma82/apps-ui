@@ -16,6 +16,8 @@ export class ExampleListPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private listContext : EntityListingContextService
   ) {     
+    // title
+    appContext.Layout.setTitle(null);
   }
 
   // subscriptions
@@ -27,18 +29,7 @@ export class ExampleListPageComponent implements OnInit, OnDestroy {
     // subscribe to route changes
     this.subs.add(
       this.route.data.subscribe(x => this.listContext.setIsWorkflowAssigned(x.isWorkflowAssigned))    
-    );
-    // check my tasks
-    /*if(this.route.snapshot.data.isMyTasks) {
-      this.context.setMyTasks(true);
-      this.appContext.Layout.setTitle("Example App - My Tasks");         
-    } else {
-      this.context.setMyTasks(false);
-      this.appContext.Layout.setTitle("Example App");         
-    }*/
-
-    // refresh data
-    //this.context.refreshData();    
+    );    
   }  
 
   // cleanup

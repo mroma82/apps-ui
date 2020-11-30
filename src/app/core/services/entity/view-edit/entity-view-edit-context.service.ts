@@ -60,7 +60,7 @@ export class EntityViewEditContextService {
       this.entityRecord$.next(x);
 
       // set title
-      this.appContext.Layout.setTitle(`Record: ${this.mode$.value} ${x.exampleId}`);
+      this.appContext.Layout.setTitle(x.exampleId);
     });
   }
 
