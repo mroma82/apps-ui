@@ -61,8 +61,8 @@ export class EntityCreateContextService {
     }
 
     // validate
-    return validate.pipe(mergeMap(x => {
-      if(x.success) {
+    return validate.pipe(mergeMap(result => {
+      if(result.success) {
 
         // try to create
         return this.api.add(this.entityConfig.entityTypeId, model).pipe(tap(x => {
@@ -84,7 +84,7 @@ export class EntityCreateContextService {
         }));
 
       } else {
-        this.dialogService.message("Validation", x.text);        
+        this.dialogService.message("Validation", result.text);        
       }
 
       return of(false);

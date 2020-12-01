@@ -58,26 +58,18 @@ export class EntityListingContextService {
     // combine model
     let model = {
       entityTypeId: this.entityConfig.entityTypeId,
+      
       filter: {
         ...this.filter$.value,
         ...this.view$.value.filter                      
       },
-      searchText: this.searchText$.value,
-      /*
-      ...{
-        isMyTasks: this.isMyTasks$.value
-      },*/
-      ...{
-        pageNumber: this.page$.value,
-        pageSize: this.pageSize$.value,        
-      },      
-      ...{
-        sortField: this.sort$.value.field,
-        sortIsDescending: this.sort$.value.isDescending
-      },
-      ...{
-        isWorkflowAssigned: this.isWorkflowAssigned$.value
-      }
+      
+      searchText: this.searchText$.value,      
+      pageNumber: this.page$.value,
+      pageSize: this.pageSize$.value,              
+      sortField: this.sort$.value.field,
+      sortIsDescending: this.sort$.value.isDescending,
+      isWorkflowAssigned: this.isWorkflowAssigned$.value      
     };    
 
     // get the data
@@ -104,22 +96,27 @@ export class EntityListingContextService {
     this.page$.next(1);
   }
 
+  // set search text
   setSearchText(text: string) {
     this.searchText$.next(text);
   }
 
+  // set page
   setPage(page: number) {
     this.page$.next(page);
   }
 
+  // set page size
   setPageSize(size: number) {
     this.pageSize$.next(size);
   }
 
+  // set sort
   setSort(sort: any) {
     this.sort$.next(sort);
   }
 
+  // set workflow assigned filter
   setIsWorkflowAssigned(set: boolean) {
     this.isWorkflowAssigned$.next(set);
   }

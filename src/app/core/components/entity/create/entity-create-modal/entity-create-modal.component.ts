@@ -18,6 +18,7 @@ export class EntityCreateModalComponent extends BaseDialog {
     title: "Create"
   };
 
+  // model
   model = {};
 
   // new

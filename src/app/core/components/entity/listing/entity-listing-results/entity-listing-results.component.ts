@@ -10,6 +10,7 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 })
 export class EntityListingResultsComponent implements OnInit {
 
+  // observables
   listItems$ : Observable<any[]> = this.context.listItems$;
   columns$ : Observable<any[]> = this.config.getColumns();
   pageSize$ : Observable<number> = this.context.pageSize$;

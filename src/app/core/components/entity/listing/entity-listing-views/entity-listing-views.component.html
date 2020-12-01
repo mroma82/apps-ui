@@ -3,7 +3,7 @@
 
   <div ngbDropdown class="btn-group view-menu" placement="bottom-left">
     <button class="btn btn-link" id="viewMenu" ngbDropdownToggle>
-      {{(selectedView$ | async).title}}
+      {{ (selectedView$ | async).title }}
     </button>
     <div ngbDropdownMenu aria-labelledby="viewMenu">
       <button ngbDropdownItem (click)="setView(view)" *ngFor="let view of views$ | async">{{ view.title }}</button>        

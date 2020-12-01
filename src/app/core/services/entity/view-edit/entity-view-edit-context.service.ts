@@ -117,36 +117,6 @@ export class EntityViewEditContextService {
       }
     }));
   }
-/*
-  // copy
-  copy(isEdit: boolean) : Observable<any> {
-    
-    // ask first
-    return this.dialogService.yesNo("Copy", "Are you sure you want to copy this record?").pipe(switchMap(x => {
-      if(x == DialogResultEnum.Yes) {
-
-        // define check/update observable
-        let checkUpd$ : Observable<boolean>;
-        if(isEdit) {
-          checkUpd$ = this.update();
-        } else {
-          checkUpd$ = of(true);
-        }
-
-        // check/update, then copy
-        return checkUpd$.pipe(switchMap(updateResult => {
-          console.log(["updateResult", updateResult])
-          if(updateResult) {
-            return this.service.copy(this.id$.value);
-          }
-          return of({ success: false });
-        }));
-      } else {
-        return of({ success: false });
-      }
-    }));
-  }
-  */
 
   // destroy
   ngOnDestroy() {

@@ -14,10 +14,7 @@ export class EntityListingViewsComponent implements OnInit {
   selectedView$ : Observable<any> = this.listingContext.view$;
   views$ : Observable<any[]> = this.listingConfig.getViews();
 
-  state = {
-    showChange: false
-  };
-
+  // new
   constructor(
     @Inject(ENTITY_LISTING_CONFIG) private listingConfig : IEntityListingConfigurationService,
     private listingContext : EntityListingContextService
@@ -26,13 +23,8 @@ export class EntityListingViewsComponent implements OnInit {
   ngOnInit() {
   }
 
-  showChange() {
-    this.state.showChange = true;
-  }
-
+  // set the view
   setView(view: any) {
-    this.listingContext.setView(view);
-    this.state.showChange = false;
+    this.listingContext.setView(view);   
   }
-
 }

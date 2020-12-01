@@ -45,8 +45,8 @@ export class EntitySingleRecordViewEditContextService {
     }
 
     // validate
-    return validate.pipe(mergeMap(x => {
-      if(x.success) {
+    return validate.pipe(mergeMap(result => {
+      if(result.success) {
 
         // try to create
         return this.api.update(this.entityConfig.entityTypeId, model).pipe(tap(x => {
@@ -62,7 +62,7 @@ export class EntitySingleRecordViewEditContextService {
         }));
 
       } else {
-        this.dialogService.message("Validation", x.text);        
+        this.dialogService.message("Validation", result.text);        
       }
 
       return of(false);

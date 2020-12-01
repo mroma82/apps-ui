@@ -3,9 +3,11 @@ import { Component, Injectable } from '@angular/core';
 @Injectable()
 export class EntityConfigurationService {
   
+  // define root url for routing
   rootUrl: string = "";
   
-  contextType: number = 0;
+  // entity info
+  contextType: number = 0; // obsolete
   entityTypeId : string = "";
   
   // workflow
@@ -15,9 +17,7 @@ export class EntityConfigurationService {
     prefixText: ""
   }
 
-  // create
-  createFormComponent: any;
-
-  // view/edit
-  viewEditFormComponent: any;
+  // forms
+  createFormComponent: Component;
+  viewEditFormComponent: Component;
 }
