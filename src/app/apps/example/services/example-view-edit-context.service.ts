@@ -9,12 +9,9 @@ import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ExampleViewEditContextService implements OnDestroy {
-    
-    
+        
   // new
   constructor(
     private service: ExampleService,

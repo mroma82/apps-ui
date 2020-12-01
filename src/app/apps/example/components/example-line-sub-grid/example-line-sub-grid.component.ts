@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
+import { ExampleEntityTypes } from '../../example-entity-types';
 import { ExampleLineValidationService } from '../../services/example-line.validation.service';
 import { ExampleLineCreateComponent } from '../example-line-create/example-line-create.component';
 import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-line-view-edit.component';
@@ -17,6 +18,9 @@ import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-
   ]
 })
 export class ExampleLineSubGridComponent implements OnInit {
+
+  // options
+  entityTypeId : string = ExampleEntityTypes.ExampleLine;
 
   // state
   viewMode$ : Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));

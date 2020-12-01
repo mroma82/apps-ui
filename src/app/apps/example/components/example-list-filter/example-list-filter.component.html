@@ -2,10 +2,10 @@
   
   <div>    
     <select class="form-control" [(ngModel)]="model.status" (change)="updateFilter()">
-      <option value="">-- All Statuses --</option>
-      <option [value]="0">Open</option>
-      <option [value]="1">Active</option>
-      <option [value]="2">Unknown</option>
+      <option [ngValue]="null">-- All Statuses --</option>
+      <option [ngValue]="0">Open</option>
+      <option [ngValue]="1">Active</option>
+      <option [ngValue]="2">Unknown</option>
     </select>
   </div>
     

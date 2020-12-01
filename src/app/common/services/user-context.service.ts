@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { AppHttpClientService } from './app-http-client.service';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -153,9 +153,22 @@ export class UserContextService {
   }
 
   // set profile
-  setProfile(profile: any) {    
-    console.log(profile);
+  setProfile(profile: any) {        
     this.profile$.next(profile);  
     this.isAdmin$.next(profile.role ? profile.role.indexOf("SysAdmin") > -1 : false);
+  }
+
+  // has access 
+  hasAccess(key: string) : Observable<boolean> {
+    
+    // stream with the profile
+    return this.profile$.pipe(map(profile => {      
+      // check if no profile or roles
+      if(!profile || !profile.role)
+        return false;
+
+      // else, check if admin or has the key
+      return profile.role.indexOf(key) > -1 || profile.role.indexOf("SysAdmin") > -1;
+    }));
   }
 }

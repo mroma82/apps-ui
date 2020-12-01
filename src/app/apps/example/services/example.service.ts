@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClientService } from 'src/app/common/services/app-http-client.service';
 import { Observable, of, from } from 'rxjs';
+import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
+import { ExampleEntityTypes } from '../example-entity-types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +11,9 @@ export class ExampleService {
 
   // new
   constructor(
-    private apiClient : AppHttpClientService
+    private apiClient : AppHttpClientService,
+    private entityApi : EntityApiService
   ) { }  
-
-  create(model) {
-    return of(true);
-  }
   
   // copy
   copy(id: string) : Observable<any> {
@@ -23,6 +22,6 @@ export class ExampleService {
 
   // get parameters
   getParameters() : Observable<any> {
-    return this.apiClient.get("/entity/getSingle?entityTypeId=d6b351f0-618e-47cc-8eea-35cf3534d1fa");
+    return this.entityApi.getSingle(ExampleEntityTypes.ExampleParameters);    
   }
 }

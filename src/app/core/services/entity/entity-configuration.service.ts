@@ -18,6 +18,6 @@ export class EntityConfigurationService {
   }
 
   // forms
-  createFormComponent: Component;
-  viewEditFormComponent: Component;
+  createFormComponent: any;
+  viewEditFormComponent: any;
 }

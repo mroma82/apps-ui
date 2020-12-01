@@ -27,6 +27,7 @@ import { SimulateUserComponent } from './components/utils/simulate-user/simulate
 import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 import { MenuItemService } from './services/menu-item.service';
 import { RouterModule } from '@angular/router';
+import { LocalNavComponent } from './components/layout/local-nav/local-nav.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { RouterModule } from '@angular/router';
     ExcludeDeletedPipe,
     MessageDialogComponent,
     SimulateUserComponent,
-    UserFullnamePipe    
+    UserFullnamePipe,
+    LocalNavComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -74,15 +76,17 @@ import { RouterModule } from '@angular/router';
     CheckBoxFieldComponent,
     NumberFieldComponent,
     TextAreaFieldComponent,
-    LookupFieldComponent,
-    UtcDateTimePipe,
+    LookupFieldComponent,    
     CustomerLookupDialogComponent,
     CardGroupComponent,
-    ListingControlsComponent,
-    ExcludeDeletedPipe,
+    ListingControlsComponent,    
     MessageDialogComponent,
     SimulateUserComponent,
-    UserFullnamePipe    
+    LocalNavComponent,
+
+    UtcDateTimePipe,
+    ExcludeDeletedPipe,
+    UserFullnamePipe 
   ]
 })
 export class AppCommonModule { }

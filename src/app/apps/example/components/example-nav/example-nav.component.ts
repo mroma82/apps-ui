@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { AppContextService } from 'src/app/app-context.service';
+import { INavigationItem } from 'src/app/common/models/navigation-item';
 
 @Component({
   selector: 'app-example-nav',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExampleNavComponent implements OnInit {
 
-  constructor() { }
+  // state
+  navItems$ : Observable<INavigationItem[]>;
 
-  ngOnInit() {
+  // new
+  constructor(
+    appContext: AppContextService
+  ) { 
+
+    // setup nav items
+    const baseUrl = "/app/example";
+    this.navItems$ = of([
+      { url: `${baseUrl}`, title: "Home" },
+      { url: `${baseUrl}/mytasks`, title: "Tasks" },
+      { url: `${baseUrl}/parameters`, title: "Parameters", hasAccess$: appContext.User.hasAccess("ExampleAdmin") },
+    ]);
   }
 
+  // init
+  ngOnInit() {
+  }
 }

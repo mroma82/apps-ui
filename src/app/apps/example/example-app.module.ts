@@ -29,6 +29,7 @@ import { ExampleParametersPageComponent } from './pages/example-parameters-page/
 import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
+import { ExampleEntityTypes } from './example-entity-types';
 
 
 @NgModule({
@@ -79,7 +80,7 @@ export class ExampleAppModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47";
+    entityConfig.entityTypeId = ExampleEntityTypes.Example;
     entityConfig.contextType = 1;
     entityConfig.rootUrl = "/app/example";
 
