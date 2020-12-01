@@ -28,6 +28,7 @@ import { UserFullnamePipe } from './pipes/user-fullname.pipe';
 import { MenuItemService } from './services/menu-item.service';
 import { RouterModule } from '@angular/router';
 import { LocalNavComponent } from './components/layout/local-nav/local-nav.component';
+import { ToastMessageListComponent } from './components/toast/toast-message-list/toast-message-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LocalNavComponent } from './components/layout/local-nav/local-nav.compo
     MessageDialogComponent,
     SimulateUserComponent,
     UserFullnamePipe,
-    LocalNavComponent    
+    LocalNavComponent,
+    ToastMessageListComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -83,6 +85,7 @@ import { LocalNavComponent } from './components/layout/local-nav/local-nav.compo
     MessageDialogComponent,
     SimulateUserComponent,
     LocalNavComponent,
+    ToastMessageListComponent,
 
     UtcDateTimePipe,
     ExcludeDeletedPipe,

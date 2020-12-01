@@ -1,0 +1,3 @@
+<div class="toast-message" *ngFor="let message of messages" [class.active]="message.isActive" [style.z-index]="9999 + message.index">
+  {{ message.text }}
+</div>

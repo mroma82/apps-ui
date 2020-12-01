@@ -24,6 +24,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 
 import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.component';
+import { ToastMessageContextService } from './common/services/toast-message-context.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.compon
   providers: [
     AppContextService,
     LayoutContextService,
+    ToastMessageContextService,
     UserContextService,
     DialogService    
   ],

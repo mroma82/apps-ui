@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AppHttpClientService } from 'src/app/common/services/app-http-client.service';
+import { ToastMessageContextService } from 'src/app/common/services/toast-message-context.service';
 
 @Component({
   selector: 'app-listing-controls',
@@ -22,7 +23,7 @@ export class ListingControlsComponent implements OnInit {
 
   // new
   constructor(
-    private http : AppHttpClientService
+    private http : AppHttpClientService, private t : ToastMessageContextService
   ) { }
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class ListingControlsComponent implements OnInit {
 
   // refresh
   refresh() {
+    this.t.add({ text: "This is a test" });
     this.onRefresh.emit();
   }
 
