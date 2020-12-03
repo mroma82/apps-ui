@@ -73,7 +73,7 @@ export class EntityListingContextService {
     };    
 
     // get the data
-    this.api.list(model).subscribe(x => {
+    this.api.list(this.entityConfig.entityTypeId, model).subscribe(x => {
       this.listItems$.next(x);      
     });
   }

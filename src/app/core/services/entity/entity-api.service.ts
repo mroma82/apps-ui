@@ -13,41 +13,32 @@ export class EntityApiService {
   ) { }
 
   // list results
-  list(model: any) : Observable<any> {
-    return this.api.post(`/entity/list`, model);
+  list(entityTypeId : string, model: any) : Observable<any> {
+    return this.api.post(`/entity/${entityTypeId}/list`, model);
   }
 
   // get single by id
   getSingleById(entityTypeId : string, id: string) : Observable<any> {
-    return this.api.get(`/entity/get?entityTypeId=${entityTypeId}&id=${id}`);
+    return this.api.get(`/entity/${entityTypeId}/get/${id}`);
   }
 
   // get a single record
   getSingle(entityTypeId : string) : Observable<any> {
-    return this.api.get(`/entity/getSingle?entityTypeId=${entityTypeId}`);
+    return this.api.get(`/entity/${entityTypeId}/single`);
   }
   
   // add
   add(entityTypeId : string, model: any) : Observable<any> {
-    return this.api.post("/entity/add", {
-      entityTypeId: entityTypeId,
-      model: model
-    });
+    return this.api.post(`/entity/${entityTypeId}/add`, model);
   }
 
   // update
   update(entityTypeId : string, model: any) : Observable<any> {
-    return this.api.post("/entity/update", {
-      entityTypeId: entityTypeId,
-      model: model
-    });
+    return this.api.post(`/entity/${entityTypeId}/update`, model);
   }
 
   // delete
   delete(entityTypeId : string, id: string) : Observable<any> {
-    return this.api.post("/entity/delete", {
-      entityTypeId: entityTypeId,
-      id: id
-    });
+    return this.api.post(`/entity/${entityTypeId}/delete/${id}`, null);
   }
 }
