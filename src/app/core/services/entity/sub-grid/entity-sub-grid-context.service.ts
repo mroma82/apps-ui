@@ -44,8 +44,7 @@ export class EntitySubGridContextService implements OnDestroy {
      .subscribe(([entityTypeId, filter, sort]) => {
 
       // get the data
-      this.api.list({
-        entityTypeId: entityTypeId,
+      this.api.list(entityTypeId, {        
         filter: filter,
         pageNumber: 1,
         pageSize: 25, //hack               
