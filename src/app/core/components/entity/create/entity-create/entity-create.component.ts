@@ -1,5 +1,4 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { EventEmitter } from 'protractor';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class EntityCreateComponent implements OnInit, OnDestroy {
   // new
   constructor(
     private entityConfig: EntityConfigurationService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,    
   ) { 
     
   }

@@ -83,6 +83,8 @@ export class ExampleAppModule {
     entityConfig.entityTypeId = ExampleEntityTypes.Example;
     entityConfig.contextType = 1;
     entityConfig.rootUrl = "/app/example";
+    entityConfig.name = "Example";
+    entityConfig.pluralName = "Examples";
 
     // workflow
     entityConfig.workflow.enabled = true;

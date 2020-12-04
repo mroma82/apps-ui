@@ -1,3 +1,11 @@
 <div class="toast-message" *ngFor="let message of messages" [class.active]="message.isActive" [style.z-index]="9999 + message.index">
-  {{ message.text }}
+  
+  <a *ngIf="message.url" [routerLink]="message.url" (click)="dismiss(message)">
+    {{ message.text }}
+  </a>
+  <span *ngIf="!message.url">
+    {{ message.text }}
+  </span>
+  
+  <a class="btn-dismiss" href="javascript:;;" (click)="dismiss(message)"><i class="fas fa-times"></i></a>  
 </div>

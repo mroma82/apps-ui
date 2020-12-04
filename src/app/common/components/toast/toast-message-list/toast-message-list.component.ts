@@ -17,4 +17,8 @@ export class ToastMessageListComponent implements OnInit {
   ngOnInit() {
   }
 
+  // dismiss
+  dismiss(item: any) {
+    this.toastMessageContext.dismiss(item);
+  }
 }

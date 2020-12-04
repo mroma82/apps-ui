@@ -1,8 +1,10 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
+import { AppContextService } from 'src/app/app-context.service';
 import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogService } from 'src/app/common/services/dialog.service';
+import { ToastMessageContextService } from 'src/app/common/services/toast-message-context.service';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
 import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
@@ -22,6 +24,7 @@ export class EntityCreateContextService {
     private dialogService : DialogService,
     private entityConfig: EntityConfigurationService,
     private listingContext: EntityListingContextService,      
+    private appContext: AppContextService,
     @Optional() private subGridContext : EntitySubGridContextService,      
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
@@ -74,7 +77,10 @@ export class EntityCreateContextService {
               this.subGridContext.refreshData();
             } else {
               this.listingContext.refreshData();
-            }            
+            }           
+            
+            // send a toast message
+            this.appContext.ToastMessage.add({ text: `${this.entityConfig.name} Created`, url: `${this.entityConfig.rootUrl}/view/${x.id}` });
             return true;
             
           } else {

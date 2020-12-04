@@ -5,7 +5,9 @@ export class EntityConfigurationService {
   
   // define root url for routing
   rootUrl: string = "";
-  
+  name: string = "Record"
+  pluralName: string = "Records"
+
   // entity info
   contextType: number = 0; // obsolete
   entityTypeId : string = "";
