@@ -46,6 +46,10 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "statusValue",
         title: "Status (Value)"
+      },
+      {
+        model: "workflowStateText",
+        title: "Workflow Status"
       }
     ]);
   }
