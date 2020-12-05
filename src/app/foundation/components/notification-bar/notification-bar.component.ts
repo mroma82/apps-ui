@@ -23,6 +23,10 @@ export class NotificationBarComponent implements OnInit {
     this.list$ = context.list$.pipe(map(x => x.reverse().slice(0, 3)));
   }
 
+  model = {
+    showMenu: false
+  }
+
   // init
   ngOnInit() {
 

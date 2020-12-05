@@ -17,7 +17,32 @@
 
     </div>
   </li>
+  <li class="nav-item" *ngIf="(count$ | async) > 0">
+    <a href="javascript:;;" (click)="model.showMenu = true;">
+      <i class="fas fa-bell badge" data-count="1">zzz</i>      
+    </a>
+  </li>
 </ul>
+<div>
+  
+</div>
 
 <app-notification-list-dialog></app-notification-list-dialog>
+
+<div class="left-menu bg-primary" [class.active]="model.showMenu">
+  <ul class="list-group">        
+    <li class="list-group-item"  *ngFor="let item of list$ | async">
+      <a [routerLink]="getRoute(item)" (click)="hoverOn=false;">
+        <i [class]="item.icon + ' mr-2'"></i>
+        {{ item.subject }}
+      </a>
+    </li>
+
+    <li class="list-group-item border-top">
+      <small>
+        <a href="javascript:;;" (click)="showListDialog()">View All Notifications</a>
+      </small>          
+    </li>
+  </ul>
+</div>
 
