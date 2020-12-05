@@ -9,7 +9,6 @@ export class EntityConfigurationService {
   pluralName: string = "Records"
 
   // entity info
-  contextType: number = 0; // obsolete
   entityTypeId : string = "";
   
   // workflow

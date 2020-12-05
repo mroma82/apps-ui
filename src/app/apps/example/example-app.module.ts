@@ -81,7 +81,6 @@ export class ExampleAppModule {
 
     // entity
     entityConfig.entityTypeId = ExampleEntityTypes.Example;
-    entityConfig.contextType = 1;
     entityConfig.rootUrl = "/app/example";
     entityConfig.name = "Example";
     entityConfig.pluralName = "Examples";

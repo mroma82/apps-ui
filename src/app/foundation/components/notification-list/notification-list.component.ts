@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { NotificationContextService } from '../../services/notification/notification-context.service';
-import { ContextTypeRouteResolverService } from 'src/app/common/services/context-type-route-resolver.service';
+import { EntityRouteResolverService } from 'src/app/common/services/entity-route-resolver.service';
 
 @Component({
   selector: 'app-notification-list',
@@ -24,7 +24,7 @@ export class NotificationListComponent implements OnInit, OnDestroy {
   // new
   constructor(
     private context : NotificationContextService,
-    private routeResolver : ContextTypeRouteResolverService
+    private routeResolver : EntityRouteResolverService
   ) { 
     // subscribe
     this.onListChange = this.context.list$.subscribe(x => {
@@ -34,7 +34,7 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 
   // get route
   getRoute(notification: any) {
-    return this.routeResolver.resolve(notification.contextType, notification.contextId);
+    return this.routeResolver.resolve(notification.entityTypeId, notification.entityId);
   }
 
   // close dialog

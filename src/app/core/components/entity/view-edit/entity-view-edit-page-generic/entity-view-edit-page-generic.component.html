@@ -1,11 +1,11 @@
 <div class="mb-2" *ngIf="model.workflow.enabled">
-  <app-workflow-bar [prefixText]="model.workflow.prefixText" [contextType]="model.contextType" [contextId]="model.id" [workflowUrl]="model.workflow.url"></app-workflow-bar>    
+  <app-workflow-bar [prefixText]="model.workflow.prefixText" [entityTypeId]="model.entityTypeId" [entityId]="model.id" [workflowUrl]="model.workflow.url"></app-workflow-bar>    
 </div>
 
 <div class="d-flex mb-2">  
   <app-foundation-view-edit-button-bar 
-    [contextId]="model.id" 
-    [contextType]="model.contextType" 
+    [entityId]="model.id" 
+    [entityTypeId]="model.entityTypeId" 
     [viewMode]="model.mode == 'view'" 
     (onEdit)="edit()"
     (onSave)="save()" 

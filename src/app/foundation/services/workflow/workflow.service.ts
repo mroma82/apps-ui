@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClientService } from 'src/app/common/services/app-http-client.service';
-import { IContext } from 'src/app/common/models/context';
+import { IEntity } from 'src/app/common/models/context';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class WorkflowService {
   ) { }
 
   // init
-  init(url: string, contextId: string) : Observable<any> {
-    return this.apiClient.get(`${url}/init/${contextId}`);
+  init(url: string, entityId: string) : Observable<any> {
+    return this.apiClient.get(`${url}/init/${entityId}`);
   }
 
   // advance
@@ -44,8 +44,8 @@ export class WorkflowService {
   }
 
   // get instance  
-  getInstanceByContext(url: string, context: IContext) : Observable<any> {
-    return this.apiClient.get(`${url}/getInstance/${context.contextId}`);
+  getInstanceByEntity(url: string, context: IEntity) : Observable<any> {
+    return this.apiClient.get(`${url}/getInstance/${context.entityId}`);
   }
 
   // get actions

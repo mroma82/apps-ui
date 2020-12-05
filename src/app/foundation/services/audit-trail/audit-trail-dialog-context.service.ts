@@ -25,10 +25,10 @@ export class AuditTrailDialogContextService {
 
     // check if no record, use the last
     if(record === undefined)
-      record = this.recordContextService.recordContext$.value;
+      record = this.recordContextService.record$.value;
 
     // refresh from api
-    this.service.getAllByContext(record.contextType, record.contextId).subscribe(d => {      
+    this.service.getAllByEntity(record.entityTypeId, record.entityId).subscribe(d => {      
       this.list$.next(d);
     });    
   }  

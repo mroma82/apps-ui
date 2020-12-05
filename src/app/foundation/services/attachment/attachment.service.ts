@@ -16,8 +16,8 @@ export class AttachmentService {
   ) { }
 
   // get all by context
-  getAllByContext(contextType: number, contextId: string) : Observable<any> {
-    return this.apiClient.get(`/foundation/attachment/getByContext/${contextType}/${contextId}`);
+  getAllByEntity(entityTypeId: string, entityId: string) : Observable<any> {
+    return this.apiClient.get(`/foundation/attachment/getByEntity/${entityTypeId}/${entityId}`);
     /*return of([
       { id: "123", description: "Attachment 1" },
       { id: "234", description: "Attachment 2" },

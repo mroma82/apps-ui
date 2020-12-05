@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class RecordLockGuard implements CanActivate {
 
-  contextType: number;
-  setContextType(contextType: number) {
-    this.contextType = contextType;
+  entityTypeId: string;
+  setContextType(entityTypeId: string) {
+    this.entityTypeId = entityTypeId;
   }
 
   constructor(
@@ -27,7 +27,7 @@ export class RecordLockGuard implements CanActivate {
 
     // check if locked
     return this.recordLockService
-      .check(this.contextType, id)
+      .check(this.entityTypeId, id)
       .pipe(map(x => {
        
         if(!x.isLocked) {

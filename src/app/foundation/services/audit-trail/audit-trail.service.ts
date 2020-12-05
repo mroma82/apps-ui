@@ -13,8 +13,8 @@ export class AuditTrailService {
   ) { }
 
   // get all by context
-  getAllByContext(contextType: number, contextId: string) : Observable<any> {
-    return this.apiClient.get(`/foundation/auditTrail/getByContext/${contextType}/${contextId}`);
+  getAllByEntity(entityTypeId: string, entityId: string) : Observable<any> {
+    return this.apiClient.get(`/foundation/auditTrail/getByEntity/${entityTypeId}/${entityId}`);
   }
 
   // get details by parent

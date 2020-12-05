@@ -16,8 +16,8 @@ import { NotesListDialogContextService } from '../../services/notes/notes-list-d
   ]
 })
 export class FoundationViewEditButtonBarComponent implements OnInit {
-  @Input() contextId: string;
-  @Input() contextType: number;
+  @Input() entityId: string;
+  @Input() entityTypeId: string;
   @Input() viewMode: boolean;
 
   // events

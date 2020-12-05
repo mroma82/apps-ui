@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { WorkflowService } from './workflow.service';
-import { IContext } from 'src/app/common/models/context';
+import { IEntity } from 'src/app/common/models/context';
 import { NotificationContextService } from '../notification/notification-context.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
@@ -13,7 +13,7 @@ export class WorkflowContextService implements OnDestroy {
 
   // observables
   busy$ = new BehaviorSubject<boolean>(false);
-  context$ = new BehaviorSubject<IContext>(null);    
+  entity$ = new BehaviorSubject<IEntity>(null);    
   instance$ = new BehaviorSubject<any>(null);
   actions$ = new BehaviorSubject<any>([]);
   assigned$ = new BehaviorSubject<any>([]);
@@ -41,7 +41,7 @@ export class WorkflowContextService implements OnDestroy {
   ) { 
     
     // on context change
-    this.onContextChange = this.context$.subscribe(x => {
+    this.onContextChange = this.entity$.subscribe(x => {
       this.refreshInstance()
     });
 
@@ -59,15 +59,15 @@ export class WorkflowContextService implements OnDestroy {
   }
 
   // set context
-  setContext(context: IContext) {
-    this.context$.next(context);
+  setEntity(entity: IEntity) {
+    this.entity$.next(entity);
   }
 
   // refresh instance
   refreshInstance() {    
-    let context = this.context$.value;    
+    let context = this.entity$.value;    
     if(context !== null) {
-        this.service.getInstanceByContext(this.options.url, context).subscribe(i => this.instance$.next(i));
+        this.service.getInstanceByEntity(this.options.url, context).subscribe(i => this.instance$.next(i));
     }
   }
 
