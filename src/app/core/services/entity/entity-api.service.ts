@@ -41,4 +41,9 @@ export class EntityApiService {
   delete(entityTypeId : string, id: string) : Observable<any> {
     return this.api.post(`/entity/${entityTypeId}/delete/${id}`, null);
   }
+
+  // has access
+  hasAccess(entityTypeId : string, permissionsMask: number) : Observable<boolean> {
+    return this.api.get(`/entity/${entityTypeId}/hasAccess/${permissionsMask}`);
+  }
 }

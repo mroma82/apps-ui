@@ -30,6 +30,7 @@ import { ExampleParametersComponent } from './components/example-parameters/exam
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { ExampleEntityTypes } from './example-entity-types';
+import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ExampleEntityTypes } from './example-entity-types';
     { provide: ENTITY_VALIDATION, useClass: ExampleValidationService },
     EntityListingContextService,        
     EntityCreateContextService,
-    ExampleLineValidationService
+    ExampleLineValidationService,
+    EntitySecurityService
   ],
   entryComponents: [
     ExampleCreateComponent,
