@@ -1,5 +1,5 @@
 
-export interface IContext {
-    contextType: number;
-    contextId: string;
+export interface IEntity {
+    entityTypeId: string;
+    entityId: string;
 }

@@ -25,10 +25,10 @@ export class NotesListDialogContextService {
 
     // check if no record, use the last
     if(record === undefined)
-      record = this.recordContextService.recordContext$.value;
+      record = this.recordContextService.record$.value;
 
     // refresh from api
-    this.notesService.getAllByContext(record.contextType, record.contextId).subscribe(d => {      
+    this.notesService.getAllByEntity(record.entityTypeId, record.entityId).subscribe(d => {      
       this.list$.next(d);
     });    
   }  
@@ -37,12 +37,12 @@ export class NotesListDialogContextService {
   add(model: any) : Observable<any> { 
     
     // get the record
-    const record = this.recordContextService.recordContext$.value;
+    const record = this.recordContextService.record$.value;
       
     // add
     return this.notesService.addUpdate({      
-      contextType: record.contextType,
-      contextId: record.contextId,
+      entityTypeId: record.entityTypeId,
+      entityId: record.entityId,
       contentText: model.contentText
     }).pipe(map(x => { 
 

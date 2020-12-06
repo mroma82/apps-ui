@@ -23,7 +23,7 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     id: "",
     mode: null,
     
-    contextType: this.entityConfig.contextType,
+    entityTypeId: this.entityConfig.entityTypeId,
     workflow: this.entityConfig.workflow
   };
 
@@ -49,7 +49,7 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     this.model.workflow = this.entityConfig.workflow;
 
     // set record
-    this.recordContext.setRecordContext(this.entityConfig.contextType, this.model.id);
+    this.recordContext.setRecord(this.entityConfig.entityTypeId, this.model.id);
     this.viewEditContext.setId(this.model.id);    
 
     // hack

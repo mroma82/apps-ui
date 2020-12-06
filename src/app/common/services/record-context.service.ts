@@ -7,15 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 export class RecordContextService {
 
   // observables
-  recordContext$ = new BehaviorSubject<any>({});
+  record$ = new BehaviorSubject<any>({});
 
   // set record
-  setRecordContext(contextType: number, contextId: string) {
+  setRecord(entityTypeId: string, entityId: string) {
     
     // next
-    this.recordContext$.next({
-      contextType: contextType,
-      contextId: contextId
+    this.record$.next({
+      entityTypeId: entityTypeId,
+      entityId: entityId
     });
   }
 

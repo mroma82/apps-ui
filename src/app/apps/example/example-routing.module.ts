@@ -6,6 +6,7 @@ import { ExampleListPageComponent } from './pages/example-list-page/example-list
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
+import { ExampleEntityTypes } from './example-entity-types';
 
 // example routing
 const routes: Routes = [
@@ -33,6 +34,6 @@ export class ExampleRoutingModule {
   constructor(
     recordLock: RecordLockGuard,    
   ) {
-    recordLock.setContextType(1);
+    recordLock.setContextType(ExampleEntityTypes.Example);
   }
 }

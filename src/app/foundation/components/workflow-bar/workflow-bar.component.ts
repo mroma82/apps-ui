@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
   providers: [WorkflowContextService]
 })
 export class WorkflowBarComponent implements OnInit {
-  @Input() contextType: number;
-  @Input() contextId: string;
+  @Input() entityTypeId: string;
+  @Input() entityId: string;
   @Input() workflowUrl: string;
   @Input() prefixText: string;
 
@@ -39,9 +39,9 @@ export class WorkflowBarComponent implements OnInit {
     });
 
     // context
-    this.context.setContext({
-      contextId: this.contextId,
-      contextType: this.contextType
+    this.context.setEntity({
+      entityId: this.entityId,
+      entityTypeId: this.entityTypeId
     });
   }
 

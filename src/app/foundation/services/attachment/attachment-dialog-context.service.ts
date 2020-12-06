@@ -26,10 +26,10 @@ export class AttachmentDialogContextService {
 
     // check if no record, use the last
     if(record === undefined)
-      record = this.recordContextService.recordContext$.value;
+      record = this.recordContextService.record$.value;
 
     // refresh from api
-    this.service.getAllByContext(record.contextType, record.contextId).subscribe(d => {      
+    this.service.getAllByEntity(record.entityTypeId, record.entityId).subscribe(d => {      
       this.list$.next(d);
     });    
   }  
@@ -72,12 +72,12 @@ export class AttachmentDialogContextService {
   add(model: any) {
 
     // get the record
-    const record = this.recordContextService.recordContext$.value;
+    const record = this.recordContextService.record$.value;
 
     // save
     return this.service.add({
-      contextType: record.contextType,
-      contextId: record.contextId,
+      entityTypeId: record.entityTypeId,
+      entityId: record.entityId,
       description: model.description,
       tempFileId: this.tempFile$.value.id
     });

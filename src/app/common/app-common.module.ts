@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { AppHttpClientService } from './services/app-http-client.service';
 import { DragDropComponent } from './components/drag-drop/drag-drop.component';
-import { ContextTypeRouteResolverService } from './services/context-type-route-resolver.service';
+import { EntityRouteResolverService } from './services/entity-route-resolver.service';
 import { YesNoDialogComponent } from './components/dialogs/yes-no-dialog/yes-no-dialog.component';
 import { TextFieldComponent } from './components/forms/text-field/text-field.component';
 import { FormsModule } from '@angular/forms';
@@ -55,7 +55,7 @@ import { ToastMessageListComponent } from './components/toast/toast-message-list
   ],
   providers: [
     AppHttpClientService,
-    ContextTypeRouteResolverService,
+    EntityRouteResolverService,
     IntegrationService,
     DatePipe,
     MenuItemService    

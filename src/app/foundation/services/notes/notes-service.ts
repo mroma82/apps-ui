@@ -13,8 +13,8 @@ export class NotesService {
   ) { }
 
   // get all by context
-  getAllByContext(contextType: number, contextId: string) : Observable<any[]> {
-    return this.apiClient.get(`/foundation/notes/getByContext/${contextType}/${contextId}`);
+  getAllByEntity(entityTypeId: string, entityId: string) : Observable<any[]> {
+    return this.apiClient.get(`/foundation/notes/getByEntity/${entityTypeId}/${entityId}`);
   }
 
   // add/update

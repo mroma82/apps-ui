@@ -12,17 +12,17 @@ export class RecordLockService {
   ) { }
 
   // check
-  check(contextType: number, contextId: string) : Observable<any> {
-    return this.apiClient.get(`/foundation/recordlock/check/${contextType}/${contextId}`);
+  check(entityTypeId: string, entityId: string) : Observable<any> {
+    return this.apiClient.get(`/foundation/recordlock/check/${entityTypeId}/${entityId}`);
   }
 
   // set
-  set(contextType: number, contextId: string) : void {
-    this.apiClient.post(`/foundation/recordlock/set/${contextType}/${contextId}`, {}).subscribe();
+  set(entityTypeId: string, entityId: string) : void {
+    this.apiClient.post(`/foundation/recordlock/set/${entityTypeId}/${entityId}`, {}).subscribe();
   }
 
   // clear
-  clear(contextType: number, contextId: string) : void {
-    this.apiClient.post(`/foundation/recordlock/clear/${contextType}/${contextId}`, {}).subscribe();
+  clear(entityTypeId: string, entityId: string) : void {
+    this.apiClient.post(`/foundation/recordlock/clear/${entityTypeId}/${entityId}`, {}).subscribe();
   }
 }

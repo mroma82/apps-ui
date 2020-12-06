@@ -25,8 +25,8 @@ export class RecordLockContextService implements OnDestroy {
     this.lockSubscription = source.subscribe(x => {
 
       // set lock
-      let record = this.recordContext.recordContext$.value;
-      this.service.set(record.contextType, record.contextId);
+      let record = this.recordContext.record$.value;
+      this.service.set(record.entityTypeId, record.entityId);
     });
   }
 
@@ -39,9 +39,9 @@ export class RecordLockContextService implements OnDestroy {
     }
 
     // get the record
-    let record = this.recordContext.recordContext$.value;
+    let record = this.recordContext.record$.value;
 
     // set
-    this.service.clear(record.contextType, record.contextId);
+    this.service.clear(record.entityTypeId, record.entityId);
   }
 }
