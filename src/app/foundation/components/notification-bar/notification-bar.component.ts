@@ -20,7 +20,7 @@ export class NotificationBarComponent implements OnInit {
     private routeResolver: EntityRouteResolverService
   ) { 
     this.count$ = context.listCount$;
-    this.list$ = context.list$.pipe(map(x => x.reverse().slice(0, 3)));
+    this.list$ = context.list$.pipe(map(x => x.reverse().slice(0, 20)));
   }
 
   model = {
@@ -40,5 +40,6 @@ export class NotificationBarComponent implements OnInit {
   // show list dialog
   showListDialog() {
     this.context.openListDialog();
+    this.model.showMenu = false;
   }
 }

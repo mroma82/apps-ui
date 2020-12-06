@@ -25,12 +25,14 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
 
 import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.component';
 import { ToastMessageContextService } from './common/services/toast-message-context.service';
+import { HomeMyTasksComponent } from './apps/home/components/home-my-tasks/home-my-tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppContainerComponent,
     HomeTilesComponent,
+    HomeMyTasksComponent,
     HomePageComponent,
     HeaderComponent,
     HeaderNavComponent,
