@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { LocalNavComponent } from './components/layout/local-nav/local-nav.component';
 import { ToastMessageListComponent } from './components/toast/toast-message-list/toast-message-list.component';
 import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
+import { TileComponent } from './components/layout/tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
     SimulateUserComponent,
     UserFullnamePipe,
     LocalNavComponent,
-    ToastMessageListComponent    
+    ToastMessageListComponent,
+    TileComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -88,6 +90,7 @@ import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
     SimulateUserComponent,
     LocalNavComponent,
     ToastMessageListComponent,
+    TileComponent,
 
     UtcDateTimePipe,
     UtcDateTimeSincePipe,
