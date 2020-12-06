@@ -11,6 +11,7 @@ export class ListingControlsComponent implements OnInit {
   @Input() exportFilename : string = "export";
   @Input() exportSheetname : string = "Data";
   @Output() onRefresh = new EventEmitter();
+  @Output() onClear = new EventEmitter();
   @Output() onSetPageSize = new EventEmitter<number>();
 
   // constants
@@ -40,9 +41,12 @@ export class ListingControlsComponent implements OnInit {
     this.onSetPageSize.emit(this.model.pageSize);
   }
 
+  // clear
+  clear() {
+    this.onClear.emit();
+  }
   // refresh
   refresh() {
-    this.t.add({ text: "This is a test" });
     this.onRefresh.emit();
   }
 
