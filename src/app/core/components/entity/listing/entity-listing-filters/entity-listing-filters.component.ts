@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
