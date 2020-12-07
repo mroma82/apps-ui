@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AdminMenuItemsService } from '../../../services/admin-menu-items.service';
 
 @Component({
   selector: 'app-admin-nav',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminNavComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  // observables
+  navItems$ : Observable<any> = this.menuItems.menuItems$;
+  
+  // new
+  constructor(
+    private menuItems : AdminMenuItemsService
+  ) {     
+    // set menu items
+    this.navItems$ = this.menuItems.menuItems$.pipe(map((x : any[]) => {
+      return [
+        { title: "Home", url: "/app/admin" },
+        ...x
+      ];
+    }))
   }
 
+  // init
+  ngOnInit() {
+  }
 }

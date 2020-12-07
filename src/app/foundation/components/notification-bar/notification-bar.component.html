@@ -1,23 +1,47 @@
 
-<ul class="nav navbar-nav navbar-right" *ngIf="(count$ | async) > 0">
-  <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
-    <a class="nav-link dropdown-toggle active" href="javascript:;;" ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{count$ | async }} notification(s)
-    </a>
-    <div class="dropdown-menu px-4 py-3" ngbDropdownMenu aria-labelledby="navbarDropdown" style="width: 300px;">
-      
-      <div *ngFor="let item of list$ | async">
-        <strong><a [routerLink]="getRoute(item)" (click)="hoverOn=false;">{{ item.subject }}</a></strong>
-        <hr />
-      </div>
-      
-      <small>
-        <a href="javascript:;;" (click)="showListDialog()">View All Notifications</a>
-      </small>      
+<ul class="nav navbar-nav navbar-dark navbar-right">
 
-    </div>
+  <li class="nav-item">
+    <a class="nav-link active" href="javascript:;;" (click)="model.showMenu = !model.showMenu;">
+      <i class="fas fa-tasks">
+        <span class="badge-tasks" *ngIf="(count$ | async) as notifCount">{{ notifCount }}</span>
+      </i>      
+    </a>
   </li>
 </ul>
 
 <app-notification-list-dialog></app-notification-list-dialog>
+
+<div class="notification-menu bg-white" [class.active]="model.showMenu">
+  <ul class="list-group"> 
+    <li class="list-group-item">
+      <h4 class="mb-0">My Tasks</h4>
+    </li>       
+
+    <li class="list-group-item d-flex flex-row"  *ngFor="let item of list$ | async">
+      <a [routerLink]="getRoute(item)" (click)="model.showMenu=false;">
+        <i [class]="'fas fa-shapes mr-2'"></i>
+      </a>
+      <div>
+        <a [routerLink]="getRoute(item)" (click)="model.showMenu=false;">        
+          {{ item.subject }}
+        </a>
+        <div>
+          <small [title]="item.createDateTime | utcDateTime">
+            {{ item.createDateTime | utcDateTimeSince}}
+          </small>
+        </div>
+      </div>
+      
+    </li>
+
+    <li class="list-group-item border-top view-all-row bg-white" *ngIf="(count$ | async)">
+      <small>
+        <a href="javascript:;;" (click)="showListDialog()">View All Tasks</a>
+      </small>          
+    </li>
+  </ul>
+
+  <a class="btn-dismiss p-2" href="javascript:;;" (click)="model.showMenu = false;"><i class="fas fa-times"></i></a>  
+</div>
 

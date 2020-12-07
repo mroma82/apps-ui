@@ -23,6 +23,7 @@ import { AdminWorkflowGroupEditPageComponent } from './pages/workflow-groups/adm
 import { AdminWorkflowGroupEditComponent } from './components/workflow-groups/admin-workflow-group-edit/admin-workflow-group-edit.component';
 import { AdminWorkflowGroupListComponent } from './components/workflow-groups/admin-workflow-group-list/admin-workflow-group-list.component';
 import { AdminWorkflowGroupApiService } from './services/workflow-groups/admin-workflow-group-api.service';
+import { AdminMenuItemsService } from './services/admin-menu-items.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminWorkflowGroupApiService } from './services/workflow-groups/admin-w
   ],
   providers: [
     PermissionsContextService,
-    AdminWorkflowGroupApiService
+    AdminWorkflowGroupApiService,
+    AdminMenuItemsService
   ]
 })
 export class AdminAppModule { }

@@ -125,4 +125,13 @@ export class EntityListingContextService {
   setIsWorkflowAssigned(set: boolean) {
     this.isWorkflowAssigned$.next(set);
   }
+
+  // reset filter
+  clearFilter() {
+    
+    // clear all
+    this.filter$.next({});
+    this.searchText$.next(null);
+    this.page$.next(1);
+  }
 }

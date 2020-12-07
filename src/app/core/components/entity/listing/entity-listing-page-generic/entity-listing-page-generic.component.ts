@@ -26,6 +26,11 @@ export class EntityListingPageGenericComponent implements OnInit {
     this.refresh();
   }
 
+  // clear
+  clear() {
+    this.listingContext.clearFilter();
+  }
+  
   // refresh
   refresh() {
     this.listingContext.refreshData();

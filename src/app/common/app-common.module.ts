@@ -29,6 +29,8 @@ import { MenuItemService } from './services/menu-item.service';
 import { RouterModule } from '@angular/router';
 import { LocalNavComponent } from './components/layout/local-nav/local-nav.component';
 import { ToastMessageListComponent } from './components/toast/toast-message-list/toast-message-list.component';
+import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
+import { TileComponent } from './components/layout/tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { ToastMessageListComponent } from './components/toast/toast-message-list
     NumberFieldComponent,
     LookupFieldComponent,
     UtcDateTimePipe,
+    UtcDateTimeSincePipe,
     LookupDialogContainerComponent,
     CustomerLookupDialogComponent,
     CardGroupComponent,
@@ -51,7 +54,8 @@ import { ToastMessageListComponent } from './components/toast/toast-message-list
     SimulateUserComponent,
     UserFullnamePipe,
     LocalNavComponent,
-    ToastMessageListComponent    
+    ToastMessageListComponent,
+    TileComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -86,8 +90,10 @@ import { ToastMessageListComponent } from './components/toast/toast-message-list
     SimulateUserComponent,
     LocalNavComponent,
     ToastMessageListComponent,
+    TileComponent,
 
     UtcDateTimePipe,
+    UtcDateTimeSincePipe,
     ExcludeDeletedPipe,
     UserFullnamePipe 
   ]

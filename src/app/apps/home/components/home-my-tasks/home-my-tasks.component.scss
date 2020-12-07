@@ -1,0 +1,7 @@
+.list-group-item {
+    border-width: 0;
+
+    &.view-all-row {
+        border-top-width: 1px;
+    }
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AdminMenuItemsService } from '../../services/admin-menu-items.service';
 
 @Component({
   selector: 'app-admin-home-page',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomePageComponent implements OnInit {
 
-  constructor() { }
+  // menu items
+  menuItems$ : Observable<any> = this.menuItems.menuItems$;
+
+  // new
+  constructor(
+    private menuItems : AdminMenuItemsService
+  ) { }
 
   ngOnInit() {
   }
