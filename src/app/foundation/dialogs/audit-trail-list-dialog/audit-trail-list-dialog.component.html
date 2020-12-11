@@ -23,7 +23,7 @@
                     <strong>{{ item.createDateTime | utcDateTime:'medium' }}</strong>
                 </div>                
                 <div>
-                    <small>{{ item.createUser | userFullname | async }}</small>
+                    <small>{{ item.createUserId | userFullname | async }}</small>
                 </div>
                 <div>
                     <span class="badge badge-primary">{{ item.recordTypeText }}</span>

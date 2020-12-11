@@ -21,7 +21,7 @@ export class AppAuthGuard implements CanActivate {
     
       // subcribe to auth changes
       this.userContext.isAuthenticated$.subscribe(isAuthenticated => {
-        
+        console.log(`isauthed: ${isAuthenticated}`);
         if(!isAuthenticated) {
           localStorage.setItem("apps:requestedUrl", window.location.pathname);        
           this.router.navigate(["/login"]);

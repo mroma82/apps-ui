@@ -18,7 +18,7 @@
         </div>
       </div>
       <div>
-        <small>{{ item.createUser | userFullname | async }} on {{ item.createDateTime | date }}</small>
+        <small>{{ item.createUserId | userFullname | async }} on {{ item.createDateTime | date }}</small>
       </div>
       <div *ngIf="!item.editPending">
         {{ item.description }}

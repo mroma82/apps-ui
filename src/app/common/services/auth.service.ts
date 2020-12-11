@@ -53,8 +53,8 @@ export class AuthService {
   }
 
   // impersonate
-  impersonate(username: string) : Observable<any> {
-    return this.http.postAsActualUser(`/auth/impersonate/${username}`, null);
+  impersonate(userId: string) : Observable<any> {
+    return this.http.postAsActualUser(`/auth/impersonate/${userId}`, null);
   }
 
   // save
@@ -74,6 +74,12 @@ export class AuthService {
     return this.http.get("/auth/getUsers");
   }
 
+  // get admin roles
+  getAdminRoles() : Observable<any> {
+    return this.http.get("/auth/getAdminRoles");
+  }
+
+
   // get groups
   getGroups() : Observable<any> {
     return this.http.get("/auth/getGroups");
@@ -89,8 +95,8 @@ export class AuthService {
     return this.http.post("/auth/updateUserPermission", model);
   }
 
-  // get username
-  getUserFullName(username: string) : Observable<any> {
-    return this.http.get(`/auth/getUserFullName/${username}`);
+  // get full name
+  getUserFullName(userId: string) : Observable<any> {
+    return this.http.get(`/auth/getUserFullName/${userId}`);
   }
 }

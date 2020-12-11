@@ -22,7 +22,7 @@ export class SimulateUserComponent implements OnInit {
 
   // model
   model = {
-    username: ""
+    userId: ""
   };
 
   // new
@@ -43,17 +43,17 @@ export class SimulateUserComponent implements OnInit {
   }
 
   // simulate user
-  simulateUser(username: string) {
-    if(username) {
-      this.userContext.simulateUser(username);
+  simulateUser(userId: string) {
+    if(userId) {
+      this.userContext.simulateUser(userId);
       this.state.simulatePending = false;
-      this.model.username = "";
+      this.model.userId = "";
     }
   }
 
   // clear impersonate
   clearImpersonate() {
     this.userContext.clearImpersonate();
-    this.model.username = "";
+    this.model.userId = "";
   }
 }

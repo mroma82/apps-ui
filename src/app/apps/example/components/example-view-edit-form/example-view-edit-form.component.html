@@ -51,7 +51,7 @@
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="viewModel.record.requestUserId" [disabled]="viewMode$ | async" name="requestUserId" label="Request User">
                     <option value="">-- Please select --</option>
-                    <option *ngFor="let item of userList$ | async" [value]="item.username" [selected]="item.username == viewModel.record.requestUserId">{{ item.name }}</option>
+                    <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == viewModel.record.requestUserId">{{ item.name }}</option>
                 </app-select-field>        
             </div>
         </div>

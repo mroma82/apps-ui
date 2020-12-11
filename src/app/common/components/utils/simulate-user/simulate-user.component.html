@@ -9,9 +9,9 @@
   <div *ngIf="state.simulatePending">
     <div class="d-flex flex-row">
       <div class="p-2">
-          <select class="form-control form-control-sm" [(ngModel)]="model.username" (change)="simulateUser(model.username)">
+          <select class="form-control form-control-sm" [(ngModel)]="model.userId" (change)="simulateUser(model.userId)">
               <option [value]="">-- Select a User --</option>
-              <option *ngFor="let item of userList$ | async" [value]="item.username">{{ item.name }}</option>
+              <option *ngFor="let item of userList$ | async" [value]="item.id">{{ item.name }}</option>
             </select>
       </div>
       <div class="p-2">          
