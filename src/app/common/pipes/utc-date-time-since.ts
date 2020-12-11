@@ -23,7 +23,7 @@ export class UtcDateTimeSincePipe implements PipeTransform {
 
       // check if minutes
       if(minutes < 60) {
-        return this.getText(minutes, "minutes");        
+      return this.getText(minutes, "minute");        
       }
 
       // check if hours
