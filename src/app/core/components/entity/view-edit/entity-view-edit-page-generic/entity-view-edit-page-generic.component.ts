@@ -6,6 +6,7 @@ import { RecordContextService } from 'src/app/common/services/record-context.ser
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { ExampleViewEditFormComponent } from 'src/app/apps/example/components/example-view-edit-form/example-view-edit-form.component';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-entity-view-edit-page-generic',
@@ -27,6 +28,10 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     workflow: this.entityConfig.workflow
   };
 
+  // state
+  entityRecord$ : Observable<any> = this.viewEditContext.entityRecord$;
+
+  // new
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,    

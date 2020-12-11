@@ -1,0 +1,11 @@
+
+<app-card-group title="Audit Details">
+  <div class="row">
+    <div class="col-md-6">
+      Created on <strong>{{ model.createDateTime | utcDateTime:'medium' }} by {{ model.createUserId | userFullname | async }}</strong>      
+    </div>
+    <div class="col-md-6">
+      Modified on <strong>{{ model.modifyDateTime | utcDateTime:'medium' }} by {{ model.modifyUserId | userFullname | async }}</strong>      
+    </div>
+  </div>
+</app-card-group> 

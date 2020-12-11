@@ -21,4 +21,5 @@
 <div>  
   <ng-content select="[form]"></ng-content>  
   <app-entity-view-edit></app-entity-view-edit>
+  <app-record-audit-info [model]="entityRecord$ | async"></app-record-audit-info>
 </div>
