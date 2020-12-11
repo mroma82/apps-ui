@@ -201,6 +201,7 @@ export class UserContextService {
     
     // stream with the profile
     return this.profile$.pipe(map(profile => {      
+      
       // check if no profile or roles
       if(!profile || !profile.role)
         return false;
