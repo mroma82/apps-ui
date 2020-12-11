@@ -12,9 +12,7 @@ import { Observable } from 'rxjs';
   selector: 'app-example-view-edit-page',
   templateUrl: './example-view-edit-page.component.html',
   styleUrls: ['./example-view-edit-page.component.scss'],
-  providers: [
-    RecordContextService,
-    EntityViewEditContextService,
+  providers: [        
     ExampleViewEditContextService
   ]
 })

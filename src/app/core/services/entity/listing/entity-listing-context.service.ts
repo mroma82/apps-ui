@@ -86,6 +86,10 @@ export class EntityListingContextService {
   // set view 
   setView(model: any) {
     this.view$.next(model);
+
+    if(model.sort) {
+      this.sort$.next(model.sort);
+    }
   }
 
   // set filter

@@ -13,7 +13,7 @@ import { EntityConfigurationService } from 'src/app/core/services/entity/entity-
   styleUrls: ['./entity-view-edit-page-generic.component.scss'],
   providers: [
     RecordContextService,
-    ExampleViewEditContextService
+    EntityViewEditContextService    
   ]
 })
 export class EntityViewEditPageGenericComponent implements OnInit {  

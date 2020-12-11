@@ -49,7 +49,12 @@ const routes: Routes = [
               { path: 'edit/:id', component: AdminWorkflowGroupEditPageComponent },
               { path: 'edit', redirectTo: '' }
             ]
-          }
+          },
+
+          {
+            path: 'security-roles',        
+            loadChildren: './security-roles/admin-security-roles.module#AdminSecurityRolesModule'
+          },
       ]
   }
 ];
