@@ -28,7 +28,7 @@
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
             <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button> 
             <button ngbDropdownItem (click)="showHistory()">History</button> 
-            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()">Refresh</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()">Rebuild</button> 
             <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button> 
             <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button> 
           </div>
