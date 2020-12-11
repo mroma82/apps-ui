@@ -55,6 +55,10 @@ const routes: Routes = [
             path: 'security-roles',        
             loadChildren: './security-roles/admin-security-roles.module#AdminSecurityRolesModule'
           },
+          {
+            path: 'system-users',        
+            loadChildren: './system-users/admin-system-users.module#AdminSystemUsersModule'
+          },
       ]
   }
 ];

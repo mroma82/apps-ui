@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3" *ngFor="let item of menuItems$ | async">  
+    <div class="col-lg-2 col-md-3" *ngFor="let item of menuItems$ | async">  
         <app-tile [title]="item.title" [url]="item.url" [description]="item.description"></app-tile>
     </div>  
 </div>

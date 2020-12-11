@@ -25,7 +25,10 @@ import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-bu
 @NgModule({
   declarations: [
     AdminSecurityRoleCreateComponent, 
-    AdminSecurityRoleViewEditComponent, AdminSecurityRoleEntitySubGridComponent, AdminSecurityRoleEntityCreateComponent, AdminSecurityRoleEntityEditComponent
+    AdminSecurityRoleViewEditComponent, 
+    AdminSecurityRoleEntitySubGridComponent, 
+    AdminSecurityRoleEntityCreateComponent, 
+    AdminSecurityRoleEntityEditComponent
   ],
   imports: [
     CommonModule,    
