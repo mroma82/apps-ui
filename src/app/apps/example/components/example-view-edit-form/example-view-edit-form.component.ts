@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BaseEntityViewEditComponent } from 'src/app/core/services/entity/abstractions/base-entity-view-edit-component';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { ExampleListsService } from '../../services/example-lists.service';
@@ -13,60 +14,29 @@ import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-
   templateUrl: './example-view-edit-form.component.html',
   styleUrls: ['./example-view-edit-form.component.scss']
 })
-export class ExampleViewEditFormComponent implements OnInit {
+export class ExampleViewEditFormComponent extends BaseEntityViewEditComponent {
   
-    
   // lists
   statusList$ : Observable<any>;  
   statusValueList$ : Observable<any>;  
   userList$ : Observable<any>;
 
-  // state
-  viewMode$ : Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
-
-  // model
-  viewModel : any = {
-    record: { 
-      customerId: "",
-      customerName: ""     
-    }
-  };
-
-  // subscriptions
-  subs = new Subscription();  
-
   // new
   constructor(
-    private context: EntityViewEditContextService,
+    context: EntityViewEditContextService,
     private lists: ExampleListsService    
-  ) {     
+  ) {   
+    super(context);
+
     // lists
     this.statusList$ = lists.userList$
     this.statusValueList$ = lists.statusValueList$;
     this.userList$ = lists.userList$;    
   }
-  
-  // init
-  ngOnInit() {    
-
-    // subscribe to record changes
-    this.subs.add(
-      this.context.entityRecord$.subscribe(x => {        
-        if(x) {          
-          this.viewModel.record = x;                  
-        }
-      })
-    );       
-  }
-
-  // destroy
-  ngOnDestroy() {    
-    this.subs.unsubscribe();
-  }
 
   // select
   setCustomer(customer) {
-    this.viewModel.record.customerId = customer.customerId;
-    this.viewModel.record.customerName = customer.customerName;
+    this.model.customerId = customer.customerId;
+    this.model.customerName = customer.customerName;
   }
 }

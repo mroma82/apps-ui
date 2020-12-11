@@ -9,9 +9,7 @@ export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
     viewMode$: Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
 
     // model
-    viewModel: any = {
-        record: {}
-    };
+    model: any = {};
 
     // subscriptions
     subs = new Subscription();
@@ -29,7 +27,7 @@ export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
         this.subs.add(
             this.context.entityRecord$.subscribe(x => {
                 if (x) {
-                    this.viewModel.record = x;
+                    this.model = x;
                 }
             })
         );

@@ -1,18 +1,18 @@
-<div *ngIf="viewModel.record.id">    
+<div *ngIf="model.id">    
     
   <app-card-group title="Details" class="mb-2">
       <div class="row">          
           <div class="col-md-2">
-              <app-text-field [(ngModel)]="viewModel.record.name" [disabled]="viewMode$ | async" label="Name" name="name"></app-text-field>     
+              <app-text-field [(ngModel)]="model.name" [disabled]="viewMode$ | async" label="Name" name="name"></app-text-field>     
           </div>
 
           <div class="col-md-2 pt-4">
-              <app-check-box-field [(ngModel)]="viewModel.record.isSysAdmin" label="System Administrator Role" [disabled]="viewMode$ | async" name="isSysAdmin"></app-check-box-field>
+              <app-check-box-field [(ngModel)]="model.isSysAdmin" label="System Administrator Role" [disabled]="viewMode$ | async" name="isSysAdmin"></app-check-box-field>
           </div>
       </div>
   </app-card-group>    
 
-  <app-card-group title="Entities" *ngIf="!viewModel.record.isSysAdmin">
+  <app-card-group title="Entities" *ngIf="!model.isSysAdmin">
     <app-admin-security-role-entity-sub-grid></app-admin-security-role-entity-sub-grid>
   </app-card-group>
 
