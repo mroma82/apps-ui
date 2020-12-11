@@ -10,7 +10,6 @@ import { AdminSecurityRolesListConfigurationService } from './services/admin-sec
 import { AdminSecurityRolesValidationService } from './services/admin-security-roles-validation.service';
 import { AdminSecurityRoleCreateComponent } from './components/admin-security-role-create/admin-security-role-create.component';
 import { AdminSecurityRoleViewEditComponent } from './components/admin-security-role-view-edit/admin-security-role-view-edit.component';
-import { AdminSecurityRolesRoutingModule } from './admin-security-roles-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -20,6 +19,8 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { AdminSecurityRoleEntitySubGridComponent } from './components/admin-security-role-entity-sub-grid/admin-security-role-entity-sub-grid.component';
 import { AdminSecurityRoleEntityCreateComponent } from './components/admin-security-role-entity-create/admin-security-role-entity-create.component';
 import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
+import { RouterModule } from '@angular/router';
+import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,8 @@ import { AdminSecurityRoleEntityEditComponent } from './components/admin-securit
     AppFoundationModule,    
     NgxDatatableModule,
     FormsModule,
-    DatepickerModule,
-    AdminSecurityRolesRoutingModule
+    DatepickerModule,    
+    RouterModule.forChild(EntityRouteBuilder.build(null))
   ],
   providers: [
     EntityConfigurationService,

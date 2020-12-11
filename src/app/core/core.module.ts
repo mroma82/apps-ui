@@ -38,7 +38,7 @@ import { EntityProviderService } from './services/entity/entity-provider.service
     EntitySubGridViewEditModalComponent,
     EntitySubGridViewEditComponent,
     EntitySingleRecordPageGenericComponent,
-    EntitySingleRecordViewEditComponent
+    EntitySingleRecordViewEditComponent    
   ],
   imports: [
     CommonModule,     
