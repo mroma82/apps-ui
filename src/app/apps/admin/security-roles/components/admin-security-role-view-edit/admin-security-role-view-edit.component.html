@@ -12,8 +12,8 @@
       </div>
   </app-card-group>    
 
-  <app-card-group title="Entities">
-
+  <app-card-group title="Entities" *ngIf="!viewModel.record.isSysAdmin">
+    <app-admin-security-role-entity-sub-grid></app-admin-security-role-entity-sub-grid>
   </app-card-group>
 
   <app-card-group title="Users?">

@@ -17,11 +17,14 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
+import { AdminSecurityRoleEntitySubGridComponent } from './components/admin-security-role-entity-sub-grid/admin-security-role-entity-sub-grid.component';
+import { AdminSecurityRoleEntityCreateComponent } from './components/admin-security-role-entity-create/admin-security-role-entity-create.component';
+import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
 
 @NgModule({
   declarations: [
     AdminSecurityRoleCreateComponent, 
-    AdminSecurityRoleViewEditComponent
+    AdminSecurityRoleViewEditComponent, AdminSecurityRoleEntitySubGridComponent, AdminSecurityRoleEntityCreateComponent, AdminSecurityRoleEntityEditComponent
   ],
   imports: [
     CommonModule,    
@@ -43,7 +46,9 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
   ],
   entryComponents: [
     AdminSecurityRoleCreateComponent,
-    AdminSecurityRoleViewEditComponent
+    AdminSecurityRoleViewEditComponent,
+    AdminSecurityRoleEntityCreateComponent,
+    AdminSecurityRoleEntityEditComponent
   ]
 })
 export class AdminSecurityRolesModule { 

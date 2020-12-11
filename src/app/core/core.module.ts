@@ -21,6 +21,7 @@ import { EntitySubGridViewEditModalComponent } from './components/entity/sub-gri
 import { EntitySingleRecordPageGenericComponent } from './components/entity/single-record/entity-single-record-page-generic/entity-single-record-page-generic.component';
 import { EntitySingleRecordViewEditComponent } from './components/entity/single-record/entity-single-record-view-edit/entity-single-record-view-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EntityProviderService } from './services/entity/entity-provider.service';
 
 @NgModule({
   declarations: [    
@@ -49,7 +50,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppFoundationModule,    
   ],
   providers: [
-    EntityApiService
+    EntityApiService,
+    EntityProviderService
   ],
   exports: [
     EntityViewEditComponent,

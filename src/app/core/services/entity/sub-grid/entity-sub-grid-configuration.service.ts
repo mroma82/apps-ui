@@ -1,9 +1,9 @@
 
 export interface IEntitySubGridConfigurationService {
 
-  // create form
-  createFormComponent: any;
+  // create
+  createFormComponent?: any;  
 
   // edit form
-  editFormComponent: any;
+  editFormComponent?: any;  
 }

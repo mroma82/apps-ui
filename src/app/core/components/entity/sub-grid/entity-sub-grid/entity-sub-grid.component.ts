@@ -1,5 +1,5 @@
 import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
@@ -90,5 +90,19 @@ export class EntitySubGridComponent implements OnInit {
         this.context.delete(id).subscribe();          
       }
     });    
+  }
+
+  // get the column text
+  getColumnText(item: any, col: any) : Observable<any> {
+
+    // check if any display functions
+    if(col.displayFunc$)
+      return col.displayFunc$(item);
+
+    else if(col.displayFunc) 
+      return of(col.displayFunc(item));
+
+    // else just eh model
+    return of(item[col.model]);
   }
 }

@@ -1,0 +1,6 @@
+<div>
+  <app-select-field [(ngModel)]="model.entityTypeId" name="entityTypeId" label="Entity">
+    <option [ngValue]="null">-- Please select --</option>
+    <option *ngFor="let item of entityList$ | async" [value]="item.entityTypeId">{{ item.name }}</option>
+  </app-select-field>        
+</div>

@@ -1,0 +1,9 @@
+<app-entity-sub-grid
+  *ngIf="model$ | async as model"
+  [entityTypeId]="'64d60018-908c-4e7d-8e2c-a9ebad36c665'"  
+  [filter]="{securityRoleId: model.id}"
+  [sort]="{field: 'id'}"
+  [modelDefault]="{securityRoleId: model.id}"
+  [columns]="subGridColumns"
+  [config]="subGridConfig"
+></app-entity-sub-grid>
