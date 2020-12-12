@@ -26,8 +26,7 @@
     <ng-container *ngFor="let item of menuItems$ | async">          
       <li class="list-group-item" *ngIf="item.hasAccess$ | async">
         <a [routerLink]="item.url" (click)="hideMenu()">
-          <i [class]="item.icon + ' mr-2'"></i>
-          {{ item.title }}
+          <i [class]="item.icon + ' mr-2'"></i>{{ item.title }}
         </a>
       </li>
     </ng-container>

@@ -3,7 +3,10 @@ import { IMenuItem } from '../models/menu-item';
 import { UserContextService } from './user-context.service';
 import { debounce, map, mergeMap } from 'rxjs/operators';
 import { SecurityService } from './security.service';
-import { Observable, timer } from 'rxjs';
+import { combineLatest, Observable, of, timer } from 'rxjs';
+import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
+import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
+import { SecurityPermissionMask } from '../enums/security-permission-mask';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +16,6 @@ export class MenuItemService implements OnDestroy {
   // foundation menu
   readonly foundationMenu : IMenuItem[] = [
     { 
-      title: "Example App", description: "Demo application to display core functionality",
-      url: "/app/example", icon: "fas fa-shapes", 
-      hasAccess$: this.securityService.hasEntityView("e1d39dfa-2940-4434-a7e4-2c85d2d2fe47") 
-    },
-    { 
       title: "Admin", description: "Manage users and global settings",
       url: "/app/admin", icon: "fas fa-cogs", 
       hasAccess$: this.userContext.isAdmin$
@@ -26,15 +24,12 @@ export class MenuItemService implements OnDestroy {
 
 
   // app menu items
-  readonly appMenuItems: IMenuItem[] = [
-  ];
+  readonly appMenuItems = combineLatest(
 
-  // bull menu
-  readonly fullMenu = [
-    ...this.appMenuItems,
-    ...this.foundationMenu
-  ];
-
+    // example
+    this.createEntityApp("e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"),
+    this.createEntityApp("4ecc715d-8240-4498-8554-78099ca9f019")
+  );
 
   // observables
   menuItems$ : Observable<IMenuItem[]>;
@@ -42,15 +37,37 @@ export class MenuItemService implements OnDestroy {
   // new
   constructor(
     private userContext: UserContextService,
-    private securityService: SecurityService
+    private securityService: SecurityService,
+    private entityApi: EntityApiService,
+    private entityProvider: EntityProviderService
   ) { 
 
     // setup menu item
-    this.menuItems$ = userContext.profile$.pipe(debounce(() => timer(100)), map(x => this.fullMenu));    
+    this.menuItems$ = combineLatest(
+      userContext.profile$,
+      this.appMenuItems,
+      of(this.foundationMenu)
+    ).pipe(debounce(() => timer(100)), map(([,appsMenu, foundationMenu]) => {
+      return [
+        ...appsMenu,
+        ...foundationMenu
+      ]
+    }));    
   }    
 
   // cleanup
   ngOnDestroy() {
 
+  }
+
+  // function that adds an entity app
+  createEntityApp(entityTypeId: string) : Observable<IMenuItem> {
+    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => { return {
+      title: x.pluralName,
+      url: x.rootUrl,
+      icon: x.icon,
+      description: x.description,
+      hasAccess$: this.entityApi.hasAccess(entityTypeId, SecurityPermissionMask.View)
+    }}));
   }
 }

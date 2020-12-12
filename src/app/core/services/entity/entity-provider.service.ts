@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { filter, map, shareReplay } from 'rxjs/operators';
 import { IEntityDefinition } from '../../models/entity/entity-definition';
 import { EntityApiService } from './entity-api.service';
 
@@ -25,4 +25,9 @@ export class EntityProviderService {
   getEntityName(entityTypeId: string) : Observable<string> {
     return this.entities$.pipe(map(entities => entities.filter(x => x.entityTypeId == entityTypeId)[0].name));
   }  
+
+  // get entity
+  getEntity(entityTypeId: string) : Observable<IEntityDefinition> {
+    return this.entities$.pipe(map(x => x.find(x => x.entityTypeId == entityTypeId)));
+  }
 }
