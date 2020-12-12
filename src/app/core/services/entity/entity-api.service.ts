@@ -12,6 +12,11 @@ export class EntityApiService {
     private api: AppHttpClientService
   ) { }
 
+  // get all types
+  getTypes() : Observable<any> {
+    return this.api.get("/entityType/getAll");
+  }
+  
   // list results
   list(entityTypeId : string, model: any) : Observable<any> {
     return this.api.post(`/entity/${entityTypeId}/list`, model);

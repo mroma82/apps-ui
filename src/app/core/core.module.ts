@@ -22,6 +22,7 @@ import { EntitySingleRecordPageGenericComponent } from './components/entity/sing
 import { EntitySingleRecordViewEditComponent } from './components/entity/single-record/entity-single-record-view-edit/entity-single-record-view-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EntityProviderService } from './services/entity/entity-provider.service';
+import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
 
 @NgModule({
   declarations: [    
@@ -38,7 +39,8 @@ import { EntityProviderService } from './services/entity/entity-provider.service
     EntitySubGridViewEditModalComponent,
     EntitySubGridViewEditComponent,
     EntitySingleRecordPageGenericComponent,
-    EntitySingleRecordViewEditComponent    
+    EntitySingleRecordViewEditComponent,
+    EntityTypeNamePipe   
   ],
   imports: [
     CommonModule,     
@@ -63,7 +65,8 @@ import { EntityProviderService } from './services/entity/entity-provider.service
     EntityListingPageGenericComponent,
     EntitySubGridComponent,
     EntitySingleRecordPageGenericComponent,
-    EntitySingleRecordViewEditComponent
+    EntitySingleRecordViewEditComponent,
+    EntityTypeNamePipe
   ]
 })
 export class AppsCoreModule { }
