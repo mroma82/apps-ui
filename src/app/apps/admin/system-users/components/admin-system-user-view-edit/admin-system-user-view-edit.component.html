@@ -1,3 +1,28 @@
-<p>
-  admin-system-user-view-edit works!
-</p>
+
+<div class="row">
+
+  <div class="col-md-6">
+    <app-card-group title="Details">
+      <div>
+        <app-text-field [(ngModel)]="model.username" name="username" label="Username" [disabled]="viewMode$ | async"></app-text-field>
+      </div>
+      <div>
+        <app-text-field [(ngModel)]="model.fullName" name="fullName" label="Name" [disabled]="viewMode$ | async"></app-text-field>
+      </div>
+      <div>
+        <app-text-field [(ngModel)]="model.email" name="email" label="Email" [disabled]="viewMode$ | async"></app-text-field>
+      </div>
+    </app-card-group>
+  </div>
+
+  <div class="col-md-6">
+    <app-card-group title="Roles">
+
+      <div class="form-check mb-2" *ngFor="let role of roles$ | async">
+        <input type="checkbox" class="form-check-input" [id]="role.id" [(ngModel)]="userRoles[role.id]" (change)="setRole(role.id)" [disabled]="viewMode$ | async">
+        <label class="form-check-label" [for]="role.id">{{ role.name }}</label>
+      </div>
+      
+    </app-card-group>
+  </div>
+</div>

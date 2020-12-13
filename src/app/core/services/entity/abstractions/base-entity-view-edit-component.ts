@@ -28,10 +28,16 @@ export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
             this.context.entityRecord$.subscribe(x => {
                 if (x) {
                     this.model = x;
+                    
+                    // handle model change
+                    this.onModelChange(x);
                 }
             })
         );
     }
+
+    // event for on model change
+    onModelChange(model: any) { }
 
     // destroy
     ngOnDestroy() {

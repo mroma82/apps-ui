@@ -15,7 +15,7 @@ export class EntityViewEditContextService {
 
   // observables
   id$ = new BehaviorSubject<string>(null);
-  mode$ = new BehaviorSubject<"view" | "edit" | null>(null);
+  mode$ = new BehaviorSubject<"view" | "edit" | null>(null);  
   entityRecord$ = new BehaviorSubject<any>({});
 
   // lists
@@ -33,8 +33,7 @@ export class EntityViewEditContextService {
     private dialogService: DialogService,
     private entityConfig: EntityConfigurationService,    
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService    
-  ) { 
-    
+  ) {     
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
       if(x)
