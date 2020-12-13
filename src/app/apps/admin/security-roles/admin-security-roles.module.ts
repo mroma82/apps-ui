@@ -21,6 +21,7 @@ import { AdminSecurityRoleEntityCreateComponent } from './components/admin-secur
 import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
 import { RouterModule } from '@angular/router';
 import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ export class AdminSecurityRolesModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = "2d5c70e5-82a9-400e-8528-a10adf0972ba";
+    entityConfig.entityTypeId = EntityTypes.SecurityRole;
     entityConfig.rootUrl = "/app/admin/security-roles";
     entityConfig.name = "Security Role";
     entityConfig.pluralName = "Security Roles";

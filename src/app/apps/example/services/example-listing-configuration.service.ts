@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { title } from 'process';
 import { Observable, of } from 'rxjs';
+import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-view';
 import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 
 @Injectable({
@@ -10,7 +13,7 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
   constructor() { }
 
   // views
-  getViews() : Observable<any[]> {
+  getViews() : Observable<IEntityListingView[]> {
     return of([
       { id: "all", title: "All Examples", filter: { }},
       { id: "open", title: "Open Examples", filter: { status: 0 }},
@@ -19,7 +22,7 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
   }
 
   // columns
-  getColumns() : Observable<any[]> {
+  getColumns() : Observable<IEntityListingColumn[]> {
     return of([
       {
         model: "exampleId",
@@ -27,10 +30,12 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         isLink: true
       },
       {
-        model: "title"
+        model: "title",
+        title: "Title"
       },
-      {
+      {        
         model: "status",
+        title: "Status",
         displayFunc: x => {
           switch(x.status) {
             case 0: return "Open";

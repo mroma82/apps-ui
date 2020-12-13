@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppHttpClientService } from 'src/app/common/services/app-http-client.service';
 import { Observable, of, from } from 'rxjs';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
-import { ExampleEntityTypes } from '../example-entity-types';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,6 @@ export class ExampleService {
 
   // get parameters
   getParameters() : Observable<any> {
-    return this.entityApi.getSingle(ExampleEntityTypes.ExampleParameters);    
+    return this.entityApi.getSingle(EntityTypes.ExampleParameters);    
   }
 }

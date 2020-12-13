@@ -29,8 +29,8 @@ import { ExampleParametersPageComponent } from './pages/example-parameters-page/
 import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
-import { ExampleEntityTypes } from './example-entity-types';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 
 
 @NgModule({
@@ -43,7 +43,10 @@ import { EntitySecurityService } from 'src/app/core/services/entity/entity-secur
     ExampleListFilterComponent,    
     ExampleCreateComponent, 
     ExampleLineCreateComponent, 
-    ExampleLineViewEditComponent, ExampleLineSubGridComponent, ExampleParametersPageComponent, ExampleParametersComponent
+    ExampleLineViewEditComponent, 
+    ExampleLineSubGridComponent, 
+    ExampleParametersPageComponent, 
+    ExampleParametersComponent
   ],
   imports: [
     CommonModule,    
@@ -82,7 +85,7 @@ export class ExampleAppModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = ExampleEntityTypes.Example;
+    entityConfig.entityTypeId = EntityTypes.Example;
     entityConfig.rootUrl = "/app/example";
     entityConfig.name = "Example";
     entityConfig.pluralName = "Examples";

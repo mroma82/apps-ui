@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-view';
 import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 
 @Injectable()
@@ -8,7 +10,7 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
   constructor() { }
 
   // views
-  getViews() : Observable<any[]> {
+  getViews() : Observable<IEntityListingView[]> {
     return of([
       { 
         id: "all", 
@@ -22,7 +24,7 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
   }
 
   // columns
-  getColumns() : Observable<any[]> {
+  getColumns() : Observable<IEntityListingColumn[]> {
     return of([
       {
         model: "username",

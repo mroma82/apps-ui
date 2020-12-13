@@ -5,37 +5,32 @@ import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-vi
 import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 
 @Injectable()
-export class AdminSecurityRolesListConfigurationService implements IEntityListingConfigurationService {
+export class AdminListItemTypeListConfigurationService implements IEntityListingConfigurationService {
 
   constructor() { }
 
   // views
-  getViews() : Observable<IEntityListingView[]> {
+  getViews(): Observable<IEntityListingView[]> {
     return of([
-      { 
-        id: "all", 
-        title: "All Security Roles", 
-        filter: { }, 
+      {
+        id: "all",
+        title: "All Drop Down Lists",
+        filter: {},
         sort: {
-          field: "name"
+          field: "description"          
         }
       }
-    ]);
+    ])
   }
 
   // columns
-  getColumns() : Observable<IEntityListingColumn[]> {
+  getColumns(): Observable<IEntityListingColumn[]> {
     return of([
       {
-        model: "name",
-        title: "Name",
+        model: "description",
+        title: "Description",
         isLink: true
-      },
-      {
-        model: "isSysAdmin",
-        title: "Is System Administrator Role",
-        displayFunc: x => x.isSysAdmin ? "Yes" : "No"
       }
-    ]);
+    ])
   }
 }

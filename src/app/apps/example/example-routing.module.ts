@@ -6,8 +6,8 @@ import { ExampleListPageComponent } from './pages/example-list-page/example-list
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
-import { ExampleEntityTypes } from './example-entity-types';
 import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 
 // route options
 const routeOptions = {
@@ -30,6 +30,6 @@ export class ExampleRoutingModule {
   constructor(
     recordLock: RecordLockGuard,    
   ) {
-    recordLock.setContextType(ExampleEntityTypes.Example);
+    recordLock.setContextType(EntityTypes.Example);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-view';
 import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
@@ -12,7 +13,7 @@ export class EntityListingViewsComponent implements OnInit {
 
   // state
   selectedView$ : Observable<any> = this.listingContext.view$;
-  views$ : Observable<any[]> = this.listingConfig.getViews();
+  views$ : Observable<IEntityListingView[]> = this.listingConfig.getViews();
 
   // new
   constructor(

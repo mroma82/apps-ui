@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
@@ -12,7 +13,7 @@ export class EntityListingResultsComponent implements OnInit {
 
   // observables
   listItems$ : Observable<any[]> = this.context.listItems$;
-  columns$ : Observable<any[]> = this.config.getColumns();
+  columns$ : Observable<IEntityListingColumn[]> = this.config.getColumns();
   pageSize$ : Observable<number> = this.context.pageSize$;
   
   constructor(

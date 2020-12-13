@@ -26,6 +26,7 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
 import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.component';
 import { ToastMessageContextService } from './common/services/toast-message-context.service';
 import { HomeMyTasksComponent } from './apps/home/components/home-my-tasks/home-my-tasks.component';
+import { AppsCoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HomeMyTasksComponent } from './apps/home/components/home-my-tasks/home-
     AppRoutingModule,
     AppCommonModule,
     AppFoundationModule,
+    AppsCoreModule,
     NgbModule,
     FormsModule,
     HttpClientModule,

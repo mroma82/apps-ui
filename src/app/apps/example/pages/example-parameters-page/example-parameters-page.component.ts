@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { EntitySingleRecordViewEditContextService } from 'src/app/core/services/entity/single-record/entity-single-record-view-edit-context.service';
 import { ExampleParametersComponent } from '../../components/example-parameters/example-parameters.component';
-import { ExampleEntityTypes } from '../../example-entity-types';
 import { ExampleParametersValidationService } from '../../services/example-parameters-validation.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class ExampleParametersPageComponent implements OnInit {
   ) { 
 
     // entity settings
-    entityConfig.entityTypeId = ExampleEntityTypes.ExampleParameters;
+    entityConfig.entityTypeId = EntityTypes.ExampleParameters;
     entityConfig.viewEditFormComponent = ExampleParametersComponent
   }
 

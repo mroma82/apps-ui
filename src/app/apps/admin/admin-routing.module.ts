@@ -20,16 +20,6 @@ const routes: Routes = [
       component: AdminContainerComponent,
       children: [
           { path: '', component: AdminHomePageComponent },
-
-          {
-            path: 'list-items',
-            component: AdminListItemContainerComponent,
-            children: [
-              { path: '', component: AdminListItemListPageComponent },
-              { path: 'edit/:key', component: AdminListItemEditPageComponent },
-              { path: 'edit', redirectTo: '' }
-            ]
-          },
           
           { 
             path: 'permissions', 
@@ -59,6 +49,10 @@ const routes: Routes = [
             path: 'system-users',        
             loadChildren: './system-users/admin-system-users.module#AdminSystemUsersModule'
           },
+          {
+            path: 'list-items',        
+            loadChildren: './list-item-types/admin-list-item-type.module#AdminListItemTypeModule'
+          }
       ]
   }
 ];
