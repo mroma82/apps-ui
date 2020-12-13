@@ -27,6 +27,7 @@ export class ExampleLineSubGridComponent implements OnInit {
 
   // model
   model$ : Observable<any> = this.context.entityRecord$;
+  mode$ : Observable<'view' | 'edit'> = this.context.mode$;
   
   // sub grid config
   lineSubGridConfig : IEntitySubGridConfigurationService = {

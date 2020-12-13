@@ -25,7 +25,8 @@ export class AdminSecurityRoleEntitySubGridComponent implements OnInit {
 
   // model
   model$ : Observable<any> = this.context.entityRecord$;
-
+  mode$ : Observable<'view' | 'edit'> = this.context.mode$;
+  
   // sub grid config
   subGridConfig : IEntitySubGridConfigurationService = {    
     createFormComponent: AdminSecurityRoleEntityCreateComponent,    

@@ -22,12 +22,14 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
 })
 export class EntitySubGridComponent implements OnInit {
   @Input() entityTypeId : string;
+  @Input() mode : 'view' | 'edit';
   @Input() filter : any;
   @Input() sort: any;
   @Input() columns: any[];
   @Input() config: IEntitySubGridConfigurationService;  
   @Input() modelDefault : any;
-  @Input() validationService: IEntityValidationService
+  @Input() validationService: IEntityValidationService;
+
 
   // state
   items$ : Observable<any[]>;

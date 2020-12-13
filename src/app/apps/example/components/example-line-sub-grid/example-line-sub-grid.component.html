@@ -6,4 +6,5 @@
   [modelDefault]="{exampleId: model.id}"
   [columns]="[ {title: 'ID', model: 'id' }, {title: 'Title', model: 'title', isViewLink: true }, {title: 'Name', model: 'name'}]"
   [config]="lineSubGridConfig"
+  [mode]="mode$ | async"
 ></app-entity-sub-grid>
