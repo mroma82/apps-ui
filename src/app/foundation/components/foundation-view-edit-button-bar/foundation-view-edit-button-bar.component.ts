@@ -19,6 +19,7 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   @Input() entityId: string;
   @Input() entityTypeId: string;
   @Input() viewMode: boolean;
+  @Input() listPageUrl: string;
 
   // events
   @Output() onEdit = new EventEmitter<void>();
@@ -30,7 +31,7 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   constructor(
     private notesDialogContext: NotesListDialogContextService,
     private auditTrailContext: AuditTrailDialogContextService,
-    private attachmentsDialogContext : AttachmentDialogContextService,
+    private attachmentsDialogContext : AttachmentDialogContextService,    
     private dialogService : DialogService
   )
   {}

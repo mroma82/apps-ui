@@ -5,7 +5,8 @@
 <div class="d-flex mb-2">  
   <app-foundation-view-edit-button-bar 
     [entityId]="model.id" 
-    [entityTypeId]="model.entityTypeId" 
+    [entityTypeId]="model.entityTypeId"
+    [listPageUrl]="model.listPageUrl" 
     [viewMode]="model.mode == 'view'" 
     (onEdit)="edit()"
     (onSave)="save()" 

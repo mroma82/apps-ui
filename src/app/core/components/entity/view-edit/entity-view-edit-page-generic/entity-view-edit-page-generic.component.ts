@@ -25,7 +25,8 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     mode: null,
     
     entityTypeId: this.entityConfig.entityTypeId,
-    workflow: this.entityConfig.workflow
+    workflow: this.entityConfig.workflow,
+    listPageUrl: this.entityConfig.rootUrl
   };
 
   // state
