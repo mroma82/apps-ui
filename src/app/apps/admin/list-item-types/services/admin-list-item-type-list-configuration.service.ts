@@ -17,7 +17,7 @@ export class AdminListItemTypeListConfigurationService implements IEntityListing
         title: "All Drop Down Lists",
         filter: {},
         sort: {
-          field: "description"          
+          field: "description"
         }
       }
     ])

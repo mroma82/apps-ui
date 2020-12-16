@@ -1,10 +1,14 @@
-<div class="row">
+<div class="row" *ngIf="model.id">
 
   <div class="col-md-4">
-
     <app-card-group title="Details">
       <app-text-field name="description" label="Description" [(ngModel)]="model.description" [disabled]="viewMode$ | async"></app-text-field>
+    </app-card-group>    
+  </div>
+
+  <div class="col-md-8">
+    <app-card-group title="List Items">
+      <app-admin-list-item-sub-grid></app-admin-list-item-sub-grid>
     </app-card-group>
-    
   </div>
 </div>

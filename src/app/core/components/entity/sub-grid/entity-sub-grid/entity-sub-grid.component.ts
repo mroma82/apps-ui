@@ -47,7 +47,7 @@ export class EntitySubGridComponent implements OnInit {
   }
 
   ngOnInit() {
-        
+        console.log(this.filter);
     // hack
     this.context.entityTypeId$.next(this.entityTypeId);
     this.context.filter$.next(this.filter);        

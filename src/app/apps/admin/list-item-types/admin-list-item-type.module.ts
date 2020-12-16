@@ -19,11 +19,17 @@ import { AdminListItemTypeValidationService } from './services/admin-list-item-t
 import { AdminListItemTypeCreateComponent } from './components/admin-list-item-type-create/admin-list-item-type-create.component';
 import { AdminListItemTypeViewEditComponent } from './components/admin-list-item-type-view-edit/admin-list-item-type-view-edit.component';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
+import { AdminListItemViewEditComponent } from './components/admin-list-item-view-edit/admin-list-item-view-edit.component';
+import { AdminListItemCreateComponent } from './components/admin-list-item-create/admin-list-item-create.component';
+import { AdminListItemSubGridComponent } from './components/admin-list-item-sub-grid/admin-list-item-sub-grid.component';
 
 @NgModule({
   declarations: [
     AdminListItemTypeCreateComponent, 
-    AdminListItemTypeViewEditComponent
+    AdminListItemTypeViewEditComponent, 
+    AdminListItemViewEditComponent, 
+    AdminListItemCreateComponent, 
+    AdminListItemSubGridComponent
   ],
   imports: [
     CommonModule,    
@@ -45,7 +51,9 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
   ],
   entryComponents: [
     AdminListItemTypeCreateComponent, 
-    AdminListItemTypeViewEditComponent
+    AdminListItemTypeViewEditComponent,
+    AdminListItemViewEditComponent, 
+    AdminListItemCreateComponent
   ]
 })
 export class AdminListItemTypeModule { 

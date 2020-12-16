@@ -1,6 +1,6 @@
 
 export interface IEntitySubGridConfigurationService {
-
+  
   // create
   createFormComponent?: any;  
 

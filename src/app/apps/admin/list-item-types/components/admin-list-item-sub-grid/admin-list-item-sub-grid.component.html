@@ -1,9 +1,9 @@
 <app-entity-sub-grid
   *ngIf="model$ | async as model"
   [entityTypeId]="entityTypeId"  
-  [filter]="{securityRoleId: model.id}"
-  [sort]="{field: 'id'}"
-  [modelDefault]="{securityRoleId: model.id}"
+  [filter]="{typeId: model.id}"
+  [sort]="{field: 'sortOrder'}"
+  [modelDefault]="{typeId: model.id}"
   [columns]="subGridColumns"
   [config]="subGridConfig"
   [mode]="mode$ | async"

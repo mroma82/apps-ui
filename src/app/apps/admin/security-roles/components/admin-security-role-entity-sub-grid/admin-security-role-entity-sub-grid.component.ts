@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
+import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
@@ -18,14 +21,10 @@ import { AdminSecurityRoleEntityEditComponent } from '../admin-security-role-ent
     { provide: ENTITY_VALIDATION, useClass: AdminSecurityRolesEntityValidationService }
   ]
 })
-export class AdminSecurityRoleEntitySubGridComponent implements OnInit {
-
-  // state
-  viewMode$ : Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
-
-  // model
-  model$ : Observable<any> = this.context.entityRecord$;
-  mode$ : Observable<'view' | 'edit'> = this.context.mode$;
+export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridComponent {
+  
+  // entity tyoe
+  entityTypeId: string = EntityTypes.SecurityRoleEntity;
   
   // sub grid config
   subGridConfig : IEntitySubGridConfigurationService = {    
@@ -34,19 +33,18 @@ export class AdminSecurityRoleEntitySubGridComponent implements OnInit {
   };
 
   // columns
-  subGridColumns = [ 
+  subGridColumns : IEntityListingColumn[] = [ 
     {
       title: 'Entity Type', 
-      displayFunc$: (x) => {
-        return this.entityProvider.getEntityName(x.entityTypeId)
-      }
+      model: "permissionMask",
+      displayFunc$: (x) => this.entityProvider.getEntityName(x.entityTypeId)
     },
     
-    { title: "View", displayFunc: (x) => this.hasMask(SecurityPermissionMask.View, x.permissionMask) },
-    { title: "Edit", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Edit, x.permissionMask) },
-    { title: "Add", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Add, x.permissionMask) },
-    { title: "Delete", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Delete, x.permissionMask) },
-    { title: "Workflow Admin", displayFunc: (x) => this.hasMask(SecurityPermissionMask.WorkflowAdmin, x.permissionMask) },
+    { title: "View", model: "permissionMask", displayFunc: (x) => this.hasMask(SecurityPermissionMask.View, x.permissionMask) },
+    { title: "Edit", model: "permissionMask", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Edit, x.permissionMask) },
+    { title: "Add", model: "permissionMask", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Add, x.permissionMask) },
+    { title: "Delete", model: "permissionMask", displayFunc: (x) => this.hasMask(SecurityPermissionMask.Delete, x.permissionMask) },
+    { title: "Workflow Admin", model: "permissionMask", displayFunc: (x) => this.hasMask(SecurityPermissionMask.WorkflowAdmin, x.permissionMask) },
   ]
 
   // mask helper
@@ -60,11 +58,9 @@ export class AdminSecurityRoleEntitySubGridComponent implements OnInit {
 
   // bnew
   constructor(
-    private context: EntityViewEditContextService,
+    context: EntityViewEditContextService,
     private entityProvider: EntityProviderService
-  ) { }
-
-  ngOnInit() {
+  ) { 
+    super(context);
   }
-
 }

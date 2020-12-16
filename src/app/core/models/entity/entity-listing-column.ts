@@ -6,5 +6,5 @@ export interface IEntityListingColumn {
     title: string;
     isLink?: boolean;
     displayFunc?: any;
-    displayFunc$?: Observable<any>;
+    displayFunc$?: any;
 }
