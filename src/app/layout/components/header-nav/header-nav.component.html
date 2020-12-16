@@ -1,4 +1,4 @@
-<ul class="navbar-nav mr-auto">
+<ul class="navbar-nav mr-auto d-print-none">
 
   <li class="nav-item active" *ngIf="app$ | async as app">
     <a class="nav-link">{{ app }}</a>
@@ -8,3 +8,12 @@
     <a class="nav-link">{{ title }}</a>
   </li>
 </ul>
+
+<div class="d-none d-print-block">
+  <span *ngIf="app$ | async as app">
+    {{ app }}
+  </span>
+  <span *ngIf="title$ | async as title">
+    : {{ title }}
+  </span>
+</div>

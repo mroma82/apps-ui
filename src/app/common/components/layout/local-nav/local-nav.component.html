@@ -1,4 +1,4 @@
-<ul class="nav bg-light mb-2 local-nav navbar-light bg-light">
+<ul class="nav bg-light mb-2 local-nav navbar-light bg-light d-print-none">
 
   <li class="nav-item" *ngFor="let item of items">
     <a class="nav-link" *ngIf="isShowing(item) | async" [routerLink]="item.url">{{ item.title }}</a>

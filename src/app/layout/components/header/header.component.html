@@ -4,10 +4,6 @@
     <a class="navbar-brand" href="javascript:;;" (click)="toggleMenu()">
       <i class="fas fa-bars mr-2"></i> Apps
     </a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <app-header-nav></app-header-nav>    
@@ -33,4 +29,9 @@
 
     <li class="list-group-item border-top"><a routerLink="/logout" (click)="hideMenu()"><i class="fas fa-sign-out-alt mr-2"></i>Log Out</a></li>
   </ul>
+</div>
+
+<div class="d-none d-print-block">
+  <h2>Apps</h2>
+  <app-header-nav></app-header-nav>   
 </div>

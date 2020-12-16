@@ -1,4 +1,4 @@
-<div *ngIf="(isAdmin$ | async) || (isImpersonating$ | async)" class="d-flex flex-row">    
+<div *ngIf="(isAdmin$ | async) || (isImpersonating$ | async)" class="d-flex flex-row d-print-none">    
   
   <div *ngIf="!state.simulatePending" class="p-2">
     <button class="btn btn-primary btn-sm" (click)="state.simulatePending = true;"><i class="fas fa-user-secret mr-1"></i> Simulate</button>

@@ -7,7 +7,7 @@
         <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
         <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
         <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
-        <span class="badge badge-primary ml-2 clickable" *ngIf="instance.isActive" (click)="showAssigned()">
+        <span class="badge badge-primary ml-2 clickable d-print-none" *ngIf="instance.isActive" (click)="showAssigned()">
           {{ getAssignedTo(instance) }}
         </span>  
         
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-sm-6 d-print-none">
         
         <div ngbDropdown class="d-inline-block float-right" placement="bottom-right">
           <button class="btn btn-link dropdown-toggle-icon" id="workflowMenu" ngbDropdownToggle>
