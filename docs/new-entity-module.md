@@ -3,8 +3,10 @@
 Create the module:
 `ng g m apps/admin/admin-drop-down-list --spec false`
 
+cd into directory
+
 Add List configuration
-`ng g s apps/admin/drop-down-list/services/admin-drop-down-list-list-configuration --spec false`
+`ng g s services/admin-workflow-group-list-configuration --spec false`
 
 Implement
 `implements IEntityListingConfigurationService`
@@ -106,3 +108,5 @@ export class AdminSecurityRolesModule {
   }
 }
 ```
+
+Add route to main module
