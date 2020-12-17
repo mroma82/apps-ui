@@ -10,7 +10,7 @@ export const EntityTypes = {
   , SecurityRoleEntity: "64d60018-908c-4e7d-8e2c-a9ebad36c665"
   , ListItemType: "77fe6ec9-ad14-4285-8fa8-7fb22bf43f83"
   , ListItem: "b72d0250-ba61-4fd5-8a36-3976af445e8d"
-  , WorkflowGroup: ""
+  , WorkflowGroup: "3526b1cb-3b2e-4373-8a55-68157e7e3611"
 
   // example
   , Example: "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"

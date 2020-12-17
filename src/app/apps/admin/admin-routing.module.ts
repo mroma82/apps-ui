@@ -31,16 +31,6 @@ const routes: Routes = [
             ]
           },
 
-          { 
-            path: 'workflow-groups', 
-            component: AdminWorkflowGroupContainerComponent,
-            children: [
-              { path: '', component: AdminWorkflowGroupListPageComponent },
-              { path: 'edit/:id', component: AdminWorkflowGroupEditPageComponent },
-              { path: 'edit', redirectTo: '' }
-            ]
-          },
-
           {
             path: 'security-roles',        
             loadChildren: './security-roles/admin-security-roles.module#AdminSecurityRolesModule'
@@ -52,6 +42,10 @@ const routes: Routes = [
           {
             path: 'list-items',        
             loadChildren: './list-item-types/admin-list-item-type.module#AdminListItemTypeModule'
+          },
+          {
+            path: 'workflow-groups',        
+            loadChildren: './workflow-groups/admin-workflow-group.module#AdminWorkflowGroupModule'
           }
       ]
   }
