@@ -93,8 +93,15 @@ export class EntityCreateContextService {
 
   // clear
   clear() {
+
+    // model defeault
+    let modelDefault = {};
+    if(this.subGridContext) {
+      modelDefault = this.subGridContext.modelDefault$.value;
+    }
+
     this.model$.next({
-      ...this.subGridContext.modelDefault$.value
+      ...modelDefault
     });
   }
 }
