@@ -18,6 +18,7 @@ export class LookupFieldComponent extends ElementBase<string> {
   @Input() public readonly: boolean;
   @Input() public disabled: boolean;
   @Input() public name: string;  
+  @Input() public required: boolean;
   @Input() public allowManualEntry: boolean;
 
   @Output() public onLookup = new EventEmitter();  

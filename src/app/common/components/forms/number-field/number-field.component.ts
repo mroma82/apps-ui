@@ -18,6 +18,7 @@ export class NumberFieldComponent extends ElementBase<boolean> {
   @Input() public readonly: boolean;
   @Input() public disabled: boolean;
   @Input() public name: string;  
+  @Input() public required: boolean;
 
   @ViewChild(NgModel) model: NgModel;
 

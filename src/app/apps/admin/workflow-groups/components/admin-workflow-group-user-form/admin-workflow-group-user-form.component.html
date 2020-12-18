@@ -1,5 +1,5 @@
 <div>
-  <app-select-field [(ngModel)]="model.systemUserId" name="systemUserId" label="User">
+  <app-select-field [(ngModel)]="model.systemUserId" name="systemUserId" label="User" [required]="true">
     <option [ngValue]="null">-- Please select --</option>
     <option *ngFor="let item of users$ | async" [value]="item.value" [selected]="model.systemUserId == item.value">{{ item.text }}</option>
   </app-select-field> 

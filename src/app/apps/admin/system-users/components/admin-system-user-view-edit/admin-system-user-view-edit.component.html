@@ -4,13 +4,13 @@
   <div class="col-md-6">
     <app-card-group title="Details">
       <div>
-        <app-text-field [(ngModel)]="model.username" name="username" label="Username" [disabled]="viewMode$ | async"></app-text-field>
+        <app-text-field [(ngModel)]="model.username" name="username" label="Username" [disabled]="viewMode$ | async" [required]="true"></app-text-field>
       </div>
       <div>
-        <app-text-field [(ngModel)]="model.fullName" name="fullName" label="Name" [disabled]="viewMode$ | async"></app-text-field>
+        <app-text-field [(ngModel)]="model.fullName" name="fullName" label="Name" [disabled]="viewMode$ | async" [required]="true"></app-text-field>
       </div>
       <div>
-        <app-text-field [(ngModel)]="model.email" name="email" label="Email" [disabled]="viewMode$ | async"></app-text-field>
+        <app-text-field [(ngModel)]="model.email" name="email" label="Email" [disabled]="viewMode$ | async" [required]="true"></app-text-field>
       </div>
     </app-card-group>
   </div>

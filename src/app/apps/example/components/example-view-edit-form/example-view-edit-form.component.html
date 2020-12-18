@@ -7,7 +7,7 @@
             </div>
 
             <div class="col-md-2">
-                <app-text-field [(ngModel)]="model.title" [disabled]="viewMode$ | async" label="Title" name="name"></app-text-field>     
+                <app-text-field [(ngModel)]="model.title" [disabled]="viewMode$ | async" label="Title" name="name" [required]="true"></app-text-field>     
             </div>
 
             <div class="col-md-3">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-md-3">
-                <app-text-area-field [(ngModel)]="model.customerName" [disabled]="viewMode$ | async" label="Customer name" name="customerName" rows="3"></app-text-area-field>     
+                <app-text-area-field [(ngModel)]="model.customerName" [disabled]="viewMode$ | async" label="Customer name" name="customerName" rows="3" [required]="true"></app-text-area-field>     
             </div>
 
             <div class="col-md-3">

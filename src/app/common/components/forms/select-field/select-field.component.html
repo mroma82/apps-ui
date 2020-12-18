@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+    <label *ngIf="label" [attr.for]="identifier">{{label}}<span *ngIf="required" class="ml-1 text-danger">*</span></label>
     <select
         [disabled]="disabled"
         [attr.name]="name"

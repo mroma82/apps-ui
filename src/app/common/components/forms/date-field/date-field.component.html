@@ -1,7 +1,7 @@
 
 
 <div class="form-group">   
-    <label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+    <label *ngIf="label" [attr.for]="identifier">{{label}}<span *ngIf="required" class="ml-1 text-danger">*</span></label>
     <div class="input-group mb-3">
         <input      
           [disabled]="disabled"   
