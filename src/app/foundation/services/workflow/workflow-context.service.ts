@@ -1,10 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { WorkflowService } from './workflow.service';
 import { IEntity } from 'src/app/common/models/context';
 import { NotificationContextService } from '../notification/notification-context.service';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { AppContextService } from 'src/app/app-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,15 @@ export class WorkflowContextService implements OnDestroy {
   constructor(
     private service: WorkflowService,
     private notificationContext: NotificationContextService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private appContext: AppContextService
   ) { 
     
     // on context change
-    this.onContextChange = this.entity$.subscribe(x => {
+    this.onContextChange = combineLatest(
+      this.entity$,
+      this.appContext.User.profile$
+    ).subscribe(x => {
       this.refreshInstance()
     });
 
