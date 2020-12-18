@@ -31,6 +31,7 @@ import { LocalNavComponent } from './components/layout/local-nav/local-nav.compo
 import { ToastMessageListComponent } from './components/toast/toast-message-list/toast-message-list.component';
 import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
 import { TileComponent } from './components/layout/tile/tile.component';
+import { RouteProgressComponent } from './components/route-progress/route-progress.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { TileComponent } from './components/layout/tile/tile.component';
     UserFullnamePipe,
     LocalNavComponent,
     ToastMessageListComponent,
-    TileComponent    
+    TileComponent,
+    RouteProgressComponent    
   ],
   providers: [
     AppHttpClientService,
@@ -91,6 +93,7 @@ import { TileComponent } from './components/layout/tile/tile.component';
     LocalNavComponent,
     ToastMessageListComponent,
     TileComponent,
+    RouteProgressComponent,
 
     UtcDateTimePipe,
     UtcDateTimeSincePipe,
