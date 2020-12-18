@@ -19,11 +19,19 @@ import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/enti
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
+import { AdminWorkflowGroupUserSubGridComponent } from './components/admin-workflow-group-user-sub-grid/admin-workflow-group-user-sub-grid.component';
+import { AdminWorkflowGroupUserCreateComponent } from './components/admin-workflow-group-user-create/admin-workflow-group-user-create.component';
+import { AdminWorkflowGroupUserViewEditComponent } from './components/admin-workflow-group-user-view-edit/admin-workflow-group-user-view-edit.component';
+import { AdminWorkflowGroupUserFormComponent } from './components/admin-workflow-group-user-form/admin-workflow-group-user-form.component';
 
 @NgModule({
   declarations: [
     AdminWorkflowGroupCreateComponent, 
-    AdminWorkflowGroupViewEditComponent
+    AdminWorkflowGroupViewEditComponent, 
+    AdminWorkflowGroupUserSubGridComponent, 
+    AdminWorkflowGroupUserCreateComponent, 
+    AdminWorkflowGroupUserViewEditComponent, 
+    AdminWorkflowGroupUserFormComponent
   ],
   imports: [
     CommonModule,    
@@ -45,7 +53,9 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
   ],
   entryComponents: [
     AdminWorkflowGroupCreateComponent, 
-    AdminWorkflowGroupViewEditComponent
+    AdminWorkflowGroupViewEditComponent,
+    AdminWorkflowGroupUserCreateComponent, 
+    AdminWorkflowGroupUserViewEditComponent
   ]
 })
 export class AdminWorkflowGroupModule { 

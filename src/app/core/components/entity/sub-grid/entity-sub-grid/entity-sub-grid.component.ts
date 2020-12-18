@@ -1,5 +1,6 @@
 import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
@@ -100,7 +101,7 @@ export class EntitySubGridComponent implements OnInit {
     // check if any display functions
     if(col.displayFunc$)
       return col.displayFunc$(item);
-
+      
     else if(col.displayFunc) 
       return of(col.displayFunc(item));
 

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="model.id">
   
   <div class="col-md-4">
     <app-card-group title="Details">
@@ -8,7 +8,7 @@
 
   <div class="col-md-8">
     <app-card-group title="Users">
-      
+      <app-admin-workflow-group-user-sub-grid></app-admin-workflow-group-user-sub-grid>
     </app-card-group>
   </div>
 

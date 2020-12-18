@@ -31,7 +31,7 @@ export class EntityCreateContextService {
 
   // open dialog
   openDialog() {
-    this.clear();    
+    this.clear(); 
     this.dialogOpen$.next(true);
   }
 
@@ -43,16 +43,9 @@ export class EntityCreateContextService {
   // create
   create() {
     
-    // check if a default value
-    var modelDefault = null;
-    if(this.subGridContext !== null) {
-      modelDefault = this.subGridContext.modelDefault$.value;
-    }
-
     // get hte model
     const model = {
-      ...this.model$.value,
-      ...modelDefault
+      ...this.model$.value
     };
 
     // check if validation
@@ -100,6 +93,8 @@ export class EntityCreateContextService {
 
   // clear
   clear() {
-    this.model$.next({});
+    this.model$.next({
+      ...this.subGridContext.modelDefault$.value
+    });
   }
 }

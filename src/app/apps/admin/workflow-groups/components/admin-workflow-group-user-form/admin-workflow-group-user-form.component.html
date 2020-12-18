@@ -1,0 +1,18 @@
+<div>
+  <app-select-field [(ngModel)]="model.systemUserId" name="systemUserId" label="User">
+    <option [ngValue]="null">-- Please select --</option>
+    <option *ngFor="let item of users$ | async" [value]="item.value" [selected]="model.systemUserId == item.value">{{ item.text }}</option>
+  </app-select-field> 
+</div>
+
+<div>
+  <app-check-box-field [(ngModel)]="model.isActive" name="isActive" label="Active"></app-check-box-field>  
+</div> 
+
+<div>
+  <app-check-box-field [(ngModel)]="model.isNotified" name="isNotified" label="Send Notifications"></app-check-box-field>  
+</div> 
+
+<div>
+  <app-check-box-field [(ngModel)]="model.isDelegate" name="isDelegate" label="Delegate"></app-check-box-field>  
+</div>  

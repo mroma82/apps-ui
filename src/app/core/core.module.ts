@@ -23,6 +23,7 @@ import { EntitySingleRecordViewEditComponent } from './components/entity/single-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EntityProviderService } from './services/entity/entity-provider.service';
 import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
+import { SelectListService } from './services/select-list.service';
 
 @NgModule({
   declarations: [    
@@ -53,7 +54,8 @@ import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
   ],
   providers: [
     EntityApiService,
-    EntityProviderService
+    EntityProviderService,
+    SelectListService
   ],
   exports: [
     EntityViewEditComponent,

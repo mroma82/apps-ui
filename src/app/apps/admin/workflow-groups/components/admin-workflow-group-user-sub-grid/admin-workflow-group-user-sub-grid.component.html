@@ -1,0 +1,10 @@
+<app-entity-sub-grid
+  *ngIf="model$ | async as model"
+  [entityTypeId]="entityTypeId"  
+  [filter]="{workflowGroupId: model.id}"
+  [sort]="{field: 'id'}"
+  [modelDefault]="{ workflowGroupId: model.id, isActive: true, isNotified: true }"
+  [columns]="subGridColumns"
+  [config]="subGridConfig"
+  [mode]="mode$ | async"
+></app-entity-sub-grid>

@@ -11,6 +11,7 @@ export const EntityTypes = {
   , ListItemType: "77fe6ec9-ad14-4285-8fa8-7fb22bf43f83"
   , ListItem: "b72d0250-ba61-4fd5-8a36-3976af445e8d"
   , WorkflowGroup: "3526b1cb-3b2e-4373-8a55-68157e7e3611"
+  , WorkflowGroupUser: "a5df0c82-6bce-45a7-a1e0-dafebb3e775e"
 
   // example
   , Example: "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"
