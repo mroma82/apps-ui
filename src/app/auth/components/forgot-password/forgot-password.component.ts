@@ -1,23 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { UserContextService } from 'src/app/common/services/user-context.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { UserContextService } from 'src/app/common/services/user-context.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
   @ViewChild("usernameField") usernameField : ElementRef;
-
-  // state
-  showForgotPassword$ = of(true);
-
+  
   // model
   model = {
-    username: "",
-    password: ""
+    username: ""    
   };
 
   state = {
@@ -37,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   // login
-  login() {
+  reset() {
     
     // clear error
     this.state = {...this.state, ...{
@@ -45,16 +40,17 @@ export class LoginComponent implements OnInit {
       errorText:  ""
     }};
 
-    this.userContext.login(this.model).subscribe(x => {
-      if(x.success) {
-        this.router.navigateByUrl(x.nextUrl);
+    // set up password
+    this.userContext.sendPasswordSetup(this.model.username).subscribe(x => {
+      if(x) {  
+        this.router.navigateByUrl("/forgot-password-success");
       } else {
         this.state = {...this.state, ...{
           hasError: true,
           errorText:  x.text
         }}
       }
-    });
+    })
   }
 
 }

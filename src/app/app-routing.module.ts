@@ -5,6 +5,10 @@ import { HomePageComponent } from './apps/home/pages/home-page/home-page.compone
 import { AppAuthGuard } from './app-auth.guard';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.component';
+import { ForgotPasswordPageComponent } from './auth/pages/forgot-password-page/forgot-password-page.component';
+import { SetupPasswordPageComponent } from './auth/pages/setup-password-page/setup-password-page.component';
+import { ForgotPasswordSuccessPageComponent } from './auth/pages/forgot-password-success-page/forgot-password-success-page.component';
+import { SetupPasswordSuccessPageComponent } from './auth/pages/setup-password-success-page/setup-password-success-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +24,23 @@ const routes: Routes = [
     path: 'logout',
     component: LogoutPageComponent
   },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordPageComponent
+  },
+  {
+    path: 'forgot-password-success',
+    component: ForgotPasswordSuccessPageComponent
+  },
+  {
+    path: 'setup-password',
+    component: SetupPasswordPageComponent
+  },  
+  {
+    path: 'setup-password-success',
+    component: SetupPasswordSuccessPageComponent
+  },
+
   
   { 
     path: 'app',  

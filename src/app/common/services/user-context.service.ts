@@ -210,4 +210,13 @@ export class UserContextService {
       return profile.role.indexOf(key) > -1 || profile.role.indexOf("SysAdmin") > -1;
     }));
   }
+
+  // start the setup password process
+  sendPasswordSetup(username: string) : Observable<any> {
+
+    // post
+    return this.authService.sendPasswordSetup({
+      username: username
+    });
+  }
 }

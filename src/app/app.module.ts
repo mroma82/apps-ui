@@ -27,6 +27,12 @@ import { LogoutPageComponent } from './auth/pages/logout-page/logout-page.compon
 import { ToastMessageContextService } from './common/services/toast-message-context.service';
 import { HomeMyTasksComponent } from './apps/home/components/home-my-tasks/home-my-tasks.component';
 import { AppsCoreModule } from './core/core.module';
+import { ForgotPasswordPageComponent } from './auth/pages/forgot-password-page/forgot-password-page.component';
+import { SetupPasswordPageComponent } from './auth/pages/setup-password-page/setup-password-page.component';
+import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
+import { SetupPasswordComponent } from './auth/components/setup-password/setup-password.component';
+import { ForgotPasswordSuccessPageComponent } from './auth/pages/forgot-password-success-page/forgot-password-success-page.component';
+import { SetupPasswordSuccessPageComponent } from './auth/pages/setup-password-success-page/setup-password-success-page.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { AppsCoreModule } from './core/core.module';
     FooterComponent,
     LoginComponent,
     LoginPageComponent,
-    LogoutPageComponent
+    LogoutPageComponent,
+    ForgotPasswordPageComponent,
+    SetupPasswordPageComponent,
+    ForgotPasswordComponent,
+    SetupPasswordComponent,
+    ForgotPasswordSuccessPageComponent,
+    SetupPasswordSuccessPageComponent
   ],
   imports: [
     BrowserModule,

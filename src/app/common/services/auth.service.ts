@@ -62,6 +62,21 @@ export class AuthService {
     return this.http.post(`/auth/update`, null);
   }
 
+  // send password setup
+  sendPasswordSetup(request: { username: string }) : Observable<any> {
+    return this.http.post(`/auth/sendPasswordSetup`, request);
+  }
+
+  // validate password setup
+  validatePasswordSetup(request: { userId: string, setupId: string }) : Observable<any> {
+    return this.http.post("/auth/validatePasswordSetup", request);
+  }
+
+  // update password from setup
+  updatePasswordFromSetup(request: { userId: string, setupId: string, password: string }) : Observable<any> {
+    return this.http.post("/auth/updatePasswordFromSetup", request);
+  }
+
   // parse token
   parseToken(token: string) : any {
     let model = jwt_decode(token);
