@@ -67,6 +67,11 @@ export class AuthService {
     return this.http.post(`/auth/sendPasswordSetup`, request);
   }
 
+  // send password setup by id
+  sendPasswordSetupById(userId: string) : Observable<any> {
+    return this.http.post(`/auth/sendPasswordSetupById/${userId}`, null);
+  }
+
   // validate password setup
   validatePasswordSetup(request: { userId: string, setupId: string }) : Observable<any> {
     return this.http.post("/auth/validatePasswordSetup", request);

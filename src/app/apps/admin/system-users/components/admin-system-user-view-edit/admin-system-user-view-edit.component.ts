@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppContextService } from 'src/app/app-context.service';
 import { BaseEntityViewEditComponent } from 'src/app/core/services/entity/abstractions/base-entity-view-edit-component';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
@@ -21,7 +22,8 @@ export class AdminSystemUserViewEditComponent extends BaseEntityViewEditComponen
   // new
   constructor(
     viewEditContext : EntityViewEditContextService,
-    private entityApi : EntityApiService
+    private entityApi : EntityApiService,
+    private appContext: AppContextService
   ) {
     // base
     super(viewEditContext);
@@ -56,5 +58,19 @@ export class AdminSystemUserViewEditComponent extends BaseEntityViewEditComponen
     } else {
       this.model.roles.splice(this.model.roles.indexOf(roleId), 1);
     }    
+  }
+
+  // send password setup
+  sendPasswordSetup(isActivated: boolean) {
+
+    // send the password setup
+    this.appContext.User.sendPasswordSetupById(this.model.id).subscribe(x => {
+      // check ok
+      if(x) {
+        this.appContext.ToastMessage.add({
+          text: isActivated ? "Reset Password Email Sent" : "Password Setup Email Sent"
+        });
+      }
+    });
   }
 }

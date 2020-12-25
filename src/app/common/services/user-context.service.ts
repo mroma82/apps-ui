@@ -213,10 +213,13 @@ export class UserContextService {
 
   // start the setup password process
   sendPasswordSetup(username: string) : Observable<any> {
-
-    // post
     return this.authService.sendPasswordSetup({
       username: username
     });
+  }
+
+  // send password setup by id
+  sendPasswordSetupById(userId: string) : Observable<any> {
+    return this.authService.sendPasswordSetupById(userId);
   }
 }

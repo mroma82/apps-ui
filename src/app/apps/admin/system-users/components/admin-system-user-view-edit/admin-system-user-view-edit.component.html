@@ -13,6 +13,19 @@
         <app-text-field [(ngModel)]="model.email" name="email" label="Email" [disabled]="viewMode$ | async" [required]="true"></app-text-field>
       </div>
     </app-card-group>
+
+    <app-card-group title="Status">
+      <div class="form-group">
+        <label>Activated:</label> 
+        <span class="ml-2">{{ model.isActivated ? 'Yes' : 'No' }}</span>
+      </div>
+
+      <div class="form-group">
+        <button (click)="sendPasswordSetup(model.isActivated)" class="btn btn-primary">
+          {{ model.isActivated ? "Reset Password" : "Send Setup Password Email" }}
+        </button>
+      </div>
+    </app-card-group>
   </div>
 
   <div class="col-md-6">

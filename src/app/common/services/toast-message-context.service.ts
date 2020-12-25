@@ -18,7 +18,7 @@ export class ToastMessageContextService {
   constructor() { }
 
   // add
-  add(model: any) {
+  add(model: { text: string, url? : string }) {
 
     // build the message
     var message = {
