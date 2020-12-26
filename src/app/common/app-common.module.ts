@@ -32,6 +32,7 @@ import { ToastMessageListComponent } from './components/toast/toast-message-list
 import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
 import { TileComponent } from './components/layout/tile/tile.component';
 import { RouteProgressComponent } from './components/route-progress/route-progress.component';
+import { InstanceContextService } from './services/instance-context.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { RouteProgressComponent } from './components/route-progress/route-progre
     RouteProgressComponent    
   ],
   providers: [
+    InstanceContextService,
     AppHttpClientService,
     EntityRouteResolverService,
     IntegrationService,

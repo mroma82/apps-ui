@@ -1,13 +1,28 @@
 
-<div class="login-page">
+<div class="jumbotron jumbotron-fluid bg-primary text-white mb-0">
   <div class="container">
-    <div class="row justify-content-md-center">
+    <h1 class="display-4">Essential Apps</h1>
+    <p class="lead">Business applications to help your company succeed</p>
+  </div>
+</div>
+
+<div class="login-page pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login to your apps</h1>
+        <p *ngIf="showInstance">
+          Login using your instance number, username and password. Please contact your system administrator to locate your instance number or username.
+        </p>
+        <p *ngIf="!showInstance">
+          Login using your username and password. Please contact your system administrator to locate your username.
+        </p>
+      </div>
       <div class="col-md-4">
 
-        <div class="login-wrapper">
-          <div class="text-center">
-            <img src="assets/logo.svg" class="mb-3 img-logo" />
-            <h1 class="h3 mb-3 font-weight-normal">Please login below</h1>
+        <div class="">
+          <div class="text-center">            
+            
           </div>      
           <app-login></app-login>
         </div>

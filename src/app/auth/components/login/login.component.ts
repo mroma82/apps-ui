@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserContextService } from 'src/app/common/services/user-context.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { InstanceContextService } from 'src/app/common/services/instance-context.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,17 @@ import { of } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild("instanceField") instanceField : ElementRef;
   @ViewChild("usernameField") usernameField : ElementRef;
 
   // state
   showForgotPassword$ = of(true);
+  showInstance : boolean = this.instanceContext.instanceId === undefined;
+  instanceId : string = this.instanceContext.instanceId;
 
   // model
   model = {
+    instanceNumber: "",
     username: "",
     password: ""
   };
@@ -28,12 +33,16 @@ export class LoginComponent implements OnInit {
   // new
   constructor(
     private userContext: UserContextService,
+    private instanceContext: InstanceContextService,
     private router: Router
   ) { }
 
   // init
-  ngOnInit() {
-    this.usernameField.nativeElement.focus();
+  ngOnInit() {    
+    if(this.showInstance) 
+      this.instanceField.nativeElement.focus();
+    else
+      this.usernameField.nativeElement.focus();
   }
 
   // login
@@ -44,7 +53,8 @@ export class LoginComponent implements OnInit {
       hasError: false,
       errorText:  ""
     }};
-
+    
+    // login
     this.userContext.login(this.model).subscribe(x => {
       if(x.success) {
         this.router.navigateByUrl(x.nextUrl);

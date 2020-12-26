@@ -33,6 +33,7 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 import { SetupPasswordComponent } from './auth/components/setup-password/setup-password.component';
 import { ForgotPasswordSuccessPageComponent } from './auth/pages/forgot-password-success-page/forgot-password-success-page.component';
 import { SetupPasswordSuccessPageComponent } from './auth/pages/setup-password-success-page/setup-password-success-page.component';
+import { InstanceContextService } from './common/services/instance-context.service';
 
 @NgModule({
   declarations: [

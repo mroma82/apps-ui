@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { InstanceContextService } from './instance-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AppHttpClientService {
 
   // new    
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private instanceContext: InstanceContextService
   ) { 
 
   }
@@ -37,9 +39,12 @@ export class AppHttpClientService {
   }  
 
   // get headers
-  private getHeaders(token: string) : any {
+  private getHeaders(token: string) : any {        
+    
     return { 
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token) 
+      headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + token)
+        .set('X-Apps-Instance', this.instanceContext.instanceId ? this.instanceContext.instanceId : "") 
     };
   }
 

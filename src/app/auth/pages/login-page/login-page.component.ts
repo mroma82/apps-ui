@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InstanceContextService } from 'src/app/common/services/instance-context.service';
 
 @Component({
   selector: 'app-login-page',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  // state
+  showInstance : boolean = this.instanceContext.instanceId === undefined;
+  
+  // new
+  constructor(
+    private instanceContext : InstanceContextService
+  ) { }
 
+  // init
   ngOnInit() {
   }
 

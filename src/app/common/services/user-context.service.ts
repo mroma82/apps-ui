@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TouchSequence } from 'selenium-webdriver';
 import { AuthService } from './auth.service';
 import { isArray } from 'util';
+import { InstanceContextService } from './instance-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class UserContextService {
   
   // new
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private instanceContext: InstanceContextService
   ) { 
 
     // admin roles
@@ -135,13 +137,17 @@ export class UserContextService {
         this.isImpersonating$.next(false);
 
         // set profile
-        this.setProfile(this.authService.parseToken(x.token));
+        let profile = this.authService.parseToken(x.token);
+        this.setProfile(profile);
 
         // next url
         let nextUrl = window.localStorage.getItem("apps:requestedUrl");
         if(!nextUrl || nextUrl == "/login" || nextUrl == "/logout") {
           nextUrl = "/";
         }
+
+        // set instance
+        this.instanceContext.instanceId = profile.instance;
 
         // return ok
         return {
