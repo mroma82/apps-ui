@@ -1,11 +1,24 @@
 <div class="d-print-none">
   <button type="button" class="btn btn-primary" [routerLink]="listPageUrl" *ngIf="listPageUrl"><i class="fas fa-arrow-left"></i></button>
+  
   <button type="button" class="btn btn-primary" (click)="edit()" *ngIf="viewMode"><i class="fas fa-pencil-alt mr-1"></i> Edit</button>
   <button type="button" class="btn btn-primary" (click)="save()" *ngIf="!viewMode"><i class="far fa-save mr-1"></i> Save</button>
   <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode"><i class="far fa-save mr-1"></i>Save and Close</button>  
-  <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()"><i class="fas fa-paperclip mr-1"></i> Attachments</button>
-  <button type="button" class="btn btn-primary" (click)="openNotesDialog()"><i class="far fa-sticky-note mr-1"></i> Notes</button>
-  <button type="button" class="btn btn-primary" (click)="openAuditTrail()" *ngIf="hasAuditTrail$ | async"><i class="fas fa-history mr-1"></i> Audit Trail</button>
+  
+  <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()">
+    <i class="fas fa-paperclip mr-1"></i> Attachments
+    <span *ngIf="attachmentCount$ | async as attachmentCount" class="badge badge-warning ml-1">{{attachmentCount}}</span>
+  </button>
+  
+  <button type="button" class="btn btn-primary" (click)="openNotesDialog()">
+    <i class="far fa-sticky-note mr-1"></i> Notes
+    <span *ngIf="noteCount$ | async as noteCount" class="badge badge-warning ml-1">{{noteCount}}</span>
+  </button>
+
+  <button type="button" class="btn btn-primary" (click)="openAuditTrail()" *ngIf="hasAuditTrail$ | async">
+    <i class="fas fa-history mr-1"></i> Audit Trail
+  </button>
+  
   <button type="button" class="btn btn-primary" (click)="print()"><i class="fas fa-print mr-1"></i> Print</button>
   <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode"><i class="far fa-trash-alt mr-1"></i> Delete</button>
 

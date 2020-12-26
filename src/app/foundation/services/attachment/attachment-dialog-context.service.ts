@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RecordContextService } from 'src/app/common/services/record-context.service';
 import { AttachmentService } from './attachment.service';
 
@@ -10,6 +11,7 @@ export class AttachmentDialogContextService {
 
   // observables
   list$ = new BehaviorSubject<any>([]);  
+  count$ = this.list$.pipe(map(x => x.length));  
   dialogOpenClose$ = new BehaviorSubject<boolean>(false);
   dialogMode$ = new BehaviorSubject<string>("list");
   tempFile$ = new BehaviorSubject<any>({});

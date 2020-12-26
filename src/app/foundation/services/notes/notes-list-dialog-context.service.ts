@@ -11,13 +11,14 @@ export class NotesListDialogContextService {
 
   // list observable
   list$ = new BehaviorSubject<any[]>([]);
+  count$ = this.list$.pipe(map(x => x.length));
   dialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
   // new
   constructor(
     private recordContextService: RecordContextService,
     private notesService: NotesService
-  ) {    
+  ) {        
   }
 
   // refresh list

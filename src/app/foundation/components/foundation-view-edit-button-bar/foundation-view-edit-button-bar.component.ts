@@ -29,8 +29,12 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   @Output() onSaveClose = new EventEmitter<void>();
   @Output() onDelete = new EventEmitter<void>();
 
-  // state
+  // options
   hasAuditTrail$ : Observable<boolean> = of(false);
+
+  // counts
+  noteCount$ = this.notesDialogContext.count$;
+  attachmentCount$ = this.attachmentsDialogContext.count$;
 
   // new
   constructor(
@@ -47,6 +51,10 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
 
     // has audit trail
     this.hasAuditTrail$ = this.entityProvider.hasAuditTrail(this.entityTypeId);
+
+    // refresh lists
+    this.notesDialogContext.refreshList();
+    this.attachmentsDialogContext.refreshList();
   }
 
   // edit
