@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IMenuItem } from 'src/app/common/models/menu-item';
+import { MenuItemService } from 'src/app/common/services/menu-item.service';
 import { AdminMenuItemsService } from '../../../services/admin-menu-items.service';
 
 @Component({
@@ -11,20 +13,19 @@ import { AdminMenuItemsService } from '../../../services/admin-menu-items.servic
 export class AdminNavComponent implements OnInit {
 
   // observables
-  navItems$ : Observable<any> = this.menuItems.menuItems$;
-  
+  navItems$ : Observable<IMenuItem[]>;
+
   // new
   constructor(
-    private menuItems : AdminMenuItemsService
+    private menuItemService: MenuItemService
   ) {     
-    // set menu items
-    this.navItems$ = this.menuItems.menuItems$.pipe(map((x : any[]) => {
+    this.navItems$ = this.menuItemService.adminMenuItems$.pipe(map(lst => {
       return [
-        { title: "Home", url: "/app/admin" },
-        ...x
-      ];
-    }))
-  }
+        { title: "Home", url: "/app/admin", icon: "", description: "", hasAccess$: of(true) },
+        ...lst
+      ]
+    }));
+  }  
 
   // init
   ngOnInit() {

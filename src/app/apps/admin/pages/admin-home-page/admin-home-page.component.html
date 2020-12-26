@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2 col-md-3" *ngFor="let item of menuItems$ | async">  
-            <app-tile [title]="item.title" [url]="item.url" [description]="item.description"></app-tile>
-        </div>  
+        <ng-container *ngFor="let item of menuItems$ | async">
+            <div class="col-lg-2 col-md-3" *ngIf="item.hasAccess$ | async">      
+                <app-tile [title]="item.title" [description]="item.description" [url]="item.url" [icon]="item.icon"></app-tile>
+            </div>
+        </ng-container>        
     </div>
 </div>

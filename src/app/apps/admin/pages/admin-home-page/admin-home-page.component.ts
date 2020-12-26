@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AdminMenuItemsService } from '../../services/admin-menu-items.service';
+import { IMenuItem } from 'src/app/common/models/menu-item';
+import { MenuItemService } from 'src/app/common/services/menu-item.service';
 
 @Component({
   selector: 'app-admin-home-page',
@@ -9,14 +10,18 @@ import { AdminMenuItemsService } from '../../services/admin-menu-items.service';
 })
 export class AdminHomePageComponent implements OnInit {
 
-  // menu items
-  menuItems$ : Observable<any> = this.menuItems.menuItems$;
+  // observables
+  menuItems$ : Observable<IMenuItem[]>;
 
   // new
   constructor(
-    private menuItems : AdminMenuItemsService
-  ) { }
+    private menuItemService: MenuItemService
+  ) { 
 
+    // profile change
+    this.menuItems$ = this.menuItemService.adminMenuItems$;    
+  }  
+  
   ngOnInit() {
   }
 

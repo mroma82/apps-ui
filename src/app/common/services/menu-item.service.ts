@@ -7,6 +7,7 @@ import { combineLatest, Observable, of, timer } from 'rxjs';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { SecurityPermissionMask } from '../enums/security-permission-mask';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +27,22 @@ export class MenuItemService implements OnDestroy {
   // app menu items
   readonly appMenuItems = combineLatest(
 
-    // example
-    this.createEntityApp("e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"),
-    this.createEntityApp("4ecc715d-8240-4498-8554-78099ca9f019")
+    // apps
+    this.createEntityApp(EntityTypes.Example),
+    this.createEntityApp(EntityTypes.SystemUser)
+  );
+
+  // admin menu items
+  readonly adminMenuitems = combineLatest(
+    this.createEntityApp(EntityTypes.ListItemType),
+    this.createEntityApp(EntityTypes.SecurityRole),
+    this.createEntityApp(EntityTypes.SystemUser),
+    this.createEntityApp(EntityTypes.WorkflowGroup),
   );
 
   // observables
   menuItems$ : Observable<IMenuItem[]>;
+  adminMenuItems$ : Observable<IMenuItem[]>;
 
   // new
   constructor(
@@ -42,7 +52,7 @@ export class MenuItemService implements OnDestroy {
     private entityProvider: EntityProviderService
   ) { 
 
-    // setup menu item
+    // setup menu items
     this.menuItems$ = combineLatest(
       userContext.profile$,
       this.appMenuItems,
@@ -52,6 +62,14 @@ export class MenuItemService implements OnDestroy {
         ...appsMenu,
         ...foundationMenu
       ]
+    }));    
+
+    // setup admin menu items
+    this.adminMenuItems$ = combineLatest(
+      userContext.profile$,
+      this.adminMenuitems
+    ).pipe(debounce(() => timer(100)), map(([,menu]) => {
+      return menu
     }));    
   }    
 
