@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClientService } from './app-http-client.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
@@ -117,6 +117,8 @@ export class AuthService {
 
   // get full name
   getUserFullName(userId: string) : Observable<any> {
+    if(!userId) 
+      return of({ fullName: "" });
     return this.http.get(`/auth/getUserFullName/${userId}`);
   }
 }

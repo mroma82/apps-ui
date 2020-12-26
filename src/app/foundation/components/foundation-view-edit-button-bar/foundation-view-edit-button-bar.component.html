@@ -5,7 +5,7 @@
   <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode"><i class="far fa-save mr-1"></i>Save and Close</button>  
   <button type="button" class="btn btn-primary" (click)="openAttachmentsDialog()"><i class="fas fa-paperclip mr-1"></i> Attachments</button>
   <button type="button" class="btn btn-primary" (click)="openNotesDialog()"><i class="far fa-sticky-note mr-1"></i> Notes</button>
-  <button type="button" class="btn btn-primary" (click)="openAuditTrail()"><i class="fas fa-history mr-1"></i> Audit Trail</button>
+  <button type="button" class="btn btn-primary" (click)="openAuditTrail()" *ngIf="hasAuditTrail$ | async"><i class="fas fa-history mr-1"></i> Audit Trail</button>
   <button type="button" class="btn btn-primary" (click)="print()"><i class="fas fa-print mr-1"></i> Print</button>
   <button type="button" class="btn btn-primary" (click)="delete()" *ngIf="!viewMode"><i class="far fa-trash-alt mr-1"></i> Delete</button>
 

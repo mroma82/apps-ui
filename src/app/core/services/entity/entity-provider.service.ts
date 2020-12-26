@@ -30,4 +30,9 @@ export class EntityProviderService {
   getEntity(entityTypeId: string) : Observable<IEntityDefinition> {
     return this.entities$.pipe(map(x => x.find(x => x.entityTypeId == entityTypeId)));
   }
+
+  // has audit trail
+  hasAuditTrail(entityTypeId: string) : Observable<boolean> {
+    return this.getEntity(entityTypeId).pipe(map(x => x.hasAuditTrail));
+  }
 }

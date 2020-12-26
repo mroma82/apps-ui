@@ -4,6 +4,8 @@ import { AttachmentDialogContextService } from '../../services/attachment/attach
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
+import { Observable, of } from 'rxjs';
+import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 
 @Component({
   selector: 'app-foundation-view-edit-button-bar',
@@ -27,17 +29,24 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   @Output() onSaveClose = new EventEmitter<void>();
   @Output() onDelete = new EventEmitter<void>();
 
+  // state
+  hasAuditTrail$ : Observable<boolean> = of(false);
+
   // new
   constructor(
     private notesDialogContext: NotesListDialogContextService,
     private auditTrailContext: AuditTrailDialogContextService,
     private attachmentsDialogContext : AttachmentDialogContextService,    
-    private dialogService : DialogService
+    private dialogService : DialogService,
+    private entityProvider: EntityProviderService
   )
   {}
   
   // init
   ngOnInit() {
+
+    // has audit trail
+    this.hasAuditTrail$ = this.entityProvider.hasAuditTrail(this.entityTypeId);
   }
 
   // edit

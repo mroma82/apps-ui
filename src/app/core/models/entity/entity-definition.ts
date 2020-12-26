@@ -7,4 +7,5 @@ export interface IEntityDefinition {
     icon: string;
     description: string;
     rootUrl: string;
+    hasAuditTrail: boolean;
 }
