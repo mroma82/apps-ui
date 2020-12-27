@@ -60,6 +60,9 @@ export class AdminSystemUsersModule {
     entityConfig.name = "System User";
     entityConfig.pluralName = "System Users";
     
+    // record description
+    entityConfig.recordDescription = (x) => x.username;
+
     // create
     entityConfig.createFormComponent = AdminSystemUserCreateComponent;
 

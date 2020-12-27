@@ -70,6 +70,9 @@ export class AdminWorkflowGroupModule {
     entityConfig.rootUrl = "/app/admin/workflow-groups";
     entityConfig.name = "Workflow Group";
     entityConfig.pluralName = "Workflow Groups";
+
+    // record description
+    entityConfig.recordDescription = (x) => x.groupId;
     
     // create
     entityConfig.createFormComponent = AdminWorkflowGroupCreateComponent;

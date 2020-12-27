@@ -68,6 +68,9 @@ export class AdminSecurityRolesModule {
     entityConfig.rootUrl = "/app/admin/security-roles";
     entityConfig.name = "Security Role";
     entityConfig.pluralName = "Security Roles";
+
+    // record description
+    entityConfig.recordDescription = (x) => x.name;
     
     // create
     entityConfig.createFormComponent = AdminSecurityRoleCreateComponent;

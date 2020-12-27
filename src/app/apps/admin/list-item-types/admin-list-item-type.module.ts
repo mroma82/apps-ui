@@ -68,6 +68,9 @@ export class AdminListItemTypeModule {
     entityConfig.rootUrl = "/app/admin/list-items";
     entityConfig.name = "Drop Down List";
     entityConfig.pluralName = "Drop Down List";
+
+    // record description
+    entityConfig.recordDescription = (x) => x.description;
     
     // create
     entityConfig.createFormComponent = AdminListItemTypeCreateComponent;

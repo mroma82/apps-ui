@@ -57,9 +57,6 @@ export class EntityViewEditContextService {
     // get the data
     this.api.getSingleById(this.entityConfig.entityTypeId, this.id$.value).subscribe(x => {
       this.entityRecord$.next(x);
-
-      // set title
-      this.appContext.Layout.setTitle(x.exampleId);
     });
   }
 

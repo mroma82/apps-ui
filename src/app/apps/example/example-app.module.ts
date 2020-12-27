@@ -90,6 +90,9 @@ export class ExampleAppModule {
     entityConfig.name = "Example";
     entityConfig.pluralName = "Examples";
 
+    // record description
+    entityConfig.recordDescription = (x) => x.exampleId;
+    
     // workflow
     entityConfig.workflow.enabled = true;
     entityConfig.workflow.url = "/example/workflow";

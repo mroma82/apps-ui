@@ -7,6 +7,8 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { ExampleViewEditFormComponent } from 'src/app/apps/example/components/example-view-edit-form/example-view-edit-form.component';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { Observable } from 'rxjs';
+import { AppContextService } from 'src/app/app-context.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-entity-view-edit-page-generic',
@@ -38,7 +40,8 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     private router: Router,    
     private recordContext: RecordContextService,
     private entityConfig: EntityConfigurationService,
-    private viewEditContext : EntityViewEditContextService     
+    private viewEditContext : EntityViewEditContextService,
+    private appContext: AppContextService     
   ) {   
     
   }
@@ -59,11 +62,15 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     this.viewEditContext.setId(this.model.id);    
 
     // hack
-    switch(this.model.mode)
-    {
+    switch(this.model.mode) {
       case "view": this.viewEditContext.setMode("view"); break;
       case "edit": this.viewEditContext.setMode("edit"); break;
     }    
+
+    // set title
+    this.entityRecord$.pipe(map(x => this.entityConfig.recordDescription(x))).subscribe(x => {
+      this.appContext.Layout.setTitle(x);
+    });
   }  
 
   // edit

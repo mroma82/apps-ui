@@ -13,6 +13,7 @@ export class HeaderNavComponent implements OnInit {
   app$ : Observable<string> = this.layoutContext.appTitle$;
   title$ : Observable<string> = this.layoutContext.pageTitle$;
   
+  // new
   constructor(
     private layoutContext: LayoutContextService
   ) {     

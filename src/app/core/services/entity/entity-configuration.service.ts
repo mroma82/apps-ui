@@ -1,4 +1,5 @@
 import { Component, Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class EntityConfigurationService {
@@ -10,6 +11,11 @@ export class EntityConfigurationService {
 
   // entity info
   entityTypeId : string = "";
+
+  // define record description
+  recordDescription(model: any) : string {
+    return model.id;
+  }
   
   // workflow
   workflow = {

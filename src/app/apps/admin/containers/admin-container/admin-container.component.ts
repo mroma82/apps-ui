@@ -8,15 +8,7 @@ import { AppContextService } from 'src/app/app-context.service';
 })
 export class AdminContainerComponent implements OnInit {
 
-  // new
-  constructor(
-    appContext: AppContextService
-  ) { 
-    appContext.Layout.setApp("Administration");
-    appContext.Layout.setTitle(null);
-  }
-
+  // init
   ngOnInit() {
   }
-
 }
