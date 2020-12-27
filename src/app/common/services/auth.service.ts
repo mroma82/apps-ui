@@ -99,22 +99,6 @@ export class AuthService {
     return this.http.get("/auth/getAdminRoles");
   }
 
-
-  // get groups
-  getGroups() : Observable<any> {
-    return this.http.get("/auth/getGroups");
-  }
-
-  // get user permissions
-  getUserPermissions() : Observable<any> {
-    return this.http.get("/auth/getUserPermissions");
-  }
-
-  // upate user permission
-  updateUserPermission(model: any ) : Observable<any> {
-    return this.http.post("/auth/updateUserPermission", model);
-  }
-
   // get full name
   getUserFullName(userId: string) : Observable<any> {
     if(!userId) 
