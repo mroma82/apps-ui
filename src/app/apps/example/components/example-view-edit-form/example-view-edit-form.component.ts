@@ -20,6 +20,7 @@ export class ExampleViewEditFormComponent extends BaseEntityViewEditComponent {
   statusList$ : Observable<any>;  
   statusValueList$ : Observable<any>;  
   userList$ : Observable<any>;
+  departmentList$ : Observable<any>;
 
   // new
   constructor(
@@ -32,6 +33,7 @@ export class ExampleViewEditFormComponent extends BaseEntityViewEditComponent {
     this.statusList$ = lists.userList$
     this.statusValueList$ = lists.statusValueList$;
     this.userList$ = lists.userList$;    
+    this.departmentList$ = lists.departmentList$;
   }
 
   // select

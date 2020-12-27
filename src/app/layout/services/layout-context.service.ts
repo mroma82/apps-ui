@@ -18,7 +18,6 @@ export class LayoutContextService {
   
   // set page title
   setTitle(title: string) {
-    console.log(["setTitle", title]);
     this.pageTitle$.next(title);    
   }
 
@@ -31,7 +30,5 @@ export class LayoutContextService {
     combineLatest(this.appTitle$, this.pageTitle$).subscribe(([app, title]) => {
       titleService.setTitle(["Apps", app, title].filter(x => x !== null).join(" - "));
     });
-
-
   }
 }

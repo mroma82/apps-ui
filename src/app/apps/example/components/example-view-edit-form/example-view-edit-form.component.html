@@ -54,6 +54,13 @@
                     <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == model.requestUserId">{{ item.name }}</option>
                 </app-select-field>        
             </div>
+
+            <div class="col-md-3">
+                <app-select-field [(ngModel)]="model.departmentId" [disabled]="viewMode$ | async" name="departmentId" label="Department">
+                    <option value="">-- Please select --</option>
+                    <option *ngFor="let item of departmentList$ | async" [value]="item.id" [selected]="item.id == model.departmentId">{{ item.text }}</option>
+                </app-select-field>        
+            </div>
         </div>
     </app-card-group>
 

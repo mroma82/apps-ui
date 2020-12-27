@@ -14,6 +14,7 @@ export class ExampleListsService {
   userList$ : Observable<any>;
   statusList$ : Observable<any>;
   statusValueList$ : Observable<any>;
+  departmentList$ : Observable<any>;
 
   // new
   constructor(
@@ -29,8 +30,16 @@ export class ExampleListsService {
     this.statusList$ = this.getStatusList();    
 
     // get params    
-    this.statusValueList$ = service.getParameters().pipe(mergeMap(x => 
+    const params$ = service.getParameters();
+
+    // get status from params
+    this.statusValueList$ = params$.pipe(mergeMap(x => 
       listItems.getItemsByType(x.statusListTypeId).pipe(take(1))
+    ));
+
+    // get departments from params    
+    this.departmentList$ = params$.pipe(mergeMap(x => 
+      listItems.getItemsByType(x.departmentListTypeId).pipe(take(1))
     ));
   }
 

@@ -49,8 +49,12 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         title: "Number"
       },
       {
-        model: "statusValue",
-        title: "Status (Value)"
+        model: "requestUser.fullName",
+        title: "Requested By"
+      },
+      {
+        model: "department.text",
+        title: "Department"
       },
       {
         model: "workflowStateText",
