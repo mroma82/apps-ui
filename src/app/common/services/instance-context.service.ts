@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AppHttpClientService } from './app-http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,14 @@ export class InstanceContextService {
 
   // define instance
   instanceId : string;
+  instance$ : Observable<any>;
   
   // token
   private token = () => window.localStorage.getItem("apps:token"); 
   
   // init
   constructor(
-    private httpClient: HttpClient
+    httpClient: HttpClient
   ) { 
 
     // check query string
@@ -51,5 +53,14 @@ export class InstanceContextService {
         this.instanceId = model.instance;        
       }
     }
+
+    // http headers
+    const httpHeaders = { 
+      headers: new HttpHeaders()
+        .set('X-Apps-Instance', this.instanceId ? this.instanceId : "") 
+    };
+
+    // set the instance
+    this.instance$ = httpClient.get(`${environment.apiUrl}/instance/get`, httpHeaders).pipe(shareReplay(1));
   }
 }
