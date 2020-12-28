@@ -70,7 +70,7 @@ imports: [
     NgxDatatableModule,
     FormsModule,
     DatepickerModule,    
-    RouterModule.forChild(EntityRouteBuilder.build(null))
+    EntityRouteModule.forOptions(null);
   ],
   providers: [
     EntityConfigurationService,

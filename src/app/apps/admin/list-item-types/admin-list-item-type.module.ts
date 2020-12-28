@@ -8,7 +8,6 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
-import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -22,6 +21,7 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { AdminListItemViewEditComponent } from './components/admin-list-item-view-edit/admin-list-item-view-edit.component';
 import { AdminListItemCreateComponent } from './components/admin-list-item-create/admin-list-item-create.component';
 import { AdminListItemSubGridComponent } from './components/admin-list-item-sub-grid/admin-list-item-sub-grid.component';
+import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { AdminListItemSubGridComponent } from './components/admin-list-item-sub-
     NgxDatatableModule,
     FormsModule,
     DatepickerModule,    
-    RouterModule.forChild(EntityRouteBuilder.build(null))
+    EntityRouteModule.forOptions(null)
   ],
   providers: [
     EntityConfigurationService,

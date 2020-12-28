@@ -20,8 +20,8 @@ import { AdminSecurityRoleEntitySubGridComponent } from './components/admin-secu
 import { AdminSecurityRoleEntityCreateComponent } from './components/admin-security-role-entity-create/admin-security-role-entity-create.component';
 import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
 import { RouterModule } from '@angular/router';
-import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
+import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,8 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
     AppFoundationModule,    
     NgxDatatableModule,
     FormsModule,
-    DatepickerModule,    
-    RouterModule.forChild(EntityRouteBuilder.build(null))
+    DatepickerModule,
+    EntityRouteModule.forOptions(null)
   ],
   providers: [
     EntityConfigurationService,

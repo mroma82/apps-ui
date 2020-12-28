@@ -12,7 +12,6 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
-import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -23,6 +22,7 @@ import { AdminWorkflowGroupUserSubGridComponent } from './components/admin-workf
 import { AdminWorkflowGroupUserCreateComponent } from './components/admin-workflow-group-user-create/admin-workflow-group-user-create.component';
 import { AdminWorkflowGroupUserViewEditComponent } from './components/admin-workflow-group-user-view-edit/admin-workflow-group-user-view-edit.component';
 import { AdminWorkflowGroupUserFormComponent } from './components/admin-workflow-group-user-form/admin-workflow-group-user-form.component';
+import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { AdminWorkflowGroupUserFormComponent } from './components/admin-workflow
     NgxDatatableModule,
     FormsModule,
     DatepickerModule,    
-    RouterModule.forChild(EntityRouteBuilder.build(null))
+    EntityRouteModule.forOptions(null)
   ],
   providers: [
     EntityConfigurationService,

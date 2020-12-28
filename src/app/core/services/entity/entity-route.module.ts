@@ -1,14 +1,20 @@
-import { Routes } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { EntityContainerComponent } from '../../components/entity/container/entity-container/entity-container.component';
 import { EntityListingPageGenericComponent } from '../../components/entity/listing/entity-listing-page-generic/entity-listing-page-generic.component';
 import { EntityViewEditPageGenericComponent } from '../../components/entity/view-edit/entity-view-edit-page-generic/entity-view-edit-page-generic.component';
 
-export class EntityRouteBuilder {
+export class EntityRouteModule extends RouterModule {
 
-    // build
-    static build(options: any) : Routes {
-             
+    // route for options
+    static forOptions(options: any) : ModuleWithProviders<RouterModule> {
+        return this.forChild(this.build(options));
+    }
+    
+    // build with options
+    private static build(options: any) : Routes {
+
         // define container
         var containerComponent = EntityContainerComponent;
 

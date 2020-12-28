@@ -6,8 +6,8 @@ import { ExampleListPageComponent } from './pages/example-list-page/example-list
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
-import { EntityRouteBuilder } from 'src/app/core/services/entity/entity-route-builder';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
+import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 
 // route options
 const routeOptions = {
@@ -21,7 +21,9 @@ const routeOptions = {
 }
 
 @NgModule({
-  imports: [RouterModule.forChild(EntityRouteBuilder.build(routeOptions))],
+  imports: [
+    EntityRouteModule.forOptions(routeOptions)
+  ],
   exports: [RouterModule],
   providers: [RecordLockGuard]
 })
