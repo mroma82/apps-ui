@@ -1,5 +1,8 @@
 image: docker:stable
 
+services:
+  - docker:18.09-dind
+
 stages:
   - info
   - build
