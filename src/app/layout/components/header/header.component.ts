@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { IMenuItem } from 'src/app/common/models/menu-item';
 import { AppContextService } from 'src/app/app-context.service';
 import { MenuItemService } from 'src/app/common/services/menu-item.service';
+import { APP_VERSION } from 'src/app/app-version';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +12,10 @@ import { MenuItemService } from 'src/app/common/services/menu-item.service';
 })
 export class HeaderComponent implements OnInit {
 
+  // model
   model = {
-    showMenu: false
+    showMenu: false,
+    appVersion: APP_VERSION
   };
 
   // observables

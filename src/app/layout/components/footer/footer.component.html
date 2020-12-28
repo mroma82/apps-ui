@@ -10,9 +10,9 @@
     <div>
       <app-simulate-user></app-simulate-user>
     </div>
-    
+
     <div class="ml-auto p-2" *ngIf="instance$ | async as instance">
-      {{instance.number }}: {{ instance.name }}
+      <a class="btn btn-link btn-sm">{{instance.number }} : {{ instance.name }}</a>
     </div>
   </div>
 </footer>
