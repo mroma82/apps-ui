@@ -1,19 +1,15 @@
-import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { provideRoutes, RouterModule, Routes } from '@angular/router';
 import { RecordLockGuard } from 'src/app/foundation/record-lock-guard.service';
 import { EntityContainerComponent } from '../../components/entity/container/entity-container/entity-container.component';
 import { EntityListingPageGenericComponent } from '../../components/entity/listing/entity-listing-page-generic/entity-listing-page-generic.component';
 import { EntityViewEditPageGenericComponent } from '../../components/entity/view-edit/entity-view-edit-page-generic/entity-view-edit-page-generic.component';
 
+@NgModule()
 export class EntityRouteModule extends RouterModule {
 
     // route for options
     static forOptions(options: any) : ModuleWithProviders<RouterModule> {
-        return this.forChild(this.build(options));
-    }
-    
-    // build with options
-    private static build(options: any) : Routes {
 
         // define container
         var containerComponent = EntityContainerComponent;
@@ -45,7 +41,7 @@ export class EntityRouteModule extends RouterModule {
         if(!parametersRoute) parametersRoute = [];
          
         // return the template
-        return [
+        const routes = [
             {
                 path: '',
                 component: containerComponent,
@@ -58,5 +54,11 @@ export class EntityRouteModule extends RouterModule {
                 ]
             }
         ]; 
+
+        // return
+        return {
+            ngModule: RouterModule, 
+            providers: [provideRoutes(routes)]
+        };
     }
 }
