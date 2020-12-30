@@ -1,41 +1,39 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: apps-ui-stage
-  namespace: development
+  name: apps-ui-deployment
+  namespace: apps-staging
   labels:
-      app: apps-ui-stage
+      app: apps-ui-app
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: apps-ui-stage
+        app: apps-ui-app
     spec:
       containers:
-      - name: apps-ui-stage
+      - name: apps-ui-app
         image: registry.gitlab.com/roma-code/apps/apps-ui:stage
         ports:
         - containerPort: 80
-      nodeSelector:
-        env: development
       imagePullSecrets:
       - name: gitlab-regcred-romacode
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: apps-ui-stage
-  namespace: development
+  name: apps-ui-service
+  namespace: apps-staging
   labels:
-    app: apps-ui-stage
+    app: apps-ui-app
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 80
   selector:
-    app: apps-ui-stage
+    app: apps-ui-app
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -47,10 +45,10 @@ metadata:
       if ($http_x_forwarded_proto = 'http'){
         return 301 https://$host$request_uri;
       }
-  name: apps-ui-stage
-  namespace: development
+  name: apps-ui-ingress
+  namespace: apps-staging
   labels:
-    app: apps-ui-stage
+    app: apps-ui-app
 spec:
   rules:
   - host: apps-stage.roma-cloud.com
@@ -58,5 +56,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: apps-ui-stage
+          serviceName: apps-ui-app
           servicePort: 8080      
