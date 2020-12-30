@@ -22,7 +22,7 @@ const routeOptions = {
 
 @NgModule({
   imports: [
-    //EntityRouteModule.forOptions(routeOptions)
+    EntityRouteModule.forOptions(routeOptions)
   ],
   exports: [RouterModule],
   providers: [RecordLockGuard]

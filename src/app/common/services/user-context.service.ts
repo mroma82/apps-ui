@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { AppHttpClientService } from './app-http-client.service';
 import { filter, map, shareReplay } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
-import { TouchSequence } from 'selenium-webdriver';
 import { AuthService } from './auth.service';
-import { isArray } from 'util';
 import { InstanceContextService } from './instance-context.service';
 
 @Injectable({
@@ -52,7 +48,7 @@ export class UserContextService {
           return false;
   
         // if more than one role, check all roles
-        if(isArray(profile.role))
+        if(Array.isArray(profile.role))
           return profile.role.filter(x => adminRoles.indexOf(x)).length > 0;
 
         // else, check if the role is admin

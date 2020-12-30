@@ -39,7 +39,7 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     NgxDatatableModule,
     FormsModule,
     DatepickerModule,
-    //EntityRouteModule.forOptions(null)
+    EntityRouteModule.forOptions(null)
   ],
   providers: [
     EntityConfigurationService,
