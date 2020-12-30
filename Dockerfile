@@ -10,7 +10,7 @@ FROM node:10 AS builder
 
 # build dependencies
 WORKDIR /app
-RUN npm install -g @angular/cli@7.3.5
+RUN npm install -g @angular/cli@10.2.1
 COPY package.json /app
 RUN npm install
 
