@@ -8,7 +8,7 @@ import { UserContextService } from 'src/app/common/services/user-context.service
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  @ViewChild("usernameField") usernameField : ElementRef;
+  @ViewChild("usernameField", { static: true }) usernameField : ElementRef;
   
   // model
   model = {

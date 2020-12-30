@@ -22,7 +22,7 @@ export class TextAreaFieldComponent extends ElementBase<string> {
   @Input() public rows: number = 1;
   @Input() public required: boolean;
   
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, { static: true }) model: NgModel;
 
   public identifier = `text-field-${textAreaFieldIdx++}`;
 

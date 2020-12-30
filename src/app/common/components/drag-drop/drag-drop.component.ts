@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '
 })
 export class DragDropComponent implements OnInit {
   @Output('afterUpload') afterUpload = new EventEmitter<any>();  
-  @ViewChild('file') fileUpload : ElementRef;
+  @ViewChild('file', { static: true }) fileUpload : ElementRef;
   // state
   state = {
     isDraggedOn: false

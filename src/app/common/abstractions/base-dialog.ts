@@ -3,7 +3,7 @@ import { ViewChild, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 
 export class BaseDialog implements OnDestroy {
-    @ViewChild('content') content : any;
+    @ViewChild('content', { static: true }) content : any;
     
     // define options
     protected dialogSize: 'lg' | 'sm' | 'full' | 'xl' = 'lg'

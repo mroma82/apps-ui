@@ -23,7 +23,7 @@ export class LookupFieldComponent extends ElementBase<string> {
 
   @Output() public onLookup = new EventEmitter();  
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, { static: true }) model: NgModel;
 
   public identifier = `lookup-field-${lookupFieldIdx++}`;
 

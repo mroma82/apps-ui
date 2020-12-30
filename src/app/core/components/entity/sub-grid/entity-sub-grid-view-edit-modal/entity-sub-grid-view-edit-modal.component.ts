@@ -11,7 +11,7 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
   styleUrls: ['./entity-sub-grid-view-edit-modal.component.scss']
 })
 export class EntitySubGridViewEditModalComponent extends BaseDialog {  
-  @ViewChild('content', ) content : any;  
+  @ViewChild('content', { static: true }) content : any;  
 
   // observables
   mode$ : Observable<'view' | 'edit'> = this.context.mode$;

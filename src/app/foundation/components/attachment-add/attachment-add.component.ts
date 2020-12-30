@@ -9,7 +9,7 @@ import { DragDropComponent } from 'src/app/common/components/drag-drop/drag-drop
   styleUrls: ['./attachment-add.component.scss']
 })
 export class AttachmentAddComponent implements OnInit {
-  @ViewChild('dropArea') dropArea : DragDropComponent;
+  @ViewChild('dropArea', { static: true }) dropArea : DragDropComponent;
   
   // observables
   tempFile$ : Observable<any>;

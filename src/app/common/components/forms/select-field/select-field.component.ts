@@ -20,7 +20,7 @@ export class SelectFieldComponent extends ElementBase<string> {
   @Input() public name: string;
   @Input() public required: boolean;
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, { static: true }) model: NgModel;
 
   public identifier = `select-field-${selectFieldIdx++}`;
 

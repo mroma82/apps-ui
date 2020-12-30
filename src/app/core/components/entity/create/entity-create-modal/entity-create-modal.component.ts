@@ -11,7 +11,7 @@ import { EntityConfigurationService } from 'src/app/core/services/entity/entity-
   styleUrls: ['./entity-create-modal.component.scss']
 })
 export class EntityCreateModalComponent extends BaseDialog {  
-  @ViewChild('content', ) content : any;  
+  @ViewChild('content', { static: true }) content : any;  
 
   // setup
   modalConfig = {

@@ -7,7 +7,7 @@ import { EntityConfigurationService } from 'src/app/core/services/entity/entity-
   styleUrls: ['./entity-create.component.scss']
 })
 export class EntityCreateComponent implements OnInit, OnDestroy {  
-  @ViewChild("formContainer", { read: ViewContainerRef }) formContainer;
+  @ViewChild("formContainer", { read: ViewContainerRef, static: true }) formContainer;
   componentRef: any;
 
   // new

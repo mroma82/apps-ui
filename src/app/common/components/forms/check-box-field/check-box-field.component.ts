@@ -18,7 +18,7 @@ export class CheckBoxFieldComponent extends ElementBase<boolean> {
   @Input() public name: string;
   @Input() public disabled: boolean;
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, { static: true }) model: NgModel;
 
   public identifier = `checkbox-field-${checkBoxIdx++}`;
 

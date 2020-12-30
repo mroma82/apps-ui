@@ -10,8 +10,8 @@ import { InstanceContextService } from 'src/app/common/services/instance-context
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("instanceField") instanceField : ElementRef;
-  @ViewChild("usernameField") usernameField : ElementRef;
+  @ViewChild("instanceField", { static: true }) instanceField : ElementRef;
+  @ViewChild("usernameField", { static: true }) usernameField : ElementRef;
 
   // state
   showForgotPassword$ = of(true);
