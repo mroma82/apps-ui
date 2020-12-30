@@ -104,3 +104,17 @@ label {
 .btn-link {
     box-shadow: none;
 }
+
+// date picker
+.bs-date-picker--default {
+    
+    // header
+    .bs-datepicker-head {
+        background-color: #000080;
+    }
+
+    // selected
+    .bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span {
+        background-color: #000080;
+    }
+}

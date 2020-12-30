@@ -13,7 +13,9 @@
       [attr.name]="name"            
     />
     <div class="input-group-append" *ngIf="!readonly && !disabled">      
-      <button type="button" class="btn btn-secondary" (click)="lookup()">Lookup</button>
+      <button type="button" class="btn btn-secondary" (click)="lookup()">
+        <i class="fas fa-search" role="button"></i>   
+      </button>
     </div>
   </div>  
 </div>

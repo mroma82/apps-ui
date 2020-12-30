@@ -12,14 +12,14 @@
           class="form-control"           
           [id]="identifier"
           [attr.name]="name"   
-          [bsConfig]="{dateInputFormat: 'M/D/YYYY'}"
+          [bsConfig]="{dateInputFormat: 'M/D/YYYY', containerClass: 'bs-date-picker--default'}"
           bsDatepicker                     
           (ngModelChange)="onDateChange()" 
           #d="bsDatepicker"     
         />    
         <div class="input-group-append" *ngIf="!disabled && !readonly">
-          <button class="btn">
-              <i class="far fa-calendar-alt fa-lg"(click)="d.toggle()" role="button"></i>          
+          <button class="btn btn-secondary" (click)="d.toggle()">
+              <i class="far fa-calendar-alt fa-lg" role="button"></i>          
           </button>          
         </div>          
     </div>
