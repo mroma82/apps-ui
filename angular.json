@@ -29,7 +29,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss" 
+              "src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -198,5 +198,8 @@
       }
     }
   },
-  "defaultProject": "apps-ui"
+  "defaultProject": "apps-ui",
+  "cli": {
+    "analytics": false
+  }
 }
