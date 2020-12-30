@@ -1,4 +1,4 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnInit, OnDestroy, Directive } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
@@ -6,6 +6,7 @@ import { IEntitySubGridConfigurationService } from '../sub-grid/entity-sub-grid-
 import { EntitySubGridViewEditContextService } from '../sub-grid/entity-sub-grid-view-edit-context.service';
 import { EntityViewEditContextService } from '../view-edit/entity-view-edit-context.service';
 
+@Directive()
 export abstract class BaseEntitySubGridComponent implements OnInit {
 
   // state

@@ -1,7 +1,8 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit, Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EntityCreateContextService } from '../create/entity-create-context.service';
 
+@Directive()
 export abstract class BaseEntityCreateComponent implements OnInit, OnDestroy {
 
   // model

@@ -1,8 +1,9 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnInit, OnDestroy, Directive } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EntityViewEditContextService } from '../view-edit/entity-view-edit-context.service';
 
+@Directive()
 export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
 
     // state
