@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./note-list-dialog.component.scss']  
 })
 export class NoteListDialogComponent extends BaseDialog implements OnInit  {
+    
+  // state
+  canEdit$ : Observable<boolean> = this.context.canEdit$;
 
   // new
   constructor(
@@ -38,7 +41,7 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
   ngOnInit(): void {
 
     // setup obserables
-    this.list$ = this.context.list$;
+    this.list$ = this.context.list$;    
   }
 
   // refresh the list

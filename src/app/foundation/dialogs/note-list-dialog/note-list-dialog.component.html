@@ -10,7 +10,7 @@
     <div *ngFor="let item of (list$ | async) ">
       <div>
         <strong>{{ item.createUserId | userFullname | async }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
-        <div class="d-inline ml-2">
+        <div class="d-inline ml-2" *ngIf="canEdit$ | async">
           <a class="btn btn-link" (click)="edit(item)" role="button">
             <i class="fas fa-pencil-alt"></i>
           </a>
@@ -20,7 +20,7 @@
         </div>
         <div class="d-inline ml-2" *ngIf="item.deletePending">
           Are you sure you want to delete?
-          <button type="button" class="btn btn-link btn-sm" (click)="deleteConfirm(item)">Yes</button>
+          <button type="button" class="btn btn-link btn-sm" (click)="deleteConfirm(item)" *ngIf="canEdit$ | async">Yes</button>
           <button type="button" class="btn btn-link btn-sm" (click)="deleteCancel(item)">No - Cancel</button>
         </div>
       </div>
@@ -40,17 +40,19 @@
       <hr>
     </div>
     
-    <div class="mt-2" *ngIf="!model.addPending">
-      <button type="button" class="btn btn-primary" (click)="add()">Add</button>
-    </div>
-
-    <div class="mt-2" *ngIf="model.addPending">
-      <div class="form-group">
-        <textarea class="form-control" rows="4" [(ngModel)]="model.addModel.contentText"></textarea>
+    <div  *ngIf="canEdit$ | async">
+      <div class="mt-2" *ngIf="!model.addPending">
+        <button type="button" class="btn btn-primary" (click)="add()">Add</button>
       </div>
-      <div>
-        <button type="button" class="btn btn-primary" (click)="addCommit()">Save</button>
-        <button type="button" class="btn btn-link" (click)="addCancel()">Cancel</button>
+
+      <div class="mt-2" *ngIf="model.addPending">
+        <div class="form-group">
+          <textarea class="form-control" rows="4" [(ngModel)]="model.addModel.contentText"></textarea>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="addCommit()">Save</button>
+          <button type="button" class="btn btn-link" (click)="addCancel()">Cancel</button>
+        </div>
       </div>
     </div>
 

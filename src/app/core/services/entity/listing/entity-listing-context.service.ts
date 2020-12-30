@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
-import { debounce, take } from 'rxjs/operators';
+import { debounce, shareReplay, take } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { EntityApiService } from '../entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
@@ -17,8 +17,8 @@ export class EntityListingContextService {
   isWorkflowAssigned$ = new BehaviorSubject<boolean>(false);
 
   // permissions
-  canCreate$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Add);
-  canEdit$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Edit);
+  canCreate$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Add).pipe(shareReplay(1));
+  canEdit$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Edit).pipe(shareReplay(1));
 
   // paging
   page$ = new BehaviorSubject<number>(1);

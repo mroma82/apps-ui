@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { RecordContextService } from 'src/app/common/services/record-context.service';
+import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { AttachmentService } from './attachment.service';
 
 @Injectable({
@@ -15,11 +17,13 @@ export class AttachmentDialogContextService {
   dialogOpenClose$ = new BehaviorSubject<boolean>(false);
   dialogMode$ = new BehaviorSubject<string>("list");
   tempFile$ = new BehaviorSubject<any>({});
+  canEdit$ = new BehaviorSubject<boolean>(false);
 
   // new
   constructor(
     private recordContextService: RecordContextService,
-    private service: AttachmentService
+    private service: AttachmentService,
+    private entityApi: EntityApiService
   ) { 
   }
 
@@ -34,6 +38,9 @@ export class AttachmentDialogContextService {
     this.service.getAllByEntity(record.entityTypeId, record.entityId).subscribe(d => {      
       this.list$.next(d);
     });    
+
+    // can edit
+    this.entityApi.hasAccess(record.entityTypeId, SecurityPermissionMask.Edit).subscribe(x => this.canEdit$.next(x));
   }  
 
   // open dialog

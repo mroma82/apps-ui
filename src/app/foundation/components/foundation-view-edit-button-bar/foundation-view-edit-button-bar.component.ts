@@ -6,6 +6,9 @@ import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enu
 import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
 import { Observable, of } from 'rxjs';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
+import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
+import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
+import { shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-foundation-view-edit-button-bar',
@@ -36,21 +39,32 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   noteCount$ = this.notesDialogContext.count$;
   attachmentCount$ = this.attachmentsDialogContext.count$;
 
+  // permissions
+  canEdit$ : Observable<boolean> = of(false);
+  canDelete$ : Observable<boolean> = of(false);
+
   // new
   constructor(
     private notesDialogContext: NotesListDialogContextService,
     private auditTrailContext: AuditTrailDialogContextService,
     private attachmentsDialogContext : AttachmentDialogContextService,    
     private dialogService : DialogService,
-    private entityProvider: EntityProviderService
+    private entityProvider: EntityProviderService,
+    private entityApi: EntityApiService
   )
-  {}
+  {    
+    console.log(this.entityTypeId);
+  }
   
   // init
   ngOnInit() {
 
     // has audit trail
     this.hasAuditTrail$ = this.entityProvider.hasAuditTrail(this.entityTypeId);
+
+    // permissions
+    this.canEdit$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Edit).pipe(tap(x => console.log(["A", x])), shareReplay(1));
+    this.canDelete$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Delete).pipe(tap(x => console.log(["A", x])), shareReplay(1));
 
     // refresh lists
     this.notesDialogContext.refreshList();

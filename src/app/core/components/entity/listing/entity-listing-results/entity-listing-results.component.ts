@@ -16,8 +16,12 @@ export class EntityListingResultsComponent implements OnInit {
   columns$ : Observable<IEntityListingColumn[]> = this.config.getColumns();
   pageSize$ : Observable<number> = this.context.pageSize$;
   
+  // permissions
+  canEdit$ = this.context.canEdit$;
+
+  // new
   constructor(
-    private context : EntityListingContextService,
+    private context : EntityListingContextService,    
     @Inject(ENTITY_LISTING_CONFIG) private config : IEntityListingConfigurationService
   ) { }
 

@@ -3,21 +3,25 @@ import { RecordContextService } from 'src/app/common/services/record-context.ser
 import { NotesService } from './notes-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
+import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesListDialogContextService {
 
-  // list observable
+  // state
   list$ = new BehaviorSubject<any[]>([]);
   count$ = this.list$.pipe(map(x => x.length));
   dialogOpenClose$ = new BehaviorSubject<boolean>(false);
+  canEdit$ = new BehaviorSubject<boolean>(false);
 
   // new
   constructor(
     private recordContextService: RecordContextService,
-    private notesService: NotesService
+    private notesService: NotesService,
+    private entityApi: EntityApiService
   ) {        
   }
 
@@ -32,6 +36,9 @@ export class NotesListDialogContextService {
     this.notesService.getAllByEntity(record.entityTypeId, record.entityId).subscribe(d => {      
       this.list$.next(d);
     });    
+
+    // can edit
+    this.entityApi.hasAccess(record.entityTypeId, SecurityPermissionMask.Edit).subscribe(x => this.canEdit$.next(x));
   }  
 
   // add
@@ -87,5 +94,4 @@ export class NotesListDialogContextService {
   closeDialog() {
     this.dialogOpenClose$.next(false);
   }
-
 }

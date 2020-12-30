@@ -4,7 +4,7 @@
     <img *ngIf="isImage(item)" [src]="getViewUrl(item)" class="mr-3 preview-image" />    
     <div class="media-body">
       <strong><a [href]="getDownloadUrl(item)">{{ item.fileName }}</a></strong>
-      <div class="d-inline ml-2">
+      <div class="d-inline ml-2" *ngIf="canEdit$ | async">        
         <a class="btn btn-link btn-sm" (click)="edit(item)" role="button">
           <i class="fas fa-pencil-alt"></i>
         </a>
@@ -24,18 +24,20 @@
         {{ item.description }}
       </div>      
 
-      <div *ngIf="item.editPending" class="mt-2">
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" placeholder="Description" />
+      <ng-container *ngIf="canEdit$ | async">
+        <div *ngIf="item.editPending" class="mt-2">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="item.descriptionEdit" placeholder="Description" />
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editCommit(item)">Save</button>
+          <button type="button" class="btn btn-link btn-sm" (click)="editCancel(item)">Cancel</button>
         </div>
-        <button type="button" class="btn btn-primary btn-sm" (click)="editCommit(item)">Save</button>
-        <button type="button" class="btn btn-link btn-sm" (click)="editCancel(item)">Cancel</button>
-      </div>
+      </ng-container>
     </div>
   </div>
   <hr>
 </div>
 
-<div>
+<div *ngIf="canEdit$ | async">
   <button type="button" class="btn btn-primary" (click)="add()">Add</button>  
 </div>

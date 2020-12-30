@@ -12,6 +12,7 @@ export class AttachmentListComponent implements OnInit {
 
   // observables
   list$: Observable<any>;  
+  canEdit$ = this.context.canEdit$;
 
   // new
   constructor(
