@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AttachmentDialogContextService } from '../../services/attachment/attachment-dialog-context.service';
 import { environment } from 'src/environments/environment';
+import { InstanceContextService } from 'src/app/common/services/instance-context.service';
 
 @Component({
   selector: 'app-attachment-list',
@@ -16,7 +17,8 @@ export class AttachmentListComponent implements OnInit {
 
   // new
   constructor(
-    private context: AttachmentDialogContextService
+    private context: AttachmentDialogContextService,
+    private instanceContext: InstanceContextService 
   ) { 
     this.list$ = context.list$;    
   }
@@ -33,7 +35,7 @@ export class AttachmentListComponent implements OnInit {
 
   // download url
   getDownloadUrl(attachment: any) {
-    return `${environment.apiUrl}/foundation/attachment/download/${attachment.id}`;
+    return `${environment.apiUrl}/foundation/attachment/download/${attachment.id}?i=${this.instanceContext.instanceId}`;
   }
 
   // checks if the attachment is an image
