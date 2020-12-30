@@ -12,7 +12,7 @@ stages:
 variables:
   DOCKER_DRIVER: overlay
   BUILD_IMAGE: ${CI_REGISTRY_IMAGE}/build:$CI_COMMIT_SHA   
-  BUILD_CONFIG_DEV: dev
+  BUILD_CONFIG_DEV: ""
   BUILD_CONFIG_STAGE: stage
   BUILD_CONFIG_PROD: production
 
