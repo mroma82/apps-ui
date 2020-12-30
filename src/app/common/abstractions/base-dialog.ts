@@ -1,7 +1,8 @@
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ViewChild, OnDestroy } from '@angular/core';
+import { ViewChild, OnDestroy, Directive } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 
+@Directive()
 export class BaseDialog implements OnDestroy {
     @ViewChild('content', { static: true }) content : any;
     
