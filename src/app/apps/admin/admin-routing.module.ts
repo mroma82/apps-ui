@@ -15,19 +15,19 @@ const routes: Routes = [
 
           {
             path: 'security-roles',        
-            loadChildren: './security-roles/admin-security-roles.module#AdminSecurityRolesModule'
+            loadChildren: () => import('./security-roles/admin-security-roles.module').then(m => m.AdminSecurityRolesModule)
           },
           {
             path: 'system-users',        
-            loadChildren: './system-users/admin-system-users.module#AdminSystemUsersModule'
+            loadChildren: () => import('./system-users/admin-system-users.module').then(m => m.AdminSystemUsersModule)
           },
           {
             path: 'list-items',        
-            loadChildren: './list-item-types/admin-list-item-type.module#AdminListItemTypeModule'
+            loadChildren: () => import('./list-item-types/admin-list-item-type.module').then(m => m.AdminListItemTypeModule)
           },
           {
             path: 'workflow-groups',        
-            loadChildren: './workflow-groups/admin-workflow-group.module#AdminWorkflowGroupModule'
+            loadChildren: () => import('./workflow-groups/admin-workflow-group.module').then(m => m.AdminWorkflowGroupModule)
           }
       ]
   }

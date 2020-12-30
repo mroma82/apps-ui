@@ -50,11 +50,11 @@ const routes: Routes = [
     children: [      
       {
         path: 'example',        
-        loadChildren: './apps/example/example-app.module#ExampleAppModule'
+        loadChildren: () => import('./apps/example/example-app.module').then(m => m.ExampleAppModule)
       },
       {
         path: 'admin',        
-        loadChildren: './apps/admin/admin-app.module#AdminAppModule'
+        loadChildren: () => import('./apps/admin/admin-app.module').then(m => m.AdminAppModule)
       },
       {
         path: '',        
