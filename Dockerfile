@@ -17,7 +17,7 @@ RUN npm install
 ARG BUILDCONF
 ARG APPVERSION
 COPY . /src
-RUN sed -i 's/X.X.X/'"${APPVERSION}"'/g' /src/app/app-version.ts
+RUN sed -i 's/X.X.X/'"${APPVERSION}"'/g' src/app/app-version.ts
 RUN ng build --configuration=${BUILDCONF} --output-path /app/dist
                 
 # final ==============================
