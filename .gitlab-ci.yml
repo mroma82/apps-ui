@@ -10,7 +10,7 @@ stages:
   - deploy
 
 variables:
-  DOCKER_DRIVER: overlay
+  DOCKER_HOST: tcp://localhost:2375
   BUILD_IMAGE: ${CI_REGISTRY_IMAGE}/build:$CI_COMMIT_SHA   
   
   BUILD_CONFIG_DEV: ""
