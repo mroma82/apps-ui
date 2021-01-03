@@ -26,7 +26,7 @@ spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: apps-ui-api
+      - name: app
         image: romacloud.azurecr.io/apps-ui:stage
         imagePullPolicy: Always
         ports:
