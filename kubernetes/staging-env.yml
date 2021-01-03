@@ -1,24 +1,36 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  apps-staging
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apps-ui-deployment
   namespace: apps-staging
-  labels:
-      app: apps-ui-app
 spec:
-  replicas: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apps-ui-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
   template:
     metadata:
       labels:
         app: apps-ui-app
     spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
       containers:
-      - name: apps-ui-app
-        image: registry.gitlab.com/roma-code/apps/apps-ui:stage
+      - name: apps-ui-api
+        image: romacloud.azurecr.io/apps-ui:stage
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
-      imagePullSecrets:
-      - name: gitlab-regcred-romacode
 ---
 apiVersion: v1
 kind: Service
@@ -40,11 +52,6 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/server-snippet: |
-      if ($http_x_forwarded_proto = 'http'){
-        return 301 https://$host$request_uri;
-      }
   name: apps-ui-ingress
   namespace: apps-staging
   labels:
@@ -56,5 +63,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: apps-ui-app
+          serviceName: apps-ui-service
           servicePort: 8080      
