@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://apps-api-stage.roma-cloud.com"
+  apiUrl: "http://apps-api-stage.roma-cloud.com"
 };
