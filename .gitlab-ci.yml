@@ -134,7 +134,7 @@ release:latest:
       - docker
     script:
       - echo $KUBE_CLUSTER_CA > deploy.crt
-      - kubectl config set-cluster k8s --server="$KUBE_CLUSTER" --certificate-authority=deploy.crt --embed-certs=true
+      - kubectl config set-cluster k8s --insecure-skip-tls-verify=true --server="$KUBE_CLUSTER" --certificate-authority=deploy.crt --embed-certs=true
       - kubectl config set-credentials ci-cd --token="$KUBE_USER_TOKEN"
       - kubectl config set-context k8s --cluster=k8s --user=ci-cd
       - kubectl config use-context k8s    
