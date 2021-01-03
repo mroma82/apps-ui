@@ -134,12 +134,12 @@ release:latest:
       - docker
     script:
       - echo $KUBE_CLUSTER_CA > deploy.crt
-      - kubectl config set-cluster k8s --insecure-skip-tls-verify=true --server="$KUBE_CLUSTER" --certificate-authority=deploy.crt --embed-certs=true
+      - kubectl config set-cluster k8s --server="$KUBE_CLUSTER" --certificate-authority=deploy.crt --embed-certs=true
       - kubectl config set-credentials ci-cd --token="$KUBE_USER_TOKEN"
       - kubectl config set-context k8s --cluster=k8s --user=ci-cd
       - kubectl config use-context k8s    
       - kubectl config view
-      - kubectl get all
+      - kubectl get all --insecure-skip-tls-verify=true
       - kubectl --record deployment.apps/$DEPLOYMENT_NAME set image deployment.v1.apps/$DEPLOYMENT_NAME $DEPLOYMENT_CONTAINER_NAME=$DEPLOY_IMAGE --namespace=$DEPLOYMENT_NAMESPACE 
       - kubectl patch deployment.apps/$DEPLOYMENT_NAME -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"lastUpdateDateTime\":\"`date +'%s'`\"}}}}}" --namespace=$DEPLOYMENT_NAMESPACE       
       
