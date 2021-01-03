@@ -59,7 +59,7 @@ build:stage:
     BUILD_CONFIG: $BUILD_CONFIG_STAGE
     BUILD_VERSION: Staging:$CI_COMMIT_SHORT_SHA
   only:
-    - stage
+    - stageX
 
 build:master:
   <<: *build_script
@@ -98,7 +98,7 @@ release:stage:
   variables:
     DEPLOY_IMAGE: $AZURE_ACR_SERVER/apps-ui:stage
   only:
-    - stage
+    - stageX
 
 release:master:
   <<: *release_script
