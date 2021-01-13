@@ -19,4 +19,9 @@ export const EntityTypes = {
   , ExampleLine: "d790dfde-8ac0-439a-9302-ee8ca897a75e"
   , ExampleParameters: "d6b351f0-618e-47cc-8eea-35cf3534d1fa"
   
+  // preventative maintenance
+  , PmItem: "58c6b238-4ce0-4e1a-9f15-2eda06828e74"
+  , PmActivity: "ed29a07c-76d2-4eee-8f1a-aa54179aaac6"
+  , PmEvent: "0c1dce0b-bde8-4d70-8447-772f56727051"
+  , PmParameters: "44c913ba-48c3-4a67-848d-eef0c60f1461"
 }
