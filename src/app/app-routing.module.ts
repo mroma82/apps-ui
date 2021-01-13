@@ -53,6 +53,10 @@ const routes: Routes = [
         loadChildren: () => import('./apps/example/example-app.module').then(m => m.ExampleAppModule)
       },
       {
+        path: 'preventative-maintenance',
+        loadChildren: () => import('./apps/pm/pm-app.module').then(m => m.PmAppModule)
+      },
+      {
         path: 'admin',        
         loadChildren: () => import('./apps/admin/admin-app.module').then(m => m.AdminAppModule)
       },
