@@ -19,9 +19,13 @@ export class MenuItemService implements OnDestroy {
   readonly appMenuItems = combineLatest([
 
     // apps
-    this.createEntityApp(EntityTypes.Example)
+    this.createEntityApp(EntityTypes.Example),
+    this.createEntityApp(EntityTypes.PmItem, {
+      title: "Preventative Maintenance",
+      url: "/app/preventative-maintenance",
+      description: "Application to track preventative maintenance history"
+    }),
   ]);
-
   // setup menu items
   readonly setupMenuItems = combineLatest([
 
@@ -96,21 +100,32 @@ export class MenuItemService implements OnDestroy {
   ngOnDestroy() { }
 
   // function that adds an entity app
-  createEntityApp(entityTypeId: string): Observable<IMenuItem> {
-    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => {
-
+  createEntityApp(entityTypeId: string, overrides?: any) : Observable<IMenuItem> {
+    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => { 
+      
       // null safe
       if (!x)
         return null;
-
+        
       // build the menu item
-      return {
+      const menuItem =  {
         title: x.pluralName,
         url: x.rootUrl,
         icon: x.icon,
         description: x.description,
         hasAccess$: this.entityApi.hasAccess(entityTypeId, SecurityPermissionMask.View)
+      };
+    
+      // check if overrides
+      if(overrides) {
+        return {
+          ...menuItem,
+          ...overrides
+        }
       }
+
+      // else, return the item
+      return menuItem;
     }));
   }
 }

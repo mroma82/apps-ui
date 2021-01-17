@@ -1,1 +1,31 @@
-<p>pm-item-view-edit works!</p>
+<div *ngIf="model">
+
+    <app-card-group title="Details">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <app-text-field [(ngModel)]="model.description" [disabled]="viewMode$ | async" name="description" label="Description" [required]="true"></app-text-field>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <app-select-field [(ngModel)]="model.itemTypeId" [disabled]="viewMode$ | async" name="itemTypeId" label="Type">
+                    <option value="">-- Please select --</option>
+                    <option *ngFor="let item of itemTypeList$ | async" [value]="item.id" [selected]="item.id == model.itemTypeId">{{ item.text }}</option>
+                </app-select-field>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <app-select-field [(ngModel)]="model.locationId" [disabled]="viewMode$ | async" name="locationId" label="Location">
+                    <option value="">-- Please select --</option>
+                    <option *ngFor="let item of locationList$ | async" [value]="item.id" [selected]="item.id == model.locationId">{{ item.text }}</option>
+                </app-select-field> 
+            </div>
+        </div>
+    </app-card-group>
+
+    <app-card-group title="Activities">
+        <div class="row">
+    
+        </div>
+    </app-card-group>
+
+</div>
