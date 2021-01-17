@@ -25,6 +25,7 @@ export class MenuItemService implements OnDestroy {
       url: "/app/preventative-maintenance",
       description: "Application to track preventative maintenance history"
     }),
+
   ]);
   // setup menu items
   readonly setupMenuItems = combineLatest([
