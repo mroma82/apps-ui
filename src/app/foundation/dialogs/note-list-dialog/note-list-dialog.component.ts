@@ -96,4 +96,9 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit  {
       this.model.addPending = false;
     });  
   }
+
+  // dismiss
+  dismiss() {
+    this.context.dialogOpenClose$.next(false);
+  }
 }

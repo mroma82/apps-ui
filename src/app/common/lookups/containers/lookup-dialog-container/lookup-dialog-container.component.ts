@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-lookup-dialog-container',

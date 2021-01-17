@@ -24,4 +24,9 @@ export class WorkflowRejectDialogComponent extends BaseDialog implements OnInit 
   ngOnInit() {
     
   }
+
+  // dismiss
+  dismiss() {
+    this.context.rejectDialogOpenClose$.next(false);
+  }
 }

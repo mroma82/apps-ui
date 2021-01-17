@@ -47,4 +47,9 @@ export class YesNoDialogComponent extends BaseDialog implements OnInit {
   cancel() {
     this.close(DialogResultEnum.Cancel);
   }
+
+  // dismiss
+  dismiss() {
+    this.dialogService.yesNoDialogOpenClose$.next(false);
+  }
 }

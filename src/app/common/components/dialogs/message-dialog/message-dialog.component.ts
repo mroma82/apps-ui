@@ -32,4 +32,9 @@ export class MessageDialogComponent extends BaseDialog implements OnInit {
     this.modalDetails.result.next(true);
     this.modal.dismiss();
   }  
+
+  // dismiss
+  dismiss() {
+    this.dialogService.messageDialogOpenClose$.next(false);
+  }
 }

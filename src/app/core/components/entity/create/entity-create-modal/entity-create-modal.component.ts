@@ -45,5 +45,10 @@ export class EntityCreateModalComponent extends BaseDialog {
       }
     });
   }
+
+  // dismiss
+  dismiss() {
+    this.context.dialogOpen$.next(false);
+  }
 }
 

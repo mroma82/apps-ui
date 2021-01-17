@@ -46,4 +46,9 @@ export class EntitySubGridViewEditModalComponent extends BaseDialog {
       }
     });
   }
+
+  // dismiss
+  dismiss() {
+    this.context.dialogOpen$.next(false);
+  }
 }

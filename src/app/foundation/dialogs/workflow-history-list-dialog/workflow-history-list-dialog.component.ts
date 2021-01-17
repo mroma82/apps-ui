@@ -27,5 +27,10 @@ export class WorkflowHistoryListDialogComponent extends BaseDialog implements On
   ngOnInit() {
     
   }
+
+  // dismiss
+  dismiss() {
+    this.context.historyDialogOpenClose$.next(false);
+  }
 }
 

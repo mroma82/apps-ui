@@ -27,4 +27,9 @@ export class WorkflowAssignedListDialogComponent extends BaseDialog implements O
   ngOnInit() {
     
   }
+
+  // dismiss
+  dismiss() {
+    this.context.assignedListDialogOpenClose$.next(false);
+  }
 }

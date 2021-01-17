@@ -24,4 +24,9 @@ export class NotificationListDialogComponent extends BaseDialog implements OnIni
   ngOnInit() {
     
   }
+
+  // dismiss
+  dismiss() {
+    this.context.listDialogOpenClose$.next(false);
+  }
 }

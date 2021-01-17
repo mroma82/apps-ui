@@ -58,4 +58,9 @@ export class AuditTrailListDialogComponent extends BaseDialog implements OnInit 
     // return
     return value;
   }
+
+  // dismiss
+  dismiss() {
+    this.context.dialogOpenClose$.next(false);
+  }
 }

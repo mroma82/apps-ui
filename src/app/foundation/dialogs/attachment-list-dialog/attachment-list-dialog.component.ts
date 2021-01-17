@@ -33,4 +33,9 @@ export class AttachmentListDialogComponent extends BaseDialog implements OnInit 
   ngOnInit() {
      this.mode$ = this.context.dialogMode$;
   }
+
+  // dismiss
+  dismiss() {
+    this.context.dialogOpenClose$.next(false);
+  }
 }

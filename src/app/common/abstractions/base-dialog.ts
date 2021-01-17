@@ -3,7 +3,7 @@ import { ViewChild, OnDestroy, Directive } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 
 @Directive()
-export class BaseDialog implements OnDestroy {
+export abstract class BaseDialog implements OnDestroy {
     @ViewChild('content', { static: true }) content : any;
     
     // define options
@@ -37,6 +37,9 @@ export class BaseDialog implements OnDestroy {
             }
         })
     }
+
+    // dismiss
+    abstract dismiss() : void;
 
     // open dialog
     openDialog() {

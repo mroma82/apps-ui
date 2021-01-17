@@ -30,7 +30,7 @@ export class AttachmentListComponent implements OnInit {
 
   // view url
   getViewUrl(attachment: any) {
-    return `${environment.apiUrl}/foundation/attachment/view/${attachment.id}`;
+    return `${environment.apiUrl}/foundation/attachment/view/${attachment.id}?i=${this.instanceContext.instanceId}`;
   }
 
   // download url

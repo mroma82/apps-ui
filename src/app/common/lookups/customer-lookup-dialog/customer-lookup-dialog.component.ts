@@ -43,4 +43,9 @@ export class CustomerLookupDialogComponent extends BaseDialog {
     this.onSelect.emit(item);
     this.closeDialog();
   }
+
+  // dismiss
+  dismiss() {
+    this.closeDialog();
+  }
 }
