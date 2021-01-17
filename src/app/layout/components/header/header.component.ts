@@ -4,6 +4,7 @@ import { IMenuItem } from 'src/app/common/models/menu-item';
 import { AppContextService } from 'src/app/app-context.service';
 import { MenuItemService } from 'src/app/common/services/menu-item.service';
 import { APP_VERSION } from 'src/app/app-version';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   // model
   model = {
     showMenu: false,
-    appVersion: APP_VERSION
+    appVersion: APP_VERSION,
+    environmentDescription: environment.description
   };
 
   // observables
