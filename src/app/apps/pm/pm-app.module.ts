@@ -5,6 +5,8 @@ import { PmContainerComponent } from './containers/pm-container/pm-container.com
 import { PmAppRoutingModule } from './pm-app-routing.module';
 import { PmNavComponent } from './components/pm-nav/pm-nav.component';
 import { AppCommonModule } from 'src/app/common/app-common.module';
+import { PmListsService } from './services/pm-lists.service';
+import { PmService } from './services/pm.service';
 
 
 
@@ -18,6 +20,10 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
     CommonModule,
     AppCommonModule,
     PmAppRoutingModule
+  ],
+  providers: [
+    PmService,
+    PmListsService
   ]
 })
 export class PmAppModule { }
