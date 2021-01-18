@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { IMenuItem } from '../models/menu-item';
 import { UserContextService } from './user-context.service';
-import { debounce, map, mergeMap } from 'rxjs/operators';
+import { debounce, filter, map, mergeMap } from 'rxjs/operators';
 import { SecurityService } from './security.service';
 import { combineLatest, Observable, of, timer } from 'rxjs';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
@@ -61,7 +61,7 @@ export class MenuItemService implements OnDestroy {
       return [
         ...appsMenu,
         ...foundationMenu
-      ]
+      ].filter(x => x !== null)
     }));    
 
     // setup admin menu items
@@ -69,23 +69,29 @@ export class MenuItemService implements OnDestroy {
       userContext.profile$,
       this.adminMenuitems
     ).pipe(debounce(() => timer(100)), map(([,menu]) => {
-      return menu
+      return menu.filter(x => x !== null)
     }));    
   }    
 
   // cleanup
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() { }
 
   // function that adds an entity app
   createEntityApp(entityTypeId: string) : Observable<IMenuItem> {
-    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => { return {
-      title: x.pluralName,
-      url: x.rootUrl,
-      icon: x.icon,
-      description: x.description,
-      hasAccess$: this.entityApi.hasAccess(entityTypeId, SecurityPermissionMask.View)
-    }}));
+    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => { 
+    
+      // null safe
+      if(!x)
+        return null;
+
+      // build the menu item
+      return {
+        title: x.pluralName,
+        url: x.rootUrl,
+        icon: x.icon,
+        description: x.description,
+        hasAccess$: this.entityApi.hasAccess(entityTypeId, SecurityPermissionMask.View)
+      }
+    }));
   }
 }

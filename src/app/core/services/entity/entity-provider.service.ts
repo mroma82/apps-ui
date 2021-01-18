@@ -33,6 +33,6 @@ export class EntityProviderService {
 
   // has audit trail
   hasAuditTrail(entityTypeId: string) : Observable<boolean> {
-    return this.getEntity(entityTypeId).pipe(map(x => x.hasAuditTrail));
+    return this.getEntity(entityTypeId).pipe(map(x => x ? x.hasAuditTrail : false));
   }
 }

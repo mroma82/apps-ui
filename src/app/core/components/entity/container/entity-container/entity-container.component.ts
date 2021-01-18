@@ -21,7 +21,8 @@ export class EntityContainerComponent implements OnInit {
 
     // set the title
     this.entityProvider.getEntity(this.entityConfig.entityTypeId).subscribe(entity => {
-      this.appContext.Layout.setApp(entity.pluralName);
+      if(entity)
+        this.appContext.Layout.setApp(entity.pluralName);
     });
   }
 
