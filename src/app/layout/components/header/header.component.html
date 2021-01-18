@@ -3,7 +3,7 @@
 
     <a class="navbar-brand" href="javascript:;;" (click)="toggleMenu()">
       <i class="fas fa-bars mr-2"></i> Essential Apps
-      <span *ngIf="model.environmentDescription" class="badge badge-pill badge-warning">{{ model.environmentDescription }}</span>
+      <span *ngIf="model.environmentDescription" class="ml-1 badge badge-pill badge-warning environment-description">{{ model.environmentDescription }}</span>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
