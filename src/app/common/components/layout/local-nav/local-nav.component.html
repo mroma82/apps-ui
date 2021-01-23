@@ -1,7 +1,16 @@
-<ul class="nav bg-light mb-2 local-nav navbar-light bg-light d-print-none">
+<nav class="navbar local-nav navbar-expand-lg navbar-light bg-light d-print-none mb-2">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <li class="nav-item" *ngFor="let item of items">
-    <a class="nav-link" *ngIf="isShowing(item) | async" [routerLink]="item.url">{{ item.title }}</a>
-  </li>
+  <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
 
-</ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngFor="let item of items">
+        <a class="nav-link" *ngIf="isShowing(item) | async" [routerLink]="item.url" (click)="isMenuCollapsed = true">{{ item.title }}</a>
+      </li>
+    </ul>
+
+  </div>  
+</nav>

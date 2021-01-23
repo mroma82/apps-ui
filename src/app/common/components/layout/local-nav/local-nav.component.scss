@@ -1,6 +1,13 @@
 .local-nav {
     font-size: 0.9rem;
+
     a {
         color: #000;
+    }    
+    
+    padding: .25rem 1rem;
+
+    .navbar-toggler {
+        border: none;
     }
 }

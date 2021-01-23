@@ -9,6 +9,7 @@ import { INavigationItem } from 'src/app/common/models/navigation-item';
 })
 export class LocalNavComponent implements OnInit {
   @Input() items : INavigationItem[];
+  public isMenuCollapsed = true;
 
   constructor() { }
 
