@@ -18,11 +18,13 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
+import { PmActivitySubGridComponent } from '../activities/components/pm-activity-sub-grid/pm-activity-sub-grid.component';
+import { PmActivityModule } from '../activities/pm-activity.module';
 
 @NgModule({
   declarations: [
     PmItemViewEditComponent,
-    PmItemCreateComponent
+    PmItemCreateComponent    
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
     NgxDatatableModule,
     FormsModule,
     DatepickerModule,    
-    EntityRouteModule.forOptions(null)
+    EntityRouteModule.forOptions(null),
+    PmActivityModule
   ],
   providers: [
     EntityConfigurationService,

@@ -15,6 +15,10 @@ const routes: Routes = [
           {
             path: 'items',        
             loadChildren: () => import('./modules/items/pm-item.module').then(m => m.PmItemModule)
+          },
+          {
+            path: 'activities',        
+            loadChildren: () => import('./modules/activities/pm-activity.module').then(m => m.PmActivityModule)
           }
       ]
   }
