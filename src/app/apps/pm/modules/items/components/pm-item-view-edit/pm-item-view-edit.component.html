@@ -22,10 +22,8 @@
         </div>
     </app-card-group>
 
-    <app-card-group title="Activities">
-        <div class="row">
-    
-        </div>
+    <app-card-group title="Activities" *ngIf="model.id">        
+        <app-pm-activity-sub-grid></app-pm-activity-sub-grid>        
     </app-card-group>
 
 </div>
