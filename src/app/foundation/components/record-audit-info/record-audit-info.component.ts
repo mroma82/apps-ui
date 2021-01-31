@@ -14,4 +14,9 @@ export class RecordAuditInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  // check if empty date
+  isEmpty(userId: string) : boolean {
+    return userId === "00000000-0000-0000-0000-000000000000";
+  }
+
 }
