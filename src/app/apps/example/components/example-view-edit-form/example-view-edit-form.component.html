@@ -1,5 +1,4 @@
 <div *ngIf="model.id">    
-    
     <app-card-group title="Main" class="mb-2">
         <div class="row">
             <div class="col-md-2">
@@ -12,7 +11,7 @@
 
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="model.status" [disabled]="viewMode$ | async" name="status" label="Status">
-                    <option *ngFor="let item of statusList$ | async" [value]="item.code">{{ item.text }}</option>
+                    <option *ngFor="let item of statusList$ | async" [value]="item.value" [selected]="item.value == model.status">{{ item.text }}</option>
                 </app-select-field>        
             </div>
 

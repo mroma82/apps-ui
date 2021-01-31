@@ -30,7 +30,7 @@ export class ExampleViewEditFormComponent extends BaseEntityViewEditComponent {
     super(context);
 
     // lists
-    this.statusList$ = lists.userList$
+    this.statusList$ = lists.statusList$
     this.statusValueList$ = lists.statusValueList$;
     this.userList$ = lists.userList$;    
     this.departmentList$ = lists.departmentList$;

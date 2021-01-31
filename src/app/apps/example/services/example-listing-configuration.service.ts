@@ -17,7 +17,8 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
     return of([
       { id: "all", title: "All Examples", filter: { }},
       { id: "open", title: "Open Examples", filter: { status: 0 }},
-      { id: "active", title: "Active Examples", filter: { status: 1 }}      
+      { id: "in-progress", title: "In Process Examples", filter: { status: 1 }},
+      { id: "completed", title: "Completed Examples", filter: { status: 2 }}      
     ]);
   }
 
@@ -39,7 +40,8 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         displayFunc: x => {
           switch(x.status) {
             case 0: return "Open";
-            case 1: return "Active";
+            case 1: return "In Progress";
+            case 2: return "Completed";
             default: return "Unknown";
           }
         }
