@@ -1,1 +1,46 @@
-<p>pm-activity-view-edit works!</p>
+<div *ngIf="model">
+
+    <div class="row">
+        
+        <div class="col-xl-6 col-lg-12">
+            <app-card-group title="Details">
+                <app-text-field [(ngModel)]="model.description" name="description" label="Description" [required]="true"></app-text-field>
+                <app-text-area-field [(ngModel)]="model.comments" name="comments" label="Comments" [rows]="4"></app-text-area-field>
+            </app-card-group>            
+
+            <app-card-group title="Scheduling">
+
+                <app-select-field [(ngModel)]="model.schedulingType" name="schedulingType" label="Scheduling Type">
+                    <option *ngFor="let i of [ { id: 0, t: 'As Needed' }, {id: 1, t:'Recurring' }]" [value]="i.id">{{i.t}}</option>                
+                </app-select-field>
+
+                <div *ngIf="model.schedulingType == 1">
+                    
+                    <label>Repeat every</label>
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <app-number-field [(ngModel)]="model.recurringUnitValue" name="recurringUnitValue"></app-number-field>                
+                        </div>
+                        <div class="mr-2">
+                            <app-select-field [(ngModel)]="model.recurringUnit" name="recurringUnit">
+                                <option *ngFor="let i of [ { id: 0, t: 'Day' }, {id: 1, t:'Week' }, {id: 2, t:'Month' }, {id: 3, t:'Year' }]" [value]="i.id">{{i.t}}{{model.recurringUnitValue==1 ? '': 's' }}</option>                
+                            </app-select-field>
+                        </div>                    
+                    </div>
+
+                    <app-date-field [(ngModel)]="model.recurringStartDate" name="recurringStartDate" label="Start date"></app-date-field>
+                    <app-date-field [(ngModel)]="model.recurringEndDate" name="recurringEndDate" label="End date"></app-date-field>
+                </div>
+
+            </app-card-group>
+        </div>
+
+        <div class="col-xl-6 col-lg-12">
+
+            <app-card-group title="Events">
+                Events
+            </app-card-group>
+
+        </div>
+    </div>
+</div>
