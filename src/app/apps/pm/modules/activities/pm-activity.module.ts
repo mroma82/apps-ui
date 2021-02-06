@@ -48,7 +48,7 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
     EntityListingContextService,        
     EntityCreateContextService,    
     EntitySecurityService
-  ]
+  ]  
 })
 export class PmActivityModule { 
 
