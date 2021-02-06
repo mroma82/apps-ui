@@ -19,6 +19,7 @@ import { EntitySecurityService } from 'src/app/core/services/entity/entity-secur
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
+import { PmEventModule } from '../events/pm-event.module';
 
 
 
@@ -37,6 +38,7 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
     FormsModule,
     DatepickerModule,    
     EntityRouteModule.forOptions(null),
+    PmEventModule
   ],
   exports: [
     PmActivitySubGridComponent
@@ -61,7 +63,7 @@ export class PmActivityModule {
     entityConfig.entityTypeId = EntityTypes.PmActivity;
     entityConfig.rootUrl = "/app/preventative-maintenance/activities";
     entityConfig.name = "Preventative Maintenance Activity";
-    entityConfig.pluralName = "Preventative Maintenance Activity";
+    entityConfig.pluralName = "Preventative Maintenance Activities";
 
     // record description
     entityConfig.recordDescription = (x) => x.description;

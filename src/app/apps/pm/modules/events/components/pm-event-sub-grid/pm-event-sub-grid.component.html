@@ -1,0 +1,10 @@
+<app-entity-sub-grid
+  *ngIf="model$ | async as model"
+  [entityTypeId]="entityTypeId"  
+  [filter]="{activityId: model.id}"
+  [sort]="{field: 'eventDateTime'}"
+  [modelDefault]="{activityId: model.id}"
+  [columns]="cols"
+  [config]="lineSubGridConfig"
+  [mode]="mode$ | async"
+></app-entity-sub-grid>

@@ -24,7 +24,8 @@ export class PmNavComponent implements OnInit {
     this.navItems$ = of([      
       { title: "Home", url: home, icon: "", description: "", hasAccess$: of(true) },
       { title: "Items", url: `${home}/items`, icon: "", description: "", hasAccess$: of(true) },
-      { title: "Activities", url: `${home}/activities`, icon: "", description: "", hasAccess$: of(true) }
+      { title: "Activities", url: `${home}/activities`, icon: "", description: "", hasAccess$: of(true) },
+      { title: "Events", url: `${home}/events`, icon: "", description: "", hasAccess$: of(true) }
     ]);
   }  
 

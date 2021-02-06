@@ -19,6 +19,10 @@ const routes: Routes = [
           {
             path: 'activities',        
             loadChildren: () => import('./modules/activities/pm-activity.module').then(m => m.PmActivityModule)
+          },
+          {
+            path: 'events',        
+            loadChildren: () => import('./modules/events/pm-event.module').then(m => m.PmEventModule)
           }
       ]
   }
