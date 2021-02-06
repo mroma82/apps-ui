@@ -2,12 +2,15 @@
 
     <div class="row">
         
-        <div class="col-xl-6 col-lg-12">
+        <div class="col-xl-4 col-lg-6">
             <app-card-group title="Details">
                 <app-text-field [(ngModel)]="model.description" name="description" label="Description" [required]="true"></app-text-field>
                 <app-text-area-field [(ngModel)]="model.comments" name="comments" label="Comments" [rows]="4"></app-text-area-field>
             </app-card-group>            
 
+            
+        </div>
+        <div class="col-xl-4 col-lg-6">
             <app-card-group title="Scheduling">
 
                 <app-select-field [(ngModel)]="model.schedulingType" name="schedulingType" label="Scheduling Type">
@@ -34,13 +37,9 @@
 
             </app-card-group>
         </div>
-
-        <div class="col-xl-6 col-lg-12">
-
-            <app-card-group title="Events">
-                Events
-            </app-card-group>
-
-        </div>
     </div>
+
+    <app-card-group title="Events" *ngIf="model.id">
+        <app-pm-event-sub-grid></app-pm-event-sub-grid>
+    </app-card-group>
 </div>
