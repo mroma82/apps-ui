@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PmContainerComponent } from './containers/pm-container/pm-container.component';
 import { PmHomePageComponent } from './pages/pm-home-page/pm-home-page.component';
+import { PmParametersPageComponent } from './pages/pm-parameters-page/pm-parameters-page.component';
 
 // routing
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
       component: PmContainerComponent,
       children: [
           { path: '', component: PmHomePageComponent },
+          { path: 'parameters', component: PmParametersPageComponent },
           
           {
             path: 'items',        

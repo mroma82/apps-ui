@@ -1,0 +1,18 @@
+<div class="row" *ngIf="model$ | async as model">
+
+    <div class="col-sm-4">
+      
+      <app-card-group title="Items">    
+        <app-select-field [(ngModel)]="model.itemTypeListTypeId" name="itemTypeListTypeId" label="Item type list type">
+          <option value="">-- Please select --</option>
+          <option *ngFor="let item of listTypes$ | async" [value]="item.id" [selected]="item.id == model.itemTypeListTypeId">{{ item.description }}</option>
+        </app-select-field> 
+  
+        <app-select-field [(ngModel)]="model.locationListTypeId" name="locationListTypeId" label="Item location list type">
+          <option value="">-- Please select --</option>
+          <option *ngFor="let item of listTypes$ | async" [value]="item.id" [selected]="item.id == model.locationListTypeId">{{ item.description }}</option>
+        </app-select-field> 
+      </app-card-group>
+  
+    </div>
+  </div>
