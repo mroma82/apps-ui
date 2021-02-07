@@ -88,20 +88,8 @@ export class EntitySubGridComponent implements OnInit {
   }
 
   // edit
-  edit(item: any, col: IEntitySubGridColumn) {
-
-    // check if a view url    
-    if(col.viewLinkFunc) {
-
-      // navigate to it
-      var viewLink = col.viewLinkFunc(item);
-      this.router.navigateByUrl(viewLink);
-    } 
-
-    // else, open the view dialog
-    else {
-      this.viewEditContext.openDialog("edit", item.id);
-    }
+  edit(item: any) {    
+    this.viewEditContext.openDialog("edit", item.id);    
   }
 
   // delete

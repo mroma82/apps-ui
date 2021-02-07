@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { BaseEntitySubGridViewEditComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-view-edit-component';
 import { EntitySubGridViewEditContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-view-edit-context.service';
 
 @Component({
@@ -7,29 +8,12 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
   templateUrl: './example-line-view-edit.component.html',
   styleUrls: ['./example-line-view-edit.component.scss']
 })
-export class ExampleLineViewEditComponent implements OnInit, OnDestroy {
-
-  // model
-  model : any = {};  
-
-  // subscriptions
-  subs = new Subscription();
+export class ExampleLineViewEditComponent extends BaseEntitySubGridViewEditComponent {
 
   // new
   constructor(
-    private context: EntitySubGridViewEditContextService    
+    context: EntitySubGridViewEditContextService    
   ) { 
-
-    // sub to model
-    this.context.model$.subscribe(x => this.model = x);
-  }
-
-  // init
-  ngOnInit() {    
-  }
-
-  // cleanup
-  ngOnDestroy() {
-    this.subs.unsubscribe();
+    super(context);
   }
 }

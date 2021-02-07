@@ -1,5 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { BaseEntityCreateComponent } from 'src/app/core/services/entity/abstractions/base-entity-create-component';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 
 @Component({
@@ -7,30 +8,12 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
   templateUrl: './example-line-create.component.html',
   styleUrls: ['./example-line-create.component.scss']
 })
-export class ExampleLineCreateComponent implements OnInit, OnDestroy {
-
-  // model
-  model : any = {};  
-
-  // subscriptions
-  subs = new Subscription();
+export class ExampleLineCreateComponent extends BaseEntityCreateComponent {
 
   // new
   constructor(
-    private context: EntityCreateContextService    
+    context: EntityCreateContextService    
   ) { 
-
-    // sub to model
-    this.context.model$.subscribe(x => this.model = x);
+    super(context);
   }
-
-  // init
-  ngOnInit() {    
-  }
-
-  // cleanup
-  ngOnDestroy() {
-    this.subs.unsubscribe();
-  }
-
 }

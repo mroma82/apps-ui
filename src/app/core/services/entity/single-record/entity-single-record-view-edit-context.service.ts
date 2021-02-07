@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogService } from 'src/app/common/services/dialog.service';
+import { ToastMessageContextService } from 'src/app/common/services/toast-message-context.service';
 import { EntityApiService } from '../entity-api.service';
 import { EntityConfigurationService } from '../entity-configuration.service';
 import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
@@ -18,6 +19,7 @@ export class EntitySingleRecordViewEditContextService {
     private api: EntityApiService,    
     private dialogService: DialogService,
     private entityConfig: EntityConfigurationService,
+    private toastMessage: ToastMessageContextService,
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
 
@@ -53,6 +55,7 @@ export class EntitySingleRecordViewEditContextService {
 
           // check if ok
           if(x.success) {
+            this.toastMessage.add({ text: "Record saved"});
             return true;
             
           } else {
