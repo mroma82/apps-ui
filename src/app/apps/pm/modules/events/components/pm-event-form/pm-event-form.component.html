@@ -1,0 +1,18 @@
+<div>
+    <app-date-field [(ngModel)]="model.eventDateTime" name="eventDateTime" label="Event date" [required]="true" [disabled]="viewMode"></app-date-field>
+
+    <app-check-box-field [(ngModel)]="model.isCompleted" name="isCompleted" label="Is completed?" (click)="setAsCompleted()" [disabled]="viewMode"></app-check-box-field>
+    
+    <div *ngIf="model.isCompleted">
+
+        <app-date-field [(ngModel)]="model.completedDateTime" name="completedDateTime" label="Completed on" [disabled]="viewMode"></app-date-field>
+
+        <app-select-field [(ngModel)]="model.completedUserId" name="completedUserId" label="Completed by" [disabled]="viewMode">
+            <option value="">-- Please select --</option>
+            <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == model.completedUserId" [disabled]="viewMode">{{ item.name }}</option>
+        </app-select-field>
+        
+        <app-text-area-field [(ngModel)]="model.comments" name="comments" label="Comments" [rows]="2" [disabled]="viewMode"></app-text-area-field>
+    
+    </div>
+</div>

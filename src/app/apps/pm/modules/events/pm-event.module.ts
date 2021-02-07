@@ -19,6 +19,8 @@ import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validatio
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
+import { PmEventFormComponent } from './components/pm-event-form/pm-event-form.component';
+import { PmEventSubGridViewEditComponent } from './components/pm-event-sub-grid-view-edit/pm-event-sub-grid-view-edit.component';
 
 
 
@@ -26,7 +28,7 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
   declarations: [
     PmEventViewEditComponent, 
     PmEventCreateComponent, 
-    PmEventSubGridComponent
+    PmEventSubGridComponent, PmEventFormComponent, PmEventSubGridViewEditComponent
   ],
   imports: [
     CommonModule,    

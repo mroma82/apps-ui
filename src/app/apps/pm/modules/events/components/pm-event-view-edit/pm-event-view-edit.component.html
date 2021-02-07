@@ -1,1 +1,5 @@
-<p>pm-event-view-edit works!</p>
+<div *ngIf="model.id" class="row">
+    <div class="col-lg-4">
+        <app-pm-event-form [model]="model" [viewMode]="viewMode$ | async"></app-pm-event-form>
+    </div>
+</div>
