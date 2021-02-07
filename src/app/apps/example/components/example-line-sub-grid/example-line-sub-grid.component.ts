@@ -19,6 +19,14 @@ import { ExampleLineViewEditComponent } from '../example-line-view-edit/example-
 })
 export class ExampleLineSubGridComponent implements OnInit {
 
+  // columns
+  cols = [
+    { title: 'Title', model: 'title', isViewLink: true },
+    { title: 'Created on', model: 'createDateTime', formatter: 'd' }, 
+    { title: 'Example', model: 'example.exampleId', isViewLink: true, viewLinkFunc: x => '/app/example/view/' + x.exampleId }, 
+    { title: 'Name', model: 'name' }
+  ];
+
   // options
   entityTypeId : string = EntityTypes.ExampleLine;
 

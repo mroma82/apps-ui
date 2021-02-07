@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
@@ -29,7 +30,7 @@ export class AdminListItemSubGridComponent extends BaseEntitySubGridComponent {
   };
 
   // columns
-  subGridColumns: IEntityListingColumn[] = [
+  subGridColumns: IEntitySubGridColumn[] = [
     { title: "Value", model: "valueId" },
     { title: "Text", model: "text" },
     { title: "Sort", model: "sortOrder" }

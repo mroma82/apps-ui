@@ -4,7 +4,7 @@
   [filter]="{exampleId: model.id}"
   [sort]="{field: 'Title'}"
   [modelDefault]="{exampleId: model.id}"
-  [columns]="[ {title: 'ID', model: 'id' }, {title: 'Title', model: 'title', isViewLink: true }, {title: 'Name', model: 'name'}]"
+  [columns]="cols"
   [config]="lineSubGridConfig"
   [mode]="mode$ | async"
 ></app-entity-sub-grid>

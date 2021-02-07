@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
@@ -41,7 +42,7 @@ export class AdminWorkflowGroupUserSubGridComponent extends BaseEntitySubGridCom
   };
 
   // columns
-  subGridColumns: IEntityListingColumn[] = [
+  subGridColumns: IEntitySubGridColumn[] = [
     { 
       title: "User", 
       model: "systemUserId",

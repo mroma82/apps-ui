@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
+import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
@@ -33,7 +34,7 @@ export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridCo
   };
 
   // columns
-  subGridColumns : IEntityListingColumn[] = [ 
+  subGridColumns : IEntitySubGridColumn[] = [ 
     {
       title: 'Entity Type', 
       model: "permissionMask",

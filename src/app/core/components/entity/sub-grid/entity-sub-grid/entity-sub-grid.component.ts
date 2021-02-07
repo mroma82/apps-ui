@@ -1,8 +1,9 @@
 import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
+import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { IEntityValidationService } from 'src/app/core/services/entity/entity-validation.service';
@@ -26,7 +27,7 @@ export class EntitySubGridComponent implements OnInit {
   @Input() mode : 'view' | 'edit';
   @Input() filter : any;
   @Input() sort: any;
-  @Input() columns: any[];
+  @Input() columns: IEntitySubGridColumn[];
   @Input() config: IEntitySubGridConfigurationService;  
   @Input() modelDefault : any;
   @Input() validationService: IEntityValidationService;
@@ -42,13 +43,14 @@ export class EntitySubGridComponent implements OnInit {
     private dialogService : DialogService,
     private createContext: EntityCreateContextService,
     private viewEditContext: EntitySubGridViewEditContextService,
+    private router: Router
   ) { 
     this.items$ = context.items$;    
     
   }
 
   ngOnInit() {
-        console.log(this.filter);
+        
     // hack
     this.context.entityTypeId$.next(this.entityTypeId);
     this.context.filter$.next(this.filter);        
@@ -69,17 +71,37 @@ export class EntitySubGridComponent implements OnInit {
   }
 
   // view
-  view(id: string) {
+  view(item: any, col: IEntitySubGridColumn) {    
 
-    // edit
-    this.viewEditContext.openDialog("view", id);
+    // check if a view url    
+    if(col.viewLinkFunc) {
+
+      // navigate to it
+      var viewLink = col.viewLinkFunc(item);
+      this.router.navigateByUrl(viewLink);
+    } 
+
+    // else, open the view dialog
+    else {
+      this.viewEditContext.openDialog("view", item.id);
+    }  
   }
 
   // edit
-  edit(id: string) {
+  edit(item: any, col: IEntitySubGridColumn) {
 
-    // edit
-    this.viewEditContext.openDialog("edit", id);
+    // check if a view url    
+    if(col.viewLinkFunc) {
+
+      // navigate to it
+      var viewLink = col.viewLinkFunc(item);
+      this.router.navigateByUrl(viewLink);
+    } 
+
+    // else, open the view dialog
+    else {
+      this.viewEditContext.openDialog("edit", item.id);
+    }
   }
 
   // delete
@@ -96,16 +118,37 @@ export class EntitySubGridComponent implements OnInit {
   }
 
   // get the column text
-  getColumnText(item: any, col: any) : Observable<any> {
+  getColumnText(item: any, col: IEntitySubGridColumn) : Observable<any> {
 
     // check if any display functions
     if(col.displayFunc$)
       return col.displayFunc$(item);
-      
+          
     else if(col.displayFunc) 
       return of(col.displayFunc(item));
 
+    // else - the raw value
+    var val = item[col.model];
+
+    // check if expansion
+    if(col.model.indexOf(".") >= 0) {      
+      val = item;
+      var modelExpansion = col.model.split(".");
+      for(var i=0; i < modelExpansion.length; i++) {
+        val = val[modelExpansion[i]];
+      }
+    }    
+        
+    // cehck if any formatter
+    if(col.formatter) {
+      switch(col.formatter) {
+        case 'd':
+          val = new Date(val + 'Z').toLocaleDateString();
+          break;
+      }
+    }
+
     // else just eh model
-    return of(item[col.model]);
+    return of(val);
   }
 }
