@@ -7,13 +7,14 @@ import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { PmEventValidationService } from '../../services/pm-event-validation.service';
 import { PmEventCreateComponent } from '../pm-event-create/pm-event-create.component';
-import { PmEventViewEditComponent } from '../pm-event-view-edit/pm-event-view-edit.component';
+import { PmEventSubGridViewEditComponent } from '../pm-event-sub-grid-view-edit/pm-event-sub-grid-view-edit.component';
 
 @Component({
   selector: 'app-pm-event-sub-grid',
   templateUrl: './pm-event-sub-grid.component.html',
   styleUrls: ['./pm-event-sub-grid.component.sass'],
   providers: [
+    
     { provide: ENTITY_VALIDATION, useClass: PmEventValidationService }
   ]
 })
@@ -21,10 +22,10 @@ export class PmEventSubGridComponent implements OnInit {
 
   // columns
   cols = [
-    { model: "eventDateTime", title: "Scheduled date", isLink: true },
+    { model: "eventDateTime", title: "Scheduled date", isViewLink: true },
     { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
-    { model: "completedByUser.fullName", title: "Completed by" },
-    { model: "completedByDateTime", title: "Completed on" }
+    { model: "completedUserId", title: "Completed by", displayFunc: x => x.completedUser?.fullName },
+    { model: "completedDateTime", title: "Completed on" }
   ];
 
   // options
@@ -40,7 +41,7 @@ export class PmEventSubGridComponent implements OnInit {
   // sub grid config
   lineSubGridConfig: IEntitySubGridConfigurationService = {
     createFormComponent: PmEventCreateComponent,
-    editFormComponent: PmEventViewEditComponent
+    editFormComponent: PmEventSubGridViewEditComponent
   };
 
   // new
