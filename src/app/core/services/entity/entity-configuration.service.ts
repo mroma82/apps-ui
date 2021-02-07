@@ -1,13 +1,20 @@
 import { Component, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { EntityProviderService } from './entity-provider.service';
 
 @Injectable()
 export class EntityConfigurationService {
   
+  // new
+  constructor(
+    private entityProvider: EntityProviderService
+  ) {    
+  }
+  
   // define root url for routing
-  rootUrl: string = "";
-  name: string = "Record"
-  pluralName: string = "Records"
+  rootUrl: string = null;
+  name: string = null;
+  pluralName: string = null;
 
   // entity info
   entityTypeId : string = "";
@@ -27,4 +34,25 @@ export class EntityConfigurationService {
   // forms
   createFormComponent: any;
   viewEditFormComponent: any;
+
+  // set entity
+  setEntityType(entityTypeId: string) {
+
+    // set th etype
+    this.entityTypeId = entityTypeId;
+
+    // get extra details from api
+    this.entityProvider.getEntity(entityTypeId).subscribe(x => {
+
+      // set the fields
+      if(!this.rootUrl) 
+        this.rootUrl = x.rootUrl;
+
+      if(!this.name) 
+        this.name = x.name;
+
+      if(!this.pluralName) 
+        this.pluralName = x.pluralName;
+    });
+  }
 }

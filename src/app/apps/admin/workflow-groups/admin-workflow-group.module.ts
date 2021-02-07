@@ -66,11 +66,8 @@ export class AdminWorkflowGroupModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = EntityTypes.WorkflowGroup;
-    entityConfig.rootUrl = "/app/admin/workflow-groups";
-    entityConfig.name = "Workflow Group";
-    entityConfig.pluralName = "Workflow Groups";
-
+    entityConfig.setEntityType(EntityTypes.WorkflowGroup);
+    
     // record description
     entityConfig.recordDescription = (x) => x.groupId;
     

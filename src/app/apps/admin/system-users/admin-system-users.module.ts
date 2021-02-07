@@ -55,10 +55,7 @@ export class AdminSystemUsersModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = "4ecc715d-8240-4498-8554-78099ca9f019";
-    entityConfig.rootUrl = "/app/admin/system-users";
-    entityConfig.name = "System User";
-    entityConfig.pluralName = "System Users";
+    entityConfig.setEntityType("4ecc715d-8240-4498-8554-78099ca9f019");
     
     // record description
     entityConfig.recordDescription = (x) => x.username;

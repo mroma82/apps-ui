@@ -64,10 +64,7 @@ export class AdminListItemTypeModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = EntityTypes.ListItemType;
-    entityConfig.rootUrl = "/app/admin/list-items";
-    entityConfig.name = "Drop Down List";
-    entityConfig.pluralName = "Drop Down List";
+    entityConfig.setEntityType(EntityTypes.ListItemType);
 
     // record description
     entityConfig.recordDescription = (x) => x.description;

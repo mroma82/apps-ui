@@ -64,11 +64,8 @@ export class AdminSecurityRolesModule {
   ) { 
 
     // entity
-    entityConfig.entityTypeId = EntityTypes.SecurityRole;
-    entityConfig.rootUrl = "/app/admin/security-roles";
-    entityConfig.name = "Security Role";
-    entityConfig.pluralName = "Security Roles";
-
+    entityConfig.setEntityType(EntityTypes.SecurityRole);
+    
     // record description
     entityConfig.recordDescription = (x) => x.name;
     
