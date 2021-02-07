@@ -60,6 +60,10 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         viewLinkFunc: x => `/app/admin/system-users/view/${x.requestUserId}`
       },
       {
+        model: "requestUser.instance.name",
+        title: "Requested By Instance"        
+      },
+      {
         model: "department.text",
         title: "Department"
       },
