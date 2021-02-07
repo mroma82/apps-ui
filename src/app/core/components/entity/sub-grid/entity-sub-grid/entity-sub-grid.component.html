@@ -12,10 +12,10 @@
   <tbody>
     <tr *ngFor="let item of items$ | async">
       <td *ngFor="let col of columns">
-        <a href="javascript:;;" *ngIf="col.isViewLink" (click)="view(item, col)">
+        <a href="javascript:;;" *ngIf="col.isLink" (click)="view(item, col)">
           {{ getColumnText(item, col) | async }}
         </a>
-        <ng-container *ngIf="!col.isViewLink">
+        <ng-container *ngIf="!col.Link">
           {{ getColumnText(item, col) | async }}          
         </ng-container>
       </td>

@@ -29,7 +29,8 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
       {
         model: "username",
         title: "Username",
-        isLink: true
+        isLink: true,
+        showEditLink: true
       },
       {
         model: "fullName",

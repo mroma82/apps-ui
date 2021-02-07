@@ -29,7 +29,8 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
       {
         model: "name",
         title: "Name",
-        isLink: true
+        isLink: true,
+        showEditLink: true
       },
       {
         model: "isSysAdmin",

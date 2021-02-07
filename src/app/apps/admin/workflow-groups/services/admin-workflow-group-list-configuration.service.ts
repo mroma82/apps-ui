@@ -26,7 +26,7 @@ export class AdminWorkflowGroupListConfigurationService implements IEntityListin
     
     // cols
     const cols : IEntityListingColumn[] = [
-      { title: "Group ID", model: "groupId", isLink: true }
+      { title: "Group ID", model: "groupId", isLink: true, showEditLink: true }
     ]; 
 
     return of(cols);

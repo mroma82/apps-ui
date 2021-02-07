@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { title } from 'process';
 import { Observable, of } from 'rxjs';
+import { UtcDateTimePipe } from 'src/app/common/pipes/utc-date-time.pipe';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-view';
 import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -24,11 +26,12 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
 
   // columns
   getColumns() : Observable<IEntityListingColumn[]> {
-    return of([
+    var cols : IEntityListingColumn[] = [
       {
         model: "exampleId",
         title: "Example #",
-        isLink: true
+        isLink: true,
+        showEditLink: true
       },
       {
         model: "title",
@@ -52,7 +55,9 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       },
       {
         model: "requestUser.fullName",
-        title: "Requested By"
+        title: "Requested By",
+        isLink: true,
+        viewLinkFunc: x => `/app/admin/system-users/view/${x.requestUserId}`
       },
       {
         model: "department.text",
@@ -61,7 +66,14 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "workflowStateText",
         title: "Workflow Status"
+      },
+      {
+        model: "createDateTime",
+        title: "Created on",
+        pipe: new UtcDateTimePipe(new DatePipe("en-us"))
       }
-    ]);
+    ];
+
+    return of(cols);
   }
 }

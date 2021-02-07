@@ -14,12 +14,15 @@
     (sort)="onSort($event)"
     (page)="onPage($event)">
 
-    <ngx-datatable-column *ngFor="let col of columns$ | async" [name]="col.title" [prop]="col.model" [flexGrow]="1">
+    <ngx-datatable-column *ngFor="let col of columns$ | async" [name]="col.title" [prop]="col.model" [flexGrow]="1" [pipe]="col.pipe">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
         
         <div *ngIf="col.isLink">
-          <a routerLink="../view/{{row.id}}">{{value}}</a>
-          <a routerLink="../edit/{{row.id}}" class="ml-1" *ngIf="canEdit$ | async"><i class="fas fa-pencil-alt"></i></a>
+          <a [routerLink]="getViewLink(row, col)">{{value}}</a>
+
+          <span *ngIf="col.showEditLink">
+            <a [routerLink]="getEditLink(row, col)" class="ml-1" *ngIf="canEdit$ | async"><i class="fas fa-pencil-alt"></i></a>
+          </span>
         </div>
 
         <div *ngIf="!col.isLink">

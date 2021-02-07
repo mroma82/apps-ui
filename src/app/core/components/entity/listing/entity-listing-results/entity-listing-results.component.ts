@@ -42,4 +42,27 @@ export class EntityListingResultsComponent implements OnInit {
     }
   }
 
+  // view link
+  getViewLink(item: any, col: IEntityListingColumn) {
+
+    // check if no func
+    if(col.viewLinkFunc) {
+      return col.viewLinkFunc(item);
+    }
+
+    // else, the normal url
+    return `../view/${item.id}`;
+  }
+
+  // edit link
+  getEditLink(item: any, col: IEntityListingColumn) {
+
+    // check if no func
+    if(col.editLinkFunc) {
+      return col.editLinkFunc(item);
+    }
+
+    // else, the normal url
+    return `../edit/${item.id}`;
+  }
 }

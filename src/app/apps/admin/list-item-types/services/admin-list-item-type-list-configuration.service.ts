@@ -29,7 +29,8 @@ export class AdminListItemTypeListConfigurationService implements IEntityListing
       {
         model: "description",
         title: "Description",
-        isLink: true
+        isLink: true,
+        showEditLink: true
       }
     ])
   }
