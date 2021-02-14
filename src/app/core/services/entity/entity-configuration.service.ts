@@ -35,6 +35,9 @@ export class EntityConfigurationService {
   createFormComponent: any;
   viewEditFormComponent: any;
 
+  // options
+  navigateToEditAfterCreate: boolean = false;
+
   // set entity
   setEntityType(entityTypeId: string) {
 

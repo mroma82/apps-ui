@@ -100,5 +100,8 @@ export class ExampleAppModule {
 
     // view/edit
     entityConfig.viewEditFormComponent = ExampleViewEditFormComponent;
+
+    // options
+    entityConfig.navigateToEditAfterCreate = true;
   }
 }

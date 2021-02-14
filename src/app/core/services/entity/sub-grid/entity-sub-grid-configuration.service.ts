@@ -6,4 +6,7 @@ export interface IEntitySubGridConfigurationService {
 
   // edit form
   editFormComponent?: any;  
+
+  // options
+  navigateToEditAfterCreate?: boolean;
 }

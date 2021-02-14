@@ -32,7 +32,6 @@ export class EntitySubGridComponent implements OnInit {
   @Input() modelDefault : any;
   @Input() validationService: IEntityValidationService;
 
-
   // state
   items$ : Observable<any[]>;
 
@@ -62,6 +61,7 @@ export class EntitySubGridComponent implements OnInit {
       this.entityConfig.entityTypeId = this.entityTypeId;
       this.entityConfig.createFormComponent = this.config.createFormComponent;
       this.entityConfig.viewEditFormComponent = this.config.editFormComponent;
+      this.entityConfig.navigateToEditAfterCreate = this.config.navigateToEditAfterCreate;
     }
   }
 

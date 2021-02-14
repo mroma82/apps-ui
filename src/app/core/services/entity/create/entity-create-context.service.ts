@@ -1,4 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
@@ -25,6 +26,7 @@ export class EntityCreateContextService {
     private entityConfig: EntityConfigurationService,
     private listingContext: EntityListingContextService,      
     private appContext: AppContextService,
+    private router : Router,
     @Optional() private subGridContext : EntitySubGridContextService,      
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
@@ -66,14 +68,23 @@ export class EntityCreateContextService {
           // check if ok
           if(x.success) {
 
+            // refresh
             if(this.subGridContext !== null) {
               this.subGridContext.refreshData();
             } else {
               this.listingContext.refreshData();
             }           
             
-            // send a toast message
-            this.appContext.ToastMessage.add({ text: `${this.entityConfig.name} Created`, url: `${this.entityConfig.rootUrl}/view/${x.id}` });
+            // check what to do next
+            if(this.entityConfig.navigateToEditAfterCreate) {
+              this.router.navigateByUrl(`${this.entityConfig.rootUrl}/edit/${x.id}`);
+            } 
+            
+            else {  
+              // send a toast message
+              this.appContext.ToastMessage.add({ text: `${this.entityConfig.name} Created`, url: `${this.entityConfig.rootUrl}/view/${x.id}` });
+            }
+
             return true;
             
           } else {
