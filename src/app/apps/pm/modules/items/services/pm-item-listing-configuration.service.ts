@@ -17,6 +17,16 @@ export class PmItemListingConfigurationService implements IEntityListingConfigur
         sort: {
           field: "description"
         }
+      },
+      { 
+        id: "overdue",
+        title: "Overdue Items",
+        filter: { 
+          isOverdue: true
+        },
+        sort: {
+          field: "description"
+        }
       }
     ]);
   }
