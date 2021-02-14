@@ -20,7 +20,8 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       { id: "all", title: "All Examples", filter: { }},
       { id: "open", title: "Open Examples", filter: { status: 0 }},
       { id: "in-progress", title: "In Process Examples", filter: { status: 1 }},
-      { id: "completed", title: "Completed Examples", filter: { status: 2 }}      
+      { id: "completed", title: "Completed Examples", filter: { status: 2 }},
+      { id: "finance", title: "Finance Only", filter: { departmentName: "Finance" }}    
     ]);
   }
 
