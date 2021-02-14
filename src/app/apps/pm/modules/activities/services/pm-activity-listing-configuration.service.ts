@@ -34,8 +34,8 @@ export class PmActivityListingConfigurationService implements IEntityListingConf
   // columns
   getColumns(): Observable<IEntityListingColumn[]> {
     return of([
-      { model: "pmItem.description", title: "Item" },
-      { model: "description", title: "Description", isLink: true },
+      { model: "pmItem.description", title: "Item", isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/items/view/${x.itemId}` },
+      { model: "description", title: "Description", isLink: true, showEditLink: true },
       { model: "schedulingDescription", title: "Schedule" }
     ]);
   }

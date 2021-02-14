@@ -22,10 +22,10 @@ export class PmEventSubGridComponent implements OnInit {
 
   // columns
   cols = [
-    { model: "eventDateTime", title: "Scheduled date", isViewLink: true },
+    { model: "eventDateTime", title: "Scheduled date", isViewLink: true, formatter: "d" },
     { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
     { model: "completedUserId", title: "Completed by", displayFunc: x => x.completedUser?.fullName },
-    { model: "completedDateTime", title: "Completed on" }
+    { model: "completedDateTime", title: "Completed on", formatter: "d" }
   ];
 
   // options

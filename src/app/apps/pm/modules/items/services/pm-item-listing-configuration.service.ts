@@ -34,7 +34,7 @@ export class PmItemListingConfigurationService implements IEntityListingConfigur
   // columns
   getColumns(): Observable<IEntityListingColumn[]> {
     return of([
-      { model: "description", title: "Description", isLink: true },
+      { model: "description", title: "Description", isLink: true, showEditLink: true },
       { model: "itemType.text", title: "Type" },
       { model: "location.text", title: "Location" }      
     ]);
