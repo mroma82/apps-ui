@@ -19,10 +19,20 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
         }
       },
       { 
+        id: "open",
+        title: "Open Events",
+        filter: { 
+          isCompleted: false
+        },
+        sort: {
+          field: "eventDateTime"
+        }
+      },
+      { 
         id: "overdue",
         title: "Overdue Events",
         filter: { 
-          isCompleted: false
+          isOverdue: true
         },
         sort: {
           field: "eventDateTime"
@@ -45,7 +55,7 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
   // columns
   getColumns(): Observable<IEntityListingColumn[]> {
     return of([
-      { model: "pmActivity.description", title: "Item", displayFunc: x => "TODO" },
+      { model: "pmActivity.description", title: "Item", displayFunc: x => x.pmItem.description },
       { model: "pmActivity.description", title: "Activity" },
       { model: "eventDateTime", title: "Scheduled date", isLink: true },
       { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
