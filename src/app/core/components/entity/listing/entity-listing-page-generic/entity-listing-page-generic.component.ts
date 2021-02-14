@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
@@ -12,13 +15,17 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 export class EntityListingPageGenericComponent implements OnInit {
 
   // permissions
-  canAdd$ = this.entitySecurity.canAdd$;
+  canAdd$ = combineLatest(
+    this.entitySecurity.canAdd$, 
+    of(this.entityConfig.showAddOnListing)
+  ).pipe(map(([canAdd, showAdd]) => canAdd && showAdd));
 
   // new
   constructor(
     private listingContext : EntityListingContextService,
     private entitySecurity: EntitySecurityService,
     private createContext : EntityCreateContextService,
+    private entityConfig: EntityConfigurationService,
     private appContext: AppContextService
   ) { }
 

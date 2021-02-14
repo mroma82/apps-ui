@@ -37,7 +37,9 @@ export class EntityConfigurationService {
 
   // options
   navigateToEditAfterCreate: boolean = false;
+  showAddOnListing: boolean = true;
 
+  
   // set entity
   setEntityType(entityTypeId: string) {
 
