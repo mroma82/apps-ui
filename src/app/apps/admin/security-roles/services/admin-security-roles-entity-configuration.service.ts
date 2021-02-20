@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { BaseEntityConfigurationService } from 'src/app/core/services/entity/abstractions/base-entity-configuration.service';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { AdminSecurityRoleCreateComponent } from '../components/admin-security-role-create/admin-security-role-create.component';
