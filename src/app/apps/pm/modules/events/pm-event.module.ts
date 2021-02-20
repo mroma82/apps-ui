@@ -11,7 +11,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
@@ -21,6 +21,7 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { PmEventFormComponent } from './components/pm-event-form/pm-event-form.component';
 import { PmEventSubGridViewEditComponent } from './components/pm-event-sub-grid-view-edit/pm-event-sub-grid-view-edit.component';
+import { PmEventEntityConfigurationService } from './services/pm-event-entity-configuration.service';
 
 
 
@@ -44,7 +45,7 @@ import { PmEventSubGridViewEditComponent } from './components/pm-event-sub-grid-
     PmEventSubGridComponent
   ],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: PmEventEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: PmEventListingConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: PmEventValidationService },
     EntityListingContextService,        
@@ -52,26 +53,4 @@ import { PmEventSubGridViewEditComponent } from './components/pm-event-sub-grid-
     EntitySecurityService
   ]  
 })
-export class PmEventModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService
-  ) {
-
-    // entity
-    entityConfig.entityTypeId = EntityTypes.PmEvent;
-    entityConfig.rootUrl = "/app/preventative-maintenance/events";
-    entityConfig.name = "Preventative Maintenance Event";
-    entityConfig.pluralName = "Preventative Maintenance Events";
-
-    // record description
-    entityConfig.recordDescription = (x) => "test";
-
-    // create
-    entityConfig.createFormComponent = PmEventCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = PmEventViewEditComponent;
-  }
-}
+export class PmEventModule { }
