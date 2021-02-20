@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { EntityApiService } from './entity-api.service';
-import { EntityConfigurationService } from './entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from './entity-configuration.service';
 
 @Injectable()
 export class EntitySecurityService {
@@ -15,7 +15,7 @@ export class EntitySecurityService {
 
   // new
   constructor(
-    private config : EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private config: IEntityConfigurationService,
     private entityApi: EntityApiService
   ) { }
 }

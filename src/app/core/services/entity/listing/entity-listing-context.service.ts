@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
 import { debounce, shareReplay, take } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { EntityApiService } from '../entity-api.service';
-import { EntityConfigurationService } from '../entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../entity-configuration.service';
 import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from './entity-listing-configuration.service';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class EntityListingContextService {
   
   // new
   constructor(
-    private entityConfig : EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     @Inject(ENTITY_LISTING_CONFIG) private listingConfig : IEntityListingConfigurationService,
     private api : EntityApiService
   ) { 

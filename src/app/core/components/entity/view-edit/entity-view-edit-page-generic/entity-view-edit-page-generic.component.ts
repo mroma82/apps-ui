@@ -5,7 +5,7 @@ import { EntityViewEditContextService } from 'src/app/core/services/entity/view-
 import { RecordContextService } from 'src/app/common/services/record-context.service';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { ExampleViewEditFormComponent } from 'src/app/apps/example/components/example-view-edit-form/example-view-edit-form.component';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { Observable } from 'rxjs';
 import { AppContextService } from 'src/app/app-context.service';
 import { map } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class EntityViewEditPageGenericComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,    
     private recordContext: RecordContextService,
-    private entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private viewEditContext : EntityViewEditContextService,
     private appContext: AppContextService     
   ) {   

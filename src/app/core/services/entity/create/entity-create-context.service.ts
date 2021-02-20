@@ -7,7 +7,7 @@ import { IValidationResult } from 'src/app/common/models/validation-result';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { ToastMessageContextService } from 'src/app/common/services/toast-message-context.service';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
-import { EntityConfigurationService } from '../entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../entity-configuration.service';
 import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
 import { EntityListingContextService } from '../listing/entity-listing-context.service';
 import { EntitySubGridContextService } from '../sub-grid/entity-sub-grid-context.service';
@@ -23,7 +23,7 @@ export class EntityCreateContextService {
   constructor(
     private api: EntityApiService,    
     private dialogService : DialogService,
-    private entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private listingContext: EntityListingContextService,      
     private appContext: AppContextService,
     private router : Router,

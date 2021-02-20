@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -19,9 +19,8 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { AdminSecurityRoleEntitySubGridComponent } from './components/admin-security-role-entity-sub-grid/admin-security-role-entity-sub-grid.component';
 import { AdminSecurityRoleEntityCreateComponent } from './components/admin-security-role-entity-create/admin-security-role-entity-create.component';
 import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
-import { RouterModule } from '@angular/router';
-import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
+import { AdminSecurityRolesEntityConfigurationService } from './services/admin-security-roles-entity-configuration.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,7 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     EntityRouteModule.forOptions(null)
   ],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: AdminSecurityRolesEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: AdminSecurityRolesListConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: AdminSecurityRolesValidationService },
     EntityListingContextService,        
@@ -56,23 +55,4 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     AdminSecurityRoleEntityEditComponent
   ]
 })
-export class AdminSecurityRolesModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService    
-  ) { 
-
-    // entity
-    entityConfig.setEntityType(EntityTypes.SecurityRole);
-    
-    // record description
-    entityConfig.recordDescription = (x) => x.name;
-    
-    // create
-    entityConfig.createFormComponent = AdminSecurityRoleCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = AdminSecurityRoleViewEditComponent;
-  }
-}
+export class AdminSecurityRolesModule { }

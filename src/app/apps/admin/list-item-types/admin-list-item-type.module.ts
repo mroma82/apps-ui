@@ -7,7 +7,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -22,6 +22,7 @@ import { AdminListItemViewEditComponent } from './components/admin-list-item-vie
 import { AdminListItemCreateComponent } from './components/admin-list-item-create/admin-list-item-create.component';
 import { AdminListItemSubGridComponent } from './components/admin-list-item-sub-grid/admin-list-item-sub-grid.component';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
+import { AdminListItemTypeEntityConfigurationService } from './services/admin-list-item-type-entity-configuration.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     EntityRouteModule.forOptions(null)
   ],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: AdminListItemTypeEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: AdminListItemTypeListConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: AdminListItemTypeValidationService },
     EntityListingContextService,        
@@ -56,24 +57,4 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     AdminListItemCreateComponent
   ]
 })
-export class AdminListItemTypeModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService    
-  ) { 
-
-    // entity
-    entityConfig.setEntityType(EntityTypes.ListItemType);
-
-    // record description
-    entityConfig.recordDescription = (x) => x.description;
-    
-    // create
-    entityConfig.createFormComponent = AdminListItemTypeCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = AdminListItemTypeViewEditComponent;
-  }
-
-}
+export class AdminListItemTypeModule { }

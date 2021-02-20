@@ -1,5 +1,5 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { Component, ComponentFactoryResolver, Inject, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 
 @Component({
   selector: 'app-entity-sub-grid-view-edit',
@@ -12,7 +12,7 @@ export class EntitySubGridViewEditComponent implements OnInit, OnDestroy {
 
   // new
   constructor(
-    private entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private componentFactoryResolver: ComponentFactoryResolver
   ) { 
     

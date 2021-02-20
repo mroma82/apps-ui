@@ -5,7 +5,7 @@ import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { IEntityValidationService } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-context.service';
@@ -17,7 +17,6 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
   styleUrls: ['./entity-sub-grid.component.scss'],
   providers: [
     EntitySubGridContextService,
-    EntityConfigurationService,
     EntityCreateContextService,    
     EntitySubGridViewEditContextService,
   ]
@@ -38,7 +37,7 @@ export class EntitySubGridComponent implements OnInit {
   // new
   constructor(
     private context : EntitySubGridContextService,
-    private entityConfig : EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private dialogService : DialogService,
     private createContext: EntityCreateContextService,
     private viewEditContext: EntitySubGridViewEditContextService,

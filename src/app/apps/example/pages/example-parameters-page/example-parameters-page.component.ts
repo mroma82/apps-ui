@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { EntitySingleRecordViewEditContextService } from 'src/app/core/services/entity/single-record/entity-single-record-view-edit-context.service';
 import { ExampleParametersComponent } from '../../components/example-parameters/example-parameters.component';
+import { ExampleParametersEntityConfigurationService } from '../../services/example-parameters-entity-configuration.service';
 import { ExampleParametersValidationService } from '../../services/example-parameters-validation.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ExampleParametersValidationService } from '../../services/example-param
   templateUrl: './example-parameters-page.component.html',
   styleUrls: ['./example-parameters-page.component.scss'],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: ExampleParametersEntityConfigurationService },
     EntitySingleRecordViewEditContextService,
     { provide: ENTITY_VALIDATION, useClass: ExampleParametersValidationService }
   ]
@@ -20,14 +21,9 @@ export class ExampleParametersPageComponent implements OnInit {
 
   // new
   constructor(
-    entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private context: EntitySingleRecordViewEditContextService
-  ) { 
-
-    // entity settings
-    entityConfig.entityTypeId = EntityTypes.ExampleParameters;
-    entityConfig.viewEditFormComponent = ExampleParametersComponent
-  }
+  ) {}
 
   // init
   ngOnInit() {

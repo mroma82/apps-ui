@@ -3,7 +3,7 @@ import { combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 
@@ -25,7 +25,7 @@ export class EntityListingPageGenericComponent implements OnInit {
     private listingContext : EntityListingContextService,
     private entitySecurity: EntitySecurityService,
     private createContext : EntityCreateContextService,
-    private entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private appContext: AppContextService
   ) { }
 

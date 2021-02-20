@@ -1,15 +1,43 @@
-import { Component, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { EntityProviderService } from './entity-provider.service';
 
-@Injectable()
-export class EntityConfigurationService {
+// injection token
+export const ENTITY_CONFIG = "IEntityConfigurationService";
+
+// entity config
+export interface IEntityConfigurationService {  
+
+  // entity details
+  entityTypeId : string;
+  rootUrl: string;
+  name: string;
+  pluralName: string;
+
+  // workflow
+  workflow : {
+    enabled: boolean,
+    url: string,
+    prefixText: string
+  };
+
+  // forms
+  createFormComponent: any;
+  viewEditFormComponent: any;
+
+  // options
+  navigateToEditAfterCreate: boolean;
+  showAddOnListing: boolean;
+
+  // record description
+  recordDescription(model: any) : string;
+}
+
+// base
+export abstract class BaseEntityConfigurationService {
   
   // new
   constructor(
     private entityProvider: EntityProviderService
-  ) {    
-  }
+  ) {}
   
   // define root url for routing
   rootUrl: string = null;
@@ -38,7 +66,6 @@ export class EntityConfigurationService {
   // options
   navigateToEditAfterCreate: boolean = false;
   showAddOnListing: boolean = true;
-
   
   // set entity
   setEntityType(entityTypeId: string) {

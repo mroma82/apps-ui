@@ -17,7 +17,6 @@ import { AppsCoreModule } from 'src/app/core/core.module';
 import { ExampleListingConfigurationService } from './services/example-listing-configuration.service';
 import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/example-view-edit-page.component';
 import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ExampleValidationService } from './services/example-validation.service';
@@ -31,7 +30,8 @@ import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validatio
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
-
+import { ExampleEntityConfigurationService } from './services/example-entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 
 @NgModule({
   declarations: [    
@@ -61,7 +61,7 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
   providers: [
     ExampleService,        
     ExampleListsService,
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG,  useClass: ExampleEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: ExampleListingConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: ExampleValidationService },
     EntityListingContextService,        
@@ -77,31 +77,4 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
     ExampleParametersComponent
   ]
 })
-export class ExampleAppModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService    
-  ) { 
-
-    // entity
-    entityConfig.setEntityType(EntityTypes.Example);
-    
-    // record description
-    entityConfig.recordDescription = (x) => x.exampleId;
-    
-    // workflow
-    entityConfig.workflow.enabled = true;
-    entityConfig.workflow.url = "/example/workflow";
-    entityConfig.workflow.prefixText = "Approval Workflow";   
-    
-    // create
-    entityConfig.createFormComponent = ExampleCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = ExampleViewEditFormComponent;
-
-    // options
-    entityConfig.navigateToEditAfterCreate = true;
-  }
-}
+export class ExampleAppModule { }

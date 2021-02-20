@@ -7,7 +7,7 @@ import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enu
 import { DialogService } from '../../../../common/services/dialog.service';
 import { ListItemService } from '../../../../common/services/list-item.service';
 import { EntityApiService } from '../entity-api.service';
-import { EntityConfigurationService } from '../entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../entity-configuration.service';
 import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validation.service';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class EntityViewEditContextService {
     private api: EntityApiService,
     private appContext: AppContextService,
     private dialogService: DialogService,
-    private entityConfig: EntityConfigurationService,    
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,    
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService    
   ) {     
     // id change

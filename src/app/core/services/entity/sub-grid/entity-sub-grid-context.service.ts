@@ -1,10 +1,9 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { EntityApiService } from '../entity-api.service';
-import { EntityConfigurationService } from '../entity-configuration.service';
-import { IEntitySubGridConfigurationService } from './entity-sub-grid-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../entity-configuration.service';
 
 
 @Injectable()
@@ -30,7 +29,7 @@ export class EntitySubGridContextService implements OnDestroy {
   // new
   constructor(
     private api: EntityApiService,
-    private config: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private config: IEntityConfigurationService,
     private dialogService: DialogService
   ) { 
 

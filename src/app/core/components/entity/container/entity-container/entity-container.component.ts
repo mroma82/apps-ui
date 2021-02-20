@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AppContextService } from 'src/app/app-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class EntityContainerComponent implements OnInit {
   // new
   constructor(
     private appContext: AppContextService,
-    private entityConfig: EntityConfigurationService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private entityProvider: EntityProviderService
   ) { }
 

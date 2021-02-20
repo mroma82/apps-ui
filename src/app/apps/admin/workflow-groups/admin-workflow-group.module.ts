@@ -11,7 +11,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
@@ -23,6 +23,7 @@ import { AdminWorkflowGroupUserCreateComponent } from './components/admin-workfl
 import { AdminWorkflowGroupUserViewEditComponent } from './components/admin-workflow-group-user-view-edit/admin-workflow-group-user-view-edit.component';
 import { AdminWorkflowGroupUserFormComponent } from './components/admin-workflow-group-user-form/admin-workflow-group-user-form.component';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
+import { AdminWorkflowGroupEntityConfigurationService } from './services/admin-workflow-group-entity-configuration.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     EntityRouteModule.forOptions(null)
   ],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: AdminWorkflowGroupEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: AdminWorkflowGroupListConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: AdminWorkflowGroupValidationService },
     EntityListingContextService,        
@@ -58,23 +59,4 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
     AdminWorkflowGroupUserViewEditComponent
   ]
 })
-export class AdminWorkflowGroupModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService    
-  ) { 
-
-    // entity
-    entityConfig.setEntityType(EntityTypes.WorkflowGroup);
-    
-    // record description
-    entityConfig.recordDescription = (x) => x.groupId;
-    
-    // create
-    entityConfig.createFormComponent = AdminWorkflowGroupCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = AdminWorkflowGroupViewEditComponent;
-  }
-}
+export class AdminWorkflowGroupModule { }

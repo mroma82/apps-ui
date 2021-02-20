@@ -5,11 +5,13 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-context.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
+import { AdminWorkflowGroupUserEntityConfigurationService } from '../../services/admin-workflow-group-user-entity-configuration.service';
 import { AdminWorkflowGroupUserValidationService } from '../../services/admin-workflow-group-user-validation.service';
 import { AdminWorkflowGroupUserCreateComponent } from '../admin-workflow-group-user-create/admin-workflow-group-user-create.component';
 import { AdminWorkflowGroupUserViewEditComponent } from '../admin-workflow-group-user-view-edit/admin-workflow-group-user-view-edit.component';
@@ -19,6 +21,7 @@ import { AdminWorkflowGroupUserViewEditComponent } from '../admin-workflow-group
   templateUrl: './admin-workflow-group-user-sub-grid.component.html',
   styleUrls: ['./admin-workflow-group-user-sub-grid.component.scss'],
   providers: [
+    { provide: ENTITY_CONFIG, useClass: AdminWorkflowGroupUserEntityConfigurationService },
     { provide: ENTITY_VALIDATION, useClass: AdminWorkflowGroupUserValidationService }
   ]
 })
