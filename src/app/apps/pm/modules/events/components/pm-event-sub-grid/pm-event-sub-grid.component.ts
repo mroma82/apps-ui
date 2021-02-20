@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
+import { PmEventEntityConfigurationService } from '../../services/pm-event-entity-configuration.service';
 import { PmEventValidationService } from '../../services/pm-event-validation.service';
 import { PmEventCreateComponent } from '../pm-event-create/pm-event-create.component';
 import { PmEventSubGridViewEditComponent } from '../pm-event-sub-grid-view-edit/pm-event-sub-grid-view-edit.component';
@@ -14,7 +16,7 @@ import { PmEventSubGridViewEditComponent } from '../pm-event-sub-grid-view-edit/
   templateUrl: './pm-event-sub-grid.component.html',
   styleUrls: ['./pm-event-sub-grid.component.sass'],
   providers: [
-    
+    { provide: ENTITY_CONFIG, useClass: PmEventEntityConfigurationService },
     { provide: ENTITY_VALIDATION, useClass: PmEventValidationService }
   ]
 })

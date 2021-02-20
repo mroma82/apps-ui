@@ -10,7 +10,7 @@ import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.mod
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { PmActivityCreateComponent } from './components/pm-activity-create/pm-activity-create.component';
 import { PmActivityViewEditComponent } from './components/pm-activity-view-edit/pm-activity-view-edit.component';
-import { EntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
+import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { PmActivityListingConfigurationService } from './services/pm-activity-listing-configuration.service';
 import { PmActivityValidationService } from './services/pm-activity-validation.service';
@@ -20,6 +20,7 @@ import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validatio
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { PmEventModule } from '../events/pm-event.module';
+import { PmActivityEntityConfigurationService } from './services/pm-activity-entity-configuration.service';
 
 
 
@@ -44,7 +45,7 @@ import { PmEventModule } from '../events/pm-event.module';
     PmActivitySubGridComponent
   ],
   providers: [
-    EntityConfigurationService,
+    { provide: ENTITY_CONFIG, useClass: PmActivityEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: PmActivityListingConfigurationService },    
     { provide: ENTITY_VALIDATION, useClass: PmActivityValidationService },
     EntityListingContextService,        
@@ -52,26 +53,4 @@ import { PmEventModule } from '../events/pm-event.module';
     EntitySecurityService
   ]  
 })
-export class PmActivityModule { 
-
-  // new
-  constructor(
-    entityConfig: EntityConfigurationService
-  ) {
-
-    // entity
-    entityConfig.entityTypeId = EntityTypes.PmActivity;
-    entityConfig.rootUrl = "/app/preventative-maintenance/activities";
-    entityConfig.name = "Preventative Maintenance Activity";
-    entityConfig.pluralName = "Preventative Maintenance Activities";
-
-    // record description
-    entityConfig.recordDescription = (x) => x.description;
-
-    // create
-    entityConfig.createFormComponent = PmActivityCreateComponent;
-
-    // view/edit
-    entityConfig.viewEditFormComponent = PmActivityViewEditComponent;
-  }
-}
+export class PmActivityModule { }
