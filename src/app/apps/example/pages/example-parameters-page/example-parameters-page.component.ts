@@ -21,7 +21,6 @@ export class ExampleParametersPageComponent implements OnInit {
 
   // new
   constructor(
-    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private context: EntitySingleRecordViewEditContextService
   ) {}
 
