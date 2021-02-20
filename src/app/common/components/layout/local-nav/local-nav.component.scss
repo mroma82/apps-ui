@@ -9,5 +9,10 @@
 
     .navbar-toggler {
         border: none;
-    }
+
+        &:active, 
+        &:focus {
+            border: none !important;
+        }
+    }    
 }
