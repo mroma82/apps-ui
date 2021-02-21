@@ -27,6 +27,7 @@ export class PmEventEntityConfigurationService extends BaseEntityConfigurationSe
 
     // options
     this.navigateToEditAfterCreate = true;
+    this.showAddOnListing = false;
   }
 
   // record description
