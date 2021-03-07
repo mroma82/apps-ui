@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
 import { BaseEntityViewEditComponent } from 'src/app/core/services/entity/abstractions/base-entity-view-edit-component';
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
+import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class AdminSystemUserViewEditComponent extends BaseEntityViewEditComponen
     super(viewEditContext);
     
     // get the roles
-    this.roles$ = entityApi.list("2d5c70e5-82a9-400e-8528-a10adf0972ba", {}).pipe(map(x => x.items));
+    this.roles$ = entityApi.list(EntityTypes.SecurityRole, {}).pipe(map(x => x.items));
   }
 
   // override model change
@@ -37,7 +38,7 @@ export class AdminSystemUserViewEditComponent extends BaseEntityViewEditComponen
     super.onModelChange(model);
 
     // set the roles
-    this.entityApi.list("a3c8f835-496e-4caf-8238-6d3b566df4d6", { filter: { systemUserId: model.id }}).subscribe(x => {      
+    this.entityApi.list(EntityTypes.SystemUserRole, { filter: { systemUserId: model.id }}).subscribe(x => {      
       
       // build the user/roles
       this.userRoles = {};

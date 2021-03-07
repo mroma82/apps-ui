@@ -1,3 +1,10 @@
 .col-btn-new {
     padding-top: 0.4rem !important;
 }
+
+// 767
+@media (max-width: 767px) {
+    .filter-container {
+        padding-right: 0 im !important;
+    }
+}

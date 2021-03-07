@@ -10,49 +10,52 @@
     <div class="row">
       <div class="col-sm-4">
 
-        <table class="table">
+        <div class="table-responsive">
+          <table class="table">
             <thead class="thead-light">
-            <tr>
-                <th>Date/time</th>
-            </tr>            
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of list$ | async" >
-              <td (click)="setItem(item)" class="clickable" [class.table-active]="item.id == currentItemId">
-                <div>
-                    <strong>{{ item.createDateTime | utcDateTime:'medium' }}</strong>
-                </div>                
-                <div>
-                    <small>{{ item.createUserId | userFullname | async }}</small>
-                </div>
-                <div>
-                    <span class="badge badge-primary">{{ item.recordTypeText }}</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+              <tr>
+                  <th>Date/time</th>
+              </tr>            
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list$ | async" >
+                <td (click)="setItem(item)" class="clickable" [class.table-active]="item.id == currentItemId">
+                  <div>
+                      <strong>{{ item.createDateTime | utcDateTime:'medium' }}</strong>
+                  </div>                
+                  <div>
+                      <small>{{ item.createUserId | userFullname | async }}</small>
+                  </div>
+                  <div>
+                      <span class="badge badge-primary">{{ item.recordTypeText }}</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="col-sm-8">
         
-        <table class="table" *ngIf="detailList$ | async as detailList">
-          <thead class="thead-light">
-            <tr>
-              <th>Column</th>
-              <th>Old</th>
-              <th>New</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let detail of detailList">
-              <td>{{ detail.columnName }}</td>
-              <td class="old-value">{{ clean(detail.oldValue) }}</td>
-              <td>{{ clean(detail.newValue) }}</td>
-            </tr>
-          </tbody>
-        </table>
-
+        <div class="table-responsive">
+          <table class="table" *ngIf="detailList$ | async as detailList">
+            <thead class="thead-light">
+              <tr>
+                <th>Column</th>
+                <th>Old</th>
+                <th>New</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of detailList">
+                <td>{{ detail.columnName }}</td>
+                <td class="old-value">{{ clean(detail.oldValue) }}</td>
+                <td>{{ clean(detail.newValue) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>  
+        
       </div>
     </div>
     
