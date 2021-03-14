@@ -1,15 +1,15 @@
 <div class="form-group">
-    <label *ngIf="label" [attr.for]="identifier">{{label}}<span *ngIf="required" class="ml-1 text-danger">*</span></label>
-    <textarea      
-      [disabled]="disabled"   
-      type="text"
-      [readonly]="readonly"
-      [placeholder]="placeholder"
-      [(ngModel)]="value"
-      [ngClass]="{invalid: (invalid | async )}"
-      class="form-control"           
-      [id]="identifier"
-      [attr.name]="name"  
-      [rows]="rows"          
-    ></textarea>
+  <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !disabled" class="ml-1 text-danger">*</span></label>
+  <textarea      
+    [disabled]="disabled"   
+    type="text"
+    [readonly]="readonly"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    [ngClass]="{invalid: (invalid | async )}"
+    class="form-control"           
+    [id]="identifier"
+    [attr.name]="name"  
+    [rows]="rows"          
+  ></textarea>
 </div>

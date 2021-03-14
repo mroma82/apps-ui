@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Optional, Inject } from '@angular/
 import { NG_VALUE_ACCESSOR, NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { TextFieldComponent } from '../text-field/text-field.component';
 import { ElementBase } from '../base/element-base';
+import { FORM_COLUMN_PROVIDER, IFormColumnProvider } from 'src/app/common/services/form-column-provider.service';
 
 @Component({
   selector: 'app-text-area-field',
@@ -13,7 +14,7 @@ import { ElementBase } from '../base/element-base';
     multi: true,
   }]
 })
-export class TextAreaFieldComponent extends ElementBase<string> {
+export class TextAreaFieldComponent extends ElementBase<string> implements OnInit {
   @Input() public label: string;
   @Input() public placeholder: string = "";
   @Input() public readonly: boolean;
@@ -30,8 +31,16 @@ export class TextAreaFieldComponent extends ElementBase<string> {
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+    @Optional() @Inject(FORM_COLUMN_PROVIDER) formColumnProvider: IFormColumnProvider
   ) {
-    super(validators, asyncValidators);
+    super(validators, asyncValidators, formColumnProvider);
+  }
+
+  // init
+  ngOnInit() {
+
+    // init observables
+    this.initObservables();    
   }
 }
 

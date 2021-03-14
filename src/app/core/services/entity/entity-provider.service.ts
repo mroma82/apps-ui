@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { filter, map, shareReplay } from 'rxjs/operators';
+import { IEntityColumnDefinition } from '../../models/entity/entity-column-definition';
 import { IEntityDefinition } from '../../models/entity/entity-definition';
 import { EntityApiService } from './entity-api.service';
 
@@ -9,7 +10,7 @@ import { EntityApiService } from './entity-api.service';
 })
 export class EntityProviderService {
   
-  // hack: define list of entities
+  // define list of entities
   entities$ : Observable<IEntityDefinition[]>;
 
   // new
@@ -29,6 +30,22 @@ export class EntityProviderService {
   // get entity
   getEntity(entityTypeId: string) : Observable<IEntityDefinition> {
     return this.entities$.pipe(map(x => x.find(x => x.entityTypeId == entityTypeId)));
+  }
+
+  // get an entity column
+  getEntityColumn(entityTypeId: string, name: string) : Observable<IEntityColumnDefinition> {
+
+    // convert the name to the searchable name
+    const searchName = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+    // get from the entity
+    return this.getEntity(entityTypeId).pipe(map(x => {
+      var find = x.columns.filter(c => c.name == searchName);
+      if(find.length) {
+        return find[0];
+      }
+      return null;
+    }));    
   }
 
   // has audit trail

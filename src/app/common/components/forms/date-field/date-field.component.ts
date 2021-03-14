@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, Optional, Inject } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS, ControlValueAccessor } from '@angular/forms';
+import { FORM_COLUMN_PROVIDER, IFormColumnProvider } from 'src/app/common/services/form-column-provider.service';
 import { ElementBase } from '../base/element-base';
 
 @Component({
@@ -12,7 +13,7 @@ import { ElementBase } from '../base/element-base';
     multi: true,
   }]
 })
-export class DateFieldComponent extends ElementBase<string> {
+export class DateFieldComponent extends ElementBase<string> implements OnInit {
   @Input() public label: string;
   @Input() public placeholder: string = "";
   @Input() public readonly: boolean;
@@ -31,8 +32,9 @@ export class DateFieldComponent extends ElementBase<string> {
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+    @Optional() @Inject(FORM_COLUMN_PROVIDER) formColumnProvider: IFormColumnProvider
   ) {
-    super(validators, asyncValidators);
+    super(validators, asyncValidators, formColumnProvider);
   }
 
   // init
@@ -40,6 +42,9 @@ export class DateFieldComponent extends ElementBase<string> {
 
     // on value change
     this.model.valueChanges.subscribe(x => this.onValueChange());          
+
+    // init observables
+    this.initObservables();    
   }
 
   // on date change

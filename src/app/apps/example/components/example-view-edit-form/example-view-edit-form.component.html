@@ -1,29 +1,29 @@
-<div *ngIf="model.id">    
+<app-entity-form *ngIf="model.id" [entityTypeId]="entityTypeId">    
     <app-card-group title="Main" class="mb-2">
         <div class="row">
             <div class="col-md-2">
-                <app-text-field [(ngModel)]="model.exampleId" [disabled]="true" label="ID" name="exampleId"></app-text-field> 
+                <app-text-field [(ngModel)]="model.exampleId" [disabled]="true" name="exampleId"></app-text-field> 
             </div>
 
             <div class="col-md-2">
-                <app-text-field [(ngModel)]="model.title" [disabled]="viewMode$ | async" label="Title" name="name" [required]="true"></app-text-field>     
+                <app-text-field [(ngModel)]="model.title" [disabled]="viewMode$ | async" name="title"></app-text-field>     
             </div>
 
             <div class="col-md-3">
-                <app-select-field [(ngModel)]="model.status" [disabled]="viewMode$ | async" name="status" label="Status">
+                <app-select-field [(ngModel)]="model.status" [disabled]="viewMode$ | async" name="status">
                     <option *ngFor="let item of statusList$ | async" [value]="item.value" [selected]="item.value == model.status">{{ item.text }}</option>
                 </app-select-field>        
             </div>
 
             <div class="col-md-3">
-                <app-select-field [(ngModel)]="model.statusValue" [disabled]="viewMode$ | async" name="statusValue" label="Status Value">
+                <app-select-field [(ngModel)]="model.statusValue" [disabled]="viewMode$ | async" name="statusValue">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of statusValueList$ | async" [value]="item.valueId" [selected]="item.valueId == model.statusValue">{{ item.text }}</option>
                 </app-select-field>                        
             </div>
 
             <div class="col-md-2">
-                <app-check-box-field [(ngModel)]="model.checkboxField" label="Checkbox" [disabled]="viewMode$ | async" name="checkboxField"></app-check-box-field>
+                <app-check-box-field [(ngModel)]="model.checkboxField" [disabled]="viewMode$ | async" name="checkboxField"></app-check-box-field>
             </div>
         </div>
     </app-card-group>    
@@ -31,31 +31,31 @@
     <app-card-group title="Details">
         <div class="row">
             <div class="col-md-3">
-                <app-number-field [(ngModel)]="model.numberField" label="Number" [disabled]="viewMode$ | async" name="numberField"></app-number-field>
+                <app-number-field [(ngModel)]="model.numberField" [disabled]="viewMode$ | async" name="numberField"></app-number-field>
             </div>
 
             <div class="col-md-3">
-                <app-lookup-field [(ngModel)]="model.customerId" [disabled]="viewMode$ | async" label="Customer #" name="customerId" (onLookup)="customerLookup.openDialog()"></app-lookup-field>                 
+                <app-lookup-field [(ngModel)]="model.customerId" [disabled]="viewMode$ | async" name="customerId" (onLookup)="customerLookup.openDialog()"></app-lookup-field>                 
                 <app-customer-lookup-dialog #customerLookup (onSelect)="setCustomer($event)"></app-customer-lookup-dialog>
             </div>
 
             <div class="col-md-3">
-                <app-text-area-field [(ngModel)]="model.customerName" [disabled]="viewMode$ | async" label="Customer name" name="customerName" rows="3" [required]="true"></app-text-area-field>     
+                <app-text-area-field [(ngModel)]="model.customerName" [disabled]="viewMode$ | async" name="customerName" rows="3"></app-text-area-field>     
             </div>
 
             <div class="col-md-3">
-                <app-date-field [(ngModel)]="model.dateField" [disabled]="viewMode$ | async" label="Date Field" name="dateField"></app-date-field>                 
+                <app-date-field [(ngModel)]="model.dateField" [disabled]="viewMode$ | async" name="dateField"></app-date-field>                 
             </div>
 
             <div class="col-md-3">
-                <app-select-field [(ngModel)]="model.requestUserId" [disabled]="viewMode$ | async" name="requestUserId" label="Request User">
+                <app-select-field [(ngModel)]="model.requestUserId" [disabled]="viewMode$ | async" name="requestUserId">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == model.requestUserId">{{ item.name }}</option>
                 </app-select-field>        
             </div>
 
             <div class="col-md-3">
-                <app-select-field [(ngModel)]="model.departmentId" [disabled]="viewMode$ | async" name="departmentId" label="Department">
+                <app-select-field [(ngModel)]="model.departmentId" [disabled]="viewMode$ | async" name="departmentId">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of departmentList$ | async" [value]="item.id" [selected]="item.id == model.departmentId">{{ item.text }}</option>
                 </app-select-field>        
@@ -67,4 +67,4 @@
         <app-example-line-sub-grid></app-example-line-sub-grid>        
     </app-card-group>
 
-</div>
+</app-entity-form>

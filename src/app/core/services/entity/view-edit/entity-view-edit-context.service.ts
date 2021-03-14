@@ -13,6 +13,9 @@ import { ENTITY_VALIDATION, IEntityValidationService } from '../entity-validatio
 @Injectable()
 export class EntityViewEditContextService {
 
+  // type
+  entityTypeId: string = this.entityConfig.entityTypeId;
+
   // observables
   id$ = new BehaviorSubject<string>(null);
   mode$ = new BehaviorSubject<"view" | "edit" | null>(null);  

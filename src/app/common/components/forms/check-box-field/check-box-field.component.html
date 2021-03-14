@@ -9,6 +9,6 @@
             [id]="identifier"
             [disabled]="disabled"
         />    
-        <label *ngIf="label" class="form-check-label" [attr.for]="identifier">{{label}}</label>    
+        <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}</label>
     </div>
 </div>

@@ -1,3 +1,4 @@
+import { IEntityColumnDefinition } from "./entity-column-definition";
 
 
 export interface IEntityDefinition {
@@ -8,4 +9,5 @@ export interface IEntityDefinition {
     description: string;
     rootUrl: string;
     hasAuditTrail: boolean;
+    columns: IEntityColumnDefinition[];
 }

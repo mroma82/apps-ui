@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Optional, Inject } from '@angular/core';
 import { ElementBase } from '../base/element-base';
 import { NG_VALUE_ACCESSOR, NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
+import { FORM_COLUMN_PROVIDER, IFormColumnProvider } from 'src/app/common/services/form-column-provider.service';
 
 @Component({
   selector: 'app-check-box-field',
@@ -13,10 +14,11 @@ import { NG_VALUE_ACCESSOR, NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '
   }]
 
 })
-export class CheckBoxFieldComponent extends ElementBase<boolean> {
+export class CheckBoxFieldComponent extends ElementBase<boolean> implements OnInit {
   @Input() public label: string;    
   @Input() public name: string;
   @Input() public disabled: boolean;
+  public required? : boolean = false;
 
   @ViewChild(NgModel, { static: true }) model: NgModel;
 
@@ -25,8 +27,16 @@ export class CheckBoxFieldComponent extends ElementBase<boolean> {
   constructor(
       @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
       @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+      @Optional() @Inject(FORM_COLUMN_PROVIDER) formColumnProvider: IFormColumnProvider
   ) {
-      super(validators, asyncValidators);
+      super(validators, asyncValidators, formColumnProvider);
+  }
+
+  // init
+  ngOnInit() {
+
+    // init observables
+    this.initObservables();    
   }
 }
 

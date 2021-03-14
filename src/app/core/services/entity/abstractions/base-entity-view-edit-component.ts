@@ -1,10 +1,13 @@
-import { OnInit, OnDestroy, Directive } from '@angular/core';
+import { OnInit, OnDestroy, Directive, Inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EntityViewEditContextService } from '../view-edit/entity-view-edit-context.service';
 
 @Directive()
 export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
+
+    // entity type
+    entityTypeId : string = this.context.entityTypeId;
 
     // state
     viewMode$: Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
@@ -17,7 +20,7 @@ export abstract class BaseEntityViewEditComponent implements OnInit, OnDestroy {
 
     // new
     constructor(
-        private context: EntityViewEditContextService
+        private context: EntityViewEditContextService        
     ) {
     }
 

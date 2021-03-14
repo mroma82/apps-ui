@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EntityProviderService } from './services/entity/entity-provider.service';
 import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
 import { SelectListService } from './services/select-list.service';
+import { EntityFormComponent } from './components/entity/form/entity-form/entity-form.component';
 
 @NgModule({
   declarations: [    
@@ -41,7 +42,8 @@ import { SelectListService } from './services/select-list.service';
     EntitySubGridViewEditComponent,
     EntitySingleRecordPageGenericComponent,
     EntitySingleRecordViewEditComponent,
-    EntityTypeNamePipe   
+    EntityTypeNamePipe,
+    EntityFormComponent   
   ],
   imports: [
     CommonModule,     
@@ -68,7 +70,8 @@ import { SelectListService } from './services/select-list.service';
     EntitySubGridComponent,
     EntitySingleRecordPageGenericComponent,
     EntitySingleRecordViewEditComponent,
-    EntityTypeNamePipe
+    EntityTypeNamePipe,
+    EntityFormComponent
   ]
 })
 export class AppsCoreModule { }
