@@ -25,6 +25,7 @@ import { EntityProviderService } from './services/entity/entity-provider.service
 import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
 import { SelectListService } from './services/select-list.service';
 import { EntityFormComponent } from './components/entity/form/entity-form/entity-form.component';
+import { EntityValidationService } from './services/entity/entity-validation.service';
 
 @NgModule({
   declarations: [    
@@ -57,6 +58,7 @@ import { EntityFormComponent } from './components/entity/form/entity-form/entity
   providers: [
     EntityApiService,
     EntityProviderService,
+    EntityValidationService,
     SelectListService
   ],
   exports: [

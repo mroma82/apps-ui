@@ -19,17 +19,15 @@ import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/exa
 import { ExampleViewEditFormComponent } from './components/example-view-edit-form/example-view-edit-form.component';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
-import { ExampleValidationService } from './services/example-validation.service';
 import { ExampleLineCreateComponent } from './components/example-line-create/example-line-create.component';
 import { ExampleLineViewEditComponent } from './components/example-line-view-edit/example-line-view-edit.component';
 import { ExampleLineValidationService } from './services/example-line.validation.service';
 import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/example-line-sub-grid.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
 import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
-import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
+import { EntityValidationService, ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
-import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { ExampleEntityConfigurationService } from './services/example-entity-configuration.service';
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 
@@ -63,7 +61,7 @@ import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration
     ExampleListsService,
     { provide: ENTITY_CONFIG,  useClass: ExampleEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: ExampleListingConfigurationService },    
-    { provide: ENTITY_VALIDATION, useClass: ExampleValidationService },
+    { provide: ENTITY_VALIDATION, useClass: EntityValidationService },
     EntityListingContextService,        
     EntityCreateContextService,
     ExampleLineValidationService,

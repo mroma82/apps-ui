@@ -32,6 +32,11 @@ export class EntityProviderService {
     return this.entities$.pipe(map(x => x.find(x => x.entityTypeId == entityTypeId)));
   }
 
+  // get entity columns
+  getEntityColumns(entityTypeId: string) : Observable<IEntityColumnDefinition[]> {
+    return this.getEntity(entityTypeId).pipe(map(x => x.columns));
+  }
+
   // get an entity column
   getEntityColumn(entityTypeId: string, name: string) : Observable<IEntityColumnDefinition> {
 
