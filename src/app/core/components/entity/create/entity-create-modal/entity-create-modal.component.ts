@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewCon
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../services/entity/entity-configuration.service';
 
 @Component({
   selector: 'app-entity-create-modal',
@@ -11,6 +12,9 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
 export class EntityCreateModalComponent extends BaseDialog {  
   @ViewChild('content', { static: true }) content : any;  
 
+  // entity type id
+  entityTypeId : string = this.entityConfig.entityTypeId;
+  
   // setup
   modalConfig = {
     title: "Create"
@@ -22,7 +26,8 @@ export class EntityCreateModalComponent extends BaseDialog {
   // new
   constructor(
     modalService: NgbModal,
-    private context: EntityCreateContextService
+    private context: EntityCreateContextService,
+    @Inject(ENTITY_CONFIG) private entityConfig : IEntityConfigurationService
   ) { 
     super(modalService);
 

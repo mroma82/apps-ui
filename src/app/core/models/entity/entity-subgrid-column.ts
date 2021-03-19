@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 
 export interface IEntitySubGridColumn {
     model: string;
-    title: string;
+    title?: string;
 
     isLink?: boolean;
     viewLinkFunc?: any;

@@ -24,10 +24,10 @@ export class ExampleLineSubGridComponent implements OnInit {
 
   // columns
   cols = [
-    { title: 'Title', model: 'title', isLink: true },
-    { title: 'Created on', model: 'createDateTime', formatter: 'd' }, 
-    { title: 'Example', model: 'example.exampleId', isLink: true, viewLinkFunc: x => '/app/example/view/' + x.exampleId }, 
-    { title: 'Name', model: 'name' }
+    { model: 'title', isLink: true },
+    { model: 'createDateTime', formatter: 'd' }, 
+    { title: 'Example #', model: 'example.exampleId', isLink: true, viewLinkFunc: x => '/app/example/view/' + x.exampleId }, 
+    { model: 'name' }
   ];
 
   // options

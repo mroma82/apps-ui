@@ -1,6 +1,7 @@
 import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
@@ -10,6 +11,8 @@ import { IEntityValidationService } from 'src/app/core/services/entity/entity-va
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntitySubGridContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-context.service';
 import { EntitySubGridViewEditContextService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-view-edit-context.service';
+import { IEntityColumnDefinition } from '../../../../models/entity/entity-column-definition';
+import { EntityProviderService } from '../../../../services/entity/entity-provider.service';
 
 @Component({
   selector: 'app-entity-sub-grid',
@@ -38,6 +41,7 @@ export class EntitySubGridComponent implements OnInit {
   constructor(
     private context : EntitySubGridContextService,
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
+    private entityProvider: EntityProviderService,
     private dialogService : DialogService,
     private createContext: EntityCreateContextService,
     private viewEditContext: EntitySubGridViewEditContextService,
@@ -137,5 +141,20 @@ export class EntitySubGridComponent implements OnInit {
 
     // else just eh model
     return of(val);
+  }
+
+  // get title
+  getTitle(col : IEntitySubGridColumn) : Observable<string> {
+
+    // check if a title
+    if(col.title)
+      return of(col.title);
+
+    // parse out the name because we want to find from the entity provider
+    const nameParts = col.model.split('.');
+    const name = nameParts[nameParts.length - 1];
+
+    // else, try to get form the entity column provider
+    return this.entityProvider.getEntityColumn(this.entityConfig.entityTypeId, name).pipe(map(x => x?.label));      
   }
 }

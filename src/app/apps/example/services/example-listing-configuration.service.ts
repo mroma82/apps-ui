@@ -30,17 +30,14 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
     var cols : IEntityListingColumn[] = [
       {
         model: "exampleId",
-        title: "Example #",
         isLink: true,
         showEditLink: true
       },
       {
-        model: "title",
-        title: "Title"
+        model: "title"
       },
       {        
         model: "status",
-        title: "Status",
         displayFunc: x => {
           switch(x.status) {
             case 0: return "Open";
@@ -51,8 +48,7 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         }
       },
       {
-        model: "numberField",
-        title: "Number"
+        model: "numberField"
       },
       {
         model: "requestUser.fullName",
@@ -69,12 +65,10 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
         title: "Department"
       },
       {
-        model: "workflowStateText",
-        title: "Workflow Status"
+        model: "workflowStateText"
       },
       {
         model: "createDateTime",
-        title: "Created on",
         pipe: new UtcDateTimePipe(new DatePipe("en-us"))
       }
     ];

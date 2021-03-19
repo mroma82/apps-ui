@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
+import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../services/entity/entity-configuration.service';
+import { EntityProviderService } from '../../../../services/entity/entity-provider.service';
 
 @Component({
   selector: 'app-entity-listing-results',
@@ -22,7 +25,9 @@ export class EntityListingResultsComponent implements OnInit {
   // new
   constructor(
     private context : EntityListingContextService,    
-    @Inject(ENTITY_LISTING_CONFIG) private config : IEntityListingConfigurationService
+    @Inject(ENTITY_LISTING_CONFIG) private config : IEntityListingConfigurationService,
+    private entityProvider : EntityProviderService,
+    @Inject(ENTITY_CONFIG) private entityConfig : IEntityConfigurationService
   ) { }
 
   ngOnInit() {
@@ -40,6 +45,21 @@ export class EntityListingResultsComponent implements OnInit {
         isDescending: e.sorts[0].dir === "desc"
       })
     }
+  }
+
+  // title
+  getTitle(col: IEntityListingColumn) : Observable<string> {
+
+    // check if a title
+    if(col.title)
+      return of(col.title);
+
+    // parse out the name because we want to find from the entity provider
+    const nameParts = col.model.split('.');
+    const name = nameParts[nameParts.length - 1];
+
+    // else, try to get form the entity column provider
+    return this.entityProvider.getEntityColumn(this.entityConfig.entityTypeId, name).pipe(map(x => x?.label));
   }
 
   // view link

@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 export interface IEntityListingColumn {
     model: string;
-    title: string;
+    title?: string;
     
     isLink?: boolean;
     showEditLink? : boolean;
