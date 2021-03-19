@@ -2,15 +2,15 @@
 
   <div class="col-sm-4">
     
-    <app-card-group title="Status">    
-      <app-text-field name="defaultStatusValue" [(ngModel)]="model.defaultStatusValue" label="Default status value"></app-text-field>
+    <app-card-group title="Options">    
+      <app-text-field name="defaultStatusValue" [(ngModel)]="model.defaultStatusValue"></app-text-field>
 
-      <app-select-field [(ngModel)]="model.statusListTypeId" name="statusListTypeId" label="Status list type">
+      <app-select-field [(ngModel)]="model.statusListTypeId" name="statusListTypeId">
         <option value="">-- Please select --</option>
         <option *ngFor="let item of listTypes$ | async" [value]="item.id" [selected]="item.id == model.statusListTypeId">{{ item.description }}</option>
       </app-select-field> 
 
-      <app-select-field [(ngModel)]="model.departmentListTypeId" name="departmentListTypeId" label="Department list type">
+      <app-select-field [(ngModel)]="model.departmentListTypeId" name="departmentListTypeId">
         <option value="">-- Please select --</option>
         <option *ngFor="let item of listTypes$ | async" [value]="item.id" [selected]="item.id == model.departmentListTypeId">{{ item.description }}</option>
       </app-select-field> 

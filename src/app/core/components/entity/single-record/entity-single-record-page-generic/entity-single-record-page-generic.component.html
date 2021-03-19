@@ -3,6 +3,9 @@
   <ng-content select="[button-bar]"></ng-content>
 </div>
 <div>
-  <ng-content select="[form]"></ng-content>
-  <app-entity-single-record-view-edit></app-entity-single-record-view-edit>
+  <app-entity-form [entityTypeId]="entityTypeId">
+    <ng-content select="[form]"></ng-content>
+    <app-entity-single-record-view-edit></app-entity-single-record-view-edit>
+  </app-entity-form>
+
 </div>
