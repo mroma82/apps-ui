@@ -2,7 +2,7 @@
 
   <div class="col-md-4">
     <app-card-group title="Details">
-      <app-text-field name="description" label="Description" [(ngModel)]="model.description" [disabled]="viewMode$ | async" [required]="true"></app-text-field>
+      <app-text-field name="description" [(ngModel)]="model.description" [disabled]="viewMode$ | async"></app-text-field>
     </app-card-group>    
   </div>
 
