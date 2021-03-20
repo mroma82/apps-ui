@@ -21,7 +21,6 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ExampleLineCreateComponent } from './components/example-line-create/example-line-create.component';
 import { ExampleLineViewEditComponent } from './components/example-line-view-edit/example-line-view-edit.component';
-import { ExampleLineValidationService } from './services/example-line.validation.service';
 import { ExampleLineSubGridComponent } from './components/example-line-sub-grid/example-line-sub-grid.component';
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
 import { ExampleParametersComponent } from './components/example-parameters/example-parameters.component';
@@ -64,7 +63,6 @@ import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration
     { provide: ENTITY_VALIDATION, useClass: EntityValidationService },
     EntityListingContextService,        
     EntityCreateContextService,
-    ExampleLineValidationService,
     EntitySecurityService
   ],
   entryComponents: [
