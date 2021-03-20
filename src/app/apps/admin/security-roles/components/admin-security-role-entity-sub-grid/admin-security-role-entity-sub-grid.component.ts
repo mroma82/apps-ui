@@ -7,11 +7,10 @@ import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstrac
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntityProviderService } from 'src/app/core/services/entity/entity-provider.service';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
-import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
+import { EntityValidationService, ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { IEntitySubGridConfigurationService } from 'src/app/core/services/entity/sub-grid/entity-sub-grid-configuration.service';
 import { EntityViewEditContextService } from 'src/app/core/services/entity/view-edit/entity-view-edit-context.service';
 import { AdminSecurityRoleEntityEntityConfigurationService } from '../../services/admin-security-roles-entity-entity-configuration.service';
-import { AdminSecurityRolesEntityValidationService } from '../../services/admin-security-roles-entity-validation.service';
 import { AdminSecurityRoleEntityCreateComponent } from '../admin-security-role-entity-create/admin-security-role-entity-create.component';
 import { AdminSecurityRoleEntityEditComponent } from '../admin-security-role-entity-edit/admin-security-role-entity-edit.component';
 
@@ -21,7 +20,7 @@ import { AdminSecurityRoleEntityEditComponent } from '../admin-security-role-ent
   styleUrls: ['./admin-security-role-entity-sub-grid.component.scss',],
   providers: [
     { provide: ENTITY_CONFIG, useClass: AdminSecurityRoleEntityEntityConfigurationService },
-    { provide: ENTITY_VALIDATION, useClass: AdminSecurityRolesEntityValidationService }
+    { provide: ENTITY_VALIDATION, useClass: EntityValidationService }
   ]
 })
 export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridComponent {

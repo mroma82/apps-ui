@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminSystemUserListConfigurationService } from './services/admin-system-user-list-configuration.service';
-import { AdminSystemUserValidationService } from './services/admin-system-user-validation.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppCommonModule } from 'src/app/common/app-common.module';
@@ -11,7 +9,7 @@ import { AppsCoreModule } from 'src/app/core/core.module';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
-import { ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
+import { EntityValidationService, ENTITY_VALIDATION } from 'src/app/core/services/entity/entity-validation.service';
 import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
@@ -38,7 +36,7 @@ import { AdminSystemUserEntityConfigurationService } from './services/admin-syst
   providers: [
     { provide: ENTITY_CONFIG, useClass: AdminSystemUserEntityConfigurationService },
     { provide: ENTITY_LISTING_CONFIG, useClass: AdminSystemUserListConfigurationService },    
-    { provide: ENTITY_VALIDATION, useClass: AdminSystemUserValidationService },
+    { provide: ENTITY_VALIDATION, useClass: EntityValidationService },
     EntityListingContextService,        
     EntityCreateContextService,    
     EntitySecurityService    
