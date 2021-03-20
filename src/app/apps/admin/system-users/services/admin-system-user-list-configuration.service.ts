@@ -28,17 +28,14 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
     return of([
       {
         model: "username",
-        title: "Username",
         isLink: true,
         showEditLink: true
       },
       {
-        model: "fullName",
-        title: "Name"        
+        model: "fullName"
       },
       {
-        model: "email",
-        title: "Email"        
+        model: "email"
       }
     ]);
   }

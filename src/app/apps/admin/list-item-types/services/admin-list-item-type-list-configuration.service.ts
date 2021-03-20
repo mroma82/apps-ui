@@ -28,7 +28,6 @@ export class AdminListItemTypeListConfigurationService implements IEntityListing
     return of([
       {
         model: "description",
-        title: "Description",
         isLink: true,
         showEditLink: true
       }

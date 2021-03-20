@@ -28,13 +28,11 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
     return of([
       {
         model: "name",
-        title: "Name",
         isLink: true,
         showEditLink: true
       },
       {
         model: "isSysAdmin",
-        title: "Is System Administrator Role",
         displayFunc: x => x.isSysAdmin ? "Yes" : "No"
       }
     ]);

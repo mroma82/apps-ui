@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
-import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
 import { BaseEntitySubGridComponent } from 'src/app/core/services/entity/abstractions/base-entity-sub-grid-component';
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
@@ -52,7 +51,7 @@ export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridCo
 
   // mask helper
   hasMask(mask : SecurityPermissionMask, value: number ) {
-    
+
     // check if mask is on
     if((value & mask) === mask) 
       return "Yes";
