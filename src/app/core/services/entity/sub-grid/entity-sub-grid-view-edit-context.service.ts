@@ -16,6 +16,9 @@ export class EntitySubGridViewEditContextService {
   mode$ = new BehaviorSubject<'view' | 'edit'>("view");
   dialogOpen$ = new BehaviorSubject<boolean>(false);
   model$ = new BehaviorSubject<any>({});
+
+  // entity type
+  entityTypeId : string = this.entityConfig.entityTypeId;
   
   // new
   constructor(

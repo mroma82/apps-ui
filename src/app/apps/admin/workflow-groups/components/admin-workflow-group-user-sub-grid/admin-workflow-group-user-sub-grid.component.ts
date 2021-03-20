@@ -48,22 +48,18 @@ export class AdminWorkflowGroupUserSubGridComponent extends BaseEntitySubGridCom
   subGridColumns: IEntitySubGridColumn[] = [
     { 
       title: "User", 
-      model: "systemUserId",
-      displayFunc$: (x) => of(x.systemUserId) // this.auth.getUserFullName(x.systemUserId).pipe(shareReplay(), map(y => y.fullName))
+      model: "user.fullName"
+      //displayFunc$: (x) => of(x.systemUserId) // this.auth.getUserFullName(x.systemUserId).pipe(shareReplay(), map(y => y.fullName))
     },
     {
-      title: "Active",
       model: "isActive",
       displayFunc: (x) => x.isActive ? "Yes" : ""
     },
     {
-      title: "Notified",
       model: "isNotified",
       displayFunc: (x) => x.isNotified ? "Yes" : ""
-    }
-    ,
+    },
     {
-      title: "Delegate",
       model: "isDelegate",
       displayFunc: (x) => x.isDelegate ? "Yes" : ""
     }

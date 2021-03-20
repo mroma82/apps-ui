@@ -8,8 +8,10 @@
     </div>
     <div class="modal-body">
     
-      <ng-content select="[form]"></ng-content>
-      <app-entity-sub-grid-view-edit></app-entity-sub-grid-view-edit>
+      <app-entity-form [entityTypeId]="entityTypeId">
+        <ng-content select="[form]"></ng-content>
+        <app-entity-sub-grid-view-edit></app-entity-sub-grid-view-edit>
+      </app-entity-form>
 
       <div class="mt-sm-3" *ngIf="mode == 'edit'">
         <button type="button" class="btn btn-primary" (click)="update()">Update</button>
