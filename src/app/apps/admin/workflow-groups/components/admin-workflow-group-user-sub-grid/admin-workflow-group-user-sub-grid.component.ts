@@ -49,7 +49,6 @@ export class AdminWorkflowGroupUserSubGridComponent extends BaseEntitySubGridCom
     { 
       title: "User", 
       model: "user.fullName"
-      //displayFunc$: (x) => of(x.systemUserId) // this.auth.getUserFullName(x.systemUserId).pipe(shareReplay(), map(y => y.fullName))
     },
     {
       model: "isActive",

@@ -34,9 +34,9 @@ export class AdminListItemSubGridComponent extends BaseEntitySubGridComponent {
 
   // columns
   subGridColumns: IEntitySubGridColumn[] = [
-    { title: "Value", model: "valueId" },
-    { title: "Text", model: "text" },
-    { title: "Sort", model: "sortOrder" }
+    { model: "valueId" },
+    { model: "text" },
+    { model: "sortOrder" }
   ];
 
   // new

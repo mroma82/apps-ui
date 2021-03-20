@@ -39,8 +39,7 @@ export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridCo
   // columns
   subGridColumns : IEntitySubGridColumn[] = [ 
     {
-      title: 'Entity Type', 
-      model: "permissionMask",
+      model: "entityTypeId",
       displayFunc$: (x) => this.entityProvider.getEntityName(x.entityTypeId)
     },
     
@@ -53,6 +52,7 @@ export class AdminSecurityRoleEntitySubGridComponent extends BaseEntitySubGridCo
 
   // mask helper
   hasMask(mask : SecurityPermissionMask, value: number ) {
+    
     // check if mask is on
     if((value & mask) === mask) 
       return "Yes";
