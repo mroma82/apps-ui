@@ -70,6 +70,10 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "createDateTime",
         pipe: new UtcDateTimePipe(new DatePipe("en-us"))
+      },
+      {
+        model: "extras.extendField",
+        title: "Extend Field"
       }
     ];
 
