@@ -1,10 +1,10 @@
 
 
 <div class="form-group">   
-  <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !disabled" class="ml-1 text-danger">*</span></label>
+  <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !(disabled$ | async)" class="ml-1 text-danger">*</span></label>
     <div class="input-group mb-3">
         <input      
-          [disabled]="disabled"   
+          [disabled]="disabled$ | async"   
           type="text"
           [readonly]="readonly"
           [(ngModel)]="dateValue"
@@ -17,7 +17,7 @@
           (ngModelChange)="onDateChange()" 
           #d="bsDatepicker"     
         />    
-        <div class="input-group-append" *ngIf="!disabled && !readonly">
+        <div class="input-group-append" *ngIf="!(disabled$ | async) && !readonly">
           <button class="btn btn-secondary" (click)="d.toggle()">
               <i class="far fa-calendar-alt fa-lg" role="button"></i>          
           </button>          

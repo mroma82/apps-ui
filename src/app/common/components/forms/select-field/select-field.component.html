@@ -1,10 +1,9 @@
 <div class="form-group">
-    <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !disabled" class="ml-1 text-danger">*</span></label>
+    <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !(disabled$ | async)" class="ml-1 text-danger">*</span></label>
     <select
-        [disabled]="disabled"
+        [disabled]="disabled$ | async"
         [attr.name]="name"
-        class="form-control"
-        [disabled]="disabled"
+        class="form-control"        
         [(ngModel)]="value"
         [ngClass]="{invalid: (invalid | async)}"
         [id]="identifier">

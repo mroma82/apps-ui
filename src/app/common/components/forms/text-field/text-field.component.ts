@@ -3,6 +3,7 @@ import { NgModel, NG_VALIDATORS, NG_ASYNC_VALIDATORS, NG_VALUE_ACCESSOR } from '
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FORM_COLUMN_PROVIDER, IFormColumnProvider } from 'src/app/common/services/form-column-provider.service';
+import { FORM_STATE_PROVIDER, IFormStateProvider } from '../../../services/form-state-provider.service';
 import { ElementBase } from '../base/element-base';
 
 @Component({
@@ -21,7 +22,7 @@ export class TextFieldComponent extends ElementBase<string> implements OnInit {
   @Input() public name: string;  
   @Input() public placeholder: string = "";
   @Input() public readonly: boolean;
-  @Input() public disabled: boolean;
+  @Input() public disabled?: boolean;
     
   @ViewChild(NgModel, { static: true }) model: NgModel;
 
@@ -31,17 +32,18 @@ export class TextFieldComponent extends ElementBase<string> implements OnInit {
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
-    @Optional() @Inject(FORM_COLUMN_PROVIDER) formColumnProvider: IFormColumnProvider
+    @Optional() @Inject(FORM_COLUMN_PROVIDER) formColumnProvider: IFormColumnProvider,
+    @Optional() @Inject(FORM_STATE_PROVIDER) formStateProvider: IFormStateProvider
   ) {
-    super(validators, asyncValidators, formColumnProvider);    
+    super(validators, asyncValidators, formColumnProvider, formStateProvider);    
   }
 
   // init
   ngOnInit() {
 
     // init observables
-    this.initObservables();    
-  }
+    this.initObservables();         
+  }  
 }
 
 let textFieldIdx = 0;

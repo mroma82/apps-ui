@@ -7,7 +7,7 @@
             class="form-check form-check-input" 
             [attr.name]="name"    
             [id]="identifier"
-            [disabled]="disabled"
+            [disabled]="disabled$ | async"
         />    
         <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}</label>
     </div>

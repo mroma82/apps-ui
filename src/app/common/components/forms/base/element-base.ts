@@ -4,6 +4,7 @@ import { ValidatorArray, AsyncValidatorArray, ValidationResult, message, validat
 import { map } from 'rxjs/operators';
 import { IFormColumnProvider } from 'src/app/common/services/form-column-provider.service';
 import { Input } from '@angular/core';
+import { IFormStateProvider } from '../../../services/form-state-provider.service';
 
 export class ValueAccessorBase<T> implements ControlValueAccessor {
   private innerValue: T;
@@ -46,16 +47,19 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   public abstract label: string;
   public abstract required?: boolean;
   public abstract name: string;  
+  public abstract disabled?: boolean;
 
   // observables
   label$: Observable<string>;
   required$: Observable<boolean>;
+  disabled$: Observable<boolean>;
 
   // new
   constructor(
     private validators: ValidatorArray,
     private asyncValidators: AsyncValidatorArray,
-    private formColumnProvider: IFormColumnProvider
+    private formColumnProvider: IFormColumnProvider,
+    private formStateProvider: IFormStateProvider
   ) {
     super();
   }
@@ -89,6 +93,13 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
       this.required$ = this.formColumnProvider.getColumn(this.name).pipe(map(x => x?.isRequired));      
     } else {
       this.required$ = of(this.required ? true : false);
+    }
+
+    // set disabled
+    if(this.formStateProvider && this.disabled == null) {
+      this.disabled$ = this.formStateProvider.getState().pipe(map(x => x.mode != 'edit'));
+    } else {
+      this.disabled$ = of(this.disabled ? true : false);
     }
   }
 }

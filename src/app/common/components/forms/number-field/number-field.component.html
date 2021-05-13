@@ -1,7 +1,7 @@
 <div class="form-group">
-  <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !disabled" class="ml-1 text-danger">*</span></label>
+  <label *ngIf="label$ | async as labelTxt" [attr.for]="identifier">{{labelTxt}}<span *ngIf="(required$ | async) && !(disabled$ | async)" class="ml-1 text-danger">*</span></label>
   <input      
-    [disabled]="disabled"   
+    [disabled]="disabled$ | async"   
     type="number"
     [readonly]="readonly"
     [placeholder]="placeholder"
