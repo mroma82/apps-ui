@@ -28,6 +28,10 @@ const routes: Routes = [
           {
             path: 'workflow-groups',        
             loadChildren: () => import('./workflow-groups/admin-workflow-group.module').then(m => m.AdminWorkflowGroupModule)
+          },
+          {
+            path: 'number-sequences',        
+            loadChildren: () => import('./number-sequences/admin-number-sequence.module').then(m => m.AdminNumberSequenceModule)
           }
       ]
   }
