@@ -12,6 +12,7 @@ export const EntityTypes = {
   , ListItem: "b72d0250-ba61-4fd5-8a36-3976af445e8d"
   , WorkflowGroup: "3526b1cb-3b2e-4373-8a55-68157e7e3611"
   , WorkflowGroupUser: "a5df0c82-6bce-45a7-a1e0-dafebb3e775e"
+  , NumberSequence: "ff6d0ef4-707a-468b-9282-348776c1d5f6"
 
   // example
   , Example: "e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"
