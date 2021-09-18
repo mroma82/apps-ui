@@ -2,17 +2,17 @@
   
   <div class="form-group" [hidden]="!showInstance">
     <label>Instance #</label>
-    <input type="text" class="form-control" [(ngModel)]="model.instanceNumber" #instanceField />
+    <input type="text" class="form-control" [(ngModel)]="model.instanceNumber" name="instance" #instanceField />
   </div>
 
   <div class="form-group">
     <label>Username</label>
-    <input type="text" class="form-control" [(ngModel)]="model.username" #usernameField />
+    <input type="text" class="form-control" [(ngModel)]="model.username" name="username" #usernameField />
   </div>
   
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control" [(ngModel)]="model.password" />
+    <input type="password" class="form-control" [(ngModel)]="model.password" name="password" />
   </div>
   
   <div class="text-center form-group mt-3">
