@@ -1,24 +1,31 @@
-<h5 class="mt-2"><i class="fas fa-tasks mr-1"></i> My Tasks</h5>
+<div class="wrapper">
+  <h5 class="mt-2"><i class="fas fa-tasks mr-1"></i> My Tasks</h5>
 
-<div class="list-group" *ngIf="list$ | async as list">
-  <div class="list-group-item d-flex flex-row pl-0" *ngFor="let item of list">
-    <a [routerLink]="item.url">
-      <i [class]="'fas fa-shapes mr-2'"></i>
-    </a>
-    <div>
+  <div class="list-group" *ngIf="list$ | async as list">
+    <div class="list-group-item d-flex flex-row pl-0" *ngFor="let item of list">
       <a [routerLink]="item.url">
-        {{ item.subject }}
+        <i [class]="'fas fa-shapes mr-2'"></i>
       </a>
       <div>
-        <small>{{ item.createDateTime | utcDateTimeSince }}</small>
+        <a [routerLink]="getRoute(item)">
+          {{ item.subject }}
+        </a>
+        <div>
+          <small>{{ item.createDateTime | utcDateTimeSince }}</small>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="list-group-item view-all-row pl-4">
-    <small>
-      <a href="javascript:;;" (click)="openListDialog()">
-        View All Tasks
-      </a>
-    </small>
-  </div>
+    
+    <div class="list-group-item view-all-row pl-4" *ngIf="list.length > 0">
+      <small>
+        <a href="javascript:;;" (click)="openListDialog()">
+          View All Tasks
+        </a>
+      </small>
+    </div>
+
+    <div *ngIf="list.length == 0" class="mt-3 mb-1">
+      <i>You have no tasks</i>
+    </div>
+  </div>  
 </div>

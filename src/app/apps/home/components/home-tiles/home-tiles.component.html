@@ -2,7 +2,7 @@
 
   <div class="row">
     <ng-container *ngFor="let item of menuItems$ | async">
-      <div class="col-md-4" *ngIf="item.hasAccess$ | async">      
+      <div class="col-md-4 mb-3" *ngIf="item.hasAccess$ | async">      
         <app-tile [title]="item.title" [description]="item.description" [url]="item.url" [icon]="item.icon"></app-tile>
       </div>
     </ng-container>

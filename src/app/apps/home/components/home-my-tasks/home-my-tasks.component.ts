@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificationContextService } from 'src/app/foundation/services/notification/notification-context.service';
+import { EntityRouteResolverService } from '../../../../common/services/entity-route-resolver.service';
 
 @Component({
   selector: 'app-home-my-tasks',
@@ -15,7 +16,8 @@ export class HomeMyTasksComponent implements OnInit {
 
   // new
   constructor(
-    private notificationContext: NotificationContextService
+    private notificationContext: NotificationContextService,
+    private routeResolver : EntityRouteResolverService
   ) { 
     this.list$ = notificationContext.list$.pipe(map(x => x.reverse().slice(0, 20)));
   }
@@ -27,5 +29,10 @@ export class HomeMyTasksComponent implements OnInit {
   // open dialog
   openListDialog() {
     this.notificationContext.openListDialog();
+  }
+
+  // get route
+  getRoute(notification: any) {
+    return this.routeResolver.resolve(notification.entityTypeId, notification.entityId);
   }
 }

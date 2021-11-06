@@ -13,12 +13,12 @@
 <app-notification-list-dialog></app-notification-list-dialog>
 
 <div class="notification-menu bg-white" [class.active]="model.showMenu">
-  <ul class="list-group"> 
+  <ul class="list-group" *ngIf="list$ | async as list"> 
     <li class="list-group-item">
       <h4 class="mb-0">My Tasks</h4>
     </li>       
 
-    <li class="list-group-item d-flex flex-row"  *ngFor="let item of list$ | async">
+    <li *ngFor="let item of list" class="list-group-item d-flex flex-row">
       <a [routerLink]="getRoute(item)" (click)="model.showMenu=false;">
         <i [class]="'fas fa-shapes mr-2'"></i>
       </a>
@@ -31,9 +31,13 @@
             {{ item.createDateTime | utcDateTimeSince}}
           </small>
         </div>
-      </div>
-      
+      </div>          
     </li>
+
+    <li *ngIf="list.length == 0" class="list-group-item d-flex flex-row">
+      <i>You have no tasks</i>
+    </li>
+
 
     <li class="list-group-item border-top view-all-row bg-white" *ngIf="(count$ | async)">
       <small>

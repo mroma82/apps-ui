@@ -1,9 +1,13 @@
 .media {
-    padding: 10px;
-    
+    padding: 15px;
+    height: 100%;
+    transition-delay: .07s;
+
     &:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,.1);
         background-color: #fff;
+        border-radius: 7px;
+        transition-delay: 0s;
     }
 }
 
