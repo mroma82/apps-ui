@@ -1,3 +1,12 @@
 main {
     padding-top: 56px;
 }
+
+@media print {
+
+    // remove padding on print
+    main {
+        padding-top: 0;
+    }
+    
+}

@@ -1,7 +1,4 @@
 
-.navbar-dark a {
-    color: #fff;
-}
 
 .footer-spacer {    
     display: inline-block;
@@ -14,4 +11,15 @@
     width: 100%;
     left: 0;
     bottom: 0;
+}
+
+@media print {
+
+    .bg-light {
+        background-color: transparent !important;
+
+        a {
+            color: #000;
+        }
+    }
 }
