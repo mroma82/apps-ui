@@ -1,5 +1,5 @@
 <div>
-  <app-text-field [(ngModel)]="model.username" name="username"></app-text-field>
+  <app-text-field [(ngModel)]="model.username" name="username" appInputFocus></app-text-field>
 </div>
 <div>
   <app-text-field [(ngModel)]="model.fullName" name="fullName"></app-text-field>
@@ -8,5 +8,6 @@
   <app-text-field [(ngModel)]="model.email" name="email"></app-text-field>
 </div>
 <div>
-  <app-check-box-field [(ngModel)]="model.sendPasswordSetup" name="sendPasswordSetup" label="Send password setup email"></app-check-box-field>
+  <app-check-box-field [(ngModel)]="model.sendPasswordSetup" name="sendPasswordSetup" label="Send password setup email">
+  </app-check-box-field>
 </div>

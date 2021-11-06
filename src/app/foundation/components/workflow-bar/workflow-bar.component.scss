@@ -1,9 +1,10 @@
 .bar {
     padding: 10px;
-    background-color: lightgray;
+    background-color: lightgray;    
     margin-bottom: 10px;
+    border-radius: 0.25rem;
     &.active {
-        background-color: #ffff54;
+        background-color: #FEE440;
     }
 }
 

@@ -31,22 +31,22 @@ import { ExampleEntityConfigurationService } from './services/example-entity-con
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     ExampleContainerComponent,
-    ExampleListPageComponent,        
-    ExampleViewEditPageComponent,  
+    ExampleListPageComponent,
+    ExampleViewEditPageComponent,
     ExampleViewEditFormComponent,
     ExampleNavComponent,
-    ExampleListFilterComponent,    
-    ExampleCreateComponent, 
-    ExampleLineCreateComponent, 
-    ExampleLineViewEditComponent, 
-    ExampleLineSubGridComponent, 
-    ExampleParametersPageComponent, 
+    ExampleListFilterComponent,
+    ExampleCreateComponent,
+    ExampleLineCreateComponent,
+    ExampleLineViewEditComponent,
+    ExampleLineSubGridComponent,
+    ExampleParametersPageComponent,
     ExampleParametersComponent
   ],
   imports: [
-    CommonModule,    
+    CommonModule,
     AppCommonModule,
     AppsCoreModule,
     AppFoundationModule,
@@ -56,12 +56,12 @@ import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration
     BsDatepickerModule
   ],
   providers: [
-    ExampleService,        
+    ExampleService,
     ExampleListsService,
-    { provide: ENTITY_CONFIG,  useClass: ExampleEntityConfigurationService },
-    { provide: ENTITY_LISTING_CONFIG, useClass: ExampleListingConfigurationService },    
+    { provide: ENTITY_CONFIG, useClass: ExampleEntityConfigurationService },
+    { provide: ENTITY_LISTING_CONFIG, useClass: ExampleListingConfigurationService },
     { provide: ENTITY_VALIDATION, useClass: EntityValidationService },
-    EntityListingContextService,        
+    EntityListingContextService,
     EntityCreateContextService,
     EntitySecurityService
   ],

@@ -1,8 +1,8 @@
 <div>
-    <app-select-field [(ngModel)]="model.entityTypeId" name="entityTypeId">
+    <app-select-field [(ngModel)]="model.entityTypeId" name="entityTypeId" appInputFocus>
         <option [ngValue]="null">-- Please select --</option>
         <option *ngFor="let item of entityList$ | async" [value]="item.entityTypeId">{{ item.name }}</option>
-    </app-select-field>        
+    </app-select-field>
 </div>
 <div>
     <app-text-field [(ngModel)]="model.format" name="format"></app-text-field>
@@ -10,5 +10,3 @@
 <div>
     <app-number-field [(ngModel)]="model.nextNumber" name="nextNumber"></app-number-field>
 </div>
-
-  

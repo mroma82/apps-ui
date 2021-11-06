@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./note-list-dialog.component.scss']
 })
 export class NoteListDialogComponent extends BaseDialog implements OnInit {
-  @ViewChild("contentTextAddField") contentTextAddField: QueryList<ElementRef>;
 
   // state
   canEdit$: Observable<boolean> = this.context.canEdit$;
@@ -80,18 +79,12 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit {
 
 
   // save
-  add() {
+  add(x) {
+    console.log(x);
     this.model.addPending = true;
     this.model.addModel = {
       contentText: ""
     };
-
-    // focus
-    //this.contextTextAddField.nativeElement.focus();
-    console.log(this.contentTextAddField);
-    setTimeout(() => this.contentTextAddField.first.nativeElement.focus(), 500);
-
-    setTimeout(() => console.log(this.contentTextAddField), 2000);
   }
   addCancel() {
     this.model.addPending = false;

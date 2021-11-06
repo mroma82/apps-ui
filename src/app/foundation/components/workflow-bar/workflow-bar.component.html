@@ -1,16 +1,17 @@
 <div *ngIf="instance$ | async as instance">
-  <div class="bar" [class.active]="instance.canAct">    
-    
+  <div class="bar" [class.active]="instance.canAct">
+
     <div class="row">
-      
-      <div class="col-sm-6">
+
+      <div class="col-sm-6 mt-2">
         <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
         <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
         <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
-        <span class="badge badge-primary ml-2 clickable d-print-none" *ngIf="instance.isActive" (click)="showAssigned()">
+        <span class="badge badge-primary ml-2 clickable d-print-none" *ngIf="instance.isActive"
+          (click)="showAssigned()">
           {{ getAssignedTo(instance) }}
-        </span>  
-        
+        </span>
+
         <div>
           <div *ngIf="instance.isRejected" class="reject-bar">
             <strong>Rejected by {{ instance.rejectBy | userFullname | async }}: {{ instance.rejectText }}</strong>
@@ -19,18 +20,19 @@
       </div>
 
       <div class="col-sm-6 d-print-none">
-        
+
         <div ngbDropdown class="d-inline-block float-right" placement="bottom-right">
           <button class="btn btn-link dropdown-toggle-icon" id="workflowMenu" ngbDropdownToggle>
             <i class="fas fa-ellipsis-v"></i>
           </button>
-          
+
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
-            <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button> 
-            <button ngbDropdownItem (click)="showHistory()">History</button> 
-            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()">Rebuild</button> 
-            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button> 
-            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button> 
+            <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button>
+            <button ngbDropdownItem (click)="showHistory()">History</button>
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate"
+              (click)="regenerate()">Rebuild</button>
+            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button>
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button>
           </div>
         </div>
 
@@ -40,13 +42,15 @@
               <i class="{{ getActionIcon(action) }} mr-1"></i> {{ action.actionDescription }}
             </a>
           </li>
-          <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
-            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)"><i class="fas fa-reply mr-1"></i> Reject</a>
+          <li class="nav-item"
+            *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
+            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)"><i class="fas fa-reply mr-1"></i>
+              Reject</a>
           </li>
         </ul>
       </div>
     </div>
-      
+
   </div>
 </div>
 

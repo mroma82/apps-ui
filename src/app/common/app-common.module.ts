@@ -33,6 +33,7 @@ import { UtcDateTimeSincePipe } from './pipes/utc-date-time-since';
 import { TileComponent } from './components/layout/tile/tile.component';
 import { RouteProgressComponent } from './components/route-progress/route-progress.component';
 import { InstanceContextService } from './services/instance-context.service';
+import { InputFocusDirective } from './directives/input-focus.directive';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { InstanceContextService } from './services/instance-context.service';
     LocalNavComponent,
     ToastMessageListComponent,
     TileComponent,
-    RouteProgressComponent    
+    RouteProgressComponent,
+    InputFocusDirective
   ],
   providers: [
     InstanceContextService,
@@ -66,11 +68,11 @@ import { InstanceContextService } from './services/instance-context.service';
     EntityRouteResolverService,
     IntegrationService,
     DatePipe,
-    MenuItemService    
+    MenuItemService
   ],
   imports: [
     CommonModule,
-    FormsModule,    
+    FormsModule,
     NgxDatatableModule,
     NgbModule,
     RouterModule,
@@ -78,7 +80,7 @@ import { InstanceContextService } from './services/instance-context.service';
   ],
   exports: [
     DragDropComponent,
-    YesNoDialogComponent,  
+    YesNoDialogComponent,
     TextFieldComponent,
     SelectFieldComponent,
     TextAreaFieldComponent,
@@ -86,10 +88,10 @@ import { InstanceContextService } from './services/instance-context.service';
     CheckBoxFieldComponent,
     NumberFieldComponent,
     TextAreaFieldComponent,
-    LookupFieldComponent,    
+    LookupFieldComponent,
     CustomerLookupDialogComponent,
     CardGroupComponent,
-    ListingControlsComponent,    
+    ListingControlsComponent,
     MessageDialogComponent,
     SimulateUserComponent,
     LocalNavComponent,
@@ -100,7 +102,9 @@ import { InstanceContextService } from './services/instance-context.service';
     UtcDateTimePipe,
     UtcDateTimeSincePipe,
     ExcludeDeletedPipe,
-    UserFullnamePipe 
+    UserFullnamePipe,
+
+    InputFocusDirective
   ]
 })
 export class AppCommonModule { }
