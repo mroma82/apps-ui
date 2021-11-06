@@ -7,38 +7,46 @@
   </div>
   <div class="modal-body">
 
-    <div *ngFor="let item of (list$ | async) ">
-      <div>
-        <strong>{{ item.createUserId | userFullname | async }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
-        <div class="d-inline ml-2" *ngIf="canEdit$ | async">
-          <a class="btn btn-link" (click)="edit(item)" role="button">
-            <i class="fas fa-pencil-alt"></i>
-          </a>
-          <a class="btn btn-link" (click)="delete(item)" role="button" *ngIf="!item.deletePending">
-            <i class="fas fa-trash-alt"></i>
-          </a>
-        </div>
-        <div class="d-inline ml-2" *ngIf="item.deletePending">
-          Are you sure you want to delete?
-          <button type="button" class="btn btn-link btn-sm" (click)="deleteConfirm(item)" *ngIf="canEdit$ | async">Yes</button>
-          <button type="button" class="btn btn-link btn-sm" (click)="deleteCancel(item)">No - Cancel</button>
-        </div>
-      </div>
-      <p *ngIf="!item.editPending">
-        {{ item.contentText }}
-      </p>
-      <div class="mt-2" *ngIf="item.editPending">
-        <div class="form-group">
-          <textarea class="form-control" rows="4" [(ngModel)]="item.contentTextEdit"></textarea>
-        </div>
+    <div *ngIf="list$ | async as list">    
+
+      <div *ngFor="let item of list">
         <div>
-          <button type="button" class="btn btn-primary" (click)="editConfirm(item)">Save</button>
-          <button type="button" class="btn btn-link" (click)="editCancel(item)">Cancel</button>
+          <strong>{{ item.createUserId | userFullname | async }} on {{ item.createDateTime | utcDateTime:'medium' }}</strong>
+          <div class="d-inline ml-2" *ngIf="canEdit$ | async">
+            <a class="btn btn-link" (click)="edit(item)" role="button">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+            <a class="btn btn-link" (click)="delete(item)" role="button" *ngIf="!item.deletePending">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </div>
+          <div class="d-inline ml-2" *ngIf="item.deletePending">
+            Are you sure you want to delete?
+            <button type="button" class="btn btn-link btn-sm" (click)="deleteConfirm(item)" *ngIf="canEdit$ | async">Yes</button>
+            <button type="button" class="btn btn-link btn-sm" (click)="deleteCancel(item)">No - Cancel</button>
+          </div>
+        </div>
+        <p *ngIf="!item.editPending">
+          {{ item.contentText }}
+        </p>
+        <div class="mt-2" *ngIf="item.editPending">
+          <div class="form-group">
+            <textarea class="form-control" rows="4" [(ngModel)]="item.contentTextEdit"></textarea>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="editConfirm(item)">Save</button>
+            <button type="button" class="btn btn-link" (click)="editCancel(item)">Cancel</button>
+          </div>
+          <hr>
         </div>
         <hr>
       </div>
-      <hr>
+
+      <div *ngIf="list.length == 0 && !model.addPending" class="mb-3">
+        <i>There are no notes for this record</i>    
+      </div>
     </div>
+
     
     <div  *ngIf="canEdit$ | async">
       <div class="mt-2" *ngIf="!model.addPending">
@@ -47,7 +55,7 @@
 
       <div class="mt-2" *ngIf="model.addPending">
         <div class="form-group">
-          <textarea class="form-control" rows="4" [(ngModel)]="model.addModel.contentText"></textarea>
+          <textarea class="form-control" rows="4" [(ngModel)]="model.addModel.contentText" #contextTextAddField></textarea>
         </div>
         <div>
           <button type="button" class="btn btn-primary" (click)="addCommit()">Save</button>

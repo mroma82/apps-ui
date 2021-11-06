@@ -26,7 +26,7 @@ export class ExampleNavComponent implements OnInit {
     const baseUrl = "/app/example";
     this.navItems$ = of([
       { url: `${baseUrl}`, title: "Home" },
-      { url: `${baseUrl}/mytasks`, title: "Tasks" },
+      { url: `${baseUrl}/mytasks`, title: "My Tasks" },
       { url: `${baseUrl}/parameters`, title: "Parameters", hasAccess$: entityApi.hasAccess(EntityTypes.ExampleParameters, SecurityPermissionMask.Edit) },
     ]);
   }
