@@ -14,36 +14,39 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 })
 export class MenuItemService implements OnDestroy {
 
-  // foundation menu
-  readonly foundationMenu : IMenuItem[] = [
-    { 
-      title: "Admin", description: "Manage users and global settings",
-      url: "/app/admin", icon: "fas fa-cogs", 
-      hasAccess$: this.userContext.isAdmin$
-    }
-  ];
-
-
   // app menu items
-  readonly appMenuItems = combineLatest(
+  readonly appMenuItems = combineLatest([
 
     // apps
-    this.createEntityApp(EntityTypes.Example),
-    this.createEntityApp(EntityTypes.SystemUser)
-  );
+    this.createEntityApp(EntityTypes.Example)
+  ]);
+
+  // setup menu items
+  readonly setupMenuItems = combineLatest([
+
+    of({
+      title: "Admin", description: "Manage users and global settings",
+      url: "/app/admin", icon: "fas fa-cogs",
+      hasAccess$: this.userContext.isAdmin$
+    }),
+
+    this.createEntityApp(EntityTypes.SystemUser),
+    this.createEntityApp(EntityTypes.SecurityRole)
+  ])
 
   // admin menu items
-  readonly adminMenuitems = combineLatest(
+  readonly adminMenuItems = combineLatest([
     this.createEntityApp(EntityTypes.ListItemType),
     this.createEntityApp(EntityTypes.SecurityRole),
     this.createEntityApp(EntityTypes.SystemUser),
     this.createEntityApp(EntityTypes.WorkflowGroup),
     this.createEntityApp(EntityTypes.NumberSequence)
-  );
+  ]);
 
   // observables
-  menuItems$ : Observable<IMenuItem[]>;
-  adminMenuItems$ : Observable<IMenuItem[]>;
+  appMenuItems$: Observable<IMenuItem[]>;
+  setupMenuItems$: Observable<IMenuItem[]>;
+  adminMenuItems$: Observable<IMenuItem[]>;
 
   // new
   constructor(
@@ -51,38 +54,46 @@ export class MenuItemService implements OnDestroy {
     private securityService: SecurityService,
     private entityApi: EntityApiService,
     private entityProvider: EntityProviderService
-  ) { 
+  ) {
 
-    // setup menu items
-    this.menuItems$ = combineLatest(
+    // setup app menu items
+    this.appMenuItems$ = combineLatest(
       userContext.profile$,
-      this.appMenuItems,
-      of(this.foundationMenu)
-    ).pipe(debounce(() => timer(100)), map(([,appsMenu, foundationMenu]) => {
+      this.appMenuItems
+    ).pipe(debounce(() => timer(100)), map(([, appsMenu]) => {
       return [
         ...appsMenu,
-        ...foundationMenu
       ].filter(x => x !== null)
-    }));    
+    }));
+
+    // setup setup menu items
+    this.setupMenuItems$ = combineLatest(
+      userContext.profile$,
+      this.setupMenuItems
+    ).pipe(debounce(() => timer(100)), map(([, setupMenu]) => {
+      return [
+        ...setupMenu,
+      ].filter(x => x !== null)
+    }));
 
     // setup admin menu items
     this.adminMenuItems$ = combineLatest(
       userContext.profile$,
-      this.adminMenuitems
-    ).pipe(debounce(() => timer(100)), map(([,menu]) => {
+      this.adminMenuItems
+    ).pipe(debounce(() => timer(100)), map(([, menu]) => {
       return menu.filter(x => x !== null)
-    }));    
-  }    
+    }));
+  }
 
   // cleanup
   ngOnDestroy() { }
 
   // function that adds an entity app
-  createEntityApp(entityTypeId: string) : Observable<IMenuItem> {
-    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => { 
-    
+  createEntityApp(entityTypeId: string): Observable<IMenuItem> {
+    return this.entityProvider.getEntity(entityTypeId).pipe(map(x => {
+
       // null safe
-      if(!x)
+      if (!x)
         return null;
 
       // build the menu item

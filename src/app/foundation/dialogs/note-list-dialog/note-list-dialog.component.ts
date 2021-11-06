@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { NotesListDialogContextService } from '../../services/notes/notes-list-dialog-context.service';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./note-list-dialog.component.scss']
 })
 export class NoteListDialogComponent extends BaseDialog implements OnInit {
-  @ViewChild("contextTextAddField") contextTextAddField: ElementRef;
+  @ViewChild("contentTextAddField") contentTextAddField: QueryList<ElementRef>;
 
   // state
   canEdit$: Observable<boolean> = this.context.canEdit$;
@@ -88,8 +88,10 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit {
 
     // focus
     //this.contextTextAddField.nativeElement.focus();
+    console.log(this.contentTextAddField);
+    setTimeout(() => this.contentTextAddField.first.nativeElement.focus(), 500);
 
-    setTimeout(() => this.contextTextAddField.nativeElement.focus(), 500);
+    setTimeout(() => console.log(this.contentTextAddField), 2000);
   }
   addCancel() {
     this.model.addPending = false;

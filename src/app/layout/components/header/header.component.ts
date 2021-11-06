@@ -21,15 +21,17 @@ export class HeaderComponent implements OnInit {
   };
 
   // observables
-  menuItems$ : Observable<IMenuItem[]>;
+  appMenuItems$: Observable<IMenuItem[]>;
+  setupMenuItems$: Observable<IMenuItem[]>;
 
   // new  
   constructor(
     private appContext: AppContextService,
     private menuItemService: MenuItemService
-  ) {             
-    this.menuItems$ = this.menuItemService.menuItems$;    
-  }  
+  ) {
+    this.appMenuItems$ = this.menuItemService.appMenuItems$;
+    this.setupMenuItems$ = this.menuItemService.setupMenuItems$;
+  }
 
   // init
   ngOnInit() {
@@ -38,11 +40,10 @@ export class HeaderComponent implements OnInit {
   // toggle the menu
   toggleMenu() {
     this.model.showMenu = !this.model.showMenu;
-  } 
+  }
 
   // hide menu
   hideMenu() {
     this.model.showMenu = false;
   }
-
 }

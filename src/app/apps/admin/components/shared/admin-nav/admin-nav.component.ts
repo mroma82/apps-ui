@@ -13,19 +13,19 @@ import { AdminMenuItemsService } from '../../../services/admin-menu-items.servic
 export class AdminNavComponent implements OnInit {
 
   // observables
-  navItems$ : Observable<IMenuItem[]>;
+  navItems$: Observable<IMenuItem[]>;
 
   // new
   constructor(
     private menuItemService: MenuItemService
-  ) {     
+  ) {
     this.navItems$ = this.menuItemService.adminMenuItems$.pipe(map(lst => {
       return [
-        { title: "Home", url: "/app/admin", icon: "", description: "", hasAccess$: of(true) },
+        { title: "Admin", url: "/app/admin", icon: "", description: "", hasAccess$: of(true) },
         ...lst
       ]
     }));
-  }  
+  }
 
   // init
   ngOnInit() {

@@ -10,18 +10,18 @@ import { IMenuItem } from 'src/app/common/models/menu-item';
   styleUrls: ['./home-tiles.component.scss']
 })
 export class HomeTilesComponent implements OnInit {
-  
+
   // observables
-  menuItems$ : Observable<IMenuItem[]>;
+  menuItems$: Observable<IMenuItem[]>;
 
   // new
   constructor(
     private menuItemService: MenuItemService
-  ) { 
+  ) {
 
     // profile change
-    this.menuItems$ = this.menuItemService.menuItems$;    
-  }  
+    this.menuItems$ = this.menuItemService.appMenuItems$;
+  }
 
   // init
   ngOnInit() {
