@@ -14,7 +14,7 @@ export class WorkflowContextService implements OnDestroy {
 
   // observables
   busy$ = new BehaviorSubject<boolean>(false);
-  entity$ = new BehaviorSubject<IEntity>(null);    
+  entity$ = new BehaviorSubject<IEntity>(null);
   instance$ = new BehaviorSubject<any>(null);
   actions$ = new BehaviorSubject<any>([]);
   assigned$ = new BehaviorSubject<any>([]);
@@ -23,15 +23,15 @@ export class WorkflowContextService implements OnDestroy {
   // dialog obseravables
   assignedListDialogOpenClose$ = new BehaviorSubject<boolean>(false);
   rejectDialogOpenClose$ = new BehaviorSubject<boolean>(false);
-  historyDialogOpenClose$ = new BehaviorSubject<boolean>(false); 
-  
+  historyDialogOpenClose$ = new BehaviorSubject<boolean>(false);
+
   // options
   options = {
     url: ""
   };
-  
+
   // subscriptions
-  onContextChange : Subscription;
+  onContextChange: Subscription;
   onInstanceChange: Subscription;
 
   // new
@@ -40,13 +40,13 @@ export class WorkflowContextService implements OnDestroy {
     private notificationContext: NotificationContextService,
     private dialogService: DialogService,
     private appContext: AppContextService
-  ) { 
-    
+  ) {
+
     // on context change
-    this.onContextChange = combineLatest(
+    this.onContextChange = combineLatest([
       this.entity$,
       this.appContext.User.profile$
-    ).subscribe(x => {
+    ]).subscribe(x => {
       this.refreshInstance()
     });
 
@@ -60,7 +60,7 @@ export class WorkflowContextService implements OnDestroy {
 
   // set options
   setOptions(options: any) {
-    this.options = {...this.options, ...options};
+    this.options = { ...this.options, ...options };
   }
 
   // set context
@@ -69,17 +69,17 @@ export class WorkflowContextService implements OnDestroy {
   }
 
   // refresh instance
-  refreshInstance() {    
-    let context = this.entity$.value;    
-    if(context !== null) {
-        this.service.getInstanceByEntity(this.options.url, context).subscribe(i => this.instance$.next(i));
+  refreshInstance() {
+    let context = this.entity$.value;
+    if (context !== null) {
+      this.service.getInstanceByEntity(this.options.url, context).subscribe(i => this.instance$.next(i));
     }
   }
 
   // refresh actions
   refreshActions() {
     let instance = this.instance$.value;
-    if(instance !== null) {
+    if (instance !== null) {
       this.service.getActions(instance.id).subscribe(x => this.actions$.next(x));
     }
   }
@@ -87,7 +87,7 @@ export class WorkflowContextService implements OnDestroy {
   // refresh assigned
   refreshAssigned() {
     let instance = this.instance$.value;
-    if(instance !== null) {
+    if (instance !== null) {
       this.service.getAssigned(instance.id).subscribe(x => this.assigned$.next(x));
     }
   }
@@ -95,7 +95,7 @@ export class WorkflowContextService implements OnDestroy {
   // refresh history
   refreshHistory() {
     let instance = this.instance$.value;
-    if(instance !== null) {
+    if (instance !== null) {
       this.service.getHistory(instance.id).subscribe(x => this.history$.next(x));
     }
   }
@@ -133,11 +133,11 @@ export class WorkflowContextService implements OnDestroy {
 
     // ask
     this.dialogService.yesNo("Cancel Workflow", "Are you sure you want to cancel the workflow?").subscribe(x => {
-      if(x == DialogResultEnum.Yes) {
+      if (x == DialogResultEnum.Yes) {
 
         // get the instance
         const instance = this.instance$.value;
-    
+
         // reset
         this.busy$.next(true);
         this.service.reset(this.options.url, instance.id, instance.currentTaskId).subscribe(x => {
@@ -154,7 +154,7 @@ export class WorkflowContextService implements OnDestroy {
 
     // ask
     this.dialogService.yesNo("Cancel Workflow", "Are you sure you want to cancel the workflow?").subscribe(x => {
-      if(x == DialogResultEnum.Yes) {
+      if (x == DialogResultEnum.Yes) {
 
         // get the instance
         const instance = this.instance$.value;
@@ -192,7 +192,7 @@ export class WorkflowContextService implements OnDestroy {
   closeAssignedDialog() {
     this.assignedListDialogOpenClose$.next(false);
   }
-  
+
   // reject dialog open/close
   openRejectDialog() {
     this.rejectDialogOpenClose$.next(true);
@@ -209,10 +209,10 @@ export class WorkflowContextService implements OnDestroy {
     this.historyDialogOpenClose$.next(false);
   }
 
-  
+
   // clean up
   ngOnDestroy(): void {
-    
+
     // subscriptions
     this.onContextChange.unsubscribe();
     this.onInstanceChange.unsubscribe();

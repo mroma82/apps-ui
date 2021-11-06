@@ -11,13 +11,13 @@ export class EntitySubGridContextService implements OnDestroy {
 
   // state
   entityTypeId$ = new BehaviorSubject<string>(null);
-  filter$ = new BehaviorSubject<any>({});  
+  filter$ = new BehaviorSubject<any>({});
   refresh$ = new BehaviorSubject<number>(0);
   modelDefault$ = new BehaviorSubject<any>(null);
 
   // sorting
   sort$ = new BehaviorSubject<any>({
-    field: "CreateDateTime"    
+    field: "CreateDateTime"
   });
 
   // items
@@ -31,28 +31,28 @@ export class EntitySubGridContextService implements OnDestroy {
     private api: EntityApiService,
     @Inject(ENTITY_CONFIG) private config: IEntityConfigurationService,
     private dialogService: DialogService
-  ) { 
+  ) {
 
     // setup subscription to refresh
-    const rx = combineLatest(
+    const rx = combineLatest([
       this.entityTypeId$,
       this.filter$,
       this.sort$,
       this.refresh$
-    ).pipe(debounce(() => timer(100)))
-     .subscribe(([entityTypeId, filter, sort]) => {
+    ]).pipe(debounce(() => timer(100)))
+      .subscribe(([entityTypeId, filter, sort]) => {
 
-      // get the data
-      this.api.list(entityTypeId, {        
-        filter: filter,
-        pageNumber: 1,
-        pageSize: 25, //hack               
-        sortField: sort.field,
-        sortIsDescending: sort.isDescending        
-      }).subscribe(data => {
-        this.items$.next(data.items);
+        // get the data
+        this.api.list(entityTypeId, {
+          filter: filter,
+          pageNumber: 1,
+          pageSize: 25, //hack               
+          sortField: sort.field,
+          sortIsDescending: sort.isDescending
+        }).subscribe(data => {
+          this.items$.next(data.items);
+        });
       });
-    });
 
     this.subs$.add(rx);
   }
@@ -63,14 +63,14 @@ export class EntitySubGridContextService implements OnDestroy {
   }
 
   // delete
-  delete(id: string) : Observable<boolean> {
+  delete(id: string): Observable<boolean> {
 
     // delete, check if ok
     return this.api.delete(this.config.entityTypeId, id).pipe(map(x => {
-      if(x.success) {
+      if (x.success) {
         this.refreshData();
         return true;
-      } else {        
+      } else {
         this.dialogService.message("Error during delete", x.text);
         return false;
       }

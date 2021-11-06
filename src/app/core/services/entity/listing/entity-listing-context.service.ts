@@ -10,46 +10,46 @@ import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from './ent
 export class EntityListingContextService {
 
   // observables
-  listItems$ = new BehaviorSubject<any>([]);  
+  listItems$ = new BehaviorSubject<any>([]);
   view$ = new BehaviorSubject<any>({});
   filter$ = new BehaviorSubject<any>({});
   searchText$ = new BehaviorSubject<string>(null);
   isWorkflowAssigned$ = new BehaviorSubject<boolean>(false);
 
   // permissions
-  canCreate$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Add).pipe(shareReplay(1));
-  canEdit$ = this.api.hasAccess(this.entityConfig.entityTypeId,SecurityPermissionMask.Edit).pipe(shareReplay(1));
+  canCreate$ = this.api.hasAccess(this.entityConfig.entityTypeId, SecurityPermissionMask.Add).pipe(shareReplay(1));
+  canEdit$ = this.api.hasAccess(this.entityConfig.entityTypeId, SecurityPermissionMask.Edit).pipe(shareReplay(1));
 
   // paging
   page$ = new BehaviorSubject<number>(1);
   pageSize$ = new BehaviorSubject<number>(25);
-  
+
   sort$ = new BehaviorSubject<any>({
     field: "CreateDateTime",
     isDescending: true
   });
-  
+
 
   // subscriptions
-  onFilterChange$ : Subscription;
-  
+  onFilterChange$: Subscription;
+
   // new
   constructor(
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
-    @Inject(ENTITY_LISTING_CONFIG) private listingConfig : IEntityListingConfigurationService,
-    private api : EntityApiService
-  ) { 
+    @Inject(ENTITY_LISTING_CONFIG) private listingConfig: IEntityListingConfigurationService,
+    private api: EntityApiService
+  ) {
 
     // setup filter change
-    this.onFilterChange$ = combineLatest(
+    this.onFilterChange$ = combineLatest([
       this.view$,
-      this.filter$, 
+      this.filter$,
       this.searchText$,
-      this.page$,       
+      this.page$,
       this.pageSize$,
-      this.sort$, 
+      this.sort$,
       this.isWorkflowAssigned$
-    ).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
+    ]).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
 
     // get the first view
     this.listingConfig.getViews().pipe(take(1)).subscribe(x => {
@@ -63,23 +63,23 @@ export class EntityListingContextService {
     // combine model
     let model = {
       entityTypeId: this.entityConfig.entityTypeId,
-      
+
       filter: {
         ...this.filter$.value,
-        ...this.view$.value.filter                      
+        ...this.view$.value.filter
       },
-      
-      searchText: this.searchText$.value,      
+
+      searchText: this.searchText$.value,
       pageNumber: this.page$.value,
-      pageSize: this.pageSize$.value,              
+      pageSize: this.pageSize$.value,
       sortField: this.sort$.value.field,
       sortIsDescending: this.sort$.value.isDescending,
-      isWorkflowAssigned: this.isWorkflowAssigned$.value      
-    };    
+      isWorkflowAssigned: this.isWorkflowAssigned$.value
+    };
 
     // get the data
     this.api.list(this.entityConfig.entityTypeId, model).subscribe(x => {
-      this.listItems$.next(x);      
+      this.listItems$.next(x);
     });
   }
 
@@ -87,13 +87,13 @@ export class EntityListingContextService {
   setView(model: any) {
     this.view$.next(model);
 
-    if(model.sort) {
+    if (model.sort) {
       this.sort$.next(model.sort);
     }
   }
 
   // set filter
-  setFilter(model: any) {    
+  setFilter(model: any) {
 
     // merge filter
     this.filter$.next({
@@ -132,7 +132,7 @@ export class EntityListingContextService {
 
   // reset filter
   clearFilter() {
-    
+
     // clear all
     this.filter$.next({});
     this.searchText$.next(null);

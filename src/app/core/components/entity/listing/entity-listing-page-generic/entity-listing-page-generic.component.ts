@@ -15,16 +15,16 @@ import { EntityListingContextService } from 'src/app/core/services/entity/listin
 export class EntityListingPageGenericComponent implements OnInit {
 
   // permissions
-  canAdd$ = combineLatest(
-    this.entitySecurity.canAdd$, 
+  canAdd$ = combineLatest([
+    this.entitySecurity.canAdd$,
     of(this.entityConfig.showAddOnListing)
-  ).pipe(map(([canAdd, showAdd]) => canAdd && showAdd));
+  ]).pipe(map(([canAdd, showAdd]) => canAdd && showAdd));
 
   // new
   constructor(
-    private listingContext : EntityListingContextService,
+    private listingContext: EntityListingContextService,
     private entitySecurity: EntitySecurityService,
-    private createContext : EntityCreateContextService,
+    private createContext: EntityCreateContextService,
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
     private appContext: AppContextService
   ) { }
@@ -42,7 +42,7 @@ export class EntityListingPageGenericComponent implements OnInit {
   clear() {
     this.listingContext.clearFilter();
   }
-  
+
   // refresh
   refresh() {
     this.listingContext.refreshData();

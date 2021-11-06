@@ -57,30 +57,30 @@ export class MenuItemService implements OnDestroy {
   ) {
 
     // setup app menu items
-    this.appMenuItems$ = combineLatest(
+    this.appMenuItems$ = combineLatest([
       userContext.profile$,
       this.appMenuItems
-    ).pipe(debounce(() => timer(100)), map(([, appsMenu]) => {
+    ]).pipe(debounce(() => timer(100)), map(([, appsMenu]) => {
       return [
         ...appsMenu,
       ].filter(x => x !== null)
     }));
 
     // setup setup menu items
-    this.setupMenuItems$ = combineLatest(
+    this.setupMenuItems$ = combineLatest([
       userContext.profile$,
       this.setupMenuItems
-    ).pipe(debounce(() => timer(100)), map(([, setupMenu]) => {
+    ]).pipe(debounce(() => timer(100)), map(([, setupMenu]) => {
       return [
         ...setupMenu,
       ].filter(x => x !== null)
     }));
 
     // setup admin menu items
-    this.adminMenuItems$ = combineLatest(
+    this.adminMenuItems$ = combineLatest([
       userContext.profile$,
       this.adminMenuItems
-    ).pipe(debounce(() => timer(100)), map(([, menu]) => {
+    ]).pipe(debounce(() => timer(100)), map(([, menu]) => {
       return menu.filter(x => x !== null)
     }));
   }
