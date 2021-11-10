@@ -63,8 +63,12 @@
 
 .btn-menu-toggle {
     color: #fff;
+    padding: 20px 18px;
+    margin-top: -32px;
+    margin-bottom: -30px;
 
-    &:hover {
-        color: #fff;
+    &.active {
+        background-color: #fff;
+        color: navy;
     }
 }

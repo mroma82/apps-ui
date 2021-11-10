@@ -34,6 +34,8 @@ import { SetupPasswordComponent } from './auth/components/setup-password/setup-p
 import { ForgotPasswordSuccessPageComponent } from './auth/pages/forgot-password-success-page/forgot-password-success-page.component';
 import { SetupPasswordSuccessPageComponent } from './auth/pages/setup-password-success-page/setup-password-success-page.component';
 import { InstanceContextService } from './common/services/instance-context.service';
+import { HeaderUserContextComponent } from './layout/components/header-user-context/header-user-context.component';
+import { HeaderUserContextMenuComponent } from './layout/components/header-user-context-menu/header-user-context-menu.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { InstanceContextService } from './common/services/instance-context.servi
     ForgotPasswordComponent,
     SetupPasswordComponent,
     ForgotPasswordSuccessPageComponent,
-    SetupPasswordSuccessPageComponent
+    SetupPasswordSuccessPageComponent,
+    HeaderUserContextComponent,
+    HeaderUserContextMenuComponent
   ],
   imports: [
     BrowserModule,

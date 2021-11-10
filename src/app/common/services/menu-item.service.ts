@@ -25,7 +25,7 @@ export class MenuItemService implements OnDestroy {
   readonly setupMenuItems = combineLatest([
 
     of({
-      title: "Admin", description: "Manage users and global settings",
+      title: "Administration Area", description: "Manage users and global settings",
       url: "/app/admin", icon: "fas fa-cogs",
       hasAccess$: this.userContext.isAdmin$
     }),

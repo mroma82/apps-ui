@@ -1,23 +1,24 @@
-<div *ngIf="(isAdmin$ | async) || (isImpersonating$ | async)" class="d-flex flex-row d-print-none">    
-  
-  <div *ngIf="!state.simulatePending" class="p-2">
-    <button class="btn btn-link btn-sm" (click)="state.simulatePending = true;"><i class="fas fa-user-secret mr-2"></i>Simulate</button>
-      
-      <button class="btn btn-link btn-sm" (click)="clearImpersonate()" *ngIf="isImpersonating$ | async">Clear</button>      
+<div *ngIf="(isAdmin$ | async) || (isImpersonating$ | async)" class="d-print-none">
+
+  <div *ngIf="!state.simulatePending">
+    <button class="btn btn-link btn-sm" (click)="state.simulatePending = true;"><i
+        class="fas fa-user-secret mr-2"></i>Simulate</button>
+
+    <button class="btn btn-link btn-sm" (click)="clearImpersonate()" *ngIf="isImpersonating$ | async">Clear</button>
   </div>
 
   <div *ngIf="state.simulatePending">
     <div class="d-flex flex-row">
-      <div class="p-2">
-          <select class="form-control form-control-sm" [(ngModel)]="model.userId" (change)="simulateUser(model.userId)">
-              <option [value]="">-- Select a User --</option>
-              <option *ngFor="let item of userList$ | async" [value]="item.id">{{ item.name }}</option>
-            </select>
+      <div class="pr-2">
+        <select class="form-control form-control-sm" [(ngModel)]="model.userId" (change)="simulateUser(model.userId)">
+          <option [value]="">-- Select a User --</option>
+          <option *ngFor="let item of userList$ | async" [value]="item.id">{{ item.name }}</option>
+        </select>
       </div>
-      <div class="p-2">          
-            <button class="btn btn-link btn-sm" (click)="state.simulatePending = false;">Cancel</button>            
-        </div>
-    </div>    
+      <div class="pl-2">
+        <button class="btn btn-link btn-sm" (click)="state.simulatePending = false;">Cancel</button>
+      </div>
+    </div>
   </div>
-  
+
 </div>

@@ -1,0 +1,22 @@
+.user-context {
+    color: #fff;
+
+    margin-top: -32px;
+    margin-bottom: -30px;
+    padding: 20px 12px;
+
+    a {
+        color: #fff;
+        display: inline-block;
+        line-height: 1;
+        font-size: 0.8rem;
+    }    
+
+    &.active {
+        background-color: #fff;
+        
+        a {
+            color: #000080;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<ng-container *ngIf="isAuthenticated$ | async as isAuthenticated">
+    <ng-container *ngIf="user$ | async as user">
+        <ng-container *ngIf="instance$ | async as instance">
+
+            <div class="user-context" [class.active]="menuOpen">
+                <a href="javascript:;;" (click)="toggleMenu()">
+                    <div>
+                        <strong>{{ user.fullName }}</strong>
+                    </div>
+                    <small>
+                        {{ instance.name }} ({{instance.number }})
+                    </small>
+                </a>
+            </div>
+
+            <app-header-user-context-menu [isActive]="menuOpen" [user]="user" [instance]="instance">
+            </app-header-user-context-menu>
+        </ng-container>
+    </ng-container>
+</ng-container>

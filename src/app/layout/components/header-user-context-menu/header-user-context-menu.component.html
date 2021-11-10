@@ -1,0 +1,16 @@
+<div class="user-context-menu" [class.active]="isActive">
+
+    <p>
+        <strong>{{ user.fullName }}</strong><br>
+        <small>{{ user.email }}| <a routerLink="/logout">Logout</a></small>
+    </p>
+    <p>
+        <strong>Instance:</strong><br>
+        <small>Number: <strong>{{ instance.number }}</strong></small><br>
+        <small>Name: <strong>{{ instance.name }}</strong></small> | <small><a href="#">Change Instance</a></small>
+    </p>
+
+    <div class="simulate-user text-center">
+        <app-simulate-user></app-simulate-user>
+    </div>
+</div>

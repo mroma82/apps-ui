@@ -1,11 +1,11 @@
 <header>
   <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
 
-    <a class="btn-menu-toggle mr-2 ml-1" (click)="toggleMenu()" href="javascript:;;">
+    <a class="btn-menu-toggle mr-1 ml-0" (click)="toggleMenu()" href="javascript:;;" [class.active]="model.showMenu">
       <i class="fas fa-th"></i>
     </a>
 
-    <a class="navbar-brand ml-3" href="javascript:;;" routerLink="/app">
+    <a class="navbar-brand ml-2" href="javascript:;;" routerLink="/app">
       <img src="/assets/logo.svg" alt="Essential Apps" class="img-logo" />Essential Apps
       <span *ngIf="model.environmentDescription" class="ml-1 badge badge-pill badge-warning environment-description">{{
         model.environmentDescription }}</span>
@@ -17,6 +17,10 @@
 
     <div>
       <app-notification-bar></app-notification-bar>
+    </div>
+
+    <div class="ml-2 mt-2 mr-2">
+      <app-header-user-context></app-header-user-context>
     </div>
   </nav>
 </header>
@@ -42,7 +46,7 @@
 
   <div *ngIf="setupMenuItems$ | async as setupMenuItems">
     <div *ngIf="setupMenuItems.length > 0">
-      <h5 class="border-bottom mt-4">Administration</h5>
+      <h5 class="border-bottom mt-4">Setup</h5>
       <ul class="list-group">
 
         <ng-container *ngFor="let item of setupMenuItems">
