@@ -3,6 +3,17 @@
 
     a {
         color: #000;
+        border-bottom: 2px transparent;
+
+        &.active {
+            font-weight: bold;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.9);
+        }
+
+        &:hover {
+            background-color: rgb(0, 0, 0, 0.08);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.9);
+        }
     }    
     
     padding: .25rem 1rem;

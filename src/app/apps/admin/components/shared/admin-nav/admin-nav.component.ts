@@ -21,7 +21,14 @@ export class AdminNavComponent implements OnInit {
   ) {
     this.navItems$ = this.menuItemService.adminMenuItems$.pipe(map(lst => {
       return [
-        { title: "Admin", url: "/app/admin", icon: "", description: "", hasAccess$: of(true) },
+        {
+          title: "Admin",
+          url: "/app/admin",
+          icon: "",
+          description: "",
+          hasAccess$: of(true),
+          activePathIsExact: true
+        },
         ...lst
       ]
     }));

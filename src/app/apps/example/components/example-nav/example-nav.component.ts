@@ -14,18 +14,18 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 export class ExampleNavComponent implements OnInit {
 
   // state
-  navItems$ : Observable<INavigationItem[]>;
+  navItems$: Observable<INavigationItem[]>;
 
   // new
   constructor(
     appContext: AppContextService,
     entityApi: EntityApiService
-  ) { 
+  ) {
 
     // setup nav items
     const baseUrl = "/app/example";
     this.navItems$ = of([
-      { url: `${baseUrl}`, title: "Home" },
+      { url: `${baseUrl}`, title: "Home", activePathIsExact: true },
       { url: `${baseUrl}/mytasks`, title: "My Tasks" },
       { url: `${baseUrl}/parameters`, title: "Parameters", hasAccess$: entityApi.hasAccess(EntityTypes.ExampleParameters, SecurityPermissionMask.Edit) },
     ]);
