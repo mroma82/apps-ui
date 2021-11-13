@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IInstance } from '../models/instance';
 import { AppHttpClientService } from './app-http-client.service';
 
 @Injectable({
@@ -13,54 +14,54 @@ import { AppHttpClientService } from './app-http-client.service';
 export class InstanceContextService {
 
   // define instance
-  instanceId : string;
-  instance$ : Observable<any>;
-  
+  instanceId: string;
+  instance$: Observable<IInstance>;
+
   // token
-  private token = () => window.localStorage.getItem("apps:token"); 
-  
+  private token = () => window.localStorage.getItem("apps:token");
+
   // init
   constructor(
     httpClient: HttpClient
-  ) { 
+  ) {
 
     // check query string
     let instanceQueryStringParam = "";
-    if(location.search) {
+    if (location.search) {
 
       // parse into key, value
       let qs = location.search.substring(1).split('&').map(x => x.split('='));
       qs.forEach(([key, val]) => {
 
         // check if the instance
-        if(key == "i") {
+        if (key == "i") {
           instanceQueryStringParam = val;
         }
       })
     }
 
     // check if a query string, pull from there
-    if(instanceQueryStringParam) {
+    if (instanceQueryStringParam) {
       this.instanceId = instanceQueryStringParam;
     }
-    
+
     // else, check if a token
-    else if(this.token()) {      
+    else if (this.token()) {
 
       // parse
       let model = jwt_decode(this.token());
-      if(model.instance) {
-        this.instanceId = model.instance;        
+      if (model.instance) {
+        this.instanceId = model.instance;
       }
     }
 
     // http headers
-    const httpHeaders = { 
+    const httpHeaders = {
       headers: new HttpHeaders()
-        .set('X-Apps-Instance', this.instanceId ? this.instanceId : "") 
+        .set('X-Apps-Instance', this.instanceId ? this.instanceId : "")
     };
 
     // set the instance
-    this.instance$ = httpClient.get(`${environment.apiUrl}/instance/get`, httpHeaders).pipe(shareReplay(1));
+    this.instance$ = httpClient.get<IInstance>(`${environment.apiUrl}/instance/get`, httpHeaders).pipe(shareReplay(1));
   }
 }

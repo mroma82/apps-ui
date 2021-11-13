@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppContextService } from '../../../app-context.service';
+import { IInstance } from '../../../common/models/instance';
+import { IUserProfile } from '../../../common/models/user-profile';
 import { InstanceContextService } from '../../../common/services/instance-context.service';
 
 @Component({
@@ -12,9 +14,9 @@ import { InstanceContextService } from '../../../common/services/instance-contex
 export class HeaderUserContextComponent implements OnInit {
 
   // state 
-  user$: Observable<any> = this.appContext.User.profile$;
+  user$: Observable<IUserProfile> = this.appContext.User.profile$;
   isAuthenticated$: Observable<boolean> = this.appContext.User.isAuthenticated$;
-  instance$: Observable<any> = this.instanceContext.instance$;
+  instance$: Observable<IInstance> = this.instanceContext.instance$;
 
   // menu
   menuOpen: boolean = false;

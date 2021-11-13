@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { filter, map, shareReplay } from 'rxjs/operators';
+import { IUserProfile } from '../models/user-profile';
 import { AuthService } from './auth.service';
 import { InstanceContextService } from './instance-context.service';
 
@@ -11,18 +12,16 @@ export class UserContextService {
 
   // state
   verify$ = new BehaviorSubject<boolean>(null);
-  profile$ = new BehaviorSubject<any>(null);
+  profile$ = new BehaviorSubject<IUserProfile>(null);
   adminRoles$: Observable<any>;
 
   // is authenticated formula
-  isAuthenticated$ = combineLatest(this.verify$, this.profile$).pipe(filter(([verify]) => verify != null), map(([, profile]) => profile != null));
+  isAuthenticated$ = combineLatest([this.verify$, this.profile$]).pipe(filter(([verify]) => verify != null), map(([, profile]) => profile != null));
 
   // is admin
   isAdmin$: Observable<any>;
 
   isImpersonating$ = new BehaviorSubject<boolean>(false);
-
-
 
   // new
   constructor(
@@ -44,15 +43,11 @@ export class UserContextService {
       ([profile, adminRoles]) => {
 
         // check if all the data
-        if (profile == null || profile.role == null || adminRoles == null)
+        if (profile == null || profile.roles == null || adminRoles == null)
           return false;
 
         // if more than one role, check all roles
-        if (Array.isArray(profile.role))
-          return profile.role.filter(x => adminRoles.indexOf(x)).length > 0;
-
-        // else, check if the role is admin
-        return adminRoles.indexOf(profile.role) >= 0
+        return profile.roles.filter(x => adminRoles.indexOf(x)).length > 0;
       }
     ));
 
@@ -193,9 +188,8 @@ export class UserContextService {
   }
 
   // set profile
-  setProfile(profile: any) {
+  setProfile(profile: IUserProfile) {
     this.profile$.next(profile);
-    //this.isAdmin$.next(profile.role ? profile.role.indexOf("SysAdmin") > -1 : false);
   }
 
   // has access 
@@ -205,11 +199,11 @@ export class UserContextService {
     return this.profile$.pipe(map(profile => {
 
       // check if no profile or roles
-      if (!profile || !profile.role)
+      if (!profile || !profile.roles)
         return false;
 
       // else, check if admin or has the key
-      return profile.role.indexOf(key) > -1 || profile.role.indexOf("SysAdmin") > -1;
+      return profile.roles.indexOf(key) > -1 || profile.roles.indexOf("SysAdmin") > -1;
     }));
   }
 

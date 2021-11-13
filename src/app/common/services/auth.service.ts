@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
+import { IUserProfile } from '../models/user-profile';
+import { isArray } from 'ngx-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,8 @@ import * as jwt_decode from 'jwt-decode';
 export class AuthService {
 
   // tokens
-  private token = () => window.localStorage.getItem("apps:token"); 
-  private tokenImpersonated = () => window.localStorage.getItem("apps:token:impersonate"); 
+  private token = () => window.localStorage.getItem("apps:token");
+  private tokenImpersonated = () => window.localStorage.getItem("apps:token:impersonate");
 
   // new
   constructor(
@@ -20,22 +22,22 @@ export class AuthService {
   ) { }
 
   // return actual token
-  getActualToken() : string {
+  getActualToken(): string {
     return this.token();
   }
-  
+
   // verify token
-  verify() : Observable<any> {
+  verify(): Observable<any> {
 
     // convert the response
     return this.http.getAsActualUser("/auth/verify").pipe(map(x => {
-      
+
       // check error response
-      if(x instanceof HttpErrorResponse) {
+      if (x instanceof HttpErrorResponse) {
         return {
           success: false
         };
-      } 
+      }
 
       // else, ok
       else {
@@ -53,7 +55,7 @@ export class AuthService {
   }
 
   // impersonate
-  impersonate(userId: string) : Observable<any> {
+  impersonate(userId: string): Observable<any> {
     return this.http.postAsActualUser(`/auth/impersonate/${userId}`, null);
   }
 
@@ -63,45 +65,54 @@ export class AuthService {
   }
 
   // send password setup
-  sendPasswordSetup(request: { username: string }) : Observable<any> {
+  sendPasswordSetup(request: { username: string }): Observable<any> {
     return this.http.post(`/auth/sendPasswordSetup`, request);
   }
 
   // send password setup by id
-  sendPasswordSetupById(userId: string) : Observable<any> {
+  sendPasswordSetupById(userId: string): Observable<any> {
     return this.http.post(`/auth/sendPasswordSetupById/${userId}`, null);
   }
 
   // validate password setup
-  validatePasswordSetup(request: { userId: string, setupId: string }) : Observable<any> {
+  validatePasswordSetup(request: { userId: string, setupId: string }): Observable<any> {
     return this.http.post("/auth/validatePasswordSetup", request);
   }
 
   // update password from setup
-  updatePasswordFromSetup(request: { userId: string, setupId: string, password: string }) : Observable<any> {
+  updatePasswordFromSetup(request: { userId: string, setupId: string, password: string }): Observable<any> {
     return this.http.post("/auth/updatePasswordFromSetup", request);
   }
 
   // parse token
-  parseToken(token: string) : any {
-    let model = jwt_decode(token);
-    console.log(model);
-    return model;
+  parseToken(token: string): IUserProfile {
+
+    // model
+    var model = jwt_decode(token);
+
+    // convert to model
+    return {
+      instance: model.instance,
+      userId: model.userId,
+      fullName: model.fullName,
+      email: model.email,
+      roles: isArray(model.role) ? model.role : [model.role]
+    };
   }
 
   // get users
-  getUsers() : Observable<any> {
+  getUsers(): Observable<any> {
     return this.http.get("/auth/getUsers");
   }
 
   // get admin roles
-  getAdminRoles() : Observable<any> {
+  getAdminRoles(): Observable<any> {
     return this.http.get("/auth/getAdminRoles");
   }
 
   // get full name
-  getUserFullName(userId: string) : Observable<any> {
-    if(!userId) 
+  getUserFullName(userId: string): Observable<any> {
+    if (!userId)
       return of({ fullName: "" });
     return this.http.get(`/auth/getUserFullName/${userId}`);
   }
