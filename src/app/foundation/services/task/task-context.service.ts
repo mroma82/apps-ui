@@ -14,6 +14,7 @@ export class TaskContextService implements OnDestroy {
   // state
   list$ = new BehaviorSubject<ITaskItem[]>([]);
   listCount$: Observable<number> = this.list$.pipe(map(x => x.length));
+  listDialogOpenClose$ = new BehaviorSubject<boolean>(false);
 
   // subscriptions
   onRefresh$: Subscription;
@@ -68,6 +69,10 @@ export class TaskContextService implements OnDestroy {
       this.list$.next(newTasks);
     });
   }
+
+  // dialog
+  openListDialog = () => this.listDialogOpenClose$.next(true);
+  closeListDialog = () => this.listDialogOpenClose$.next(false);
 
   // cleanup
   ngOnDestroy(): void {

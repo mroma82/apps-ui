@@ -15,8 +15,8 @@ import { AppCommonModule } from '../common/app-common.module';
 import { RecordLockService } from './services/record-lock/record-lock.service';
 import { NotificationService } from './services/notification/notification.service';
 import { RouterModule } from '@angular/router';
-import { NotificationListDialogComponent } from './dialogs/notification-list-dialog/notification-list-dialog.component';
-import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { TaskListDialogComponent } from './dialogs/task-list-dialog/task-list-dialog.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 import { WorkflowBarComponent } from './components/workflow-bar/workflow-bar.component';
 import { WorkflowService } from './services/workflow/workflow.service';
 import { WorkflowAssignedListComponent } from './components/workflow-assigned-list/workflow-assigned-list.component';
@@ -40,8 +40,8 @@ import { TaskBarComponent } from './components/task-bar/task-bar.component';
     AttachmentAddComponent,
     AttachmentEditComponent,
     TaskBarComponent,
-    NotificationListDialogComponent,
-    NotificationListComponent,
+    TaskListDialogComponent,
+    TaskListComponent,
     WorkflowBarComponent,
     WorkflowAssignedListComponent,
     WorkflowAssignedListDialogComponent,

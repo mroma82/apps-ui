@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationContextService } from '../foundation/services/notification/notification-context.service';
+import { TaskContextService } from '../foundation/services/task/task-context.service';
 
 @Component({
   selector: 'app-app-container',
   templateUrl: './app-container.component.html',
   styleUrls: ['./app-container.component.scss'],
   providers: [
-    NotificationContextService
+    TaskContextService
   ]
 })
 export class AppContainerComponent implements OnInit {

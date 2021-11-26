@@ -35,7 +35,7 @@ export class TaskBarComponent implements OnInit {
 
   // show list dialog
   showListDialog() {
-    // todo: this.context.openListDialog();
+    this.context.openListDialog();
     this.model.showMenu = false;
   }
 }

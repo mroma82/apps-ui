@@ -1,0 +1,16 @@
+<div>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>Date/Time</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{ item.taskDateTime | utcDateTime:'medium' }}</td>
+        <td><a [routerLink]="item.url" (click)="closeDialog()">{{ item.description }}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -9,9 +9,9 @@
   </li>
 </ul>
 
-<app-notification-list-dialog></app-notification-list-dialog>
+<app-task-list-dialog></app-task-list-dialog>
 
-<div class="notification-menu bg-white" [class.active]="model.showMenu">
+<div class="task-menu bg-white" [class.active]="model.showMenu">
   <ul class="list-group" *ngIf="list$ | async as list">
     <li class="list-group-item">
       <h4 class="mb-0">My Tasks</h4>

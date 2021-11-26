@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationContextService } from '../../services/notification/notification-context.service';
+import { TaskContextService } from '../../services/task/task-context.service';
 
 @Component({
-  selector: 'app-notification-list-dialog',
-  templateUrl: './notification-list-dialog.component.html',
-  styleUrls: ['./notification-list-dialog.component.scss']
+  selector: 'app-task-list-dialog',
+  templateUrl: './task-list-dialog.component.html',
+  styleUrls: ['./task-list-dialog.component.scss']
 })
-export class NotificationListDialogComponent extends BaseDialog implements OnInit {
+export class TaskListDialogComponent extends BaseDialog implements OnInit {
 
   // new
   constructor(
     modalService: NgbModal,
-    private context: NotificationContextService
+    private context: TaskContextService
   ) {
     super(modalService);
 
@@ -22,7 +23,7 @@ export class NotificationListDialogComponent extends BaseDialog implements OnIni
   }
 
   ngOnInit() {
-    
+
   }
 
   // dismiss
