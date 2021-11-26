@@ -8,33 +8,37 @@ import { min } from 'rxjs/operators';
 export class UtcDateTimeSincePipe implements PipeTransform {
 
   // inject date pipe
-  constructor(private datePipe: DatePipe) {}
-  
+  constructor(private datePipe: DatePipe) { }
+
   // transform
-  transform(value: any): string {    
-    if(value) {
+  transform(value: any): string {
+    if (value) {
 
       // get the date as utc
       var utcDate = new Date(value + 'Z');
       var utcNow = new Date();
 
       // get the difference in minutes
-      var minutes = (utcNow.getTime() - utcDate.getTime())/1000/60;
+      var minutes = (utcNow.getTime() - utcDate.getTime()) / 1000 / 60;
+
+      // check if no
+      if (Math.round(minutes) == 0)
+        return "Just now";
 
       // check if minutes
-      if(minutes < 60) {
-      return this.getText(minutes, "minute");        
+      if (minutes < 60) {
+        return this.getText(minutes, "minute");
       }
 
       // check if hours
       var hours = minutes / 60;
-      if(hours < 24) {
-        return this.getText(hours, "hour");        
+      if (hours < 24) {
+        return this.getText(hours, "hour");
       }
 
       // else, days
       var days = hours / 24;
-      return this.getText(days, "day");      
+      return this.getText(days, "day");
     }
     return '';
   }

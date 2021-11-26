@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificationContextService } from 'src/app/foundation/services/notification/notification-context.service';
 import { EntityRouteResolverService } from '../../../../common/services/entity-route-resolver.service';
+import { EntityProviderService } from '../../../../core/services/entity/entity-provider.service';
+import { ITaskItem } from '../../../../foundation/models/task/task-item';
+import { TaskContextService } from '../../../../foundation/services/task/task-context.service';
 
 @Component({
   selector: 'app-home-my-tasks',
@@ -12,14 +15,15 @@ import { EntityRouteResolverService } from '../../../../common/services/entity-r
 export class HomeMyTasksComponent implements OnInit {
 
   // observables
-  list$ : Observable<any>;
+  list$: Observable<any>;
 
   // new
   constructor(
-    private notificationContext: NotificationContextService,
-    private routeResolver : EntityRouteResolverService
-  ) { 
-    this.list$ = notificationContext.list$.pipe(map(x => x.reverse().slice(0, 20)));
+    private taskContext: TaskContextService,
+    private routeResolver: EntityRouteResolverService,
+    private entityProvider: EntityProviderService
+  ) {
+    this.list$ = taskContext.list$.pipe(map(x => [...x].reverse().slice(0, 20)));
   }
 
   // init
@@ -28,11 +32,6 @@ export class HomeMyTasksComponent implements OnInit {
 
   // open dialog
   openListDialog() {
-    this.notificationContext.openListDialog();
-  }
-
-  // get route
-  getRoute(notification: any) {
-    return this.routeResolver.resolve(notification.entityTypeId, notification.entityId);
+    //todo: this.notificationContext.openListDialog();
   }
 }

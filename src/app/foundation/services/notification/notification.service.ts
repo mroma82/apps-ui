@@ -12,18 +12,18 @@ export class NotificationService {
   ) { }
 
   // get for user
-  getAllForCurrentUser() : Observable<any> {
+  getAllForCurrentUser(): Observable<any> {
     return this.apiClient.get("/foundation/notification/getAllForCurrentUser");
   }
 
   // delete
-  delete(id: string) : Observable<any> {
+  delete(id: string): Observable<any> {
     return this.apiClient.post(`/foundation/notification/delete/${id}`, {});
   }
 
-    // delete
-    markAsReadState(id: string, state: boolean) : Observable<any> {
-      return this.apiClient.post(`/foundation/notification/setReadState/${id}/${state}`, {});
-    }
-  
+  // delete
+  markAsReadState(id: string, state: boolean): Observable<any> {
+    return this.apiClient.post(`/foundation/notification/setReadState/${id}/${state}`, {});
+  }
+
 }

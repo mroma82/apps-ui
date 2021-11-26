@@ -11,7 +11,7 @@ import { EntityViewEditContextService } from 'src/app/core/services/entity/view-
   styleUrls: ['./admin-security-role-entity-edit.component.scss']
 })
 export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewEditComponent {
-  
+
   // new
   constructor(
     private viewEditContext: EntitySubGridViewEditContextService
@@ -20,7 +20,7 @@ export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewE
   }
 
   // define permission model
-  permissionModel = {    
+  permissionModel = {
   }
 
   // init
@@ -29,32 +29,32 @@ export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewE
     // list on model change
     this.subs.add(
       this.viewEditContext.model$.subscribe(x => {
-        
+
         // check the permissions
-        var permissionMask : number = x.permissionMask;
+        var permissionMask: number = x.permissionMask;
         var setMask = (mask: SecurityPermissionMask) => {
           this.permissionModel[mask] = (permissionMask & mask) === mask;
         }
-        
+
         // set all
         setMask(SecurityPermissionMask.View);
         setMask(SecurityPermissionMask.Edit);
         setMask(SecurityPermissionMask.Add);
         setMask(SecurityPermissionMask.Delete);
-        setMask(SecurityPermissionMask.WorkflowAdmin);        
+        setMask(SecurityPermissionMask.WorkflowAdmin);
       })
     )
   }
 
   // update the permissions mask
   updatePermissionMask(model: any) {
-    
+
     // init mask
     var permissionMask = 0;
 
     // helper
     var addMask = (mask: SecurityPermissionMask) => {
-      if(model[mask]) 
+      if (model[mask])
         permissionMask = permissionMask | mask;
     }
 
@@ -65,7 +65,7 @@ export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewE
     addMask(SecurityPermissionMask.Delete);
     addMask(SecurityPermissionMask.WorkflowAdmin);
 
-    console.log(permissionMask);
-    this.model.permissionmask = permissionMask;      
+    // set the permission mask
+    this.model.permissionmask = permissionMask;
   }
 }

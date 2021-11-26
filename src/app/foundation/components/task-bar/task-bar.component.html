@@ -1,11 +1,10 @@
-
 <ul class="nav navbar-nav navbar-dark navbar-right">
 
   <li class="nav-item">
     <a class="nav-link active" href="javascript:;;" (click)="model.showMenu = !model.showMenu;">
       <i class="fas fa-tasks">
         <span class="badge-tasks" *ngIf="(count$ | async) as notifCount">{{ notifCount }}</span>
-      </i>      
+      </i>
     </a>
   </li>
 </ul>
@@ -13,25 +12,25 @@
 <app-notification-list-dialog></app-notification-list-dialog>
 
 <div class="notification-menu bg-white" [class.active]="model.showMenu">
-  <ul class="list-group" *ngIf="list$ | async as list"> 
+  <ul class="list-group" *ngIf="list$ | async as list">
     <li class="list-group-item">
       <h4 class="mb-0">My Tasks</h4>
-    </li>       
+    </li>
 
     <li *ngFor="let item of list" class="list-group-item d-flex flex-row">
-      <a [routerLink]="getRoute(item)" (click)="model.showMenu=false;">
-        <i [class]="'fas fa-shapes mr-2'"></i>
+      <a [routerLink]="item.url" (click)="model.showMenu=false;">
+        <i [class]="item.icon + ' mr-2'"></i>
       </a>
       <div>
-        <a [routerLink]="getRoute(item)" (click)="model.showMenu=false;">        
-          {{ item.subject }}
+        <a [routerLink]="item.url" (click)="model.showMenu=false;">
+          {{ item.description }}
         </a>
         <div>
-          <small [title]="item.createDateTime | utcDateTime">
-            {{ item.createDateTime | utcDateTimeSince}}
+          <small [title]="item.taskDateTime | utcDateTime">
+            {{ item.taskDateTime | utcDateTimeSince}}
           </small>
         </div>
-      </div>          
+      </div>
     </li>
 
     <li *ngIf="list.length == 0" class="list-group-item d-flex flex-row">
@@ -42,10 +41,9 @@
     <li class="list-group-item border-top view-all-row bg-white" *ngIf="(count$ | async)">
       <small>
         <a href="javascript:;;" (click)="showListDialog()">View All Tasks</a>
-      </small>          
+      </small>
     </li>
   </ul>
 
-  <a class="btn-dismiss p-2" href="javascript:;;" (click)="model.showMenu = false;"><i class="fas fa-times"></i></a>  
+  <a class="btn-dismiss p-2" href="javascript:;;" (click)="model.showMenu = false;"><i class="fas fa-times"></i></a>
 </div>
-

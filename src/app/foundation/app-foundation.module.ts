@@ -14,7 +14,6 @@ import { AttachmentService } from './services/attachment/attachment.service';
 import { AppCommonModule } from '../common/app-common.module';
 import { RecordLockService } from './services/record-lock/record-lock.service';
 import { NotificationService } from './services/notification/notification.service';
-import { NotificationBarComponent } from './components/notification-bar/notification-bar.component';
 import { RouterModule } from '@angular/router';
 import { NotificationListDialogComponent } from './dialogs/notification-list-dialog/notification-list-dialog.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
@@ -28,26 +27,28 @@ import { WorkflowHistoryListComponent } from './components/workflow-history-list
 import { WorkflowHistoryListDialogComponent } from './dialogs/workflow-history-list-dialog/workflow-history-list-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecordAuditInfoComponent } from './components/record-audit-info/record-audit-info.component';
+import { TaskService } from './services/task/task.service';
+import { TaskBarComponent } from './components/task-bar/task-bar.component';
 
 @NgModule({
   declarations: [
-    FoundationViewEditButtonBarComponent, 
-    NoteListDialogComponent, 
-    AuditTrailListDialogComponent, 
-    AttachmentListDialogComponent, 
-    AttachmentListComponent, 
-    AttachmentAddComponent, 
-    AttachmentEditComponent, 
-    NotificationBarComponent, 
-    NotificationListDialogComponent, 
-    NotificationListComponent, 
-    WorkflowBarComponent, 
-    WorkflowAssignedListComponent, 
-    WorkflowAssignedListDialogComponent, 
-    WorkflowRejectComponent, 
-    WorkflowRejectDialogComponent, 
-    WorkflowHistoryListComponent, 
-    WorkflowHistoryListDialogComponent, 
+    FoundationViewEditButtonBarComponent,
+    NoteListDialogComponent,
+    AuditTrailListDialogComponent,
+    AttachmentListDialogComponent,
+    AttachmentListComponent,
+    AttachmentAddComponent,
+    AttachmentEditComponent,
+    TaskBarComponent,
+    NotificationListDialogComponent,
+    NotificationListComponent,
+    WorkflowBarComponent,
+    WorkflowAssignedListComponent,
+    WorkflowAssignedListDialogComponent,
+    WorkflowRejectComponent,
+    WorkflowRejectDialogComponent,
+    WorkflowHistoryListComponent,
+    WorkflowHistoryListDialogComponent,
     RecordAuditInfoComponent
   ],
   imports: [
@@ -59,7 +60,7 @@ import { RecordAuditInfoComponent } from './components/record-audit-info/record-
   ],
   exports: [
     FoundationViewEditButtonBarComponent,
-    NotificationBarComponent,
+    TaskBarComponent,
     WorkflowBarComponent,
     RecordAuditInfoComponent
   ],
@@ -69,7 +70,8 @@ import { RecordAuditInfoComponent } from './components/record-audit-info/record-
     AttachmentService,
     RecordLockService,
     NotificationService,
-    WorkflowService
+    WorkflowService,
+    TaskService
   ]
 })
 export class AppFoundationModule { }

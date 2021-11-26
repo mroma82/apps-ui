@@ -79,8 +79,7 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit {
 
 
   // save
-  add(x) {
-    console.log(x);
+  add() {
     this.model.addPending = true;
     this.model.addModel = {
       contentText: ""

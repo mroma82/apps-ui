@@ -1,12 +1,15 @@
-
 <hr>
-<div *ngIf="!isEmpty(model.createUserId)">
-  <small>
-    Created on <strong>{{ model.createDateTime | utcDateTime:'medium' }} by {{ model.createUserId | userFullname | async }}</strong> 
-  </small>
-</div>
-<div *ngIf="!isEmpty(model.modifyUserId)">
-  <small>
-    Modified on <strong>{{ model.modifyDateTime | utcDateTime:'medium' }} by {{ model.modifyUserId | userFullname | async }}</strong>
-  </small>
+<div *ngIf="model">
+  <div *ngIf="!isEmpty(model.createUserId)">
+    <small>
+      Created on <strong>{{ model.createDateTime | utcDateTime:'medium' }} by {{ model.createUserId | userFullname |
+        async }}</strong>
+    </small>
+  </div>
+  <div *ngIf="!isEmpty(model.modifyUserId)">
+    <small>
+      Modified on <strong>{{ model.modifyDateTime | utcDateTime:'medium' }} by {{ model.modifyUserId | userFullname |
+        async }}</strong>
+    </small>
+  </div>
 </div>

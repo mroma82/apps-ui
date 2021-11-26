@@ -7,28 +7,27 @@ import { UserContextService } from './common/services/user-context.service';
   providedIn: 'root'
 })
 export class AppAuthGuard implements CanActivate {
-  
+
   // new
   constructor(
     private router: Router,
     private userContext: UserContextService
-  ) {}
-  
+  ) { }
+
   // can activate
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean>{
-    
-      // subcribe to auth changes
-      this.userContext.isAuthenticated$.subscribe(isAuthenticated => {
-        console.log(`isauthed: ${isAuthenticated}`);
-        if(!isAuthenticated) {
-          localStorage.setItem("apps:requestedUrl", window.location.pathname);        
-          this.router.navigate(["/login"]);
-        }
-      });
-      
-      return this.userContext.isAuthenticated$;
+    state: RouterStateSnapshot): Observable<boolean> {
+
+    // subcribe to auth changes
+    this.userContext.isAuthenticated$.subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+        localStorage.setItem("apps:requestedUrl", window.location.pathname);
+        this.router.navigate(["/login"]);
+      }
+    });
+
+    return this.userContext.isAuthenticated$;
   }
-  
+
 }

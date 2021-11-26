@@ -33,29 +33,27 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
   @Output() onDelete = new EventEmitter<void>();
 
   // options
-  hasAuditTrail$ : Observable<boolean> = of(false);
+  hasAuditTrail$: Observable<boolean> = of(false);
 
   // counts
   noteCount$ = this.notesDialogContext.count$;
   attachmentCount$ = this.attachmentsDialogContext.count$;
 
   // permissions
-  canEdit$ : Observable<boolean> = of(false);
-  canDelete$ : Observable<boolean> = of(false);
+  canEdit$: Observable<boolean> = of(false);
+  canDelete$: Observable<boolean> = of(false);
 
   // new
   constructor(
     private notesDialogContext: NotesListDialogContextService,
     private auditTrailContext: AuditTrailDialogContextService,
-    private attachmentsDialogContext : AttachmentDialogContextService,    
-    private dialogService : DialogService,
+    private attachmentsDialogContext: AttachmentDialogContextService,
+    private dialogService: DialogService,
     private entityProvider: EntityProviderService,
     private entityApi: EntityApiService
-  )
-  {    
-    console.log(this.entityTypeId);
+  ) {
   }
-  
+
   // init
   ngOnInit() {
 
@@ -63,8 +61,8 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
     this.hasAuditTrail$ = this.entityProvider.hasAuditTrail(this.entityTypeId);
 
     // permissions
-    this.canEdit$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Edit).pipe(tap(x => console.log(["A", x])), shareReplay(1));
-    this.canDelete$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Delete).pipe(tap(x => console.log(["A", x])), shareReplay(1));
+    this.canEdit$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Edit).pipe(shareReplay(1));
+    this.canDelete$ = this.entityApi.hasAccess(this.entityTypeId, SecurityPermissionMask.Delete).pipe(shareReplay(1));
 
     // refresh lists
     this.notesDialogContext.refreshList();
@@ -91,10 +89,10 @@ export class FoundationViewEditButtonBarComponent implements OnInit {
 
     // ask
     this.dialogService.yesNo("Delete", "Are you sure you want to delete?").subscribe(x => {
-      if(x == DialogResultEnum.Yes) {
+      if (x == DialogResultEnum.Yes) {
         this.onDelete.emit();
       }
-    });          
+    });
   }
 
   // print
