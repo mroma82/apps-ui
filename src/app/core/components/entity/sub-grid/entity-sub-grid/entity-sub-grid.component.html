@@ -6,24 +6,35 @@
           {{ getTitle(col) | async }}
         </th>
         <th>
-          
+
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of items$ | async">
         <td *ngFor="let col of columns">
-          <a href="javascript:;;" *ngIf="col.isLink" (click)="view(item, col)">
-            {{ getColumnText(item, col) | async }}
-          </a>
-          <ng-container *ngIf="!col.isLink">
-            {{ getColumnText(item, col) | async }}          
+
+          <ng-container *ngIf="getColumnType(col) as columnType">
+
+            <a href="javascript:;;" *ngIf="columnType == ColumnTypeEnum.Link" (click)="view(item, col)">
+              {{ getColumnText(item, col) | async }}
+            </a>
+
+            <ng-container *ngIf="columnType == ColumnTypeEnum.Regular">
+              {{ getColumnText(item, col) | async }}
+            </ng-container>
+
+            <div *ngIf="columnType == ColumnTypeEnum.Html" [innerHtml]="getColumnText(item, col) | async">
+            </div>
+
           </ng-container>
         </td>
         <td>
           <div *ngIf="mode == 'edit'" class="text-right">
-            <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)"><i class="fas fa-pencil-alt mr-1"></i> Edit</button>
-            <button type="button" class="btn btn-primary btn-sm" (click)="delete(item.id)"><i class="far fa-trash-alt mr-1"></i> Delete</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)"><i
+                class="fas fa-pencil-alt mr-1"></i> Edit</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="delete(item.id)"><i
+                class="far fa-trash-alt mr-1"></i> Delete</button>
           </div>
         </td>
       </tr>

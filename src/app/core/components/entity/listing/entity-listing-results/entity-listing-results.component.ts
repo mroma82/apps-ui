@@ -6,6 +6,7 @@ import { ENTITY_LISTING_CONFIG, IEntityListingConfigurationService } from 'src/a
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../services/entity/entity-configuration.service';
 import { EntityProviderService } from '../../../../services/entity/entity-provider.service';
+import { EntityColumnType } from '../../../../types/entity-column-type.enum';
 
 @Component({
   selector: 'app-entity-listing-results',
@@ -13,21 +14,22 @@ import { EntityProviderService } from '../../../../services/entity/entity-provid
   styleUrls: ['./entity-listing-results.component.scss']
 })
 export class EntityListingResultsComponent implements OnInit {
+  ColumnTypeEnum = EntityColumnType;
 
   // observables
-  listItems$ : Observable<any[]> = this.context.listItems$;
-  columns$ : Observable<IEntityListingColumn[]> = this.config.getColumns();
-  pageSize$ : Observable<number> = this.context.pageSize$;
-  
+  listItems$: Observable<any[]> = this.context.listItems$;
+  columns$: Observable<IEntityListingColumn[]> = this.config.getColumns();
+  pageSize$: Observable<number> = this.context.pageSize$;
+
   // permissions
   canEdit$ = this.context.canEdit$;
 
   // new
   constructor(
-    private context : EntityListingContextService,    
-    @Inject(ENTITY_LISTING_CONFIG) private config : IEntityListingConfigurationService,
-    private entityProvider : EntityProviderService,
-    @Inject(ENTITY_CONFIG) private entityConfig : IEntityConfigurationService
+    private context: EntityListingContextService,
+    @Inject(ENTITY_LISTING_CONFIG) private config: IEntityListingConfigurationService,
+    private entityProvider: EntityProviderService,
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService
   ) { }
 
   ngOnInit() {
@@ -35,11 +37,11 @@ export class EntityListingResultsComponent implements OnInit {
 
   // on page
   onPage(e) {
-    this.context.setPage(e.offset + 1);    
+    this.context.setPage(e.offset + 1);
   }
 
-  onSort(e) {      
-    if(e.sorts.length) {
+  onSort(e) {
+    if (e.sorts.length) {
       this.context.setSort({
         field: e.sorts[0].prop,
         isDescending: e.sorts[0].dir === "desc"
@@ -48,10 +50,10 @@ export class EntityListingResultsComponent implements OnInit {
   }
 
   // title
-  getTitle(col: IEntityListingColumn) : Observable<string> {
+  getTitle(col: IEntityListingColumn): Observable<string> {
 
     // check if a title
-    if(col.title)
+    if (col.title)
       return of(col.title);
 
     // parse out the name because we want to find from the entity provider
@@ -66,7 +68,7 @@ export class EntityListingResultsComponent implements OnInit {
   getViewLink(item: any, col: IEntityListingColumn) {
 
     // check if no func
-    if(col.viewLinkFunc) {
+    if (col.viewLinkFunc) {
       return col.viewLinkFunc(item);
     }
 
@@ -78,11 +80,26 @@ export class EntityListingResultsComponent implements OnInit {
   getEditLink(item: any, col: IEntityListingColumn) {
 
     // check if no func
-    if(col.editLinkFunc) {
+    if (col.editLinkFunc) {
       return col.editLinkFunc(item);
     }
 
     // else, the normal url
     return `../edit/${item.id}`;
+  }
+
+  // get column type
+  getColumnType(col: IEntityListingColumn): EntityColumnType {
+
+    // check if a link
+    if (col.isLink)
+      return EntityColumnType.Link;
+
+    // check if html
+    if (col.isHtml)
+      return EntityColumnType.Html;
+
+    // default
+    return EntityColumnType.Regular;
   }
 }

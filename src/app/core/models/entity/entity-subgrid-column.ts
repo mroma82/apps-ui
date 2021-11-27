@@ -12,5 +12,7 @@ export interface IEntitySubGridColumn {
     displayFunc?: any;
     displayFunc$?: any;
 
+    isHtml?: boolean;
+
     formatter?: 'd';
 }

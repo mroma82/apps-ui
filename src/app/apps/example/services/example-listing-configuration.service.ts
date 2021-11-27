@@ -15,19 +15,19 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
   constructor() { }
 
   // views
-  getViews() : Observable<IEntityListingView[]> {
+  getViews(): Observable<IEntityListingView[]> {
     return of([
-      { id: "all", title: "All Examples", filter: { }},
-      { id: "open", title: "Open Examples", filter: { status: 0 }},
-      { id: "in-progress", title: "In Process Examples", filter: { status: 1 }},
-      { id: "completed", title: "Completed Examples", filter: { status: 2 }},
-      { id: "finance", title: "Finance Only", filter: { departmentName: "Finance" }}    
+      { id: "all", title: "All Examples", filter: {} },
+      { id: "open", title: "Open Examples", filter: { status: 0 } },
+      { id: "in-progress", title: "In Process Examples", filter: { status: 1 } },
+      { id: "completed", title: "Completed Examples", filter: { status: 2 } },
+      { id: "finance", title: "Finance Only", filter: { departmentName: "Finance" } }
     ]);
   }
 
   // columns
-  getColumns() : Observable<IEntityListingColumn[]> {
-    var cols : IEntityListingColumn[] = [
+  getColumns(): Observable<IEntityListingColumn[]> {
+    var cols: IEntityListingColumn[] = [
       {
         model: "exampleId",
         isLink: true,
@@ -36,10 +36,10 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "title"
       },
-      {        
+      {
         model: "status",
         displayFunc: x => {
-          switch(x.status) {
+          switch (x.status) {
             case 0: return "Open";
             case 1: return "In Progress";
             case 2: return "Completed";
@@ -58,7 +58,7 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       },
       {
         model: "requestUser.instance.name",
-        title: "Requested By Instance"        
+        title: "Requested By Instance"
       },
       {
         model: "department.text",
@@ -74,6 +74,12 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "extras.extendField",
         title: "Extend Field"
+      },
+      {
+        model: "workflowStateText",
+        title: "HTML Field",
+        displayFunc: x => `<span class="badge badge-warning">${x.workflowStateText}</span>`,
+        isHtml: true
       }
     ];
 

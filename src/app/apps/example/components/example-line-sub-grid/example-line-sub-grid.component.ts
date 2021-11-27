@@ -24,23 +24,29 @@ export class ExampleLineSubGridComponent implements OnInit {
   // columns
   cols = [
     { model: 'title', isLink: true },
-    { model: 'createDateTime', formatter: 'd' }, 
-    { title: 'Example #', model: 'example.exampleId', isLink: true, viewLinkFunc: x => '/app/example/view/' + x.exampleId }, 
-    { model: 'name' }
+    { model: 'createDateTime', formatter: 'd' },
+    { title: 'Example #', model: 'example.exampleId', isLink: true, viewLinkFunc: x => '/app/example/view/' + x.exampleId },
+    { model: 'name' },
+    {
+      model: 'title',
+      title: 'Status',
+      displayFunc: x => `<span class="badge badge-warning">${x.title}</span>`,
+      isHtml: true
+    }
   ];
 
   // options
-  entityTypeId : string = EntityTypes.ExampleLine;
+  entityTypeId: string = EntityTypes.ExampleLine;
 
   // state
-  viewMode$ : Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
+  viewMode$: Observable<boolean> = this.context.mode$.pipe(map(x => x == 'view'));
 
   // model
-  model$ : Observable<any> = this.context.entityRecord$;
-  mode$ : Observable<'view' | 'edit'> = this.context.mode$;
-  
+  model$: Observable<any> = this.context.entityRecord$;
+  mode$: Observable<'view' | 'edit'> = this.context.mode$;
+
   // sub grid config
-  lineSubGridConfig : IEntitySubGridConfigurationService = {
+  lineSubGridConfig: IEntitySubGridConfigurationService = {
     createFormComponent: ExampleLineCreateComponent,
     editFormComponent: ExampleLineViewEditComponent
   };
@@ -51,5 +57,5 @@ export class ExampleLineSubGridComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  }  
+  }
 }
