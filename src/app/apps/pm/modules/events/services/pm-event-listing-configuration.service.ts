@@ -12,38 +12,38 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
   // views
   getViews(): Observable<IEntityListingView[]> {
     return of([
-      { 
-        id: "all",
-        title: "All Events",
-        filter: { },
-        sort: {
-          field: "eventDateTime"
-        }
-      },
-      { 
+      {
         id: "open",
         title: "Open Events",
-        filter: { 
+        filter: {
           isCompleted: false
         },
         sort: {
           field: "eventDateTime"
         }
       },
-      { 
+      {
+        id: "all",
+        title: "All Events",
+        filter: {},
+        sort: {
+          field: "eventDateTime"
+        }
+      },
+      {
         id: "overdue",
         title: "Overdue Events",
-        filter: { 
+        filter: {
           isOverdue: true
         },
         sort: {
           field: "eventDateTime"
         }
       },
-      { 
+      {
         id: "completed",
         title: "Completed Events",
-        filter: { 
+        filter: {
           isCompleted: true
         },
         sort: {
@@ -63,6 +63,19 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
       { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
       { model: "completedUser.fullName", title: "Completed by" },
       { model: "completedDateTime", title: "Completed on", pipe: new UtcDateTimePipe(new DatePipe("en-us")) },
+      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x) }
     ]);
+  }
+
+  // get status badge
+  getStatusBadge(eventItem: any): string {
+
+    // check if overdue
+    if (eventItem.extras.isOverdue) {
+      return `<span class="badge badge-warning">Overdue</span>`;
+    }
+
+    // all else, nothing
+    return "";
   }
 }
