@@ -9,55 +9,56 @@ import { EntityViewEditPageGenericComponent } from '../../components/entity/view
 export class EntityRouteModule extends RouterModule {
 
     // route for options
-    static forOptions(options: any) : ModuleWithProviders<RouterModule> {
+    static forOptions(options: any): ModuleWithProviders<RouterModule> {
 
         // define container
         var containerComponent = EntityContainerComponent;
 
         // additional routes
-        var extraRoutes : Routes;        
+        var extraRoutes: Routes;
         var parametersRoute: Routes;
 
         // check if any options
-        if(options != null) {
+        if (options != null) {
 
             // check if extra routes
             extraRoutes = options.extraRoutes;
 
             // check if parameters
-            if(options.parametersEntityTypeId) {
+            if (options.parametersEntityTypeId) {
                 parametersRoute = [
                     //{ path: 'edit/:id', component: EntitySin, data: { mode: "edit" }, canActivate: [RecordLockGuard] },
                 ]
             }
 
             // container
-            if(options.containerComponent)
-            containerComponent = options.containerComponent;
+            if (options.containerComponent)
+                containerComponent = options.containerComponent;
         }
 
         // check nulls
-        if(!extraRoutes) extraRoutes = [];
-        if(!parametersRoute) parametersRoute = [];
-         
+        if (!extraRoutes) extraRoutes = [];
+        if (!parametersRoute) parametersRoute = [];
+
         // return the template
         const routes = [
             {
                 path: '',
                 component: containerComponent,
                 children: [
-                    { path: '', component: EntityListingPageGenericComponent },
+                    { path: 'list', component: EntityListingPageGenericComponent },
                     { path: 'view/:id', component: EntityViewEditPageGenericComponent, data: { mode: "view" } },
                     { path: 'edit/:id', component: EntityViewEditPageGenericComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] },
+                    { path: '', redirectTo: "list" },
                     ...parametersRoute,
                     ...extraRoutes
                 ]
             }
-        ]; 
+        ];
 
         // return
         return {
-            ngModule: RouterModule, 
+            ngModule: RouterModule,
             providers: [provideRoutes(routes)]
         };
     }
