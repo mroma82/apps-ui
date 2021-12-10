@@ -1,8 +1,16 @@
 <div>
 
-  <div class="form-group" [hidden]="!showInstance">
-    <label>Instance #</label>
-    <input type="text" class="form-control" [(ngModel)]="model.instanceNumber" name="instance" #instanceField />
+  <div class="form-group">
+    <div *ngIf="needsInstanceInput">
+      <label>Instance #</label>
+      <input type="text" class="form-control" [(ngModel)]="model.instanceNumber" name="instance" #instanceField />
+    </div>
+    <div *ngIf="!needsInstanceInput">
+      <label>Instance</label>
+      <div *ngIf="instance$ | async as instance">
+        <input type="text" class="form-control" disabled [value]="instance.number + ' - ' + instance.name" />
+      </div>
+    </div>
   </div>
 
   <div class="form-group">

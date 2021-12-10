@@ -10,13 +10,16 @@ import { InstanceContextService } from 'src/app/common/services/instance-context
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("instanceField", { static: true }) instanceField : ElementRef;
-  @ViewChild("usernameField", { static: true }) usernameField : ElementRef;
+  @ViewChild("instanceField") instanceField: ElementRef;
+  @ViewChild("usernameField") usernameField: ElementRef;
 
   // state
   showForgotPassword$ = of(true);
-  showInstance : boolean = this.instanceContext.instanceId === undefined;
-  instanceId : string = this.instanceContext.instanceId;
+  needsInstanceInput: boolean = this.instanceContext.instanceId === undefined;
+  instanceId: string = this.instanceContext.instanceId;
+
+  // defaulted instance
+  instance$ = this.instanceContext.instance$;
 
   // model
   model = {
@@ -38,8 +41,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   // init
-  ngOnInit() {    
-    if(this.showInstance) 
+  ngOnInit() {
+  }
+
+  // view init
+  ngAfterViewInit() {
+    if (this.needsInstanceInput)
       this.instanceField.nativeElement.focus();
     else
       this.usernameField.nativeElement.focus();
@@ -47,22 +54,26 @@ export class LoginComponent implements OnInit {
 
   // login
   login() {
-    
+
     // clear error
-    this.state = {...this.state, ...{
-      hasError: false,
-      errorText:  ""
-    }};
-    
+    this.state = {
+      ...this.state, ...{
+        hasError: false,
+        errorText: ""
+      }
+    };
+
     // login
     this.userContext.login(this.model).subscribe(x => {
-      if(x.success) {
+      if (x.success) {
         this.router.navigateByUrl(x.nextUrl);
       } else {
-        this.state = {...this.state, ...{
-          hasError: true,
-          errorText:  x.text
-        }}
+        this.state = {
+          ...this.state, ...{
+            hasError: true,
+            errorText: x.text
+          }
+        }
       }
     });
   }
