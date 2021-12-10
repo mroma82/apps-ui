@@ -7,8 +7,7 @@
         <span class="prefix" *ngIf="prefixText">{{ prefixText }}</span>
         <span *ngIf="instance.canAct">{{ instance.instruction }}</span>
         <span *ngIf="!instance.canAct">{{ instance.currentStateText }}</span>
-        <span class="badge badge-primary ml-2 clickable d-print-none" *ngIf="instance.isActive"
-          (click)="showAssigned()">
+        <span class="badge badge-primary ml-2 clickable d-print-none" *ngIf="instance.isActive" (click)="showAssigned()">
           {{ getAssignedTo(instance) }}
         </span>
 
@@ -29,22 +28,25 @@
           <div ngbDropdownMenu aria-labelledby="workflowMenu">
             <button ngbDropdownItem *ngIf="instance.isActive" (click)="showAssigned()">Show who is assigned</button>
             <button ngbDropdownItem (click)="showHistory()">History</button>
-            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate"
-              (click)="regenerate()">Rebuild</button>
-            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()">Reset</button>
-            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()">Cancel</button>
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canRegenerate" (click)="regenerate()" [disabled]="busy$ | async">Rebuild</button>
+            <button ngbDropdownItem *ngIf="instance.canReset" (click)="reset()" [disabled]="busy$ | async">Reset</button>
+            <button ngbDropdownItem *ngIf="instance.isActive && instance.canCancel" (click)="cancel()" [disabled]="busy$ | async">Cancel</button>
           </div>
         </div>
 
         <ul class="nav nav-pills float-right" *ngIf="instance.canAct">
           <li class="nav-item mr-2" *ngFor="let action of (actions$ | async)">
-            <a class="nav-link active" href="javascript:;;" (click)="advance(instance, action)">
+            <a class="nav-link" href="javascript:;;" (click)="advance(instance, action)" *ngIf="!(busy$ | async)">
+              <i class="{{ getActionIcon(action) }} mr-1"></i> {{ action.actionDescription }}
+            </a>
+            <a class="nav-link disabled" href="javascript:;;" *ngIf="busy$ | async">
               <i class="{{ getActionIcon(action) }} mr-1"></i> {{ action.actionDescription }}
             </a>
           </li>
-          <li class="nav-item"
-            *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
-            <a class="nav-link active" href="javascript:;;" (click)="reject(instance)"><i class="fas fa-reply mr-1"></i>
+          <li class="nav-item" *ngIf="instance.isActive && instance.rejectTo !== '00000000-0000-0000-0000-000000000000'">
+            <a class="nav-link" href="javascript:;;" (click)="reject(instance)" *ngIf="!(busy$ | async)"><i class="fas fa-reply mr-1"></i>
+              Reject</a>
+            <a class="nav-link disabled" href="javascript:;;" *ngIf="busy$ | async"><i class="fas fa-reply mr-1"></i>
               Reject</a>
           </li>
         </ul>

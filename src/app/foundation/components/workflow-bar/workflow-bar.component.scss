@@ -21,3 +21,15 @@
     margin-top: 10px;
     border-radius: 0.25rem;
 }
+
+// workflow buttons
+.nav-pills {
+    .nav-link {
+        background-color: #000080;
+        color: #fff;
+        
+        &.disabled {
+            color: #6c757d;
+        }
+    }
+}

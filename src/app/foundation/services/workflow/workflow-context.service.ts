@@ -70,9 +70,11 @@ export class WorkflowContextService implements OnDestroy {
 
   // refresh instance
   refreshInstance() {
+    this.busy$.next(true);
     let context = this.entity$.value;
     if (context !== null) {
       this.service.getInstanceByEntity(this.options.url, context).subscribe(i => this.instance$.next(i));
+      this.busy$.next(false);
     }
   }
 
@@ -107,7 +109,6 @@ export class WorkflowContextService implements OnDestroy {
     this.service.advance(this.options.url, instanceId, pushModel).subscribe(x => {
       this.refreshInstance();
       this.notificationContext.refreshList();
-      this.busy$.next(false);
     })
   }
 
@@ -124,7 +125,6 @@ export class WorkflowContextService implements OnDestroy {
     this.service.reject(this.options.url, instanceId, model).subscribe(x => {
       this.refreshInstance();
       this.notificationContext.refreshList();
-      this.busy$.next(false);
     })
   }
 
