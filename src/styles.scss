@@ -1,132 +1,20 @@
-/*! `Custom` Bootstrap 4 theme */
-/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,700);
-$headings-font-family:Open Sans;*/
-
-/*$primary:#2A89CA;
-$secondary:#d6d6d6;
-$success:#37bd74;
-$danger:#F65151;
-$info:#7ebcfa;
-$warning:#ff9b37;
-$light:#eef0f2;
-$dark:#3c4055;
-$enable-gradients:false;
-$spacer:0.7rem;
-$border-width:1px;
-$enable-rounded:true;
-//$btn-border-radius:0.25rem;
-*/
-//@import "~bootswatch/dist/default/variables";
-@import 'assets/theme/_variables1';
+// bootstrap
+@import 'assets/theme/_variables';
 @import "~bootstrap/scss/bootstrap";
-//@import "~bootswatch/dist/default/bootswatch";
 
-//@import '~bootstrap/dist';
-
-
+// vendor
 @import '~@swimlane/ngx-datatable/index.css';
 @import '~@swimlane/ngx-datatable/themes/bootstrap.css';
 @import '~@swimlane/ngx-datatable/assets/icons.css';
-
 @import '~ngx-bootstrap/datepicker/bs-datepicker.css';
-
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 
-
-// adjacent buttons
-.btn + .btn {
-    margin-left: 5px;
-}
-
-.btn {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.btn-group, .input-group {
-    .btn {
-        box-shadow: none;
-    }
-}
-
-html,body {
-    height: 100%;
-    /*font-family: $headings-font-family;*/
-}
-
-.error-text {
-    font-weight: bold;
-    color: #f00;
-}
-
-.ws-pl {
-    white-space: pre-line
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-/* drop down toggle */
-.dropdown-toggle {
-
-    /* icon */
-    &.dropdown-toggle-icon {
-        &::after {
-            display: none;
-        }
-    }
-}
-
-/* modal size */
-.modal-size {
-    &-xl {
-        .modal-dialog {
-            max-width: 95%;
-        }
-    }
-
-    &-full {
-        .modal-dialog {
-            max-width: 100%;
-        }
-    }
-}
-
-
-label {
-    font-weight: 500;
-}
-
-.datatable-header-cell-label {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.btn-link {
-    box-shadow: none;
-}
-
-// date picker
-.bs-date-picker--default {
-    
-    // header
-    .bs-datepicker-head {
-        background-color: #000080;
-    }
-
-    // selected
-    .bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span {
-        background-color: #000080;
-    }
-}
-
-@media print {
-
-    .container-fluid {
-        padding-left: 0;
-        padding-right: 0;        
-    }
-
-    .mylivechat_inline  {
-        display: none !important;
-    }
-}
+// app
+@import 'assets/theme/layout';
+@import 'assets/theme/content';
+@import 'assets/theme/buttons';
+@import 'assets/theme/forms';
+@import 'assets/theme/components';
+@import 'assets/theme/modals';
+@import 'assets/theme/listing';
+@import 'assets/theme/print';

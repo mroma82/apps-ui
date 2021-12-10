@@ -1,0 +1,24 @@
+// label weight
+label {
+    font-weight: 500;
+}
+
+// error text
+.error-text {
+    font-weight: bold;
+    color: $danger;
+}
+
+// date picker
+.bs-date-picker--default {
+    
+    // header
+    .bs-datepicker-head {
+        background-color: $primary;
+    }
+
+    // selected
+    .bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span {
+        background-color: $primary;
+    }
+}

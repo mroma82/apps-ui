@@ -1,0 +1,13 @@
+@media print {
+
+    // adjust container
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;                
+    }
+
+    // hide live chat
+    .mylivechat_inline  {
+        display: none !important;
+    }
+}

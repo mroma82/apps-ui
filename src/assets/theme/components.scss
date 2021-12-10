@@ -1,0 +1,11 @@
+
+// drop down toggle
+.dropdown-toggle {
+
+    // icon
+    &.dropdown-toggle-icon {
+        &::after {
+            display: none;
+        }
+    }
+}

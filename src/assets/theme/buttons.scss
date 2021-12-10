@@ -1,0 +1,27 @@
+
+// adjacent buttons
+.btn + .btn {
+    margin-left: 5px;
+}
+
+// shadow
+.btn {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+    // link button
+    &.btn-link {
+        box-shadow: none;
+    }
+}
+
+// remove shadow on groups
+.btn-group, .input-group {
+    .btn {
+        box-shadow: none;
+    }
+}
+
+// clickable area
+.clickable {
+    cursor: pointer;
+}

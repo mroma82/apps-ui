@@ -1,0 +1,17 @@
+// modal sizes
+.modal-size {
+
+    // xl
+    &-xl {
+        .modal-dialog {
+            max-width: 95%;
+        }
+    }
+
+    // full
+    &-full {
+        .modal-dialog {
+            max-width: 100%;
+        }
+    }
+}
