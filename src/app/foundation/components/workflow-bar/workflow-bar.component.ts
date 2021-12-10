@@ -16,14 +16,14 @@ export class WorkflowBarComponent implements OnInit {
 
   // observables
   busy$: Observable<boolean>;
-  instance$ : Observable<any>;
+  instance$: Observable<any>;
   actions$: Observable<any>;
   assigned$: Observable<any>;
 
 
-  constructor(    
+  constructor(
     private context: WorkflowContextService
-  ) { 
+  ) {
     this.instance$ = context.instance$;
     this.actions$ = context.actions$;
     this.assigned$ = context.assigned$;
@@ -47,7 +47,7 @@ export class WorkflowBarComponent implements OnInit {
 
   getAssignedTo(instance: any) {
     let assignedTo = instance.currentAssigned;
-    if(assignedTo.indexOf("_") > -1) {
+    if (assignedTo.indexOf("_") > -1) {
       return assignedTo.substring(assignedTo.indexOf("_") + 1)
     } else {
       return assignedTo;
@@ -66,14 +66,14 @@ export class WorkflowBarComponent implements OnInit {
 
   // advance
   advance(instance: any, action: any) {
-    this.context.advance(instance.id, { 
+    this.context.advance(instance.id, {
       currentTaskId: instance.currentTaskId,
       routeOption: action.routeOption
     });
   }
 
   // reject
-  reject() {    
+  reject() {
     this.context.openRejectDialog();
   }
 
@@ -92,12 +92,17 @@ export class WorkflowBarComponent implements OnInit {
     this.context.regenerate();
   }
 
+  // refresh
+  refresh() {
+    this.context.refreshInstance();
+  }
+
   // action icon
   getActionIcon(action: { actionDescription: string }) {
-    
+
     // check special cases
-    switch(action.actionDescription.toLowerCase()) {
-      
+    switch (action.actionDescription.toLowerCase()) {
+
       // approve
       case "approve":
         return "fas fa-thumbs-up";
