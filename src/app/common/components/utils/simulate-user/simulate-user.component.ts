@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { UserContextService } from 'src/app/common/services/user-context.service';
 import { AuthService } from 'src/app/common/services/auth.service';
+import { GlobalListsService } from '../../../../core/services/global-lists.service';
 
 @Component({
   selector: 'app-simulate-user',
@@ -11,9 +12,9 @@ import { AuthService } from 'src/app/common/services/auth.service';
 export class SimulateUserComponent implements OnInit {
 
   // observables
-  isAdmin$ : Observable<boolean>;
-  isImpersonating$ : Observable<boolean>;
-  userList$ : Observable<any>;
+  isAdmin$: Observable<boolean>;
+  isImpersonating$: Observable<boolean>;
+  userList$: Observable<any>;
 
   // state
   state = {
@@ -28,7 +29,7 @@ export class SimulateUserComponent implements OnInit {
   // new
   constructor(
     private userContext: UserContextService,
-    private authService : AuthService
+    private globalLists: GlobalListsService
   ) { }
 
   // init
@@ -39,12 +40,12 @@ export class SimulateUserComponent implements OnInit {
     this.isImpersonating$ = this.userContext.isImpersonating$;
 
     // lists
-    this.userList$ = this.authService.getUsers();
+    this.userList$ = this.globalLists.getUsers();
   }
 
   // simulate user
   simulateUser(userId: string) {
-    if(userId) {
+    if (userId) {
       this.userContext.simulateUser(userId);
       this.state.simulatePending = false;
       this.model.userId = "";

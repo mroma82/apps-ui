@@ -100,11 +100,6 @@ export class AuthService {
     };
   }
 
-  // get users
-  getUsers(): Observable<any> {
-    return this.http.get("/auth/getUsers");
-  }
-
   // get admin roles
   getAdminRoles(): Observable<any> {
     return this.http.get("/auth/getAdminRoles");
