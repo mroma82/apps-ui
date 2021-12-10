@@ -38,4 +38,9 @@ export class TaskBarComponent implements OnInit {
     this.context.openListDialog();
     this.model.showMenu = false;
   }
+
+  // refresh
+  refresh() {
+    this.context.refreshData();
+  }
 }

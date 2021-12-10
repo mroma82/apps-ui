@@ -29,4 +29,9 @@ export class HomeMyTasksComponent implements OnInit {
   openListDialog() {
     this.taskContext.openListDialog();
   }
+
+  // refresh
+  refresh() {
+    this.taskContext.refreshData();
+  }
 }

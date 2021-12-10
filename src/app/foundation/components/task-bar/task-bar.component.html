@@ -40,7 +40,7 @@
 
     <li class="list-group-item border-top view-all-row bg-white" *ngIf="(count$ | async)">
       <small>
-        <a href="javascript:;;" (click)="showListDialog()">View All Tasks</a>
+        <a href="javascript:;;" (click)="showListDialog()">View All Tasks</a> | <a href="javascript:;;" (click)="refresh()">Refresh</a>
       </small>
     </li>
   </ul>

@@ -16,10 +16,14 @@
       </div>
     </div>
 
-    <div class="list-group-item view-all-row pl-4" *ngIf="list.length > 0">
+    <div class="list-group-item view-all-row pl-1 pb-1" *ngIf="list.length > 0">
       <small>
         <a href="javascript:;;" (click)="openListDialog()">
           View All Tasks
+        </a>
+        &nbsp;|&nbsp;
+        <a href="javascript:;;" (click)="refresh()">
+          Refresh
         </a>
       </small>
     </div>
