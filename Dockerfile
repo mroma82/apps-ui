@@ -1,12 +1,12 @@
 # base ===============================
-FROM nginx:1.13.3-alpine AS base
+FROM docker.io/nginx:1.13.3-alpine AS base
 
 # clean up
 RUN rm -rf /usr/share/nginx/html/*
 
 
 # builder ============================
-FROM romacode/angular-cli:10.2.1 AS builder
+FROM docker.io/romacode/angular-cli:11.2.15 AS builder
 
 # build dependencies
 WORKDIR /src
