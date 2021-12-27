@@ -58,6 +58,7 @@ export class InstanceContextService {
     // http headers
     const httpHeaders = {
       headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + this.token())
         .set('X-Apps-Instance', this.instanceId ? this.instanceId : "")
     };
 
