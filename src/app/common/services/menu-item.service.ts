@@ -40,7 +40,13 @@ export class MenuItemService implements OnDestroy {
     this.createEntityApp(EntityTypes.SecurityRole),
     this.createEntityApp(EntityTypes.SystemUser),
     this.createEntityApp(EntityTypes.WorkflowGroup),
-    this.createEntityApp(EntityTypes.NumberSequence)
+    this.createEntityApp(EntityTypes.NumberSequence),
+
+    of({
+      title: "Billing", description: "Manage billing and subscriptions",
+      url: "/app/admin/billing", icon: "fas fa-credit-card",
+      hasAccess$: this.userContext.isAdmin$
+    }),
   ]);
 
   // observables

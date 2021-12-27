@@ -7,11 +7,11 @@ import { Observable, of } from 'rxjs';
 export class AdminMenuItemsService {
 
   // define menu items
-  menuItems$ : Observable<any>;
+  menuItems$: Observable<any>;
 
   // new
-  constructor() { 
-    
+  constructor() {
+
     // set the items
     const baseUrl = "/app/admin";
     this.menuItems$ = of([
@@ -20,7 +20,8 @@ export class AdminMenuItemsService {
       { url: `${baseUrl}/system-users`, title: "Users", description: "Manage Users that have access to Applications" },
       { url: `${baseUrl}/permissions`, title: "Permissions", description: "Manage User permissions for access features of the Applications" },
       { url: `${baseUrl}/workflow-groups`, title: "Workflow Groups", description: "Manage Workflow Assignment groups" },
-      { url: `${baseUrl}/number-sequences`, title: "Number Sequences", description: "..." }
+      { url: `${baseUrl}/number-sequences`, title: "Number Sequences", description: "..." },
+      { url: `${baseUrl}/billing`, title: "Billing", description: "..." }
     ]);
   }
 }
