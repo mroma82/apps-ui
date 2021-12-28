@@ -1,1 +1,33 @@
-<p>admin-billing-subscription works!</p>
+<div *ngIf="subscription$ | async as subscription">
+
+    <div class="media p-2 mb-3" *ngFor="let item of products$ | async" [class.bg-light]="item.productId == subscription.productId">
+        <img class="mr-3" src="http://placehold.jp/64x64.png" alt="Generic placeholder image">
+        <div class="media-body">
+            <div>
+                <strong class="mt-0">{{ item.description }} <span *ngIf="item.productId == subscription.productId" class="badge badge-primary">Current Plan</span></strong>
+            </div>
+            <p>
+                ${{item.price}} per user
+                <ng-container *ngIf="!(busy$ | async)">
+                    <br>
+                    <small *ngIf="item.productId != subscription.productId">
+                        <a href="javascript:;;" (click)="updateProductId(item.productId)">Change to this plan</a>
+                    </small>
+                </ng-container>
+            </p>
+
+        </div>
+    </div>
+
+    <hr>
+
+    <label for="licenseCount">User License Count<span class="ml-1 text-danger">*</span></label>
+    <div style="max-width: 100px;">
+        <app-number-field label="" [required]="true" name="licenseCount" [(ngModel)]="subscription.licenseCount"></app-number-field>
+    </div>
+
+    <div class="form-group">
+        <button type="button" (click)="updateLicenseCount(subscription.licenseCount)" class="btn btn-primary" [disabled]="busy$ | async">Update License</button>
+    </div>
+
+</div>

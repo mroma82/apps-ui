@@ -17,6 +17,10 @@ export class AdminBillingApiService {
   getPaymentMethods = () =>
     this.http.get("/subscription/GetPaymentMethods");
 
+  // get available products
+  getAvailableProducts = () =>
+    this.http.get("/subscription/GetAvailableProducts");
+
   // set default payment method
   setDefaultPaymentMethod = (type: number, id: string) =>
     this.http.post("/subscription/SetDefaultPaymentMethod", {
@@ -29,5 +33,17 @@ export class AdminBillingApiService {
     this.http.post("/subscription/RemovePaymentMethod", {
       paymentMethodType: type,
       paymentMethodId: id
+    });
+
+  // update subscription product
+  updateProductId = (productId: string) =>
+    this.http.post("/subscription/UpdateProduct", {
+      productId: productId
+    });
+
+  // update subscription license count
+  updateLicenseCount = (licenseCount: number) =>
+    this.http.post("/subscription/UpdateLicenseCount", {
+      licenseCount: licenseCount
     });
 }
