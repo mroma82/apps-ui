@@ -1,1 +1,25 @@
-<p>admin-billing-payment-methods works!</p>
+<div *ngIf="defaultPaymentMethodId$ | async as defaultPaymentMethodId">
+    <div *ngIf="paymentMethods$ | async as paymentMethods">
+
+        <div class="media p-2 mb-3" *ngFor="let item of paymentMethods" [class.bg-light]="item.paymentMethodId == defaultPaymentMethodId">
+            <img class="mr-3" src="http://placehold.jp/64x64.png" alt="Generic placeholder image">
+            <div class="media-body">
+                <div>
+                    <strong class="mt-0">{{ item.description }} <span *ngIf="item.paymentMethodId == defaultPaymentMethodId" class="badge badge-primary">Default</span></strong>
+                </div>
+                <p *ngIf="!(busy$ | async)">
+                    <small *ngIf="item.paymentMethodId != defaultPaymentMethodId">
+                        <a href="javascript:;;" (click)="setDefaultPaymentMethod(item)">Make Default</a>
+                        &nbsp;|&nbsp;
+                        <a href="javascript:;;" (click)="removeDefaultPaymentMethod(item)">Remove</a>
+                    </small>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="button" (click)="addPaymentMethod" class="btn btn-primary" [disabled]="busy$ | async">Add Payment Method</button>
+        </div>
+
+    </div>
+</div>

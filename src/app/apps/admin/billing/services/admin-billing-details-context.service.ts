@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, timer } from 'rxjs';
+import { debounce, tap } from 'rxjs/operators';
 import { DialogService } from '../../../../common/services/dialog.service';
 import { AdminBillingApiService } from './admin-billing-api.service';
 
@@ -9,6 +9,10 @@ export class AdminBillingDetailsContextService {
 
   // state
   details$ = new BehaviorSubject<{ billingName: string, billingEmail: string }>(null);
+
+  // busy
+  busyStore$ = new BehaviorSubject<boolean>(false);
+  busy$ = this.busyStore$.asObservable().pipe(debounce(() => timer(200)));
 
   // new
   constructor(
@@ -25,7 +29,7 @@ export class AdminBillingDetailsContextService {
   }
 
   // update
-  updateDetails(model: { billingName: string, billingEmail, string }): Observable<boolean> {
+  updateDetails(model: { billingName: string, billingEmail: string }): Observable<boolean> {
 
     // validate
     if (!model.billingEmail || !model.billingName) {
@@ -33,8 +37,13 @@ export class AdminBillingDetailsContextService {
       return of(false);
     }
 
+    // busy
+    this.busyStore$.next(true);
+
     // mock
     return of(true).pipe(tap(success => {
+      this.busyStore$.next(false);
+
       if (success) {
         this.refreshDetails();
       }

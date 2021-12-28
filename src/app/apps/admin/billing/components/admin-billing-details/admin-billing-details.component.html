@@ -4,6 +4,6 @@
     <app-text-field label="Billing Email" [required]="true" [(ngModel)]="details.billingEmail"></app-text-field>
 
     <div class="form-group">
-        <button type="button" (click)="update(details)" class="btn btn-primary">Update Details</button>
+        <button type="button" (click)="update(details)" class="btn btn-primary" [disabled]="busy$ | async">Update Details</button>
     </div>
 </div>
