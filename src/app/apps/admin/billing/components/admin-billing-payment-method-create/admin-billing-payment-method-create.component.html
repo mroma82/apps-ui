@@ -1,0 +1,58 @@
+<div *ngIf="model$ | async as model">
+    <div class="mb-3">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="paymentMethodType_CreditCard" id="paymentMethodType_CreditCard" [value]="1" (click)="setPaymentMethod(1)" [(ngModel)]="model.paymentMethodType">
+            <label class="form-check-label" for="paymentMethodType_CreditCard">Credit Card</label>
+        </div>
+        <div class="form-check form-check-inline ml-3">
+            <input class="form-check-input" type="radio" name="paymentMethodType_BankAccount" id="paymentMethodType_BankAccount" [value]="2" (click)="setPaymentMethod(2)" [(ngModel)]="model.paymentMethodType">
+            <label class="form-check-label" for="paymentMethodType_BankAccount">Bank Account</label>
+        </div>
+    </div>
+
+    <div *ngIf="model.paymentMethodType == 1">
+        <app-text-field label="Card Number" [required]="true" [(ngModel)]="model.cardNumber"></app-text-field>
+        <div class="d-flex">
+            <div>
+                <app-select-field label="Expr Month" [required]="true" [(ngModel)]="model.cardExpirationMonth">
+                    <option [value]="1">Jan</option>
+                    <option [value]="2">Feb</option>
+                    <option [value]="3">Mar</option>
+                    <option [value]="4">Apr</option>
+                    <option [value]="5">May</option>
+                    <option [value]="6">Jun</option>
+                    <option [value]="7">Jul</option>
+                    <option [value]="8">Aug</option>
+                    <option [value]="9">Sep</option>
+                    <option [value]="10">Oct</option>
+                    <option [value]="11">Nov</option>
+                    <option [value]="12">Dec</option>
+                </app-select-field>
+            </div>
+            <div class="ml-3">
+                <app-select-field label="Expr Year" [required]="true" [(ngModel)]="model.cardExpirationYear">
+                    <option *ngFor="let year of yearList" [value]="year">{{ year }}</option>
+                </app-select-field>
+            </div>
+        </div>
+        <app-text-field label="CVC" [required]="true" [(ngModel)]="model.cardCvc"></app-text-field>
+    </div>
+
+    <div *ngIf="model.paymentMethodType == 2">
+        <app-select-field label="Account Type" [required]="true" [(ngModel)]="model.bankAccountType">
+            <option value="individual">Individual</option>
+            <option value="company">Company</option>
+        </app-select-field>
+
+        <app-text-field label="Name on Account" [required]="true" [(ngModel)]="model.bankAccountName"></app-text-field>
+        <app-text-field label="Account Number" [required]="true" [(ngModel)]="model.bankAccountNumber"></app-text-field>
+        <app-text-field label="Routing Number" [required]="true" [(ngModel)]="model.bankAccountRouting"></app-text-field>
+
+        <app-select-field label="Account Country" [required]="true" [(ngModel)]="model.bankAccountCountry">
+            <option value="">Please select</option>
+            <option value="US">United States</option>
+        </app-select-field>
+    </div>
+
+    <pre>model = {{ model | json }}</pre>
+</div>

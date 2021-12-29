@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminBillingContextService } from '../../services/admin-billing-context.service';
 import { AdminBillingDetailsContextService } from '../../services/admin-billing-details-context.service';
+import { AdminBillingPaymentMethodCreateContextService } from '../../services/admin-billing-payment-method-create-context.service';
 import { AdminBillingPaymentMethodsContextService } from '../../services/admin-billing-payment-methods-context.service';
 import { AdminBillingSubscriptionContextService } from '../../services/admin-billing-subscription-context.service';
 
@@ -12,7 +13,8 @@ import { AdminBillingSubscriptionContextService } from '../../services/admin-bil
     AdminBillingContextService,
     AdminBillingPaymentMethodsContextService,
     AdminBillingDetailsContextService,
-    AdminBillingSubscriptionContextService
+    AdminBillingSubscriptionContextService,
+    AdminBillingPaymentMethodCreateContextService
   ]
 })
 export class AdminBillingMainPageComponent implements OnInit {

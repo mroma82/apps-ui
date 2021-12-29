@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppHttpClientService } from '../../../../common/services/app-http-client.service';
+import { AdminBillingPaymentMethodCreate } from '../models/admin-billing-payment-method-create';
 
 @Injectable()
 export class AdminBillingApiService {
@@ -27,6 +28,10 @@ export class AdminBillingApiService {
       paymentMethodType: type,
       paymentMethodId: id
     });
+
+  // add payment method
+  addPaymentMethod = (model: AdminBillingPaymentMethodCreate) =>
+    this.http.post("/subscription/AddPaymentMethod", model);
 
   // remove payment method
   removePaymentMethod = (type: number, id: string) =>

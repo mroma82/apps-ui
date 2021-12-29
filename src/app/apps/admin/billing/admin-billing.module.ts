@@ -10,6 +10,8 @@ import { AdminBillingRoutingModule } from './admin-billing-routing.module';
 import { AppCommonModule } from '../../../common/app-common.module';
 import { AppsCoreModule } from '../../../core/core.module';
 import { FormsModule } from '@angular/forms';
+import { AdminBillingPaymentMethodCreateDialogComponent } from './dialogs/admin-billing-payment-method-create-dialog/admin-billing-payment-method-create-dialog.component';
+import { AdminBillingPaymentMethodCreateComponent } from './components/admin-billing-payment-method-create/admin-billing-payment-method-create.component';
 
 
 
@@ -19,7 +21,9 @@ import { FormsModule } from '@angular/forms';
     AdminBillingPaymentMethodsComponent,
     AdminBillingDetailsComponent,
     AdminBillingSubscriptionComponent,
-    AdminBillingContainerComponent
+    AdminBillingContainerComponent,
+    AdminBillingPaymentMethodCreateDialogComponent,
+    AdminBillingPaymentMethodCreateComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../../../../common/services/dialog.service';
 import { DialogResultEnum } from '../../../../../common/types/dialogs/dialog-result.enum';
+import { AdminBillingPaymentMethodCreateContextService } from '../../services/admin-billing-payment-method-create-context.service';
 import { AdminBillingPaymentMethodsContextService } from '../../services/admin-billing-payment-methods-context.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class AdminBillingPaymentMethodsComponent implements OnInit {
   // new
   constructor(
     private context: AdminBillingPaymentMethodsContextService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    private createContext: AdminBillingPaymentMethodCreateContextService
   ) { }
 
   ngOnInit(): void {
@@ -39,5 +41,10 @@ export class AdminBillingPaymentMethodsComponent implements OnInit {
         this.context.removePaymentMethod(item).subscribe();
       }
     })
+  }
+
+  // add payment method
+  addPaymentMethod() {
+    this.createContext.openDialog();
   }
 }
