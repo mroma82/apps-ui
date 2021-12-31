@@ -18,7 +18,7 @@ export class EntityViewEditContextService {
 
   // observables
   id$ = new BehaviorSubject<string>(null);
-  mode$ = new BehaviorSubject<"view" | "edit" | null>(null);  
+  mode$ = new BehaviorSubject<"view" | "edit" | null>(null);
   entityRecord$ = new BehaviorSubject<any>({});
 
   // lists
@@ -34,12 +34,12 @@ export class EntityViewEditContextService {
     private api: EntityApiService,
     private appContext: AppContextService,
     private dialogService: DialogService,
-    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,    
-    @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService    
-  ) {     
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
+    @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
+  ) {
     // id change
     this.onIdChange$ = this.id$.subscribe(x => {
-      if(x)
+      if (x)
         this.refreshData();
     })
   }
@@ -53,7 +53,7 @@ export class EntityViewEditContextService {
   setMode(mode: "view" | "edit" | null) {
     this.mode$.next(mode);
   }
-   
+
   // refresh
   refreshData() {
 
@@ -63,16 +63,16 @@ export class EntityViewEditContextService {
     });
   }
 
-  
+
   // update 
-  update() : Observable<boolean> {
-    
+  update(): Observable<boolean> {
+
     // get the model
     const model = this.entityRecord$.value;
-  
+
     // check if validation
-    let validate : Observable<IValidationResult>;
-    if(this.entityValidation) {
+    let validate: Observable<IValidationResult>;
+    if (this.entityValidation) {
       validate = this.entityValidation.validateUpdate(model);
     } else {
       validate = of({ success: true });
@@ -80,37 +80,34 @@ export class EntityViewEditContextService {
 
     // validate
     return validate.pipe(mergeMap(x => {
-      if(x.success) {
-        
+      if (x.success) {
+
         // try to create
         return this.api.update(this.entityConfig.entityTypeId, model).pipe(tap(x => {
 
-          // check if ok
-          if(x.success) {            
-            return true;
-          } else {
+          // check if error
+          if (!x.success) {
             this.dialogService.message("Error during update", x.text);
-            return false;
           }
-        }));
+        }), map(x => x.success));
 
       } else {
-        this.dialogService.message("Validation", x.text);        
+        this.dialogService.message("Validation", x.text);
       }
 
       // no
       return of(false);
-    }));         
+    }));
   }
 
   // delete
-  delete() : Observable<boolean> {
+  delete(): Observable<boolean> {
 
     // delete, check if ok
     return this.api.delete(this.entityConfig.entityTypeId, this.id$.value).pipe(map(x => {
-      if(x.success) {
+      if (x.success) {
         return true;
-      } else {        
+      } else {
         this.dialogService.message("Error during delete", x.text);
         return false;
       }
