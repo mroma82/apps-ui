@@ -1,18 +1,21 @@
-<div *ngIf="model.id">    
-    
-  <app-card-group title="Details" class="mb-2">
-      <div class="row">          
-          <div class="col-md-2">
-              <app-text-field [(ngModel)]="model.name" [disabled]="viewMode$ | async" name="name"></app-text-field>     
-          </div>
+<div *ngIf="model.id">
 
-          <div class="col-md-2 pt-4">
-              <app-check-box-field [(ngModel)]="model.isSysAdmin" [disabled]="viewMode$ | async" name="isSysAdmin"></app-check-box-field>
-          </div>
+  <app-card-group title="Details" class="mb-2">
+    <div class="row">
+      <div class="col-md-2">
+        <app-text-field [(ngModel)]="model.name" [disabled]="viewMode$ | async" name="name"></app-text-field>
       </div>
-  </app-card-group>    
+
+      <div class="col-md-2 pt-4">
+        <app-check-box-field [(ngModel)]="model.isSysAdmin" [disabled]="viewMode$ | async" name="isSysAdmin"></app-check-box-field>
+      </div>
+      <div class="col-md-2 pt-4">
+        <app-check-box-field [(ngModel)]="model.allowBillingAccess" [disabled]="viewMode$ | async" name="allowBillingAccess"></app-check-box-field>
+      </div>
+    </div>
+  </app-card-group>
 
   <app-card-group title="Entities" *ngIf="!model.isSysAdmin">
     <app-admin-security-role-entity-sub-grid></app-admin-security-role-entity-sub-grid>
   </app-card-group>
-</div>  
+</div>

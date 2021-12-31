@@ -105,6 +105,11 @@ export class AuthService {
     return this.http.get("/auth/getAdminRoles");
   }
 
+  // get billing access roles
+  getBillingAccessRoles(): Observable<any> {
+    return this.http.get("/auth/getBillingAccessRoles");
+  }
+
   // get full name
   getUserFullName(userId: string): Observable<any> {
     if (!userId)

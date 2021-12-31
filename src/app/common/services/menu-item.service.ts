@@ -45,7 +45,7 @@ export class MenuItemService implements OnDestroy {
     of({
       title: "Billing", description: "Manage billing and subscriptions",
       url: "/app/admin/billing", icon: "fas fa-credit-card",
-      hasAccess$: this.userContext.isAdmin$
+      hasAccess$: this.userContext.hasBillingAccess$
     }),
   ]);
 

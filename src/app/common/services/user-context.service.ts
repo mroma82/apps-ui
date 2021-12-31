@@ -14,12 +14,14 @@ export class UserContextService {
   verify$ = new BehaviorSubject<boolean>(null);
   profile$ = new BehaviorSubject<IUserProfile>(null);
   adminRoles$: Observable<any>;
+  billingAccessRoles$: Observable<any>;
 
   // is authenticated formula
   isAuthenticated$ = combineLatest([this.verify$, this.profile$]).pipe(filter(([verify]) => verify != null), map(([, profile]) => profile != null));
 
-  // is admin
-  isAdmin$: Observable<any>;
+  // specialty roles
+  isAdmin$: Observable<boolean>;
+  hasBillingAccess$: Observable<boolean>;
 
   isImpersonating$ = new BehaviorSubject<boolean>(false);
 
@@ -29,8 +31,9 @@ export class UserContextService {
     private instanceContext: InstanceContextService
   ) {
 
-    // admin roles
+    // specialty roles
     this.adminRoles$ = authService.getAdminRoles().pipe(shareReplay(1));
+    this.billingAccessRoles$ = authService.getBillingAccessRoles().pipe(shareReplay(1));
 
     // is authenticated
     this.isAuthenticated$ = combineLatest([this.verify$, this.profile$]).pipe(
@@ -40,21 +43,32 @@ export class UserContextService {
 
     // is admin observable
     this.isAdmin$ = combineLatest([this.profile$, this.adminRoles$]).pipe(map(
-      ([profile, adminRoles]) => {
+      ([profile, roles]) => {
 
         // check if all the data
-        if (profile == null || profile.roles == null || adminRoles == null)
+        if (profile == null || profile.roles == null || roles == null)
           return false;
 
         // if more than one role, check all roles
-        return profile.roles.filter(x => adminRoles.indexOf(x)).length > 0;
+        return profile.roles.filter(x => roles.indexOf(x) > -1).length > 0;
+      }
+    ));
+
+    // has billing access observable
+    this.hasBillingAccess$ = combineLatest([this.profile$, this.billingAccessRoles$]).pipe(map(
+      ([profile, roles]) => {
+
+        // check if all the data
+        if (profile == null || profile.roles == null || roles == null)
+          return false;
+
+        // if more than one role, check all roles
+        return profile.roles.filter(x => roles.indexOf(x) > -1).length > 0;
       }
     ));
 
     // check if a token
     if (this.authService.getActualToken()) {
-
-      // check the token
       this.checkToken().subscribe();
     }
 
