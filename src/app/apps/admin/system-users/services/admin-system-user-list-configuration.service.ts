@@ -10,12 +10,22 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
   constructor() { }
 
   // views
-  getViews() : Observable<IEntityListingView[]> {
+  getViews(): Observable<IEntityListingView[]> {
     return of([
-      { 
-        id: "all", 
-        title: "All System Users", 
-        filter: { }, 
+      {
+        id: "all",
+        title: "All System Users",
+        filter: {},
+        sort: {
+          field: "username"
+        }
+      },
+      {
+        id: "licensed",
+        title: "All System Users with License Allocated",
+        filter: {
+          isLicenseAllocated: true
+        },
         sort: {
           field: "username"
         }
@@ -24,7 +34,7 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
   }
 
   // columns
-  getColumns() : Observable<IEntityListingColumn[]> {
+  getColumns(): Observable<IEntityListingColumn[]> {
     return of([
       {
         model: "username",
@@ -36,6 +46,10 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
       },
       {
         model: "email"
+      },
+      {
+        model: "isLicenseAllocated",
+        displayFunc: x => x.isLicenseAllocated ? "Yes" : "No"
       }
     ]);
   }

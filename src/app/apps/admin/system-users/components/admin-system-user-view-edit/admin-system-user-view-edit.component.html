@@ -1,4 +1,3 @@
-
 <div class="row">
 
   <div class="col-md-6">
@@ -14,9 +13,13 @@
       </div>
     </app-card-group>
 
+    <app-card-group title="License">
+      <app-check-box-field [(ngModel)]="model.isLicenseAllocated" name="isLicenseAllocated" [disabled]="viewMode$ | async"></app-check-box-field>
+    </app-card-group>
+
     <app-card-group title="Status">
       <div class="form-group">
-        <label>Activated:</label> 
+        <label>Activated:</label>
         <span class="ml-2">{{ model.isActivated ? 'Yes' : 'No' }}</span>
       </div>
 
@@ -35,7 +38,7 @@
         <input type="checkbox" class="form-check-input" [id]="role.id" [(ngModel)]="userRoles[role.id]" (change)="setRole(role.id)" [disabled]="viewMode$ | async">
         <label class="form-check-label" [for]="role.id">{{ role.name }}</label>
       </div>
-      
+
     </app-card-group>
   </div>
 </div>
