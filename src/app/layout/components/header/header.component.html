@@ -15,6 +15,12 @@
       <app-header-nav></app-header-nav>
     </div>
 
+    <ng-container *ngIf="licenseStatus$ | async as licenseStatus">
+      <div class="mr-3 p-2 bg-danger d-none d-md-block license-status" *ngIf="!licenseStatus.status">
+        Your instance is over allocated on licenses
+      </div>
+    </ng-container>
+
     <div>
       <app-task-bar></app-task-bar>
     </div>

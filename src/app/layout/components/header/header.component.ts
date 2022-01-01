@@ -5,6 +5,7 @@ import { AppContextService } from 'src/app/app-context.service';
 import { MenuItemService } from 'src/app/common/services/menu-item.service';
 import { APP_VERSION } from 'src/app/app-version';
 import { environment } from 'src/environments/environment';
+import { InstanceContextService } from '../../../common/services/instance-context.service';
 
 @Component({
   selector: 'app-header',
@@ -23,11 +24,13 @@ export class HeaderComponent implements OnInit {
   // observables
   appMenuItems$: Observable<IMenuItem[]>;
   setupMenuItems$: Observable<IMenuItem[]>;
+  licenseStatus$ = this.instanceContext.licenseStatus$;
 
   // new  
   constructor(
     private appContext: AppContextService,
-    private menuItemService: MenuItemService
+    private menuItemService: MenuItemService,
+    private instanceContext: InstanceContextService
   ) {
     this.appMenuItems$ = this.menuItemService.appMenuItems$;
     this.setupMenuItems$ = this.menuItemService.setupMenuItems$;
