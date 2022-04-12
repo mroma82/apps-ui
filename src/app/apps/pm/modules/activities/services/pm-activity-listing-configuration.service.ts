@@ -47,7 +47,7 @@ export class PmActivityListingConfigurationService implements IEntityListingConf
       { model: "pmItem.description", title: "Item", isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/items/view/${x.itemId}` },
       { model: "description", title: "Description", isLink: true, showEditLink: true },
       { model: "schedulingDescription", title: "Schedule" },
-      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x) }
+      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x), isHtml: true }
     ]);
   }
 

@@ -63,7 +63,7 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
       { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
       { model: "completedUser.fullName", title: "Completed by" },
       { model: "completedDateTime", title: "Completed on", pipe: new UtcDateTimePipe(new DatePipe("en-us")) },
-      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x) }
+      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x), isHtml: true }
     ]);
   }
 
