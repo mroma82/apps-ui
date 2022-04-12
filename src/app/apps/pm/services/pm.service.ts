@@ -8,11 +8,24 @@ export class PmService {
 
   // new
   constructor(
-    private entityApi : EntityApiService
-  ) { }  
+    private entityApi: EntityApiService
+  ) { }
 
   // get parameters
-  getParameters() : Observable<any> {
-    return this.entityApi.getSingle(EntityTypes.PmParameters);    
+  getParameters(): Observable<any> {
+    return this.entityApi.getSingle(EntityTypes.PmParameters);
   }
+
+  // get status badge
+  getStatusBadge(eventItem: any): string {
+
+    // check if overdue
+    if (eventItem.extras.isOverdue) {
+      return `<span class="badge badge-warning">Overdue</span>`;
+    }
+
+    // all else, nothing
+    return "";
+  }
+
 }
