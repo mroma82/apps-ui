@@ -15,26 +15,26 @@ import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 export class PmNavComponent implements OnInit {
 
   // observables
-  navItems$ : Observable<IMenuItem[]>;
+  navItems$: Observable<IMenuItem[]>;
 
   // new
   constructor(
     entityApi: EntityApiService
-  ) {     
+  ) {
     const home = "/app/preventative-maintenance";
 
     // helper
     const hasAccess = (entityTypeId) => entityApi.hasAccess(entityTypeId, SecurityPermissionMask.View)
 
     // set nav items
-    this.navItems$ = of([      
-      { title: "Home", url: home, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmItem) },
+    this.navItems$ = of([
+      { title: "Home", url: home, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmItem), activePathIsExact: true },
       { title: "Items", url: `${home}/items`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmItem) },
       { title: "Activities", url: `${home}/activities`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmActivity) },
       { title: "Events", url: `${home}/events`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmEvent) },
       { title: "Parameters", url: `${home}/parameters`, icon: "", description: "", hasAccess$: entityApi.hasAccess(EntityTypes.PmParameters, SecurityPermissionMask.Edit) }
     ]);
-  }  
+  }
 
   // init
   ngOnInit() {
