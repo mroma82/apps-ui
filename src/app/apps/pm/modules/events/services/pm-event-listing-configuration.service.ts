@@ -5,9 +5,15 @@ import { UtcDateTimePipe } from 'src/app/common/pipes/utc-date-time.pipe';
 import { IEntityListingColumn } from 'src/app/core/models/entity/entity-listing-column';
 import { IEntityListingView } from 'src/app/core/models/entity/entity-listing-view';
 import { IEntityListingConfigurationService } from 'src/app/core/services/entity/listing/entity-listing-configuration.service';
+import { PmService } from '../../../services/pm.service';
 
 @Injectable()
 export class PmEventListingConfigurationService implements IEntityListingConfigurationService {
+
+  // new
+  constructor(
+    private pmService: PmService
+  ) { }
 
   // views
   getViews(): Observable<IEntityListingView[]> {
@@ -57,25 +63,13 @@ export class PmEventListingConfigurationService implements IEntityListingConfigu
   // columns
   getColumns(): Observable<IEntityListingColumn[]> {
     return of([
-      { model: "pmActivity.pmItem.description", title: "Item", displayFunc: x => x.pmItem.description, isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/items/view/${x.pmActivity.itemId}` },
-      { model: "pmActivity.description", title: "Activity", isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/activities/view/${x.activityId}` },
       { model: "eventDateTime", title: "Scheduled date", isLink: true, showEditLink: true, pipe: new UtcDateTimePipe(new DatePipe("en-us")) },
+      { model: "pmActivity.description", title: "Activity", isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/activities/view/${x.activityId}` },
+      { model: "pmActivity.pmItem.description", title: "Item", displayFunc: x => x.pmItem.description, isLink: true, viewLinkFunc: x => `/app/preventative-maintenance/items/view/${x.pmActivity.itemId}` },
       { model: "isCompleted", title: "Completed?", displayFunc: x => x.isCompleted ? "Yes" : "No" },
       { model: "completedUser.fullName", title: "Completed by" },
       { model: "completedDateTime", title: "Completed on", pipe: new UtcDateTimePipe(new DatePipe("en-us")) },
-      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.getStatusBadge(x), isHtml: true }
+      { model: "extras.isOverdue", title: "Status", displayFunc: x => this.pmService.getStatusBadge(x), isHtml: true }
     ]);
-  }
-
-  // get status badge
-  getStatusBadge(eventItem: any): string {
-
-    // check if overdue
-    if (eventItem.extras.isOverdue) {
-      return `<span class="badge badge-warning">Overdue</span>`;
-    }
-
-    // all else, nothing
-    return "";
   }
 }
