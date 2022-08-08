@@ -1,10 +1,1 @@
-<app-entity-sub-grid
-  *ngIf="model$ | async as model"
-  [entityTypeId]="entityTypeId"  
-  [filter]="{itemId: model.id}"
-  [sort]="{field: 'description'}"
-  [modelDefault]="{itemId: model.id}"
-  [columns]="[ {title: 'Description', model: 'description', isViewLink: true }, { model: 'schedulingDescription', title: 'Schedule' } ]"
-  [config]="lineSubGridConfig"
-  [mode]="mode$ | async"
-></app-entity-sub-grid>
+<app-entity-sub-grid *ngIf="model$ | async as model" [entityTypeId]="entityTypeId" [filter]="{itemId: model.id}" [sort]="{field: 'description'}" [modelDefault]="{itemId: model.id}" [columns]="columns" [mode]="mode$ | async"></app-entity-sub-grid>
