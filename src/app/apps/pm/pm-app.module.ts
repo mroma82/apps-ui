@@ -12,16 +12,18 @@ import { PmParametersComponent } from './components/pm-parameters/pm-parameters.
 import { AppsCoreModule } from 'src/app/core/core.module';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { FormsModule } from '@angular/forms';
+import { PmAgendaPageComponent } from './pages/pm-agenda-page/pm-agenda-page.component';
 
 
 
 @NgModule({
   declarations: [
-    PmHomePageComponent, 
-    PmContainerComponent, 
-    PmNavComponent, 
-    PmParametersPageComponent, 
-    PmParametersComponent
+    PmHomePageComponent,
+    PmContainerComponent,
+    PmNavComponent,
+    PmParametersPageComponent,
+    PmParametersComponent,
+    PmAgendaPageComponent
   ],
   imports: [
     CommonModule,
