@@ -13,8 +13,7 @@
     <tbody>
       <tr *ngFor="let item of history">
         <td>
-          <i class="fas fa-reply text-danger" *ngIf="item.isRejected"></i>
-          <i class="fas fa-check text-success" *ngIf="!item.isRejected"></i>
+          <i [class]="getTransitionIconCssClass(item)"></i>
         </td>
         <td>{{ item.historyDateTime | utcDateTime:'medium' }}</td>
         <td>{{ item.currentStateText }}</td>
