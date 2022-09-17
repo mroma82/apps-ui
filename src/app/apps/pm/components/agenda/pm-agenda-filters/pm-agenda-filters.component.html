@@ -1,0 +1,19 @@
+<div class="row" *ngIf="model$ | async as model">
+    <div class="col-3">
+        <app-select-field [(ngModel)]="model.locationId" name="locationId" label="Location" (change)="updateFilter(model)">
+            <option value="">-- All Locations --</option>
+            <option *ngFor="let item of locationList$ | async" [value]="item.id" [selected]="item.id == model.locationId">{{ item.text }}</option>
+        </app-select-field>
+    </div>
+    <div class="col-3">
+        <app-select-field [(ngModel)]="model.itemTypeId" name="itemTypeId" label="Type" (change)="updateFilter(model)">
+            <option value="">-- All Types --</option>
+            <option *ngFor="let item of itemTypeList$ | async" [value]="item.id" [selected]="item.id == model.itemTypeId">{{ item.text }}</option>
+        </app-select-field>
+    </div>
+    <div class="col-3">
+        <app-date-field [(ngModel)]="model.endDate" name="endDate" label="Date" (change)="updateFilter(model)"></app-date-field>
+    </div>
+    <div class="col-3">
+    </div>
+</div>
