@@ -47,7 +47,8 @@ export class PmActivitySubGridComponent implements OnInit {
   // sub grid config
   lineSubGridConfig: IEntitySubGridConfigurationService = {
     createFormComponent: PmActivityCreateComponent,
-    editFormComponent: PmActivityViewEditComponent
+    navigateToEditAfterCreate: true
+    //editFormComponent: PmActivityViewEditComponent
   };
 
   // new

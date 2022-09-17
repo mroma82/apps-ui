@@ -13,6 +13,10 @@ import { AppsCoreModule } from 'src/app/core/core.module';
 import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { FormsModule } from '@angular/forms';
 import { PmAgendaPageComponent } from './pages/pm-agenda-page/pm-agenda-page.component';
+import { PmAgendaFiltersComponent } from './components/agenda/pm-agenda-filters/pm-agenda-filters.component';
+import { PmAgendaListComponent } from './components/agenda/pm-agenda-list/pm-agenda-list.component';
+import { PmAgendaApiService } from './services/agenda/pm-agenda-api.service';
+import { PmAgendaDebugComponent } from './components/agenda/pm-agenda-debug/pm-agenda-debug.component';
 
 
 
@@ -23,7 +27,10 @@ import { PmAgendaPageComponent } from './pages/pm-agenda-page/pm-agenda-page.com
     PmNavComponent,
     PmParametersPageComponent,
     PmParametersComponent,
-    PmAgendaPageComponent
+    PmAgendaPageComponent,
+    PmAgendaFiltersComponent,
+    PmAgendaListComponent,
+    PmAgendaDebugComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +42,8 @@ import { PmAgendaPageComponent } from './pages/pm-agenda-page/pm-agenda-page.com
   ],
   providers: [
     PmService,
-    PmListsService
+    PmListsService,
+    PmAgendaApiService
   ]
 })
 export class PmAppModule { }

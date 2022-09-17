@@ -29,10 +29,10 @@ export class PmNavComponent implements OnInit {
     // set nav items
     this.navItems$ = of([
       { title: "Home", url: home, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmItem), activePathIsExact: true },
+      { title: "Agenda", url: `${home}/agenda`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmEvent) },
       { title: "Items", url: `${home}/items`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmItem) },
       { title: "Activities", url: `${home}/activities`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmActivity) },
       { title: "Events", url: `${home}/events`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmEvent) },
-      { title: "Agenda", url: `${home}/agenda`, icon: "", description: "", hasAccess$: hasAccess(EntityTypes.PmEvent) },
       { title: "Parameters", url: `${home}/parameters`, icon: "", description: "", hasAccess$: entityApi.hasAccess(EntityTypes.PmParameters, SecurityPermissionMask.Edit) }
     ]);
   }
