@@ -1,32 +1,32 @@
-<div *ngIf="model.id">    
+<div *ngIf="model.id">
     <app-card-group title="Main" class="mb-2">
         <div class="row">
             <div class="col-md-2">
-                <app-text-field [(ngModel)]="model.exampleId" [disabled]="true" name="exampleId"></app-text-field> 
+                <app-text-field [(ngModel)]="model.exampleId" [disabled]="true" name="exampleId"></app-text-field>
             </div>
 
             <div class="col-md-2">
-                <app-text-field [(ngModel)]="model.title" name="title"></app-text-field>     
+                <app-text-field [(ngModel)]="model.title" name="title"></app-text-field>
             </div>
 
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="model.status" name="status">
                     <option *ngFor="let item of statusList$ | async" [value]="item.value" [selected]="item.value == model.status">{{ item.text }}</option>
-                </app-select-field>        
+                </app-select-field>
             </div>
 
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="model.statusValue" name="statusValue">
                     <option value="">-- Please select --</option>
-                    <option *ngFor="let item of statusValueList$ | async" [value]="item.valueId" [selected]="item.valueId == model.statusValue">{{ item.text }}</option>
-                </app-select-field>                        
+                    <option *ngFor="let item of statusValueList$ | async" [value]="item.id" [selected]="item.id == model.statusValue">{{ item.text }}</option>
+                </app-select-field>
             </div>
 
             <div class="col-md-2">
                 <app-check-box-field [(ngModel)]="model.checkboxField" name="checkboxField"></app-check-box-field>
             </div>
         </div>
-    </app-card-group>    
+    </app-card-group>
 
     <app-card-group title="Details">
         <div class="row">
@@ -35,36 +35,36 @@
             </div>
 
             <div class="col-md-3">
-                <app-lookup-field [(ngModel)]="model.customerId" name="customerId" (onLookup)="customerLookup.openDialog()"></app-lookup-field>                 
+                <app-lookup-field [(ngModel)]="model.customerId" name="customerId" (onLookup)="customerLookup.openDialog()"></app-lookup-field>
                 <app-customer-lookup-dialog #customerLookup (onSelect)="setCustomer($event)"></app-customer-lookup-dialog>
             </div>
 
             <div class="col-md-3">
-                <app-text-area-field [(ngModel)]="model.customerName" name="customerName" rows="3"></app-text-area-field>     
+                <app-text-area-field [(ngModel)]="model.customerName" name="customerName" rows="3"></app-text-area-field>
             </div>
 
             <div class="col-md-3">
-                <app-date-field [(ngModel)]="model.dateField" name="dateField"></app-date-field>                 
+                <app-date-field [(ngModel)]="model.dateField" name="dateField"></app-date-field>
             </div>
 
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="model.requestUserId" name="requestUserId">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == model.requestUserId">{{ item.name }}</option>
-                </app-select-field>        
+                </app-select-field>
             </div>
 
             <div class="col-md-3">
                 <app-select-field [(ngModel)]="model.departmentId" name="departmentId">
                     <option value="">-- Please select --</option>
                     <option *ngFor="let item of departmentList$ | async" [value]="item.id" [selected]="item.id == model.departmentId">{{ item.text }}</option>
-                </app-select-field>        
+                </app-select-field>
             </div>
         </div>
     </app-card-group>
 
     <app-card-group title="Lines">
-        <app-example-line-sub-grid></app-example-line-sub-grid>        
+        <app-example-line-sub-grid></app-example-line-sub-grid>
     </app-card-group>
 
 </div>

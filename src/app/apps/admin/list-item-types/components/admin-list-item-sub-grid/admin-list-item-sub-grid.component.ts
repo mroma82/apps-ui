@@ -20,7 +20,7 @@ import { AdminListItemViewEditComponent } from '../admin-list-item-view-edit/adm
   ]
 })
 export class AdminListItemSubGridComponent extends BaseEntitySubGridComponent {
-  
+
   // entity type
   entityTypeId: string = EntityTypes.ListItem;
 
@@ -32,7 +32,6 @@ export class AdminListItemSubGridComponent extends BaseEntitySubGridComponent {
 
   // columns
   subGridColumns: IEntitySubGridColumn[] = [
-    { model: "valueId" },
     { model: "text" },
     { model: "sortOrder" }
   ];
@@ -42,5 +41,5 @@ export class AdminListItemSubGridComponent extends BaseEntitySubGridComponent {
     context: EntityViewEditContextService
   ) {
     super(context);
-  }  
+  }
 }
