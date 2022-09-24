@@ -8,6 +8,7 @@ import { EntityProviderService } from 'src/app/core/services/entity/entity-provi
 import { EntityApiService } from 'src/app/core/services/entity/entity-api.service';
 import { SecurityPermissionMask } from '../enums/security-permission-mask';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
+import { EntityApiCachedService } from '../../core/services/entity/entity-api-cached.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class MenuItemService implements OnDestroy {
   constructor(
     private userContext: UserContextService,
     private securityService: SecurityService,
-    private entityApi: EntityApiService,
+    private entityApi: EntityApiCachedService,
     private entityProvider: EntityProviderService
   ) {
 
