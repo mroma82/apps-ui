@@ -1,9 +1,9 @@
 <a [routerLink]="url">
-  <div class="media">          
-      <i *ngIf="icon" [class]="icon + ' mr-3 mt-1'"></i>          
-      <div class="media-body">
-        <h5 class="mt-0">{{ title }}</h5>            
-        <small *ngIf="description">{{ description }}</small>
-      </div>          
+  <div class="media">
+    <i *ngIf="icon" [class]="icon + ' mr-3 mt-1 img-icon'"></i>
+    <div class="media-body">
+      <h5 class="mt-0">{{ title }}</h5>
+      <small *ngIf="description">{{ description }}</small>
+    </div>
   </div>
 </a>

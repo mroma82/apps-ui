@@ -1,18 +1,21 @@
 .media {
     padding: 15px;
     height: 100%;
-    transition-delay: .07s;
 
-    &:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,.1);
-        background-color: #fff;
-        border-radius: 7px;
-        transition-delay: 0s;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1);
+    background-color: #fff;
+    border-radius: 7px;
+    transition-delay: 0s;
+
+    .img-icon {
+        color: blue;
+        font-size: 1.5rem;
     }
 }
 
 a {
-    color: black;
+    color: #000;
+
     &:hover {
         text-decoration: none;
     }

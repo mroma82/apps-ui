@@ -1,6 +1,8 @@
 .local-nav {
     font-size: 0.9rem;
 
+    background-color: #f1f1f1;
+
     a {
         color: #000;
         border-bottom: 2px solid transparent;
@@ -14,8 +16,8 @@
             background-color: rgb(0, 0, 0, 0.08);
             border-bottom: 2px solid rgba(0, 0, 0, 0.9);
         }
-    }    
-    
+    }
+
     // adjust
     padding: .25rem 1rem;
     margin-top: -.25rem;
@@ -24,9 +26,9 @@
     .navbar-toggler {
         border: none;
 
-        &:active, 
+        &:active,
         &:focus {
             border: none !important;
         }
-    }    
+    }
 }
