@@ -9,12 +9,12 @@ import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../services
   templateUrl: './entity-create-modal.component.html',
   styleUrls: ['./entity-create-modal.component.scss']
 })
-export class EntityCreateModalComponent extends BaseDialog {  
-  @ViewChild('content', { static: true }) content : any;  
+export class EntityCreateModalComponent extends BaseDialog {
+  @ViewChild('content', { static: true }) content: any;
 
   // entity type id
-  entityTypeId : string = this.entityConfig.entityTypeId;
-  
+  entityTypeId: string = this.entityConfig.entityTypeId;
+
   // setup
   modalConfig = {
     title: "Create"
@@ -27,24 +27,24 @@ export class EntityCreateModalComponent extends BaseDialog {
   constructor(
     modalService: NgbModal,
     private context: EntityCreateContextService,
-    @Inject(ENTITY_CONFIG) private entityConfig : IEntityConfigurationService
-  ) { 
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService
+  ) {
     super(modalService);
 
     // set open/close subscripton
     this.initOpenCloseSubscription(context.dialogOpen$);
   }
-  
+
   // init
   ngOnInit() {
-    
+
   }
 
   // create
   create() {
     this.context.create().subscribe(x => {
-      if(x) {
-        this.closeDialog();
+      if (x) {
+        this.context.dialogOpen$.next(false);
       }
     });
   }
