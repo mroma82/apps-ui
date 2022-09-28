@@ -18,22 +18,22 @@ export class EntityCreateContextService {
   // observables
   dialogOpen$ = new BehaviorSubject<boolean>(false);
   model$ = new BehaviorSubject<any>({});
-  
+
   // new
   constructor(
-    private api: EntityApiService,    
-    private dialogService : DialogService,
+    private api: EntityApiService,
+    private dialogService: DialogService,
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
-    private listingContext: EntityListingContextService,      
+    private listingContext: EntityListingContextService,
     private appContext: AppContextService,
-    private router : Router,
-    @Optional() private subGridContext : EntitySubGridContextService,      
+    private router: Router,
+    @Optional() private subGridContext: EntitySubGridContextService,
     @Optional() @Inject(ENTITY_VALIDATION) private entityValidation: IEntityValidationService
   ) { }
 
   // open dialog
   openDialog() {
-    this.clear(); 
+    this.clear();
     this.dialogOpen$.next(true);
   }
 
@@ -44,15 +44,15 @@ export class EntityCreateContextService {
 
   // create
   create() {
-    
+
     // get hte model
     const model = {
       ...this.model$.value
     };
 
     // check if validation
-    let validate : Observable<IValidationResult>;
-    if(this.entityValidation) {
+    let validate: Observable<IValidationResult>;
+    if (this.entityValidation) {
       validate = this.entityValidation.validateCreate(model);
     } else {
       validate = of({ success: true });
@@ -60,33 +60,33 @@ export class EntityCreateContextService {
 
     // validate
     return validate.pipe(mergeMap(result => {
-      if(result.success) {
+      if (result.success) {
 
         // try to create
         return this.api.add(this.entityConfig.entityTypeId, model).pipe(tap(x => {
 
           // check if ok
-          if(x.success) {
+          if (x.success) {
 
             // refresh
-            if(this.subGridContext !== null) {
+            if (this.subGridContext !== null) {
               this.subGridContext.refreshData();
             } else {
               this.listingContext.refreshData();
-            }           
-            
+            }
+            console.log(`Here: ${this.entityConfig.navigateToEditAfterCreate}`);
             // check what to do next
-            if(this.entityConfig.navigateToEditAfterCreate) {
+            if (this.entityConfig.navigateToEditAfterCreate) {
               this.router.navigateByUrl(`${this.entityConfig.rootUrl}/edit/${x.id}`);
-            } 
-            
-            else {  
+            }
+
+            else {
               // send a toast message
               this.appContext.ToastMessage.add({ text: `${this.entityConfig.name} Created`, url: `${this.entityConfig.rootUrl}/view/${x.id}` });
             }
 
             return true;
-            
+
           } else {
             this.dialogService.message("Error during create", x.text);
             return false;
@@ -94,12 +94,12 @@ export class EntityCreateContextService {
         }));
 
       } else {
-        this.dialogService.message("Validation", result.text);        
+        this.dialogService.message("Validation", result.text);
       }
 
       return of(false);
     }));
-    
+
   };
 
   // clear
@@ -107,7 +107,7 @@ export class EntityCreateContextService {
 
     // model defeault
     let modelDefault = {};
-    if(this.subGridContext) {
+    if (this.subGridContext) {
       modelDefault = this.subGridContext.modelDefault$.value;
     }
 

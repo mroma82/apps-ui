@@ -11,7 +11,7 @@ export class ExampleLineEntityConfigurationService extends BaseEntityConfigurati
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type

@@ -48,7 +48,8 @@ export class ExampleLineSubGridComponent implements OnInit {
   // sub grid config
   lineSubGridConfig: IEntitySubGridConfigurationService = {
     createFormComponent: ExampleLineCreateComponent,
-    editFormComponent: ExampleLineViewEditComponent
+    editFormComponent: ExampleLineViewEditComponent,
+    navigateToEditAfterCreate: false
   };
 
   // new
