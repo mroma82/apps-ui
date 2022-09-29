@@ -16,5 +16,8 @@ export class ExampleLineEntityConfigurationService extends BaseEntityConfigurati
 
     // set entity type
     this.setEntityType(EntityTypes.ExampleLine);
+
+    // options
+    this.createName = this.viewEditName = this.deleteName = "Line";
   }
 }

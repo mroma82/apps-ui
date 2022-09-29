@@ -1,4 +1,3 @@
-
 <div class="row">
 
   <div class="col-md-6">
@@ -11,28 +10,28 @@
 
   <div class="col-md-6">
     <div class="d-flex justify-content-md-end">
-      
-      <div class="pt-2 pb-2 filter-container">        
+
+      <div class="pt-2 pb-2 filter-container">
         <ng-content select="[filter]"></ng-content>
       </div>
-    
+
       <div class="pt-2 pb-2 pr-2 pl-0">
         <app-entity-listing-filters></app-entity-listing-filters>
       </div>
-    
+
       <div class="p-2">
         <app-listing-controls (onRefresh)="refresh()" (onClear)="clear()" (onSetPageSize)="setPageSize($event)"></app-listing-controls>
       </div>
-      
-    </div>    
+
+    </div>
   </div>
 
 </div>
 
 <div class="d-flex mb-2">
   <div class="pt-2 pr-2 col-btn-new" *ngIf="canAdd$ | async">
-    <button type="button" class="btn btn-primary" (click)="openCreateDialog()"><i class="fas fa-plus mr-1"></i> New</button>
-  </div>    
+    <button type="button" class="btn btn-primary" (click)="openCreateDialog()"><i class="fas fa-plus mr-1"></i> Add</button>
+  </div>
   <div class="p-2">
     <ng-content select="[controls]"></ng-content>
   </div>

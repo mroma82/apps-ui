@@ -1,7 +1,7 @@
 import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { flatMap, map } from 'rxjs/operators';
 import { DialogService } from 'src/app/common/services/dialog.service';
 import { DialogResultEnum } from 'src/app/common/types/dialogs/dialog-result.enum';
 import { IEntitySubGridColumn } from 'src/app/core/models/entity/entity-subgrid-column';
@@ -102,8 +102,13 @@ export class EntitySubGridComponent implements OnInit {
   // delete
   delete(id: string) {
 
+    // delete name
+    const deleteName$ = (this.entityConfig.deleteName)
+      ? of(this.entityConfig.deleteName)
+      : this.entityProvider.getEntityName(this.entityConfig.entityTypeId);
+
     // ask
-    this.dialogService.yesNo("Delete", "Are you sure you want to delete this item?").subscribe(dialogResult => {
+    deleteName$.pipe(flatMap(name => this.dialogService.yesNo(`Delete ${name}`, "Are you sure you want to delete this record?"))).subscribe(dialogResult => {
       if (dialogResult == DialogResultEnum.Yes) {
 
         // delete
@@ -177,3 +182,4 @@ export class EntitySubGridComponent implements OnInit {
     return EntityColumnType.Regular;
   }
 }
+

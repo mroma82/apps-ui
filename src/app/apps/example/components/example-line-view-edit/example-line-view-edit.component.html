@@ -1,6 +1,8 @@
-<div>
-  <app-text-field [(ngModel)]="model.title" name="title" id="title"></app-text-field>
-</div>
-<div>
-  <app-text-field [(ngModel)]="model.name" name="name" id="name"></app-text-field>
+<div *ngIf="mode$ | async as viewMode">
+  <div>
+    <app-text-field [(ngModel)]="model.title" name="title" id="title" [disabled]="viewMode === 'view'"></app-text-field>
+  </div>
+  <div>
+    <app-text-field [(ngModel)]="model.name" name="name" id="name" [disabled]="viewMode === 'view'"></app-text-field>
+  </div>
 </div>

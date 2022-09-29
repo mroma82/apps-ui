@@ -1,8 +1,10 @@
 import { Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, of } from 'rxjs';
 import { BaseDialog } from 'src/app/common/abstractions/base-dialog';
 import { EntityCreateContextService } from 'src/app/core/services/entity/create/entity-create-context.service';
 import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../services/entity/entity-configuration.service';
+import { EntityProviderService } from '../../../../services/entity/entity-provider.service';
 
 @Component({
   selector: 'app-entity-create-modal',
@@ -27,6 +29,7 @@ export class EntityCreateModalComponent extends BaseDialog {
   constructor(
     modalService: NgbModal,
     private context: EntityCreateContextService,
+    private entityProvider: EntityProviderService,
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService
   ) {
     super(modalService);
@@ -38,6 +41,18 @@ export class EntityCreateModalComponent extends BaseDialog {
   // init
   ngOnInit() {
 
+  }
+
+  // get modal title
+  getModalTitle(): Observable<string> {
+
+    // check if a custom title
+    if (this.entityConfig.createName) {
+      return of(this.entityConfig.createName);
+    }
+
+    // else, from the provider
+    return this.entityProvider.getEntityName(this.entityConfig.entityTypeId);
   }
 
   // create

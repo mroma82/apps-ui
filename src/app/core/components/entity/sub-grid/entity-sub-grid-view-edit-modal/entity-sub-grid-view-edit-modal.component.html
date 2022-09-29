@@ -1,13 +1,13 @@
 <ng-template #content let-modal>
   <div *ngIf="mode$ | async as mode">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">{{ mode }}</h4>
+      <h4 class="modal-title" id="modal-basic-title">{{ modeTitle$ | async }} {{ getModalTitle() | async }}</h4>
       <button type="button" class="close" aria-label="Close" (click)="dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-    
+
       <app-entity-form [entityTypeId]="entityTypeId">
         <ng-content select="[form]"></ng-content>
         <app-entity-sub-grid-view-edit></app-entity-sub-grid-view-edit>

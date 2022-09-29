@@ -4,16 +4,19 @@ import { EntityProviderService } from './entity-provider.service';
 export const ENTITY_CONFIG = "IEntityConfigurationService";
 
 // entity config
-export interface IEntityConfigurationService {  
+export interface IEntityConfigurationService {
 
   // entity details
-  entityTypeId : string;
+  entityTypeId: string;
   rootUrl: string;
   name: string;
   pluralName: string;
+  createName: string
+  viewEditName: string;
+  deleteName: string;
 
   // workflow
-  workflow : {
+  workflow: {
     enabled: boolean,
     url: string,
     prefixText: string
@@ -28,5 +31,5 @@ export interface IEntityConfigurationService {
   showAddOnListing: boolean;
 
   // record description
-  recordDescription(model: any) : string;
+  recordDescription(model: any): string;
 }

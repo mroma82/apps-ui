@@ -10,10 +10,15 @@ import { EntitySubGridViewEditContextService } from 'src/app/core/services/entit
 })
 export class ExampleLineViewEditComponent extends BaseEntitySubGridViewEditComponent {
 
+  // observables
+  mode$;
+
   // new
   constructor(
-    context: EntitySubGridViewEditContextService    
-  ) { 
+    context: EntitySubGridViewEditContextService
+  ) {
     super(context);
+
+    this.mode$ = context.mode$;
   }
 }

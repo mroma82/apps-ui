@@ -1,19 +1,19 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{ modalConfig.title }}</h4>
+    <h4 class="modal-title" id="modal-basic-title">Add {{ getModalTitle() | async }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-  
+
     <app-entity-form [entityTypeId]="entityTypeId">
       <ng-content select="[form]"></ng-content>
       <app-entity-create></app-entity-create>
     </app-entity-form>
 
     <div class="mt-sm-3">
-      <button type="button" class="btn btn-primary" (click)="create()">Create</button>
+      <button type="button" class="btn btn-primary" (click)="create()">Add</button>
     </div>
   </div>
 </ng-template>
