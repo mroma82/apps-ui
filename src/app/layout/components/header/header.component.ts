@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { IMenuItem } from 'src/app/common/models/menu-item';
 import { AppContextService } from 'src/app/app-context.service';
@@ -13,6 +13,7 @@ import { InstanceContextService } from '../../../common/services/instance-contex
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild("container") container: ElementRef;
 
   // model
   model = {
@@ -48,5 +49,13 @@ export class HeaderComponent implements OnInit {
   // hide menu
   hideMenu() {
     this.model.showMenu = false;
+  }
+
+  // handle when container is clicked
+  onContainerClick(e: Event) {
+
+    // make sure it's onlyt he container
+    if (e.target === this.container.nativeElement)
+      this.hideMenu();
   }
 }
