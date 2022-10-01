@@ -13,7 +13,7 @@
                 </a>
             </div>
 
-            <app-header-user-context-menu [isActive]="menuOpen" [user]="user" [instance]="instance">
+            <app-header-user-context-menu [isActive]="menuOpen" [user]="user" [instance]="instance" (onHideMenu)="hideMenu()">
             </app-header-user-context-menu>
         </ng-container>
     </ng-container>

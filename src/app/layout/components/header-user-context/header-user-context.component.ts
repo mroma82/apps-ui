@@ -37,4 +37,9 @@ export class HeaderUserContextComponent implements OnInit {
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
+
+  // hide menu
+  hideMenu() {
+    this.menuOpen = false;
+  }
 }
