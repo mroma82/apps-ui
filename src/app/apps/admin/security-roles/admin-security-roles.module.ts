@@ -20,6 +20,7 @@ import { AdminSecurityRoleEntityCreateComponent } from './components/admin-secur
 import { AdminSecurityRoleEntityEditComponent } from './components/admin-security-role-entity-edit/admin-security-role-entity-edit.component';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
 import { AdminSecurityRolesEntityConfigurationService } from './services/admin-security-roles-entity-configuration.service';
+import { AdminSecurityRolePermissionFieldsComponent } from './components/admin-security-role-permission-fields/admin-security-role-permission-fields.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AdminSecurityRolesEntityConfigurationService } from './services/admin-s
     AdminSecurityRoleViewEditComponent, 
     AdminSecurityRoleEntitySubGridComponent, 
     AdminSecurityRoleEntityCreateComponent, 
-    AdminSecurityRoleEntityEditComponent
+    AdminSecurityRoleEntityEditComponent, AdminSecurityRolePermissionFieldsComponent
   ],
   imports: [
     CommonModule,    

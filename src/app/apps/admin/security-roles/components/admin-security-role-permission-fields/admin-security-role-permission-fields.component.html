@@ -1,0 +1,17 @@
+<div class="d-flex">
+    <div class="p-2">
+        <app-check-box-field [(ngModel)]="permissionModel[1]" label="View" name="canView" (change)="updatePermissionMask(permissionModel)"></app-check-box-field>
+    </div>
+    <div class="p-2">
+        <app-check-box-field [(ngModel)]="permissionModel[2]" label="Edit" name="canEdit" (change)="updatePermissionMask(permissionModel)"></app-check-box-field>
+    </div>
+    <div class="p-2">
+        <app-check-box-field [(ngModel)]="permissionModel[4]" label="Add" name="canAdd" (change)="updatePermissionMask(permissionModel)"></app-check-box-field>
+    </div>
+    <div class="p-2">
+        <app-check-box-field [(ngModel)]="permissionModel[8]" label="Delete" name="canDelete" (change)="updatePermissionMask(permissionModel)"></app-check-box-field>
+    </div>
+    <div class="p-2">
+        <app-check-box-field [(ngModel)]="permissionModel[16]" label="Workflow Admin" name="canWorkflowAdmin" (change)="updatePermissionMask(permissionModel)"></app-check-box-field>
+    </div>
+</div>

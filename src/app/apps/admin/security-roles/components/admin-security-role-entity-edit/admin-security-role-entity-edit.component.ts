@@ -19,10 +19,6 @@ export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewE
     super(viewEditContext);
   }
 
-  // define permission model
-  permissionModel = {
-  }
-
   // init
   ngOnInit() {
 
@@ -30,42 +26,8 @@ export class AdminSecurityRoleEntityEditComponent extends BaseEntitySubGridViewE
     this.subs.add(
       this.viewEditContext.model$.subscribe(x => {
 
-        // check the permissions
-        var permissionMask: number = x.permissionMask;
-        var setMask = (mask: SecurityPermissionMask) => {
-          this.permissionModel[mask] = (permissionMask & mask) === mask;
-        }
 
-        // set all
-        setMask(SecurityPermissionMask.View);
-        setMask(SecurityPermissionMask.Edit);
-        setMask(SecurityPermissionMask.Add);
-        setMask(SecurityPermissionMask.Delete);
-        setMask(SecurityPermissionMask.WorkflowAdmin);
       })
-    )
-  }
-
-  // update the permissions mask
-  updatePermissionMask(model: any) {
-
-    // init mask
-    var permissionMask = 0;
-
-    // helper
-    var addMask = (mask: SecurityPermissionMask) => {
-      if (model[mask])
-        permissionMask = permissionMask | mask;
-    }
-
-    // chedck all
-    addMask(SecurityPermissionMask.View);
-    addMask(SecurityPermissionMask.Edit);
-    addMask(SecurityPermissionMask.Add);
-    addMask(SecurityPermissionMask.Delete);
-    addMask(SecurityPermissionMask.WorkflowAdmin);
-
-    // set the permission mask
-    this.model.permissionmask = permissionMask;
+    );
   }
 }

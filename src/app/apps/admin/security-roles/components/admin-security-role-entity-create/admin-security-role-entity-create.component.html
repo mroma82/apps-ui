@@ -2,5 +2,7 @@
   <app-select-field [(ngModel)]="model.entityTypeId" name="entityTypeId">
     <option [ngValue]="null">-- Please select --</option>
     <option *ngFor="let item of entityList$ | async" [value]="item.entityTypeId">{{ item.name }}</option>
-  </app-select-field>        
+  </app-select-field>
 </div>
+
+<app-admin-security-role-permission-fields [model]="model"></app-admin-security-role-permission-fields>
