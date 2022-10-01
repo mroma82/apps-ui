@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
 
-    <a class="btn-menu-toggle mr-1 ml-0" (click)="toggleMenu()" href="javascript:;;" [class.active]="model.showMenu">
+    <a class="btn-menu-toggle mr-1 ml-0" (click)="leftMenu.toggleMenu()" href="javascript:;;">
       <i class="fas fa-th"></i>
     </a>
 
@@ -31,63 +31,6 @@
   </nav>
 </header>
 
-<div class="left-menu-container" #container [class.active]="model.showMenu" (click)="onContainerClick($event)">
-  <div class="left-menu">
-    <ul class="list-group">
+<app-left-menu #leftMenu></app-left-menu>
 
-      <a class="btn-dismiss p-2" href="javascript:;;" (click)="hideMenu()"><i class="fas fa-times"></i></a>
-
-      <h5 class="border-bottom">Applications</h5>
-
-      <li class="list-group-item pl-2"><a routerLink="/app" (click)="hideMenu()"><i class="fas fa-home mr-2"></i>Home</a>
-      </li>
-
-      <ng-container *ngFor="let item of appMenuItems$ | async">
-
-        <li class="list-group-item pl-2" *ngIf="item.hasAccess$ | async">
-          <a [routerLink]="item.url" (click)="hideMenu()">
-            <i [class]="item.icon + ' mr-2'"></i>{{ item.title }}
-          </a>
-        </li>
-      </ng-container>
-
-    </ul>
-
-    <div *ngIf="setupMenuItems$ | async as setupMenuItems">
-      <div *ngIf="setupMenuItems.length > 0">
-        <h5 class="border-bottom mt-4">Setup</h5>
-        <ul class="list-group">
-
-          <ng-container *ngFor="let item of setupMenuItems">
-            <li class="list-group-item pl-2" *ngIf="item.hasAccess$ | async">
-              <a [routerLink]="item.url" (click)="hideMenu()">
-                <i [class]="item.icon + ' mr-2'"></i>{{ item.title }}
-              </a>
-            </li>
-          </ng-container>
-
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-4">
-      <h5 class="border-bottom mt-4">System</h5>
-      <div class="row">
-        <div class="col-md-6">
-          <small>Apps Version: <strong>{{ model.appVersion }}</strong></small>
-        </div>
-        <div class="col-md-6 text-right">
-          <small>
-            <a routerLink="/logout" (click)="hideMenu()"><i class="fas fa-sign-out-alt mr-2"></i>Log Out</a>
-          </small>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="d-none d-print-block">
-  <h2>Apps</h2>
-  <app-header-nav></app-header-nav>
-  <hr />
-</div>
+<app-header-print></app-header-print>

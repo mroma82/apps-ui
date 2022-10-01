@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EntityRouteResolverService } from 'src/app/common/services/entity-route-resolver.service';
 import { take, map } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { ITaskItem } from '../../models/task/task-item';
   styleUrls: ['./task-bar.component.scss']
 })
 export class TaskBarComponent implements OnInit {
+  @ViewChild("container") container: ElementRef;
 
   // define count 
   count$: Observable<number>;
@@ -24,7 +25,7 @@ export class TaskBarComponent implements OnInit {
     this.list$ = context.list$.pipe(map(x => [...x].reverse().slice(0, 20)));
   }
 
-  model = {
+  state = {
     showMenu: false
   }
 
@@ -36,11 +37,19 @@ export class TaskBarComponent implements OnInit {
   // show list dialog
   showListDialog() {
     this.context.openListDialog();
-    this.model.showMenu = false;
+    this.state.showMenu = false;
   }
 
   // refresh
   refresh() {
     this.context.refreshData();
+  }
+
+  // handle when container is clicked
+  onContainerClick(e: Event) {
+
+    // make sure it's onlyt he container
+    if (e.target === this.container.nativeElement)
+      this.state.showMenu = false;
   }
 }
