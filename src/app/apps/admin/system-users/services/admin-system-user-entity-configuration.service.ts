@@ -13,7 +13,7 @@ export class AdminSystemUserEntityConfigurationService extends BaseEntityConfigu
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type
@@ -24,6 +24,9 @@ export class AdminSystemUserEntityConfigurationService extends BaseEntityConfigu
 
     // view/edit
     this.viewEditFormComponent = AdminSystemUserViewEditComponent;
+
+    // options
+    this.navigateToEditAfterCreate = true;
   }
 
   // record description

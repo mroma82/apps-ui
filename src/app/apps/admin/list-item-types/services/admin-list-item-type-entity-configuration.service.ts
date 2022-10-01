@@ -13,7 +13,7 @@ export class AdminListItemTypeEntityConfigurationService extends BaseEntityConfi
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type
@@ -24,6 +24,9 @@ export class AdminListItemTypeEntityConfigurationService extends BaseEntityConfi
 
     // view/edit
     this.viewEditFormComponent = AdminListItemTypeViewEditComponent;
+
+    // options
+    this.navigateToEditAfterCreate = true;
   }
 
   // record description

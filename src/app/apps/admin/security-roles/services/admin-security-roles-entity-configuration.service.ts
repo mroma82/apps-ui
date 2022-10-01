@@ -13,17 +13,20 @@ export class AdminSecurityRolesEntityConfigurationService extends BaseEntityConf
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type
     this.setEntityType(EntityTypes.SecurityRole);
-    
+
     // create
     this.createFormComponent = AdminSecurityRoleCreateComponent;
 
     // view/edit
     this.viewEditFormComponent = AdminSecurityRoleViewEditComponent;
+
+    // options
+    this.navigateToEditAfterCreate = true;
   }
 
   // record description

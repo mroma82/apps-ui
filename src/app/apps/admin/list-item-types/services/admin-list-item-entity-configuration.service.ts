@@ -13,7 +13,7 @@ export class AdminListItemEntityConfigurationService extends BaseEntityConfigura
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type

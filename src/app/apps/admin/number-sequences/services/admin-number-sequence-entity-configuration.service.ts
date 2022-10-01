@@ -13,7 +13,7 @@ export class AdminNumberSequenceEntityConfigurationService extends BaseEntityCon
   // new
   constructor(
     provider: EntityProviderService
-  ) { 
+  ) {
     super(provider);
 
     // set entity type

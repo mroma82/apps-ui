@@ -10,12 +10,32 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
   constructor() { }
 
   // views
-  getViews() : Observable<IEntityListingView[]> {
+  getViews(): Observable<IEntityListingView[]> {
     return of([
-      { 
-        id: "all", 
-        title: "All Security Roles", 
-        filter: { }, 
+      {
+        id: "all",
+        title: "All Security Roles",
+        filter: {},
+        sort: {
+          field: "name"
+        }
+      },
+      {
+        id: "admin",
+        title: "All System Administrator Roles",
+        filter: {
+          isSysAdmin: true
+        },
+        sort: {
+          field: "name"
+        }
+      },
+      {
+        id: "billing",
+        title: "All Billing Access Roles",
+        filter: {
+          allowBillingAccess: true
+        },
         sort: {
           field: "name"
         }
@@ -24,7 +44,7 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
   }
 
   // columns
-  getColumns() : Observable<IEntityListingColumn[]> {
+  getColumns(): Observable<IEntityListingColumn[]> {
     return of([
       {
         model: "name",
@@ -34,6 +54,10 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
       {
         model: "isSysAdmin",
         displayFunc: x => x.isSysAdmin ? "Yes" : "No"
+      },
+      {
+        model: "allowBillingAccess",
+        displayFunc: x => x.allowBillingAccess ? "Yes" : "No"
       }
     ]);
   }
