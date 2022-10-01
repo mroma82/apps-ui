@@ -45,6 +45,11 @@
         a {
             padding: 0.7rem 1rem;
             display: block;
+            margin-right: 25%;
+
+            &:hover {
+                background-color: #dee2e6;
+            }
         }
     }
 
