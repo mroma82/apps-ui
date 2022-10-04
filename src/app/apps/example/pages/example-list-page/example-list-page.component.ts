@@ -7,15 +7,15 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-example-list-page',
   templateUrl: './example-list-page.component.html',
-  styleUrls: ['./example-list-page.component.scss']  
+  styleUrls: ['./example-list-page.component.scss']
 })
 export class ExampleListPageComponent implements OnInit, OnDestroy {
 
   constructor(
-    private appContext: AppContextService,        
+    private appContext: AppContextService,
     private route: ActivatedRoute,
-    private listContext : EntityListingContextService
-  ) {     
+    private listContext: EntityListingContextService
+  ) {
     // title
     appContext.Layout.setTitle(null);
   }
@@ -28,12 +28,15 @@ export class ExampleListPageComponent implements OnInit, OnDestroy {
 
     // subscribe to route changes
     this.subs.add(
-      this.route.data.subscribe(x => this.listContext.setIsWorkflowAssigned(x.isWorkflowAssigned))    
-    );    
-  }  
+      this.route.data.subscribe(x => this.listContext.setIsWorkflowAssigned(x.isWorkflowAssigned))
+    );
+  }
 
   // cleanup
   ngOnDestroy() {
     this.subs.unsubscribe();
+
+    // clean up
+    this.listContext.setIsWorkflowAssigned(false);
   }
 }
