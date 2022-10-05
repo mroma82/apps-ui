@@ -12,8 +12,18 @@ export class ExampleLineCreateComponent extends BaseEntityCreateComponent {
 
   // new
   constructor(
-    context: EntityCreateContextService    
-  ) { 
+    context: EntityCreateContextService
+  ) {
     super(context);
+  }
+
+  // submit
+  submit() {
+
+    // try to create
+    this.context.create().subscribe(ok => {
+      if (ok)
+        this.context.closeDialog();
+    })
   }
 }

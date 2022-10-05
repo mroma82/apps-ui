@@ -6,22 +6,22 @@ import { EntityCreateContextService } from '../create/entity-create-context.serv
 export abstract class BaseEntityCreateComponent implements OnInit, OnDestroy {
 
   // model
-  model : any = {};  
+  model: any = {};
 
   // subscriptions
   subs = new Subscription();
 
   // new
   constructor(
-    private context: EntityCreateContextService    
-  ) { 
+    protected context: EntityCreateContextService
+  ) {
 
     // sub to model
     this.context.model$.subscribe(x => this.model = x);
   }
 
   // init
-  ngOnInit() {    
+  ngOnInit() {
   }
 
   // cleanup

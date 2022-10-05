@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./example-create.component.scss']
 })
 export class ExampleCreateComponent implements OnInit, OnDestroy {
-  
+
   // model
-  model : any = {};  
+  model: any = {};
 
   // subscriptions
   subs = new Subscription();
@@ -20,18 +20,29 @@ export class ExampleCreateComponent implements OnInit, OnDestroy {
   constructor(
     private context: EntityCreateContextService,
     private router: Router
-  ) { 
+  ) {
 
     // sub to model
     this.context.model$.subscribe(x => this.model = x);
   }
 
   // init
-  ngOnInit() {    
+  ngOnInit() {
   }
 
   // cleanup
   ngOnDestroy() {
     this.subs.unsubscribe();
+  }
+
+  // submit
+  submit() {
+
+    // try to create
+    this.context.create().subscribe(ok => {
+      if (ok) {
+        this.context.closeDialog();
+      }
+    })
   }
 }

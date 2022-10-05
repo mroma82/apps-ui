@@ -1,6 +1,8 @@
-<div>
-  <app-text-field [(ngModel)]="model.title" name="title" id="title" appInputFocus></app-text-field>
-</div>
-<div>
-  <app-text-field [(ngModel)]="model.name" name="name" id="name"></app-text-field>
-</div>
+<app-enter-submit-form (onSubmit)="submit()">
+  <div>
+    <app-text-field [(ngModel)]="model.title" name="title" id="title" appInputFocus></app-text-field>
+  </div>
+  <div>
+    <app-text-field [(ngModel)]="model.name" name="name" id="name"></app-text-field>
+  </div>
+</app-enter-submit-form>

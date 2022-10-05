@@ -34,6 +34,7 @@ import { TileComponent } from './components/layout/tile/tile.component';
 import { RouteProgressComponent } from './components/route-progress/route-progress.component';
 import { InstanceContextService } from './services/instance-context.service';
 import { InputFocusDirective } from './directives/input-focus.directive';
+import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/enter-submit-form.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { InputFocusDirective } from './directives/input-focus.directive';
     ToastMessageListComponent,
     TileComponent,
     RouteProgressComponent,
-    InputFocusDirective
+    InputFocusDirective,
+    EnterSubmitFormComponent
   ],
   providers: [
     InstanceContextService,
@@ -98,6 +100,7 @@ import { InputFocusDirective } from './directives/input-focus.directive';
     ToastMessageListComponent,
     TileComponent,
     RouteProgressComponent,
+    EnterSubmitFormComponent,
 
     UtcDateTimePipe,
     UtcDateTimeSincePipe,

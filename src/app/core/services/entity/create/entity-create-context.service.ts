@@ -43,7 +43,7 @@ export class EntityCreateContextService {
   }
 
   // create
-  create() {
+  create(): Observable<boolean> {
 
     // get hte model
     const model = {
@@ -74,7 +74,7 @@ export class EntityCreateContextService {
             } else {
               this.listingContext.refreshData();
             }
-            console.log(`Here: ${this.entityConfig.navigateToEditAfterCreate}`);
+
             // check what to do next
             if (this.entityConfig.navigateToEditAfterCreate) {
               this.router.navigateByUrl(`${this.entityConfig.rootUrl}/edit/${x.id}`);
