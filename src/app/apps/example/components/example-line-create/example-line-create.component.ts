@@ -16,14 +16,4 @@ export class ExampleLineCreateComponent extends BaseEntityCreateComponent {
   ) {
     super(context);
   }
-
-  // submit
-  submit() {
-
-    // try to create
-    this.context.create().subscribe(ok => {
-      if (ok)
-        this.context.closeDialog();
-    })
-  }
 }

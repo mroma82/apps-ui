@@ -34,15 +34,4 @@ export class ExampleCreateComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
-
-  // submit
-  submit() {
-
-    // try to create
-    this.context.create().subscribe(ok => {
-      if (ok) {
-        this.context.closeDialog();
-      }
-    })
-  }
 }
