@@ -9,7 +9,7 @@ import { EntityContainerComponent } from './components/entity/container/entity-c
 import { RouterModule } from '@angular/router';
 import { EntityListingFiltersComponent } from './components/entity/listing/entity-listing-filters/entity-listing-filters.component';
 import { EntityListingPageGenericComponent } from './components/entity/listing/entity-listing-page-generic/entity-listing-page-generic.component';
-import { EntityListingResultsComponent } from './components/entity/listing/entity-listing-results/entity-listing-results.component';
+import { EntityListingResultsDataTableComponent } from './components/entity/listing/entity-listing-results-data-table/entity-listing-results-data-table.component';
 import { EntityListingViewsComponent } from './components/entity/listing/entity-listing-views/entity-listing-views.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
@@ -26,14 +26,16 @@ import { EntityTypeNamePipe } from './pipes/entity/entity-type-name.pipe';
 import { SelectListService } from './services/select-list.service';
 import { EntityFormComponent } from './components/entity/form/entity-form/entity-form.component';
 import { EntityValidationService } from './services/entity/entity-validation.service';
+import { AgGridModule } from 'ag-grid-angular';
+import { EntityListingResultsAgGridComponent } from './components/entity/listing/entity-listing-results-ag-grid/entity-listing-results-ag-grid.component';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     EntityViewEditComponent,
-    EntityViewEditPageGenericComponent,    
+    EntityViewEditPageGenericComponent,
     EntityCreateModalComponent,
     EntityContainerComponent,
-    EntityListingResultsComponent,
+    EntityListingResultsDataTableComponent,
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
     EntityListingPageGenericComponent,
@@ -44,16 +46,18 @@ import { EntityValidationService } from './services/entity/entity-validation.ser
     EntitySingleRecordPageGenericComponent,
     EntitySingleRecordViewEditComponent,
     EntityTypeNamePipe,
-    EntityFormComponent   
+    EntityFormComponent,
+    EntityListingResultsAgGridComponent
   ],
   imports: [
-    CommonModule,     
+    CommonModule,
     RouterModule,
-    FormsModule,    
+    FormsModule,
     NgxDatatableModule,
     NgbModule,
     AppCommonModule,
-    AppFoundationModule,    
+    AppFoundationModule,
+    AgGridModule
   ],
   providers: [
     EntityApiService,
@@ -65,7 +69,8 @@ import { EntityValidationService } from './services/entity/entity-validation.ser
     EntityViewEditComponent,
     EntityViewEditPageGenericComponent,
     EntityContainerComponent,
-    EntityListingResultsComponent,
+    EntityListingResultsDataTableComponent,
+    EntityListingResultsAgGridComponent,
     EntityListingViewsComponent,
     EntityListingFiltersComponent,
     EntityListingPageGenericComponent,

@@ -35,6 +35,8 @@ import { RouteProgressComponent } from './components/route-progress/route-progre
 import { InstanceContextService } from './services/instance-context.service';
 import { InputFocusDirective } from './directives/input-focus.directive';
 import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/enter-submit-form.component';
+import { GridCellLinkComponent } from './components/ag-grid/grid-cell-link/grid-cell-link.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/e
     TileComponent,
     RouteProgressComponent,
     InputFocusDirective,
-    EnterSubmitFormComponent
+    EnterSubmitFormComponent,
+    GridCellLinkComponent
   ],
   providers: [
     InstanceContextService,
@@ -78,7 +81,8 @@ import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/e
     NgxDatatableModule,
     NgbModule,
     RouterModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AgGridModule
   ],
   exports: [
     DragDropComponent,
@@ -101,6 +105,7 @@ import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/e
     TileComponent,
     RouteProgressComponent,
     EnterSubmitFormComponent,
+    GridCellLinkComponent,
 
     UtcDateTimePipe,
     UtcDateTimeSincePipe,

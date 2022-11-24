@@ -9,11 +9,11 @@ import { EntityProviderService } from '../../../../services/entity/entity-provid
 import { EntityColumnType } from '../../../../types/entity-column-type.enum';
 
 @Component({
-  selector: 'app-entity-listing-results',
-  templateUrl: './entity-listing-results.component.html',
-  styleUrls: ['./entity-listing-results.component.scss']
+  selector: 'app-entity-listing-results-data-table',
+  templateUrl: './entity-listing-results-data-table.component.html',
+  styleUrls: ['./entity-listing-results-data-table.component.scss']
 })
-export class EntityListingResultsComponent implements OnInit {
+export class EntityListingResultsDataTableComponent implements OnInit {
   ColumnTypeEnum = EntityColumnType;
 
   // observables

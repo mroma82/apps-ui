@@ -1,0 +1,47 @@
+// listing
+.listing-ag-grid {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 14px;
+
+    .ag-root {
+        border: none !important;
+        min-height: 400px;
+    }
+
+    .ag-header {
+        color: black;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    .ag-side-bar {
+        border-left-width: thin;
+    }
+
+    .ag-status-bar {
+        border: none !important;
+    }
+
+    .ag-row-odd {
+        background-color: rgba(0, 0, 0, 0.05);
+
+        &.ag-row-selected {
+            background-color: #b7e4ff;
+        }
+    }
+}
+
+/* push paging to the bottom */
+.ag-paging-panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+/* add margin for fixed footers */
+.ag-root-wrapper-body {
+    &.ag-layout-auto-height {
+        margin-bottom: 44px;
+    }
+}
