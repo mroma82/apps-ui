@@ -1,19 +1,19 @@
 <div class="btn-group" role="group" aria-label="Listing Controls">
 
-  
+
   <button type="button" class="btn btn-link" (click)="refresh()">
     <i class="fas fa-sync-alt"></i>
   </button>
-  
+
   <button type="button" class="btn btn-link" (click)="clear()">
     <i class="fas fa-eraser"></i>
   </button>
-  
+
   <button type="button" class="btn btn-link" (click)="exportExcel()">
     <i class="fas fa-file-excel"></i>
   </button>
 
-  <div ngbDropdown class="btn-group" placement="bottom-right">
+  <div ngbDropdown class="btn-group" placement="bottom-right" *ngIf="showPaging">
     <button class="btn btn-link" id="listingPageMenu" ngbDropdownToggle>
       {{model.pageSize != PAGE_SIZE_MAX ? model.pageSize : 'All'}}</button>
     <div ngbDropdownMenu aria-labelledby="listingPageMenu">

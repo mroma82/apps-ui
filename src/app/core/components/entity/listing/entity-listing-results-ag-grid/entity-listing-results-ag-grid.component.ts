@@ -60,7 +60,7 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     animateRows: true,
     // show 50 rec per page
     pagination: true,
-    paginationPageSize: 50,
+    paginationPageSize: 25,
     // grid ready
     onGridReady: (params) => {
       this.gridColumnsApi = params.columnApi;
@@ -147,6 +147,13 @@ export class EntityListingResultsAgGridComponent implements OnInit {
       this.columnDefs$.next(this.getColumnDefs(cols, canEdit));
       this.ready$.next(true);
     })
+
+    // page size change
+    this.pageSize$.subscribe(size => {
+      if (this.gridApi)
+        this.gridApi.paginationSetPageSize(size);
+    });
+
     /*this.columns$.pipe(flatMap(x => {
       x
     })).subscribe(c => {

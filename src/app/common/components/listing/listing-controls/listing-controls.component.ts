@@ -8,8 +8,9 @@ import { ToastMessageContextService } from 'src/app/common/services/toast-messag
   styleUrls: ['./listing-controls.component.scss']
 })
 export class ListingControlsComponent implements OnInit {
-  @Input() exportFilename : string = "export";
-  @Input() exportSheetname : string = "Data";
+  @Input() exportFilename: string = "export";
+  @Input() exportSheetname: string = "Data";
+  @Input() showPaging: boolean = false;
   @Output() onRefresh = new EventEmitter();
   @Output() onClear = new EventEmitter();
   @Output() onSetPageSize = new EventEmitter<number>();
@@ -24,14 +25,14 @@ export class ListingControlsComponent implements OnInit {
 
   // new
   constructor(
-    private http : AppHttpClientService, private t : ToastMessageContextService
+    private http: AppHttpClientService, private t: ToastMessageContextService
   ) { }
 
   ngOnInit() {
   }
 
   // init model
-  initModel(model : any) {
+  initModel(model: any) {
     this.model.pageSize = model.pageSize;
   }
 
@@ -54,12 +55,12 @@ export class ListingControlsComponent implements OnInit {
   exportExcel() {
 
     // build the headers
-    var headers : any[] = [];    
-    var headersRaw = document.getElementsByTagName("datatable-header-cell");         
-    for(let x = 0 ; x < headersRaw.length; x++) {
+    var headers: any[] = [];
+    var headersRaw = document.getElementsByTagName("datatable-header-cell");
+    for (let x = 0; x < headersRaw.length; x++) {
 
       // get the label and add the header
-      var label = headersRaw[x].getElementsByTagName("label")[0];            
+      var label = headersRaw[x].getElementsByTagName("label")[0];
       headers.push({
         Name: label ? label.innerText.trim() : headersRaw[x].textContent.trim(),
         CellType: "String"
@@ -67,16 +68,16 @@ export class ListingControlsComponent implements OnInit {
     }
 
     // build the rows
-    var rows : any[] = [];
-    var rowsRaw = document.getElementsByTagName("datatable-body-row");    
-    for(let x = 0; x < rowsRaw.length; x++) {
+    var rows: any[] = [];
+    var rowsRaw = document.getElementsByTagName("datatable-body-row");
+    for (let x = 0; x < rowsRaw.length; x++) {
       var row = rowsRaw[x];
 
       // build the values in this row
-      let values : any[] = [];
+      let values: any[] = [];
       var valuesRaw = row.getElementsByTagName("datatable-body-cell");
-      for(let i = 0; i < valuesRaw.length; i++) {
-        
+      for (let i = 0; i < valuesRaw.length; i++) {
+
         // add the value
         values.push({
           Value: valuesRaw[i].textContent.trim(),
@@ -85,14 +86,14 @@ export class ListingControlsComponent implements OnInit {
       }
 
       // add row
-      rows.push({        
+      rows.push({
         Cells: values
       });
     }
 
     // format date
     const today = new Date();
-    const dateString = `${today.getFullYear()}_${today.getMonth() + 1 < 10 ? '0': ''}${today.getMonth() + 1}_${today.getDate() < 10 ? '0' : ''}${today.getDate()}`;
+    const dateString = `${today.getFullYear()}_${today.getMonth() + 1 < 10 ? '0' : ''}${today.getMonth() + 1}_${today.getDate() < 10 ? '0' : ''}${today.getDate()}`;
 
     // build final model
     const model = {
@@ -103,14 +104,14 @@ export class ListingControlsComponent implements OnInit {
     };
 
     // get the excel file    
-    this.http.postBlob("/utilities/exportGrid", model).subscribe((x : Blob) => {      
-      
+    this.http.postBlob("/utilities/exportGrid", model).subscribe((x: Blob) => {
+
       // download the file      
-      var a = document.createElement("a");        
+      var a = document.createElement("a");
       a.href = window.URL.createObjectURL(x);
       a.target = "_blank";
       a.download = model.Filename;
       a.click();
-    });      
+    });
   }
 }

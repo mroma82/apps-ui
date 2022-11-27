@@ -45,8 +45,8 @@ export class EntityListingContextService {
       this.view$,
       this.filter$,
       this.searchText$,
-      this.page$,
-      this.pageSize$,
+      //this.page$,
+      //this.pageSize$,
       this.sort$,
       this.isWorkflowAssigned$
     ]).pipe(debounce(() => timer(100))).subscribe(() => this.refreshData());
@@ -71,7 +71,7 @@ export class EntityListingContextService {
 
       searchText: this.searchText$.value,
       pageNumber: this.page$.value,
-      pageSize: this.pageSize$.value,
+      pageSize: 99999,
       sortField: this.sort$.value.field,
       sortIsDescending: this.sort$.value.isDescending,
       isWorkflowAssigned: this.isWorkflowAssigned$.value
