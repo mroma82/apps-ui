@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { Observable, BehaviorSubject, Subject, forkJoin, of } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, forkJoin, of, zip } from 'rxjs';
 import { mergeMap, tap, map } from 'rxjs/operators';
 import { GridCellLinkComponent } from '../../../../../common/components/ag-grid/grid-cell-link/grid-cell-link.component';
 import { IEntityListingColumn } from '../../../../models/entity/entity-listing-column';
@@ -142,9 +142,9 @@ export class EntityListingResultsAgGridComponent implements OnInit {
       return forkJoin(x).pipe(map(() => cols));
     }));
 
-    cols$.subscribe(x => {
-      this.columns$.next(x);
-      this.columnDefs$.next(this.getColumnDefs(x));
+    zip(cols$, this.canEdit$).subscribe(([cols, canEdit]) => {
+      this.columns$.next(cols);
+      this.columnDefs$.next(this.getColumnDefs(cols, canEdit));
       this.ready$.next(true);
     })
     /*this.columns$.pipe(flatMap(x => {
@@ -239,7 +239,7 @@ export class EntityListingResultsAgGridComponent implements OnInit {
   }
 
   // function that generates the columns definitions
-  getColumnDefs(cols: IEntityListingColumn[]): ColDef[] {
+  getColumnDefs(cols: IEntityListingColumn[], canEdit: boolean): ColDef[] {
 
     // map the current list
     return cols.map(c => {
@@ -270,8 +270,8 @@ export class EntityListingResultsAgGridComponent implements OnInit {
             return {
               text: params.value,
               viewUrl: this.getViewLink(params.data, col),
-              editUrl: c.model === "id" ? this.getEditLink(params.data, col) : undefined,
-              userHasEdit$: of(true)
+              editUrl: col.showEditLink ? this.getEditLink(params.data, col) : null,
+              userHasEdit: col.showEditLink ? canEdit : false
             };
           }
         }

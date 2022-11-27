@@ -1,4 +1,3 @@
 <a [routerLink]="model.viewUrl">
-    {{ model.text }}
-</a>
-<a *ngIf="model.editUrl && (userHasEdit$ === undefined || userHasEdit$ | async)" class="fas fa-pencil-alt ml-1" [routerLink]="model.editUrl"></a>
+    {{ model.text }}</a>
+<a *ngIf="model.editUrl && userHasEdit" class="fas fa-pencil-alt ml-1" [routerLink]="model.editUrl"></a>

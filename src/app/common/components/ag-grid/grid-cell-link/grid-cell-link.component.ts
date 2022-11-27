@@ -21,7 +21,7 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
   };
 
   // has edit
-  userHasEdit$: Observable<boolean>;
+  userHasEdit: boolean;
 
   // init
   init(params: any) {
@@ -30,7 +30,7 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
     // set params
     const model = params.getModel(params);
     this.model = model;
-    this.userHasEdit$ = model.userHasEdit$;
+    this.userHasEdit = model.userHasEdit;
   }
 
   // init
