@@ -56,26 +56,26 @@ export class ListingControlsComponent implements OnInit {
 
     // build the headers
     var headers: any[] = [];
-    var headersRaw = document.getElementsByTagName("datatable-header-cell");
+    var headersRaw = document.getElementsByClassName("ag-header-cell");
     for (let x = 0; x < headersRaw.length; x++) {
 
       // get the label and add the header
-      var label = headersRaw[x].getElementsByTagName("label")[0];
+      var label = headersRaw[x].getElementsByClassName("ag-header-cell-text")[0];
       headers.push({
-        Name: label ? label.innerText.trim() : headersRaw[x].textContent.trim(),
+        Name: label ? label.textContent.trim() : headersRaw[x].textContent.trim(),
         CellType: "String"
       });
     }
 
     // build the rows
     var rows: any[] = [];
-    var rowsRaw = document.getElementsByTagName("datatable-body-row");
+    var rowsRaw = document.getElementsByClassName("ag-center-cols-container")[0].getElementsByClassName("ag-row");
     for (let x = 0; x < rowsRaw.length; x++) {
       var row = rowsRaw[x];
 
       // build the values in this row
       let values: any[] = [];
-      var valuesRaw = row.getElementsByTagName("datatable-body-cell");
+      var valuesRaw = row.getElementsByClassName("ag-cell-value");
       for (let i = 0; i < valuesRaw.length; i++) {
 
         // add the value
