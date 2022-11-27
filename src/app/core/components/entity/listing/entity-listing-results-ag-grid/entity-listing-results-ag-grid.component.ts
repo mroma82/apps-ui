@@ -226,20 +226,6 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     return EntityColumnType.Regular;
   }
 
-
-  // Each Column Definition results in one Column.
-  public columnDefs: ColDef[] = [
-    { field: 'exampleId' },
-    { field: 'title' },
-    { field: 'requestUser.fullName' }
-  ];
-
-  // DefaultColDef sets props common to all Columns
-  public defaultColDef: ColDef = {
-    sortable: true,
-    filter: true,
-  };
-
   // Data that gets displayed in the grid
   public rowData$: Observable<any[]> = this.context.listItems$;
 
@@ -252,26 +238,32 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     //this.rowData$ = items;
   }
 
+  // function that generates the columns definitions
   getColumnDefs(cols: IEntityListingColumn[]): ColDef[] {
-    console.log([6, cols.length]);
+
+    // map the current list
     return cols.map(c => {
       const col = c;
 
+      // init the ag-grid col def
       var x: ColDef = {
         field: c.model,
         headerName: c.title,
         filter: "agSetColumnFilter"
       };
 
-      if (c.displayFunc) {
-        x.cellRenderer = (params: any) => c.displayFunc(params.data);
+      // get the type
+      let colType = this.getColumnType(c);
+
+      // html
+      if (colType == EntityColumnType.Html) {
+        x.cellRenderer = (params: any) => this.htmlRender(params, c);
       }
 
-      let colType = this.getColumnType(c);
-      if (colType == EntityColumnType.Html) {
-        x.cellRenderer = this.htmlRender;
-      } else if (colType == EntityColumnType.Link) {
-        x.cellRenderer = this.linkRender(c);
+      // link
+      else if (colType == EntityColumnType.Link) {
+
+        // set the component and params
         x.cellRenderer = GridCellLinkComponent;
         x.cellRendererParams = {
           getModel: (params) => {
@@ -284,24 +276,31 @@ export class EntityListingResultsAgGridComponent implements OnInit {
           }
         }
       }
+
+      // check if a pipe
+      else if (c.pipe) {
+        x.cellRenderer = (params: any) => c.pipe.transform(params.value);
+      }
+      // check if a display function
+      else if (c.displayFunc) {
+        x.cellRenderer = (params: any) => c.displayFunc(params.data);
+      }
+
+      // return
       return x;
     });
   }
 
-  testRender(params: any) {
-    return "<strong>Hi</strong>";
-  }
+  // html render
+  htmlRender(params: any, col: IEntityListingColumn) {
 
-  htmlRender(params: any) {
-    return params.value;
-  }
-
-  linkRender(col: IEntityListingColumn) {
-    return (params: any) => {
-
-      let link = `<a href="${this.getViewLink(params.data, col)}">${params.value}</a>`;
-
+    // check if a display method
+    if (col.displayFunc) {
+      return col.displayFunc(params.data);
     }
+
+    // fallback to value
+    return params.value;
   }
 
   ///
@@ -334,5 +333,4 @@ export class EntityListingResultsAgGridComponent implements OnInit {
       return new DatePipe('en-US').transform(value, format);
     }
   }
-
 }
