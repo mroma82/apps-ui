@@ -1,9 +1,3 @@
-<style>
-    .ag-root-wrapper {
-        border: none !important;
-    }
-</style>
-
 <div *ngIf="listItems$ | async as listItems">
     <div *ngIf="ready$ | async">
         <div *ngIf="columnDefs$ | async as cols">
