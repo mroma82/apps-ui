@@ -10,7 +10,6 @@ export interface IEntityListingColumn {
     editLinkFunc?: any;
 
     displayFunc?: any;
-    displayFunc$?: any;
 
     isHtml?: boolean;
 
