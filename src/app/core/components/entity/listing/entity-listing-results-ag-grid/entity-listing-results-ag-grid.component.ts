@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, ColumnApi, DisplayedColumnsChangedEvent, FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent, SortChangedEvent } from 'ag-grid-community';
 import { Observable, BehaviorSubject, Subject, forkJoin, of, zip } from 'rxjs';
 import { mergeMap, tap, map } from 'rxjs/operators';
 import { GridCellLinkComponent } from '../../../../../common/components/ag-grid/grid-cell-link/grid-cell-link.component';
@@ -18,165 +18,130 @@ import { EntityColumnType } from '../../../../types/entity-column-type.enum';
   styleUrls: ['./entity-listing-results-ag-grid.component.scss']
 })
 export class EntityListingResultsAgGridComponent implements OnInit {
+  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
+
+  // enums
   ColumnTypeEnum = EntityColumnType;
 
+  // variables
+  columnStateName: string;
+
   // observables
+  ready$ = new BehaviorSubject<boolean>(false);
   listItems$: Observable<any[]> = this.context.listItems$;
-  columns$ = new BehaviorSubject<IEntityListingColumn[]>([]);
   columnDefs$ = new BehaviorSubject<ColDef[]>([]);
   pageSize$: Observable<number> = this.context.pageSize$;
-  ready$ = new BehaviorSubject<boolean>(false);
-  columnStateName: "grid-Test";
 
+  // ag-grid
   gridColumnsApi: ColumnApi;
   gridApi: GridApi;
 
+  // define grid options
+  gridOptions: GridOptions = {
 
-  gridOptions = {
+    // options
     rowHeight: 50,
     suppressCellSelection: true,
     enableRangeSelection: false,
     suppressAggFuncInHeader: true,
+    cacheQuickFilter: true,
+    animateRows: true,
+    pagination: true,
+    paginationPageSize: 25,
+
+    // default column
     defaultColDef: {
       filter: 'agTextColumnFilter',
       sortable: true,
       resizable: true,
     },
+
     // define columns type
-    columnTypes: {
-      dateColumn: {
-        filter: 'agDateColumnFilter',
-        filterParams: {
-          comparator: this.dateComparator,
-          clearButton: true
-        },
-        valueFormatter: params => this.dateFormatter(params.value, 'mediumDate')
-      }
-    },
-    // Turn on cache will improve
-    // the search with more than 10,000 rows.
-    cacheQuickFilter: true,
-    // have some fun with the animation.
-    animateRows: true,
-    // show 50 rec per page
-    pagination: true,
-    paginationPageSize: 25,
+    columnTypes: {},
+
     // grid ready
-    onGridReady: (params) => {
-      this.gridColumnsApi = params.columnApi;
-      this.gridApi = params.api;
-
-      // get columns
-      /*this.getColumnDefs().pipe(take(1)).subscribe(colDefs => {
-
-        // setup columns
-        this.updateColumns(colDefs);
-
-        // subscribe to items
-        this.items$.subscribe(rowData => {
-          if (this.gridOptions.api) {
-
-            this.gridOptions.api.setRowData(rowData);
-            // restore previous filters text
-            this.loadFilters();
-            this.loadSorting();
-            // check if a filter
-            if (this.listingControlsContext.searchText$.value) {
-              this.gridOptions.api.setQuickFilter(this.listingControlsContext.searchText$.value);
-            }
-          }
-        });
-      });*/
-    },
-    onDisplayedColumnsChanged: (event) => {
-      localStorage.setItem(this.columnStateName, JSON.stringify(event.columnApi.getColumnState()))
+    onGridReady: (e: GridReadyEvent) => {
+      this.gridColumnsApi = e.columnApi;
+      this.gridApi = e.api;
     },
 
-    onFilterChanged: (filters) => {
-      //this.listingControlsContext.setFilters(filters.api.getFilterModel());
+    // save status
+    onDisplayedColumnsChanged: (e: DisplayedColumnsChangedEvent) => {
+      localStorage.setItem(this.columnStateName, JSON.stringify(e.columnApi.getColumnState()))
     },
-    onSortChanged: (grid) => {
-      //this.listingControlsContext.setSorting(grid.api.getSortModel())
+
+    // sort change  
+    onSortChanged: (e: SortChangedEvent) => {
+      //this.listingControlsContext.setSorting(grid.api.getSortModel())      
     },
+
     // first data rendered
-    onFirstDataRendered: (params) => {
-      params.api.sizeColumnsToFit();
+    onFirstDataRendered: (e: FirstDataRenderedEvent) => {
+      e.api.sizeColumnsToFit();
     },
 
     // set options
-    gridContext: { componentParent: this },
-    gridFrameworkComponents: {
+    context: {
+      componentParent: this
+    },
+
+    // components
+    frameworkComponents: {
       itemLinkRenderer: GridCellLinkComponent
     }
   };
 
-  headers: string[] = [];
-
-  // permissions
-  canEdit$ = this.context.canEdit$;
-
   // new
   constructor(
-    private context: EntityListingContextService,
     @Inject(ENTITY_LISTING_CONFIG) private config: IEntityListingConfigurationService,
-    private entityProvider: EntityProviderService,
-    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService
+    @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
+    private context: EntityListingContextService,
+    private entityProvider: EntityProviderService
   ) { }
 
+
+  // init
   ngOnInit() {
 
-    // get the 
-    let cols$ = this.config.getColumns().pipe(mergeMap(cols => {
-      var x: Observable<string>[] = [];
+    // setup observable for full column
+    let fullColumns$ = this.config.getColumns().pipe(mergeMap(cols => {
 
-      cols.forEach(c => {
-        let title$ = this.getTitle(c);
+      // go through each
+      var titles$: Observable<string>[] = [];
+      cols.forEach(col => {
 
-        x.push(title$.pipe(tap(title => {
-          c.title = title;
+        // get the title, put to rx array
+        let title$ = this.getTitle(col);
+        titles$.push(title$.pipe(tap(title => {
+          col.title = title;
         })));
 
-        return c;
+        // return the column
+        return col;
       });
 
-      return forkJoin(x).pipe(map(() => cols));
+      // observable for all the titles to finish
+      return forkJoin(titles$).pipe(map(() => cols));
     }));
 
-    zip(cols$, this.canEdit$).subscribe(([cols, canEdit]) => {
-      this.columns$.next(cols);
+    // wait for everything to finish
+    zip(fullColumns$, this.context.canEdit$).subscribe(([cols, canEdit]) => {
+
+      // set the column state
+      this.columnStateName = `apps:listingState-${this.entityConfig.entityTypeId}`;
+
+      // set column defs
       this.columnDefs$.next(this.getColumnDefs(cols, canEdit));
+
+      // ready
       this.ready$.next(true);
-    })
+    });
 
     // page size change
     this.pageSize$.subscribe(size => {
       if (this.gridApi)
         this.gridApi.paginationSetPageSize(size);
     });
-
-    /*this.columns$.pipe(flatMap(x => {
-      x
-    })).subscribe(c => {
-      this.headers = [];
-      c.forEach((x, i) => {
-        x.
-      })
-    })*/
-
-  }
-
-  // on page
-  onPage(e) {
-    this.context.setPage(e.offset + 1);
-  }
-
-  onSort(e) {
-    if (e.sorts.length) {
-      this.context.setSort({
-        field: e.sorts[0].prop,
-        isDescending: e.sorts[0].dir === "desc"
-      })
-    }
   }
 
   // title
@@ -233,18 +198,6 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     return EntityColumnType.Regular;
   }
 
-  // Data that gets displayed in the grid
-  public rowData$: Observable<any[]> = this.context.listItems$;
-
-  // For accessing the Grid's API
-  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
-
-  // Example load data from sever
-  onGridReady(params: GridReadyEvent, items: any[]) {
-    console.log('here');
-    //this.rowData$ = items;
-  }
-
   // function that generates the columns definitions
   getColumnDefs(cols: IEntityListingColumn[], canEdit: boolean): ColDef[] {
 
@@ -253,27 +206,27 @@ export class EntityListingResultsAgGridComponent implements OnInit {
       const col = c;
 
       // init the ag-grid col def
-      var x: ColDef = {
-        field: c.model,
-        headerName: c.title,
+      var colDef: ColDef = {
+        field: col.model,
+        headerName: col.title,
         filter: "agSetColumnFilter"
       };
 
       // get the type
-      let colType = this.getColumnType(c);
+      let colType = this.getColumnType(col);
 
       // html
       if (colType == EntityColumnType.Html) {
-        x.cellRenderer = (params: any) => this.htmlRender(params, c);
+        colDef.cellRenderer = (params: any) => this.htmlRender(params, col);
       }
 
       // link
       else if (colType == EntityColumnType.Link) {
 
         // set the component and params
-        x.cellRenderer = GridCellLinkComponent;
-        x.cellRendererParams = {
-          getModel: (params) => {
+        colDef.cellRenderer = GridCellLinkComponent;
+        colDef.cellRendererParams = {
+          getModel: (params: { data: any, value: any }) => {
             return {
               text: params.value,
               viewUrl: this.getViewLink(params.data, col),
@@ -285,21 +238,21 @@ export class EntityListingResultsAgGridComponent implements OnInit {
       }
 
       // check if a pipe
-      else if (c.pipe) {
-        x.cellRenderer = (params: any) => c.pipe.transform(params.value);
+      else if (col.pipe) {
+        colDef.cellRenderer = (params: { value: any }) => col.pipe.transform(params.value);
       }
       // check if a display function
-      else if (c.displayFunc) {
-        x.cellRenderer = (params: any) => c.displayFunc(params.data);
+      else if (col.displayFunc) {
+        colDef.cellRenderer = (params: { data: any }) => col.displayFunc(params.data);
       }
 
       // return
-      return x;
+      return colDef;
     });
   }
 
   // html render
-  htmlRender(params: any, col: IEntityListingColumn) {
+  htmlRender(params: { data: any, value: any }, col: IEntityListingColumn) {
 
     // check if a display method
     if (col.displayFunc) {
@@ -308,36 +261,5 @@ export class EntityListingResultsAgGridComponent implements OnInit {
 
     // fallback to value
     return params.value;
-  }
-
-  ///
-
-  // use for date filter.
-  dateComparator(filterValue, cellValue) {
-    var cellDate = new Date(cellValue);
-    // reset the cell time to midnight.
-    cellDate.setHours(0, 0, 0, 0);
-    if (filterValue.getTime() === cellDate.getTime()) {
-      return 0
-    }
-
-    if (cellDate < filterValue) {
-      return -1;
-    }
-
-    if (cellDate > filterValue) {
-      return 1;
-    }
-  }
-
-  // format date
-  dateFormatter(value: string, format: string) {
-    var date = new Date(value);
-    // check if the date is 01/01/1900 0:00:00
-    if (date.getTime() < 0) {
-      return ''
-    } else {
-      return new DatePipe('en-US').transform(value, format);
-    }
   }
 }

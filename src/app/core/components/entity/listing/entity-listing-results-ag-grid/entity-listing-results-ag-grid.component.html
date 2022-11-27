@@ -4,10 +4,10 @@
     }
 </style>
 
-<div *ngIf="rowData$ | async as rowData">
+<div *ngIf="listItems$ | async as listItems">
     <div *ngIf="ready$ | async">
         <div *ngIf="columnDefs$ | async as cols">
-            <ag-grid-angular style="width: 100%" class="ag-theme-alpine listing-ag-grid ag-listing-lg" [gridOptions]="gridOptions" domLayout="autoHeight" [columnDefs]="cols" [floatingFilter]="true" [rowData]="rowData.items" [animateRows]="true" (gridReady)="onGridReady($event, rowData.items)"></ag-grid-angular>
+            <ag-grid-angular style="width: 100%" class="ag-theme-alpine listing-ag-grid ag-listing-lg" [gridOptions]="gridOptions" domLayout="autoHeight" [columnDefs]="cols" [floatingFilter]="true" [rowData]="listItems.items"></ag-grid-angular>
         </div>
     </div>
 </div>
