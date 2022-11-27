@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColumnApi, DisplayedColumnsChangedEvent, FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent, SortChangedEvent } from 'ag-grid-community';
-import { Observable, BehaviorSubject, Subject, forkJoin, of, zip } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, forkJoin, of, zip, Subscription } from 'rxjs';
 import { mergeMap, tap, map } from 'rxjs/operators';
 import { GridCellLinkComponent } from '../../../../../common/components/ag-grid/grid-cell-link/grid-cell-link.component';
 import { IEntityListingColumn } from '../../../../models/entity/entity-listing-column';
@@ -17,7 +17,7 @@ import { EntityColumnType } from '../../../../types/entity-column-type.enum';
   templateUrl: './entity-listing-results-ag-grid.component.html',
   styleUrls: ['./entity-listing-results-ag-grid.component.scss']
 })
-export class EntityListingResultsAgGridComponent implements OnInit {
+export class EntityListingResultsAgGridComponent implements OnInit, OnDestroy {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 
   // enums
@@ -91,6 +91,9 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     }
   };
 
+  // subscriptionas
+  subs$ = new Subscription();
+
   // new
   constructor(
     @Inject(ENTITY_LISTING_CONFIG) private config: IEntityListingConfigurationService,
@@ -98,7 +101,6 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     private context: EntityListingContextService,
     private entityProvider: EntityProviderService
   ) { }
-
 
   // init
   ngOnInit() {
@@ -125,7 +127,7 @@ export class EntityListingResultsAgGridComponent implements OnInit {
     }));
 
     // wait for everything to finish
-    zip(fullColumns$, this.context.canEdit$).subscribe(([cols, canEdit]) => {
+    this.subs$.add(zip(fullColumns$, this.context.canEdit$).subscribe(([cols, canEdit]) => {
 
       // set the column state
       this.columnStateName = `apps:listingState-${this.entityConfig.entityTypeId}`;
@@ -135,13 +137,19 @@ export class EntityListingResultsAgGridComponent implements OnInit {
 
       // ready
       this.ready$.next(true);
-    });
+    }));
 
     // page size change
-    this.pageSize$.subscribe(size => {
+    this.subs$.add(this.pageSize$.subscribe(size => {
       if (this.gridApi)
         this.gridApi.paginationSetPageSize(size);
-    });
+    }));
+  }
+
+  // cleanup
+  ngOnDestroy(): void {
+    if (this.subs$)
+      this.subs$.unsubscribe();
   }
 
   // title
