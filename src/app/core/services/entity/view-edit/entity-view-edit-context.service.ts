@@ -88,6 +88,8 @@ export class EntityViewEditContextService {
           // check if error
           if (!x.success) {
             this.dialogService.message("Error during update", x.text);
+          } else {
+            this.refreshData();
           }
         }), map(x => x.success));
 
