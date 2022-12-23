@@ -12,15 +12,15 @@ import { InstanceContextService } from 'src/app/common/services/instance-context
 export class AttachmentListComponent implements OnInit {
 
   // observables
-  list$: Observable<any>;  
+  list$: Observable<any>;
   canEdit$ = this.context.canEdit$;
 
   // new
   constructor(
     private context: AttachmentDialogContextService,
-    private instanceContext: InstanceContextService 
-  ) { 
-    this.list$ = context.list$;    
+    private instanceContext: InstanceContextService
+  ) {
+    this.list$ = context.list$;
   }
 
   // add
@@ -40,55 +40,56 @@ export class AttachmentListComponent implements OnInit {
 
   // checks if the attachment is an image
   isImage(attachment: any) {
-    return ["png","jpg","jpeg","gif"].indexOf(attachment.fileType.toLowerCase()) >= 0;
+    return ["png", "jpg", "jpeg", "gif"].indexOf(attachment.fileType.toLowerCase()) >= 0;
   }
 
   // edit
   edit(attachment: any) {
     attachment.editPending = true;
-    attachment.descriptionEdit = attachment.description;    
+    attachment.descriptionEdit = attachment.description;
   }
   editCommit(attachment: any) {
-    
+
     // save
     this.context.update({
       id: attachment.id,
-      description: attachment.descriptionEdit
+      description: attachment.descriptionEdit,
+      recordVersion: attachment.recordVersion
     }).subscribe(x => {
-      
+
       // check if ok
-      if(x.success) {
+      if (x.success) {
         attachment.editPending = false;
         this.context.refreshList();
       }
-    });    
+    });
   }
   editCancel(attachment: any) {
-    attachment.editPending = false;    
+    attachment.editPending = false;
   }
 
 
   // delete
   delete(attachment: any) {
-    attachment.deletePending = true;    
+    attachment.deletePending = true;
   }
   deleteCommit(attachment: any) {
-    
+
     // save
     this.context.delete(attachment.id).subscribe(x => {
-      
+
       // check if ok
-      if(x.success) {
+      if (x.success) {
         attachment.deletePending = false;
         this.context.refreshList();
       }
-    });    
+    });
   }
   deleteCancel(attachment: any) {
-    attachment.deletePending = false;    
+    attachment.deletePending = false;
   }
 
-  
+
   // init
   ngOnInit() {
   }
