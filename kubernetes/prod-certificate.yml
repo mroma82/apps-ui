@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apps-ui-tls
+  namespace: apps-production  
+spec:
+  secretName: apps-ui-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: apps.roma-cloud.com
+  dnsNames:
+  - apps.roma-cloud.com

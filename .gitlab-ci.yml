@@ -59,7 +59,7 @@ build:stage:
     BUILD_CONFIG: $BUILD_CONFIG_STAGE
     BUILD_VERSION: Staging:$CI_COMMIT_SHORT_SHA
   only:
-    - stage
+    - develop
 
 build:master:
   <<: *build_script
@@ -98,7 +98,7 @@ release:stage:
   variables:
     DEPLOY_IMAGE: $AZURE_ACR_SERVER/apps-ui:stage
   only:
-    - stage
+    - develop
 
 release:master:
   <<: *release_script
@@ -149,7 +149,7 @@ deploy:staging:
     DEPLOY_IMAGE: ${AZURE_ACR_SERVER}/apps-ui:stage    
     DEPLOYMENT_NAMESPACE: apps-staging        
   only:
-    - stage
+    - develop
 
 deploy:production:
   <<: *deploy_script
