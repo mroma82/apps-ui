@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalizationService } from '../common/services/localization.service';
 import { TaskContextService } from '../foundation/services/task/task-context.service';
 
 @Component({
@@ -10,8 +11,6 @@ import { TaskContextService } from '../foundation/services/task/task-context.ser
   ]
 })
 export class AppContainerComponent implements OnInit {
-
-  constructor() { }
 
   ngOnInit() {
   }

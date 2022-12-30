@@ -5,6 +5,11 @@
         <p>
             <strong>{{ user.fullName }}</strong><br>
             <small>{{ user.email }} | <a routerLink="/logout">Logout</a></small>
+
+            <br>
+            <a *ngFor="let culture of cultures$ | async" class="culture-link" href="javascript:;;" (click)="setCulture(culture)">
+                <img src="/assets/culture/{{ culture }}.png" alt="{{ 'common.culture.' + culture | translate }}" />
+            </a>
         </p>
 
         <h5 class="mt-4 pb-2 border-bottom">Instance</h5>

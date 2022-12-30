@@ -2,11 +2,11 @@
 
   <div class="form-group">
     <div *ngIf="needsInstanceInput">
-      <label>Instance #</label>
+      <label>{{ 'foundation.fields.instanceNumber' | translate }}</label>
       <input type="text" class="form-control" [(ngModel)]="model.instanceNumber" name="instance" #instanceField />
     </div>
     <div *ngIf="!needsInstanceInput">
-      <label>Instance</label>
+      <label>{{ 'foundation.fields.instance' | translate }}</label>
       <div *ngIf="instance$ | async as instance">
         <input type="text" class="form-control" disabled [value]="instance.number + ' - ' + instance.name" />
       </div>
@@ -14,17 +14,17 @@
   </div>
 
   <div class="form-group">
-    <label>Username</label>
+    <label>{{ 'foundation.fields.userName' | translate }}</label>
     <input type="text" class="form-control" [(ngModel)]="model.username" name="username" #usernameField />
   </div>
 
   <div class="form-group">
-    <label>Password</label>
+    <label>{{ 'foundation.fields.password' | translate }}</label>
     <input type="password" class="form-control" [(ngModel)]="model.password" name="password" />
   </div>
 
   <div class="text-center form-group mt-3">
-    <button type="button" class="btn btn-lg btn-primary btn-block" (click)="login()">Login</button>
+    <button type="button" class="btn btn-lg btn-primary btn-block" (click)="login()">{{ 'common.login' | translate }}</button>
 
     <div class="mt-3 text-danger" style="height: 30px;">
       <span *ngIf="state.hasError">{{state.errorText}}</span>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="form-group" *ngIf="showForgotPassword$ | async">
-    Forgot your password? <a routerLink="/forgot-password">Click here to reset it</a>
+    <a routerLink="/forgot-password">{{ 'common.forgotPassword.linkText' | translate }}</a>
   </div>
 
 </div>
