@@ -1,6 +1,5 @@
 <div class="d-print-none btn-group">
-  <button type="button" class="btn btn-primary" [routerLink]="listPageUrl" *ngIf="listPageUrl"><i
-      class="fas fa-arrow-left"></i></button>
+  <button type="button" class="btn btn-primary" [routerLink]="listPageUrl" *ngIf="listPageUrl"><i class="fas fa-arrow-left"></i></button>
 
   <ng-container *ngIf="canEdit$ | async">
 
@@ -11,11 +10,11 @@
 
     <button type="button" class="btn btn-primary d-none d-md-block" (click)="save()" *ngIf="!viewMode">
       <i class="far fa-save mr-1"></i>
-      <span class="d-none d-md-inline"> Save</span>
+      <span class="d-none d-md-inline"> {{ "common.save" | translate }}</span>
     </button>
     <button type="button" class="btn btn-primary" (click)="saveClose()" *ngIf="!viewMode">
       <i class="far fa-save mr-1"></i>
-      <span class="d-none d-md-inline"> Save and Close</span>
+      <span class="d-none d-md-inline"> {{ "common.saveClose" | translate }}</span>
     </button>
 
     <ng-container *ngIf="canDelete$ | async">

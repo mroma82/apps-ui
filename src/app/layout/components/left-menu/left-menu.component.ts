@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { APP_VERSION } from '../../../app-version';
 import { IMenuItem } from '../../../common/models/menu-item';
 import { MenuItemService } from '../../../common/services/menu-item.service';
+import { UserContextService } from '../../../common/services/user-context.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -30,7 +31,8 @@ export class LeftMenuComponent implements OnInit {
 
   // new  
   constructor(
-    private menuItemService: MenuItemService
+    private menuItemService: MenuItemService,
+    private userContext: UserContextService
   ) {
     this.appMenuItems$ = this.menuItemService.appMenuItems$;
     this.setupMenuItems$ = this.menuItemService.setupMenuItems$;
