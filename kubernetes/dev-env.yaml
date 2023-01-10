@@ -70,8 +70,4 @@ spec:
           service: 
             name: apps-ui-http
             port:
-              number: 5678     
-  tls: 
-  - hosts:    
-    - apps-dev.romacode.com        
-    secretName: apps-dev-tls
+              number: 8081     
