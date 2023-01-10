@@ -10,8 +10,7 @@ variables:
   DOCKER_DRIVER: overlay2
   BUILD_IMAGE: ${CI_REGISTRY_IMAGE}/build:$CI_COMMIT_SHA   
   
-  BUILD_CONFIG_DEV: ""
-  BUILD_CONFIG_STAGE: stage
+  BUILD_CONFIG_DEV: ""  
   BUILD_CONFIG_PROD: production
 
 cache:
@@ -53,11 +52,11 @@ build:branch:
   only:
     - /^(feature|hotfix|release)\/.+$/
 
-build:stage:
+build:develop:
   <<: *build_script
   variables:
-    BUILD_CONFIG: $BUILD_CONFIG_STAGE
-    BUILD_VERSION: Staging:$CI_COMMIT_SHORT_SHA
+    BUILD_CONFIG: $BUILD_CONFIG_DEV
+    BUILD_VERSION: Develop:$CI_COMMIT_SHORT_SHA
   only:
     - develop
 
@@ -93,10 +92,10 @@ build:production:
     - docker tag $BUILD_IMAGE $DEPLOY_IMAGE
     - docker push $DEPLOY_IMAGE
 
-release:stage:
+release:develop:
   <<: *release_script
   variables:
-    DEPLOY_IMAGE: $AZURE_ACR_SERVER/apps-ui:stage
+    DEPLOY_IMAGE: $AZURE_ACR_SERVER/apps-ui:develop
   only:
     - develop
 
@@ -141,13 +140,13 @@ release:latest:
       - kubectl --record deployment.apps/$DEPLOYMENT_NAME set image deployment.v1.apps/$DEPLOYMENT_NAME $DEPLOYMENT_CONTAINER_NAME=$DEPLOY_IMAGE --namespace=$DEPLOYMENT_NAMESPACE --insecure-skip-tls-verify=true
       - kubectl patch deployment.apps/$DEPLOYMENT_NAME -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"lastUpdateDateTime\":\"`date +'%s'`\"}}}}}" --namespace=$DEPLOYMENT_NAMESPACE --insecure-skip-tls-verify=true
       
-deploy:staging:
+deploy:develop:
   <<: *deploy_script
   variables:
-    DEPLOYMENT_NAME: apps-ui-deployment
+    DEPLOYMENT_NAME: apps-ui-app
     DEPLOYMENT_CONTAINER_NAME: app
-    DEPLOY_IMAGE: ${AZURE_ACR_SERVER}/apps-ui:stage    
-    DEPLOYMENT_NAMESPACE: apps-staging        
+    DEPLOY_IMAGE: ${AZURE_ACR_SERVER}/apps-ui:develop    
+    DEPLOYMENT_NAMESPACE: apps-development        
   only:
     - develop
 
