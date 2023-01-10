@@ -10,7 +10,7 @@ variables:
   DOCKER_DRIVER: overlay2
   BUILD_IMAGE: ${CI_REGISTRY_IMAGE}/build:$CI_COMMIT_SHA   
   
-  BUILD_CONFIG_DEV: ""  
+  BUILD_CONFIG_DEV: "development"  
   BUILD_CONFIG_PROD: production
 
 cache:
