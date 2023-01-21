@@ -14,6 +14,7 @@
     <div class="col-3">
         <app-date-field [(ngModel)]="model.endDate" name="endDate" label="Date" (change)="updateFilter(model)"></app-date-field>
     </div>
-    <div class="col-3">
+    <div class="col-3 align-self-end">
+        <button (click)="refresh()" class="btn btn-primary mb-3">{{ "common.refresh" | translate }}</button>
     </div>
 </div>

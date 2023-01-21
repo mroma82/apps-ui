@@ -22,35 +22,44 @@ import { AppFoundationModule } from 'src/app/foundation/app-foundation.module';
 import { PmEventFormComponent } from './components/pm-event-form/pm-event-form.component';
 import { PmEventSubGridViewEditComponent } from './components/pm-event-sub-grid-view-edit/pm-event-sub-grid-view-edit.component';
 import { PmEventEntityConfigurationService } from './services/pm-event-entity-configuration.service';
+import { PmEventCompleteComponent } from './components/pm-event-complete/pm-event-complete.component';
+import { PmEventCompleteModalComponent } from './modals/pm-event-complete-modal/pm-event-complete-modal.component';
+import { PmEventCompleteContextService } from './services/pm-event-complete-context.service';
 
 
 
 @NgModule({
   declarations: [
-    PmEventViewEditComponent, 
-    PmEventCreateComponent, 
-    PmEventSubGridComponent, PmEventFormComponent, PmEventSubGridViewEditComponent
+    PmEventViewEditComponent,
+    PmEventCreateComponent,
+    PmEventSubGridComponent,
+    PmEventFormComponent,
+    PmEventSubGridViewEditComponent,
+    PmEventCompleteComponent,
+    PmEventCompleteModalComponent
   ],
   imports: [
-    CommonModule,    
+    CommonModule,
     AppCommonModule,
     AppsCoreModule,
-    AppFoundationModule,    
+    AppFoundationModule,
     NgxDatatableModule,
     FormsModule,
-    DatepickerModule,    
+    DatepickerModule,
     EntityRouteModule.forOptions(null),
   ],
   exports: [
-    PmEventSubGridComponent
+    PmEventSubGridComponent,
+    PmEventCompleteComponent,
+    PmEventCompleteModalComponent
   ],
   providers: [
     { provide: ENTITY_CONFIG, useClass: PmEventEntityConfigurationService },
-    { provide: ENTITY_LISTING_CONFIG, useClass: PmEventListingConfigurationService },    
+    { provide: ENTITY_LISTING_CONFIG, useClass: PmEventListingConfigurationService },
     { provide: ENTITY_VALIDATION, useClass: PmEventValidationService },
-    EntityListingContextService,        
-    EntityCreateContextService,    
+    EntityListingContextService,
+    EntityCreateContextService,
     EntitySecurityService
-  ]  
+  ]
 })
 export class PmEventModule { }

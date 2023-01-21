@@ -9,12 +9,20 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of items">
-            <td>{{ item.activity.pmItem.description }}</td>
-            <td>{{ item.activity.description}}</td>
+            <td>
+                <a routerLink="/app/preventative-maintenance/items/view/{{item.activity.pmItem.id}}" target="_blank">
+                    {{ item.activity.pmItem.description }}
+                </a>
+            </td>
+            <td>
+                <a routerLink="/app/preventative-maintenance/activities/view/{{item.activity.id}}" target="_blank">
+                    {{ item.activity.description}}
+                </a>
+            </td>
             <td>{{ item.activity.schedulingDescription }}</td>
             <td>
                 <div *ngIf="item.events">
-                    <button type="button" class="btn btn-sm btn-primary" *ngFor="let ev of item.events" [class.overdue]="ev.isOverdue">{{ ev.eventText }}</button>
+                    <button type="button" class="btn btn-sm btn-primary" *ngFor="let ev of item.events" [class.overdue]="ev.isOverdue" (click)="openCompleteDialog(ev)">{{ ev.eventText }}</button>
                 </div>
             </td>
         </tr>

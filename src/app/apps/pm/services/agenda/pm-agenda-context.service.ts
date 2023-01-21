@@ -46,7 +46,7 @@ export class PmAgendaContextService implements OnDestroy {
 
   // update filter
   updateFilter(filter: PmAgendaFilterModel) {
-    console.log("updateFilter");
+
     // get the new filter
     const newFilter = {
       ...this._filterStore$.value,
@@ -59,7 +59,6 @@ export class PmAgendaContextService implements OnDestroy {
 
   // refresh items
   refreshItems() {
-    console.log("refreshAgenda");
 
     // get items
     this.agendaApi.getItems(this._filterStore$.value).subscribe(x => {
