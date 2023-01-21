@@ -47,7 +47,7 @@ export class PmEventCompleteContextService {
   }
 
   // complete
-  complete(model: any): Observable<boolean> {
+  complete(model: any): Observable<any> {
     return this.api.complete(model);
   }
 }

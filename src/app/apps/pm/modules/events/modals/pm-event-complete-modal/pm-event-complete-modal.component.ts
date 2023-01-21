@@ -4,6 +4,7 @@ import { Optional } from 'ag-grid-community';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseDialog } from '../../../../../../common/abstractions/base-dialog';
+import { DialogService } from '../../../../../../common/services/dialog.service';
 import { ENTITY_CONFIG, IEntityConfigurationService } from '../../../../../../core/services/entity/entity-configuration.service';
 import { EntityProviderService } from '../../../../../../core/services/entity/entity-provider.service';
 import { EntitySubGridViewEditContextService } from '../../../../../../core/services/entity/sub-grid/entity-sub-grid-view-edit-context.service';
@@ -25,6 +26,7 @@ export class PmEventCompleteModalComponent extends BaseDialog implements OnInit 
   constructor(
     modalService: NgbModal,
     private context: PmEventCompleteContextService,
+    private dialogService: DialogService,
     @Optional() private agendaContext: PmAgendaContextService
   ) {
     super(modalService);
@@ -42,10 +44,10 @@ export class PmEventCompleteModalComponent extends BaseDialog implements OnInit 
   complete(model: any) {
 
     // complete
-    this.context.complete(model).subscribe(success => {
+    this.context.complete(model).subscribe(res => {
 
       // check if ok
-      if (success) {
+      if (res.success) {
 
         // refresh agenda if needed
         if (this.agendaContext)
@@ -53,6 +55,9 @@ export class PmEventCompleteModalComponent extends BaseDialog implements OnInit 
 
         // close
         this.closeDialog();
+      }
+      else {
+        this.dialogService.message("common.error", res.test);
       }
     });
   }
