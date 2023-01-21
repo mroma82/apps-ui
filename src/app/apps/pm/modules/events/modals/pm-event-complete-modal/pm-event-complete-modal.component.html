@@ -1,0 +1,17 @@
+<ng-template #content let-modal>
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{ "apps.pm.event-complete" | translate }}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="model$ | async as model">
+            <app-pm-event-complete [model]="model"></app-pm-event-complete>
+
+            <div class="mt-sm-3">
+                <button type="button" class="btn btn-primary" (click)="complete(model)">{{ "common.complete" | translate }}</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,10 @@
+<div>
+    <app-date-field [(ngModel)]="model.completedDateTime" name="completedDateTime" label="Completed on"></app-date-field>
+
+    <app-select-field [(ngModel)]="model.completedUserId" name="completedUserId" label="Completed by">
+        <option value="">-- Please select --</option>
+        <option *ngFor="let item of userList$ | async" [value]="item.id" [selected]="item.id == model.completedUserId">{{ item.name }}</option>
+    </app-select-field>
+
+    <app-text-area-field [(ngModel)]="model.comments" name="comments" label="Comments" [rows]="2"></app-text-area-field>
+</div>

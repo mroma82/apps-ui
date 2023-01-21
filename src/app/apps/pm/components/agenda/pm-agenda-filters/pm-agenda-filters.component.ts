@@ -31,4 +31,9 @@ export class PmAgendaFiltersComponent implements OnInit {
     this.context.updateFilter(filter);
   }
 
+  // refresh
+  refresh() {
+    this.context.updateFilter({});
+  }
+
 }

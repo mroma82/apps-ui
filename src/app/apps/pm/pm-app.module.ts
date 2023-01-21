@@ -17,6 +17,8 @@ import { PmAgendaFiltersComponent } from './components/agenda/pm-agenda-filters/
 import { PmAgendaListComponent } from './components/agenda/pm-agenda-list/pm-agenda-list.component';
 import { PmAgendaApiService } from './services/agenda/pm-agenda-api.service';
 import { PmAgendaDebugComponent } from './components/agenda/pm-agenda-debug/pm-agenda-debug.component';
+import { PmEventModule } from './modules/events/pm-event.module';
+import { PmEventApiService } from './modules/events/services/pm-event-api.service';
 
 
 
@@ -38,12 +40,14 @@ import { PmAgendaDebugComponent } from './components/agenda/pm-agenda-debug/pm-a
     AppsCoreModule,
     AppFoundationModule,
     FormsModule,
-    PmAppRoutingModule
+    PmAppRoutingModule,
+    PmEventModule
   ],
   providers: [
     PmService,
     PmListsService,
-    PmAgendaApiService
+    PmAgendaApiService,
+    PmEventApiService
   ]
 })
 export class PmAppModule { }

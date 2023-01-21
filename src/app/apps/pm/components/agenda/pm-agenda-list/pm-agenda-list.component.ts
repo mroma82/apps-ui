@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PmEventCompleteContextService } from '../../../modules/events/services/pm-event-complete-context.service';
 import { PmAgendaContextService } from '../../../services/agenda/pm-agenda-context.service';
 
 @Component({
@@ -13,9 +14,15 @@ export class PmAgendaListComponent implements OnInit {
 
   // new
   constructor(
-    private context: PmAgendaContextService
+    private context: PmAgendaContextService,
+    private eventCompleteContext: PmEventCompleteContextService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  // open complete
+  openCompleteDialog(event: any) {
+    this.eventCompleteContext.open(event);
   }
 }
