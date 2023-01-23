@@ -21,6 +21,8 @@ import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/enti
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
 import { PmEventModule } from '../events/pm-event.module';
 import { PmActivityEntityConfigurationService } from './services/pm-activity-entity-configuration.service';
+import { PmActivityViewEditFormComponent } from './components/pm-activity-view-edit-form/pm-activity-view-edit-form.component';
+import { PmActivityViewEditSubgridComponent } from './components/pm-activity-view-edit-subgrid/pm-activity-view-edit-subgrid.component';
 
 
 
@@ -28,29 +30,34 @@ import { PmActivityEntityConfigurationService } from './services/pm-activity-ent
   declarations: [
     PmActivitySubGridComponent,
     PmActivityCreateComponent,
-    PmActivityViewEditComponent
+    PmActivityViewEditComponent,
+    PmActivityViewEditFormComponent,
+    PmActivityViewEditSubgridComponent
   ],
   imports: [
-    CommonModule,    
+    CommonModule,
     AppCommonModule,
     AppsCoreModule,
-    AppFoundationModule,    
+    AppFoundationModule,
     NgxDatatableModule,
     FormsModule,
-    DatepickerModule,    
+    DatepickerModule,
     EntityRouteModule.forOptions(null),
     PmEventModule
   ],
   exports: [
-    PmActivitySubGridComponent
+    PmActivitySubGridComponent,
+    PmActivityViewEditComponent,
+    PmActivityViewEditFormComponent,
+    PmActivityViewEditSubgridComponent
   ],
   providers: [
     { provide: ENTITY_CONFIG, useClass: PmActivityEntityConfigurationService },
-    { provide: ENTITY_LISTING_CONFIG, useClass: PmActivityListingConfigurationService },    
+    { provide: ENTITY_LISTING_CONFIG, useClass: PmActivityListingConfigurationService },
     { provide: ENTITY_VALIDATION, useClass: PmActivityValidationService },
-    EntityListingContextService,        
-    EntityCreateContextService,    
+    EntityListingContextService,
+    EntityCreateContextService,
     EntitySecurityService
-  ]  
+  ]
 })
 export class PmActivityModule { }
