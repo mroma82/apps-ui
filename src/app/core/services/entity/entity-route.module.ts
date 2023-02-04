@@ -17,6 +17,7 @@ export class EntityRouteModule extends RouterModule {
         // additional routes
         var extraRoutes: Routes;
         var parametersRoute: Routes;
+        var homeRedirect: string = "list";
 
         // check if any options
         if (options != null) {
@@ -34,6 +35,10 @@ export class EntityRouteModule extends RouterModule {
             // container
             if (options.containerComponent)
                 containerComponent = options.containerComponent;
+
+            // home redirect
+            if (options.homeRedirect)
+                homeRedirect = options.homeRedirect;
         }
 
         // check nulls
@@ -49,7 +54,7 @@ export class EntityRouteModule extends RouterModule {
                     { path: 'list', component: EntityListingPageGenericComponent },
                     { path: 'view/:id', component: EntityViewEditPageGenericComponent, data: { mode: "view" } },
                     { path: 'edit/:id', component: EntityViewEditPageGenericComponent, data: { mode: "edit" }, canActivate: [RecordLockGuard] },
-                    { path: '', redirectTo: "list" },
+                    { path: '', redirectTo: homeRedirect },
                     ...parametersRoute,
                     ...extraRoutes
                 ]

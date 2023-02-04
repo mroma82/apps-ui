@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppContextService } from 'src/app/app-context.service';
@@ -6,6 +7,7 @@ import { EntityCreateContextService } from 'src/app/core/services/entity/create/
 import { ENTITY_CONFIG, IEntityConfigurationService } from 'src/app/core/services/entity/entity-configuration.service';
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { EntityListingContextService } from 'src/app/core/services/entity/listing/entity-listing-context.service';
+import { IEntityListingView } from '../../../../models/entity/entity-listing-view';
 
 @Component({
   selector: 'app-entity-listing-page-generic',
@@ -26,7 +28,8 @@ export class EntityListingPageGenericComponent implements OnInit {
     private entitySecurity: EntitySecurityService,
     private createContext: EntityCreateContextService,
     @Inject(ENTITY_CONFIG) private entityConfig: IEntityConfigurationService,
-    private appContext: AppContextService
+    private appContext: AppContextService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,24 @@ export class EntityListingPageGenericComponent implements OnInit {
 
     // set the title
     this.appContext.Layout.setTitle(null);
+
+    console.log(this.activatedRoute.snapshot.queryParams);
+
+    // set view if needed
+    var viewParam = this.activatedRoute.snapshot.queryParams.view;
+    if (viewParam) {
+      this.listingContext.setViewById(viewParam);
+    }
+
+    // set filter if needed
+    var filterParam = this.activatedRoute.snapshot.queryParams.filter;
+    if (filterParam) {
+      this.listingContext.setView({
+        id: "filtered",
+        title: "common.filtered",
+        filter: JSON.parse(filterParam)
+      })
+    }
   }
 
   // clear

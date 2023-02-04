@@ -1,0 +1,13 @@
+<div class="info-box info-box-bg {{ thresholdClass$ | async }}">
+    <a [routerLink]="listUrl$ | async" [queryParams]="listUrlParams$ | async">
+        <h2 class="text-center field-count">
+            <span *ngIf="count$ | async as count; else pending">
+                {{ count }}
+            </span>
+            <ng-template #pending>-</ng-template>
+        </h2>
+        <div class="title">
+            {{ title | translate }}
+        </div>
+    </a>
+</div>
