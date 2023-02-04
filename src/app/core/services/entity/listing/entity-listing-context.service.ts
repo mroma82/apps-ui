@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Subscription, timer } from 'rxjs';
-import { debounce, shareReplay, take } from 'rxjs/operators';
+import { debounce, filter, shareReplay, take } from 'rxjs/operators';
 import { SecurityPermissionMask } from 'src/app/common/enums/security-permission-mask';
 import { EntityApiService } from '../entity-api.service';
 import { ENTITY_CONFIG, IEntityConfigurationService } from '../entity-configuration.service';
@@ -92,6 +92,19 @@ export class EntityListingContextService {
     }
   }
 
+  // set view by id
+  setViewById(id: string) {
+
+    // try to find
+    this.listingConfig.getViews().subscribe(views => {
+      // find the view
+      const view = views.find(x => x.id == id);
+      if (view) {
+        this.setView(view);
+      }
+    })
+  }
+
   // set filter
   setFilter(model: any) {
 
@@ -138,4 +151,6 @@ export class EntityListingContextService {
     this.searchText$.next(null);
     this.page$.next(1);
   }
+
+
 }

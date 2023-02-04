@@ -38,6 +38,7 @@ import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/e
 import { GridCellLinkComponent } from './components/ag-grid/grid-cell-link/grid-cell-link.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { InfoBoxComponent } from './components/info-box/info-box.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { TranslatePipe } from './pipes/translate.pipe';
     InputFocusDirective,
     EnterSubmitFormComponent,
     GridCellLinkComponent,
-    TranslatePipe
+    TranslatePipe,
+    InfoBoxComponent
   ],
   providers: [
     InstanceContextService,
@@ -115,7 +117,8 @@ import { TranslatePipe } from './pipes/translate.pipe';
     UserFullnamePipe,
     TranslatePipe,
 
-    InputFocusDirective
+    InputFocusDirective,
+    InfoBoxComponent
   ]
 })
 export class AppCommonModule { }
