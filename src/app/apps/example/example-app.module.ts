@@ -30,6 +30,7 @@ import { EntitySecurityService } from 'src/app/core/services/entity/entity-secur
 import { ExampleEntityConfigurationService } from './services/example-entity-configuration.service';
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
 import { ExampleDashboardPageComponent } from './pages/example-dashboard-page/example-dashboard-page.component';
+import { ExampleSubGridComponent } from './components/example-sub-grid/example-sub-grid.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ExampleDashboardPageComponent } from './pages/example-dashboard-page/ex
     ExampleLineSubGridComponent,
     ExampleParametersPageComponent,
     ExampleParametersComponent,
-    ExampleDashboardPageComponent
+    ExampleDashboardPageComponent,
+    ExampleSubGridComponent
   ],
   imports: [
     CommonModule,

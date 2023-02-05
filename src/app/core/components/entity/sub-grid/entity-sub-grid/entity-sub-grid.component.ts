@@ -88,6 +88,10 @@ export class EntitySubGridComponent implements OnInit {
       this.router.navigateByUrl(viewLink);
     }
 
+    else if (this.config.navigateToViewOnLink) {
+      this.router.navigateByUrl(`${this.config.viewLinkUrl}/${item.id}`);
+    }
+
     // else, open the view dialog
     else {
       this.viewEditContext.openDialog("view", item.id);
