@@ -36,8 +36,11 @@
             <app-entity-inner-list [entityTypeId]="exampleEntityTypeId"
                                    [filter]="{status: 1}"
                                    [sort]="{ field: 'createDateTime' }"
-                                   [cols]="exampleInnerListCols"
-                                   viewLinkUrl="/app/example/view"></app-entity-inner-list>
+                                   [maxItems]="3"
+                                   [columns]="exampleInnerListCols"
+                                   viewLinkUrl="/app/example/view"
+                                   viewAllUrl="/app/example/list"
+                                   [viewAllUrlFilter]="{ status: 1 }"></app-entity-inner-list>
 
         </app-card-group>
     </div>
@@ -47,8 +50,10 @@
             <app-entity-inner-list [entityTypeId]="exampleEntityTypeId"
                                    [filter]="{status: 2}"
                                    [sort]="{ field: 'createDateTime' }"
-                                   [cols]="exampleInnerListCols"
-                                   viewLinkUrl="/app/example/view"></app-entity-inner-list>
+                                   [columns]="exampleInnerListCols"
+                                   viewLinkUrl="/app/example/view"
+                                   viewAllUrl="/app/example/list"
+                                   [viewAllUrlParams]="{ view: 'finance'}"></app-entity-inner-list>
         </app-card-group>
     </div>
 </div>

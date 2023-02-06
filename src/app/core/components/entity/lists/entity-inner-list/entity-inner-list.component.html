@@ -1,7 +1,43 @@
-<app-entity-sub-grid [entityTypeId]="entityTypeId"
-                     [filter]="filter"
-                     [sort]="sort"
-                     [modelDefault]="{}"
-                     [columns]="cols"
-                     [config]="lineSubGridConfig"
-                     mode="view"></app-entity-sub-grid>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ getTitle(col) | async }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items$ | async">
+                <td *ngFor="let col of columns">
+
+                    <ng-container *ngIf="getColumnType(col) as columnType">
+
+                        <a href="javascript:;;"
+                           *ngIf="columnType == ColumnTypeEnum.Link"
+                           (click)="view(item, col)">
+                            {{ getColumnText(item, col) | async }}
+                        </a>
+
+                        <ng-container *ngIf="columnType == ColumnTypeEnum.Regular">
+                            {{ getColumnText(item, col) | async }}
+                        </ng-container>
+
+                        <div *ngIf="columnType == ColumnTypeEnum.Html"
+                             [innerHtml]="getColumnText(item, col) | async">
+                        </div>
+
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="viewAllUrl">
+            <tr>
+                <td colspan="10">
+                    <a [routerLink]="viewAllUrl"
+                       [queryParams]="viewAllUrlParams">Click here to view all</a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
