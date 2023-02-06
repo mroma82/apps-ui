@@ -1,11 +1,11 @@
 <h2 class="mb-2">{{ 'common.summary' | translate }}</h2>
 <div class="row mb-4">
-    <div class="col-2">
+    <div class="col-6 col-sm-3 col-lg-2 mb-2">
         <app-info-box title="core.example.all"
                       entityTypeId="e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"
                       entityTypeListUrl="/app/example/list"></app-info-box>
     </div>
-    <div class="col-2">
+    <div class="col-6 col-sm-3 col-lg-2 mb-2">
         <app-info-box title="common.in-process"
                       thresholdDanger="5"
                       thresholdWarning="2"
@@ -13,14 +13,14 @@
                       [entityTypeFilter]="{status: 1}"
                       entityTypeListUrl="/app/example/list"></app-info-box>
     </div>
-    <div class="col-2">
+    <div class="col-6 col-sm-3 col-lg-2 mb-2">
         <app-info-box title="common.completed"
                       entityTypeId="e1d39dfa-2940-4434-a7e4-2c85d2d2fe47"
                       [entityTypeFilter]="{status: 2}"
                       customListUrl="/app/example/list"
                       [customListUrlParams]="{ view: 'completed'}"></app-info-box>
     </div>
-    <div class="col-2">
+    <div class="col-6 col-sm-3 col-lg-2 mb-2">
         <app-info-box title="core.example.finance"
                       customCountUrl="/example/getFinanceCount"
                       customListUrl="/app/example/list"
