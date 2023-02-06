@@ -38,6 +38,7 @@ import { HeaderUserContextComponent } from './layout/components/header-user-cont
 import { HeaderUserContextMenuComponent } from './layout/components/header-user-context-menu/header-user-context-menu.component';
 import { LeftMenuComponent } from './layout/components/left-menu/left-menu.component';
 import { HeaderPrintComponent } from './layout/components/header-print/header-print.component';
+import { HeaderUserContextMobileComponent } from './layout/components/header-user-context-mobile/header-user-context-mobile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { HeaderPrintComponent } from './layout/components/header-print/header-pr
     HeaderUserContextComponent,
     HeaderUserContextMenuComponent,
     LeftMenuComponent,
-    HeaderPrintComponent
+    HeaderPrintComponent,
+    HeaderUserContextMobileComponent
   ],
   imports: [
     BrowserModule,

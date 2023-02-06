@@ -1,0 +1,27 @@
+<ng-container *ngIf="isAuthenticated$ | async as isAuthenticated">
+    <ng-container *ngIf="user$ | async as user">
+        <ng-container *ngIf="instance$ | async as instance">
+
+            <h5 class="pb-2 border-bottom">{{ 'common.session-info' | translate }}</h5>
+            <p>
+                <strong>{{ user.fullName }}</strong><br>
+                <small>{{ user.email }} | <a routerLink="/logout">{{ 'common.logout' | translate }}</a></small>
+
+                <br>
+                <a *ngFor="let culture of cultures$ | async"
+                   class="culture-link"
+                   href="javascript:;;"
+                   (click)="setCulture(culture)">
+                    <img src="/assets/culture/{{ culture }}.png"
+                         alt="{{ 'common.culture.' + culture | translate }}" />
+                </a>
+            </p>
+
+            <h5 class="mt-4 pb-2 border-bottom">{{ 'common.instance' | translate }}</h5>
+            <p>
+                <small>{{ 'common.name' | translate }}: <strong>{{ instance.name }}</strong></small><br>
+                <small>{{ 'common.number' | translate }}: <strong>{{ instance.number }}</strong></small> | <small><a href="#">{{ 'common.change-instance' | translate }}</a></small>
+            </p>
+        </ng-container>
+    </ng-container>
+</ng-container>
