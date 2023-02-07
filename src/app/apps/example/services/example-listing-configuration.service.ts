@@ -31,10 +31,12 @@ export class ExampleListingConfigurationService implements IEntityListingConfigu
       {
         model: "exampleId",
         isLink: true,
-        showEditLink: true
+        showEditLink: true,
+        showOnMobile: true
       },
       {
-        model: "title"
+        model: "title",
+        showOnMobile: true
       },
       {
         model: "status",

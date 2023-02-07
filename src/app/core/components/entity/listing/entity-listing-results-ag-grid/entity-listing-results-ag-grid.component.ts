@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, ColumnApi, DisplayedColumnsChangedEvent, FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent, SortChangedEvent } from 'ag-grid-community';
+import { ColDef, ColumnApi, DisplayedColumnsChangedEvent, FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent, GridSizeChangedEvent, SortChangedEvent } from 'ag-grid-community';
+import { IColumnLimit } from 'ag-grid-community/dist/lib/gridApi';
 import { Observable, BehaviorSubject, Subject, forkJoin, of, zip, Subscription } from 'rxjs';
 import { mergeMap, tap, map } from 'rxjs/operators';
 import { GridCellLinkComponent } from '../../../../../common/components/ag-grid/grid-cell-link/grid-cell-link.component';
@@ -36,6 +37,38 @@ export class EntityListingResultsAgGridComponent implements OnInit, OnDestroy {
   gridColumnsApi: ColumnApi;
   gridApi: GridApi;
 
+  // set column widths
+  setColumnWidths(columnApi: ColumnApi, api: GridApi) {
+
+    console.log(window.innerWidth);
+
+    // mobile
+    if (window.innerWidth <= 576) {
+
+      const mobileColumns = columnApi.getColumns()
+        .reduce((i, current) => i += (current.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : 1, 0);
+
+      const { left, right } = api.getHorizontalPixelRange();
+      const containerWidth = right - left;
+
+      // limits
+      var limits: IColumnLimit[] = this.gridColumnsApi.getColumns().map((x, i) => {
+        return {
+          key: "" + i,
+          maxWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : 180,
+          minWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : 180
+        }
+      })
+      api.sizeColumnsToFit();
+      api.sizeColumnsToFit({
+        defaultMinWidth: containerWidth / mobileColumns,
+        columnLimits: limits
+      });
+
+    } else {
+      api.sizeColumnsToFit();
+    }
+  }
   // define grid options
   gridOptions: GridOptions = {
 
@@ -77,7 +110,11 @@ export class EntityListingResultsAgGridComponent implements OnInit, OnDestroy {
 
     // first data rendered
     onFirstDataRendered: (e: FirstDataRenderedEvent) => {
-      e.api.sizeColumnsToFit();
+      this.setColumnWidths(e.columnApi, e.api);
+    },
+
+    onGridSizeChanged: (e: GridSizeChangedEvent) => {
+      this.setColumnWidths(e.columnApi, e.api);
     },
 
     // set options
@@ -217,7 +254,9 @@ export class EntityListingResultsAgGridComponent implements OnInit, OnDestroy {
       var colDef: ColDef = {
         field: col.model,
         headerName: col.title,
-        filter: "agSetColumnFilter"
+        filter: "agSetColumnFilter",
+        cellClass: (col.showOnMobile ? "" : "d-none d-sm-block"),
+        headerClass: (col.showOnMobile ? "" : "d-none d-sm-block")
       };
 
       // get the type

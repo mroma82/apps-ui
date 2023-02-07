@@ -8,6 +8,7 @@ export interface IEntityListingColumn {
     showEditLink?: boolean;
     viewLinkFunc?: any;
     editLinkFunc?: any;
+    showOnMobile?: boolean;
 
     displayFunc?: any;
 
