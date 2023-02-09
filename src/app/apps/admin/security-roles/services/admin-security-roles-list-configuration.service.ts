@@ -49,11 +49,13 @@ export class AdminSecurityRolesListConfigurationService implements IEntityListin
       {
         model: "name",
         isLink: true,
-        showEditLink: true
+        showEditLink: true,
+        showOnMobile: true
       },
       {
         model: "isSysAdmin",
-        displayFunc: x => x.isSysAdmin ? "Yes" : "No"
+        displayFunc: x => x.isSysAdmin ? "Yes" : "No",
+        showOnMobile: true
       },
       {
         model: "allowBillingAccess",

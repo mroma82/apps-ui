@@ -30,7 +30,8 @@ export class AdminNumberSequenceListConfigurationService implements IEntityListi
         model: "entityType.name",
         title: "Entity Type",
         isLink: true,
-        showEditLink: true
+        showEditLink: true,
+        showOnMobile: true
       },
       {
         model: "format"

@@ -10,7 +10,7 @@ export class AdminWorkflowGroupListConfigurationService implements IEntityListin
   // views
   getViews(): Observable<IEntityListingView[]> {
     return of([
-      { 
+      {
         id: "all",
         title: "All Workflow Groups",
         filter: {},
@@ -23,11 +23,16 @@ export class AdminWorkflowGroupListConfigurationService implements IEntityListin
 
   // columns
   getColumns(): Observable<IEntityListingColumn[]> {
-    
+
     // cols
-    const cols : IEntityListingColumn[] = [
-      { model: "groupId", isLink: true, showEditLink: true }
-    ]; 
+    const cols: IEntityListingColumn[] = [
+      {
+        model: "groupId",
+        isLink: true,
+        showEditLink: true,
+        showOnMobile: true
+      }
+    ];
 
     return of(cols);
   }

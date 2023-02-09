@@ -50,18 +50,19 @@ export class EntityListingResultsAgGridComponent implements OnInit, OnDestroy {
 
       const { left, right } = api.getHorizontalPixelRange();
       const containerWidth = right - left;
-
+      const colWidth = containerWidth / mobileColumns;
       // limits
       var limits: IColumnLimit[] = this.gridColumnsApi.getColumns().map((x, i) => {
         return {
-          key: "" + i,
-          maxWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : 180,
-          minWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : 180
+          key: x,
+          maxWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : colWidth,
+          minWidth: (x.getColDef().cellClass as string).indexOf("d-none d-sm-block") >= 0 ? 0 : colWidth
         }
-      })
+      });
+      console.log([window.innerWidth, containerWidth, mobileColumns]);
       api.sizeColumnsToFit();
       api.sizeColumnsToFit({
-        defaultMinWidth: containerWidth / mobileColumns,
+        defaultMinWidth: colWidth,
         columnLimits: limits
       });
 

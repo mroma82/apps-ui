@@ -39,10 +39,12 @@ export class AdminSystemUserListConfigurationService implements IEntityListingCo
       {
         model: "username",
         isLink: true,
-        showEditLink: true
+        showEditLink: true,
+        showOnMobile: true
       },
       {
-        model: "fullName"
+        model: "fullName",
+        showOnMobile: true
       },
       {
         model: "email"
