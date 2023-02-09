@@ -1,12 +1,14 @@
 
 export interface IEntitySubGridConfigurationService {
-  
+
   // create
-  createFormComponent?: any;  
+  createFormComponent?: any;
 
   // edit form
-  editFormComponent?: any;  
+  editFormComponent?: any;
 
   // options
   navigateToEditAfterCreate?: boolean;
+  navigateToViewOnLink?: boolean;
+  viewLinkUrl?: string;
 }

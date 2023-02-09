@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LocalizationService } from '../../../common/services/localization.service';
+import { UserContextService } from '../../../common/services/user-context.service';
 
 @Component({
   selector: 'app-header-user-context-menu',
@@ -20,7 +21,8 @@ export class HeaderUserContextMenuComponent implements OnInit {
 
   // new
   constructor(
-    private localization: LocalizationService
+    private localization: LocalizationService,
+    private userContext: UserContextService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class HeaderUserContextMenuComponent implements OnInit {
 
   // set culture
   setCulture(culture: string) {
-    this.localization.setCulture(culture);
+    this.userContext.setCulture(culture);
     this.hideMenu();
   }
 }
