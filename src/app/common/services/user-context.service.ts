@@ -4,6 +4,8 @@ import { filter, map, shareReplay } from 'rxjs/operators';
 import { IUserProfile } from '../models/user-profile';
 import { AuthService } from './auth.service';
 import { InstanceContextService } from './instance-context.service';
+import { LocalizationService } from './localization.service';
+import { UserSettingsService } from './user-settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,9 @@ export class UserContextService {
   // new
   constructor(
     private authService: AuthService,
-    private instanceContext: InstanceContextService
+    private instanceContext: InstanceContextService,
+    private userSettings: UserSettingsService,
+    private localizationService: LocalizationService
   ) {
 
     // specialty roles
@@ -77,6 +81,11 @@ export class UserContextService {
       //verified
       this.verify$.next(true);
     }
+
+    // profile change
+    this.profile$.subscribe(x => {
+      this.localizationService.buildDictionary();
+    });
   }
 
   // check token
@@ -105,6 +114,11 @@ export class UserContextService {
 
         //verified
         this.verify$.next(true);
+
+        // settings 
+        this.userSettings.get().subscribe(x => {
+          this.localizationService.setCulture(x.cultureCode);
+        });
 
         // continute
         return {
@@ -135,7 +149,6 @@ export class UserContextService {
       // check if ok
       if (x.success) {
 
-        // set state
         //this.isAuthenticated$.next(true);
         window.localStorage.setItem('apps:token', x.token);
         window.localStorage.removeItem("apps:token:impersonate");
@@ -153,6 +166,11 @@ export class UserContextService {
 
         // set instance
         this.instanceContext.instanceId = profile.instance;
+
+        // settings 
+        this.userSettings.get().subscribe(x => {
+          this.localizationService.setCulture(x.cultureCode);
+        });
 
         // return ok
         return {
@@ -231,5 +249,15 @@ export class UserContextService {
   // send password setup by id
   sendPasswordSetupById(userId: string): Observable<any> {
     return this.authService.sendPasswordSetupById(userId);
+  }
+
+  // set culture
+  setCulture(culture: string) {
+
+    // set culture
+    this.localizationService.setCulture(culture);
+
+    // update sttings
+    this.userSettings.setCulture(culture).subscribe();
   }
 }

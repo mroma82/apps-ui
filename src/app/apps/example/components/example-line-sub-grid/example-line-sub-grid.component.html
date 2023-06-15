@@ -1,10 +1,8 @@
-<app-entity-sub-grid
-  *ngIf="model$ | async as model"
-  [entityTypeId]="entityTypeId"  
-  [filter]="{exampleId: model.id}"
-  [sort]="{field: 'Title'}"
-  [modelDefault]="{exampleId: model.id}"
-  [columns]="cols"
-  [config]="lineSubGridConfig"
-  [mode]="mode$ | async"
-></app-entity-sub-grid>
+<app-entity-sub-grid *ngIf="model$ | async as model"
+                     [entityTypeId]="entityTypeId"
+                     [filter]="{exampleId: model.id}"
+                     [sort]="{field: 'Title'}"
+                     [modelDefault]="{exampleId: model.id}"
+                     [columns]="cols"
+                     [config]="lineSubGridConfig"
+                     [mode]="mode$ | async"></app-entity-sub-grid>

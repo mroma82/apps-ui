@@ -8,16 +8,19 @@ import { ExampleViewEditPageComponent } from './pages/example-view-edit-page/exa
 import { ExampleParametersPageComponent } from './pages/example-parameters-page/example-parameters-page.component';
 import { EntityTypes } from 'src/app/core/services/entity/entity-types';
 import { EntityRouteModule } from 'src/app/core/services/entity/entity-route.module';
+import { ExampleDashboardPageComponent } from './pages/example-dashboard-page/example-dashboard-page.component';
 
 // route options
 const routeOptions = {
-  
+  homeRedirect: "dashboard",
+
   containerComponent: ExampleContainerComponent,
 
   extraRoutes: [
+    { path: 'dashboard', component: ExampleDashboardPageComponent },
     { path: 'mytasks', component: ExampleListPageComponent, data: { isWorkflowAssigned: true } },
     { path: 'parameters', component: ExampleParametersPageComponent }
-  ]      
+  ]
 }
 
 @NgModule({
@@ -27,10 +30,10 @@ const routeOptions = {
   exports: [RouterModule],
   providers: [RecordLockGuard]
 })
-export class ExampleRoutingModule { 
+export class ExampleRoutingModule {
 
   constructor(
-    recordLock: RecordLockGuard,    
+    recordLock: RecordLockGuard,
   ) {
     recordLock.setContextType(EntityTypes.Example);
   }

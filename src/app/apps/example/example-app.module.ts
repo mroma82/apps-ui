@@ -29,6 +29,8 @@ import { ENTITY_LISTING_CONFIG } from 'src/app/core/services/entity/listing/enti
 import { EntitySecurityService } from 'src/app/core/services/entity/entity-security.service';
 import { ExampleEntityConfigurationService } from './services/example-entity-configuration.service';
 import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration.service';
+import { ExampleDashboardPageComponent } from './pages/example-dashboard-page/example-dashboard-page.component';
+import { ExampleSubGridComponent } from './components/example-sub-grid/example-sub-grid.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ENTITY_CONFIG } from 'src/app/core/services/entity/entity-configuration
     ExampleLineViewEditComponent,
     ExampleLineSubGridComponent,
     ExampleParametersPageComponent,
-    ExampleParametersComponent
+    ExampleParametersComponent,
+    ExampleDashboardPageComponent,
+    ExampleSubGridComponent
   ],
   imports: [
     CommonModule,

@@ -62,7 +62,8 @@ export class NoteListDialogComponent extends BaseDialog implements OnInit {
 
     this.context.update({
       id: item.id,
-      contentText: item.contentTextEdit
+      contentText: item.contentTextEdit,
+      recordVersion: item.recordVersion
     }).subscribe();
   }
 

@@ -37,6 +37,8 @@ import { InputFocusDirective } from './directives/input-focus.directive';
 import { EnterSubmitFormComponent } from './components/forms/enter-submit-form/enter-submit-form.component';
 import { GridCellLinkComponent } from './components/ag-grid/grid-cell-link/grid-cell-link.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { InfoBoxComponent } from './components/info-box/info-box.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AgGridModule } from 'ag-grid-angular';
     RouteProgressComponent,
     InputFocusDirective,
     EnterSubmitFormComponent,
-    GridCellLinkComponent
+    GridCellLinkComponent,
+    TranslatePipe,
+    InfoBoxComponent
   ],
   providers: [
     InstanceContextService,
@@ -111,8 +115,10 @@ import { AgGridModule } from 'ag-grid-angular';
     UtcDateTimeSincePipe,
     ExcludeDeletedPipe,
     UserFullnamePipe,
+    TranslatePipe,
 
-    InputFocusDirective
+    InputFocusDirective,
+    InfoBoxComponent
   ]
 })
 export class AppCommonModule { }

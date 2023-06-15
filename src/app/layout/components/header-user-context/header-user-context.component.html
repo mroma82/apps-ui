@@ -2,8 +2,10 @@
     <ng-container *ngIf="user$ | async as user">
         <ng-container *ngIf="instance$ | async as instance">
 
-            <div class="user-context" [class.active]="menuOpen">
-                <a href="javascript:;;" (click)="toggleMenu()">
+            <div class="user-context"
+                 [class.active]="menuOpen">
+                <a href="javascript:;;"
+                   (click)="toggleMenu()">
                     <div>
                         <strong>{{ user.fullName }}</strong>
                     </div>
@@ -13,7 +15,10 @@
                 </a>
             </div>
 
-            <app-header-user-context-menu [isActive]="menuOpen" [user]="user" [instance]="instance" (onHideMenu)="hideMenu()">
+            <app-header-user-context-menu [isActive]="menuOpen"
+                                          [user]="user"
+                                          [instance]="instance"
+                                          (onHideMenu)="hideMenu()">
             </app-header-user-context-menu>
         </ng-container>
     </ng-container>

@@ -1,31 +1,40 @@
 <header>
   <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
 
-    <a class="btn-menu-toggle mr-1 ml-0" (click)="leftMenu.toggleMenu()" href="javascript:;;">
+    <a class="btn-menu-toggle mr-1 ml-0"
+       (click)="leftMenu.toggleMenu()"
+       href="javascript:;;">
       <i class="fas fa-th"></i>
     </a>
 
-    <a class="navbar-brand ml-2" href="javascript:;;" routerLink="/app">
-      <img src="/assets/logo.svg" alt="Apps" class="img-logo" />Apps
-      <span *ngIf="model.environmentDescription" class="ml-1 badge badge-pill badge-warning environment-description">{{
+    <a class="navbar-brand ml-2"
+       href="javascript:;;"
+       routerLink="/app">
+      <img src="/assets/logo.svg"
+           alt="Apps"
+           class="img-logo" />Apps
+      <span *ngIf="model.environmentDescription"
+            class="ml-1 badge badge-pill badge-warning environment-description">{{
         model.environmentDescription }}</span>
     </a>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse"
+         id="navbarCollapse">
       <app-header-nav></app-header-nav>
     </div>
 
     <ng-container *ngIf="licenseStatus$ | async as licenseStatus">
-      <div class="mr-3 p-2 bg-danger d-none d-md-block license-status" *ngIf="!licenseStatus.status">
+      <div class="mr-3 p-2 bg-danger d-none d-md-block license-status"
+           *ngIf="!licenseStatus.status">
         Your instance is over allocated on licenses
       </div>
     </ng-container>
 
-    <div>
+    <div class="mr-2">
       <app-task-bar></app-task-bar>
     </div>
 
-    <div class="ml-2 mt-2 mr-2">
+    <div class="mt-2 mr-2 d-none d-sm-block">
       <app-header-user-context></app-header-user-context>
     </div>
   </nav>

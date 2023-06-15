@@ -1,10 +1,22 @@
-<div class="menu-container" #container [class.active]="isActive" (click)="onContainerClick($event)">
+<div class="menu-container"
+     #container
+     [class.active]="isActive"
+     (click)="onContainerClick($event)">
     <div class="user-context-menu">
 
         <h5 class="pb-2 border-bottom">User Information</h5>
         <p>
             <strong>{{ user.fullName }}</strong><br>
             <small>{{ user.email }} | <a routerLink="/logout">Logout</a></small>
+
+            <br>
+            <a *ngFor="let culture of cultures$ | async"
+               class="culture-link"
+               href="javascript:;;"
+               (click)="setCulture(culture)">
+                <img src="/assets/culture/{{ culture }}.png"
+                     alt="{{ 'common.culture.' + culture | translate }}" />
+            </a>
         </p>
 
         <h5 class="mt-4 pb-2 border-bottom">Instance</h5>
@@ -13,7 +25,9 @@
             <small>Number: <strong>{{ instance.number }}</strong></small> | <small><a href="#">Change Instance</a></small>
         </p>
 
-        <a class="btn-dismiss p-2" href="javascript:;;" (click)="hideMenu()"><i class="fas fa-times"></i></a>
+        <a class="btn-dismiss p-2"
+           href="javascript:;;"
+           (click)="hideMenu()"><i class="fas fa-times"></i></a>
 
         <div class="border-top bottom-panel pt-2 pb-2">
             <app-simulate-user></app-simulate-user>

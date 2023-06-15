@@ -28,6 +28,7 @@ import { EntityFormComponent } from './components/entity/form/entity-form/entity
 import { EntityValidationService } from './services/entity/entity-validation.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { EntityListingResultsAgGridComponent } from './components/entity/listing/entity-listing-results-ag-grid/entity-listing-results-ag-grid.component';
+import { EntityInnerListComponent } from './components/entity/lists/entity-inner-list/entity-inner-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { EntityListingResultsAgGridComponent } from './components/entity/listing
     EntitySingleRecordViewEditComponent,
     EntityTypeNamePipe,
     EntityFormComponent,
-    EntityListingResultsAgGridComponent
+    EntityListingResultsAgGridComponent,
+    EntityInnerListComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +80,8 @@ import { EntityListingResultsAgGridComponent } from './components/entity/listing
     EntitySingleRecordPageGenericComponent,
     EntitySingleRecordViewEditComponent,
     EntityTypeNamePipe,
-    EntityFormComponent
+    EntityFormComponent,
+    EntityInnerListComponent
   ]
 })
 export class AppsCoreModule { }

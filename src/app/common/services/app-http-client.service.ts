@@ -41,10 +41,20 @@ export class AppHttpClientService {
   // get headers
   private getHeaders(token: string): any {
 
+    // init headers
+    let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+      .set('X-Apps-Instance', this.instanceContext.instanceId ? this.instanceContext.instanceId : "");
+
+    // check if a language
+    let culture = window.localStorage.getItem("apps:culture");
+    if (culture) {
+      headers = headers.set('Accept-Language', culture);
+    }
+
+    // return
     return {
-      headers: new HttpHeaders()
-        .set('Authorization', 'Bearer ' + token)
-        .set('X-Apps-Instance', this.instanceContext.instanceId ? this.instanceContext.instanceId : "")
+      headers: headers
     };
   }
 
